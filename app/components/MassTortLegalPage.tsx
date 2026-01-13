@@ -1,246 +1,226 @@
-import React from 'react';
+"use client";
+import React from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+const eligibilityPoints = [
+  {
+    title: "Harmed by Defective Product or Misconduct:",
+    description:
+      "You experienced injury from a dangerous drug, faulty product, or corporate wrongdoing.",
+  },
+  {
+    title: "Harmed by Defective Product or Misconduct:",
+    description:
+      "You experienced injury from a dangerous drug, faulty product, or corporate wrongdoing.",
+  },
+  {
+    title: "Direct Link to Injury:",
+    description:
+      "Your harm must be caused by the product or action in question.",
+  },
+  {
+    title: "Others Affected Similarly:",
+    description: "There are multiple individuals with claims like yours.",
+  },
+];
+const compensationItems = [
+  {
+    title: "Medical Expenses:",
+    description: "Covers hospital stays, treatments, and procedures.",
+  },
+  {
+    title: "Lost Income:",
+    description:
+      "Compensates for wages lost and reduced ability to earn in the future.",
+  },
+  {
+    title: "Pain and Suffering:",
+    description:
+      "Pays for physical and emotional distress, and lower quality of life.",
+  },
+  {
+    title: "Long-Term Disability:",
+    description: "Pays for ongoing care and support for lasting impairments.",
+  },
+  {
+    title: "Punitive Damages:",
+    description: "Additional penalties for corporate negligence.",
+  },
+];
 
 const MassTortLegalPage = () => {
-  return (
-    <div className="min-h-screen bg-white text-[#4a4a4a] font-sans selection:bg-blue-100">
-      {/* Custom Bullet Styling */}
-      <style>{`
-        .custom-bullet li {
-          position: relative;
-          padding-left: 1.5rem;
-          margin-bottom: 0.75rem;
-        }
-        .custom-bullet li::before {
-          content: "•";
-          color: #1a237e;
-          font-weight: bold;
-          font-size: 1.5rem;
-          position: absolute;
-          left: 0;
-          top: -0.6rem;
-        }
-      `}</style>
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const ctaRef = useRef<HTMLDivElement | null>(null);
 
-      <div className="max-w-6xl mx-auto px-4 py-12 md:px-8">
-        
-        {/* ==================== SECTION 1: MASS TORT ==================== */}
-        
-        <div className="flex flex-col lg:flex-row gap-12 mb-16">
-          {/* Left Content Column */}
-          <div className="flex-1">
-            <h1 
-              className="font-noto-serif font-normal capitalize text-[#2d3663] mb-6"
-              style={{
-                fontSize: 'clamp(28px, 6vw, 60px)',
-                lineHeight: 'clamp(36px, 7vw, 70px)',
-                letterSpacing: '0px',
-              }}
-            >
+  const [isFixed, setIsFixed] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!wrapperRef.current || !ctaRef.current) return;
+
+      const wrapperRect = wrapperRef.current.getBoundingClientRect();
+      const ctaHeight = ctaRef.current.offsetHeight;
+      const topOffset = 92;
+
+      if (wrapperRect.top <= topOffset) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+
+      if (wrapperRect.bottom <= ctaHeight + topOffset) {
+        setIsAtBottom(true);
+      } else {
+        setIsAtBottom(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div
+      ref={wrapperRef}
+      className=" bg-white
+    relative
+    mx-auto
+    max-w-[1440px]
+    2xl:max-w-[1600px]
+    px-4
+    sm:px-6
+    lg:px-3
+    2xl:px-20"
+    >
+      {/* PAGE CONTAINER */}
+      <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
+        {/* MAIN LAYOUT */}
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* ================= LEFT CONTENT ================= */}
+          <div className="flex-1 max-w-[946px]">
+            <h1 className="font-noto-serif text-[#162766] text-[30px] md:text-[40px] mb-4">
               What Is A Mass Tort?
             </h1>
-            <p 
-              className="mb-10 font-urbanist font-normal"
-              style={{
-                fontSize: '18px',
-                lineHeight: '24px',
-                letterSpacing: '0px',
-              }}
-            >
-              Mass torts cases are civil lawsuits filed by victims against a single company or companies for causing similar harm. These lawsuits often arise when defective medical products, harmful medications, or corporate negligence affect thousands of people in similar ways.
+
+            <p className="mb-10 font-urbanist text-[#425777] text-[18px] leading-[27px]">
+              Mass torts cases are civil lawsuits filed by victims against a
+              single company or companies for causing similar harm. These
+              lawsuits often arise when defective medical products, harmful
+              medications, or corporate negligence affect thousands of people in
+              similar ways.
             </p>
 
-            <h2 
-              className="font-noto-serif font-normal capitalize text-[#2d3663] mb-4"
-              style={{
-                fontSize: 'clamp(24px, 5vw, 48px)',
-                lineHeight: 'clamp(32px, 6vw, 60px)',
-                letterSpacing: '0px',
-              }}
-            >
+            <h2 className="font-noto-serif text-[#162766] text-[30px] md:text-[40px] mb-4">
               How Do You Qualify For A Mass Tort Lawsuit?
             </h2>
-            <p 
-              className="mb-4 font-urbanist font-normal"
-              style={{
-                fontSize: '18px',
-                lineHeight: '24px',
-                letterSpacing: '0px',
-              }}
-            >
-              Mass tort lawsuits bring together victims harmed by the same product or action. To qualify, you need to meet specific criteria related to your injury and the case.
+
+            <p className="mb-4 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px]">
+              Mass tort lawsuits bring together victims harmed by the same
+              product or action. To qualify, you need to meet specific criteria
+              related to your injury and the case.
             </p>
-            <p 
-              className="font-urbanist font-semibold text-[#2d3663] mb-4"
-              style={{
-                fontSize: '18px',
-                lineHeight: '24px',
-                letterSpacing: '0px',
-                fontWeight: '600',
-              }}
-            >
-              Here's what we look for:
+
+            <p className="mb-4 font-urbanist font-bold text-[#425777] text-[18px]">
+              Here&apos;s what we look for:
             </p>
-            
-            <ol 
-              className="list-decimal list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal"
-              style={{
-                fontSize: '18px',
-                lineHeight: '24px',
-                letterSpacing: '0px',
-              }}
-            >
-              <li className="pl-2">
-                <span className="text-[#2d3663] font-semibold" style={{ fontWeight: '600' }}>Harmed by Defective Product or Misconduct:</span> You experienced injury from a dangerous drug, faulty product, or corporate wrongdoing.
-              </li>
-              <li className="pl-2">
-                <span className="text-[#2d3663] font-semibold" style={{ fontWeight: '600' }}>Harmed by Defective Product or Misconduct:</span> You experienced injury from a dangerous drug, faulty product, or corporate wrongdoing.
-              </li>
-              <li className="pl-2">
-                <span className="text-[#2d3663] font-semibold" style={{ fontWeight: '600' }}>Direct Link to Injury:</span> Your harm must be caused by the product or action in question.
-              </li>
-              <li className="pl-2">
-                <span className="text-[#2d3663] font-semibold" style={{ fontWeight: '600' }}>Others Affected Similarly:</span> There are multiple individuals with claims like yours.
-              </li>
+
+            <ol className="list-decimal ml-5 text-[18px] font-normal font-urbanist space-y-3 mb-16 text-[#425777] leading-[27px]">
+              {eligibilityPoints.map((item, index) => (
+                <li key={index}>
+                  {item.title} {item.description}
+                </li>
+              ))}
             </ol>
+
+            <h2 className="font-noto-serif text-[#162766] text-[30px] md:text-[40px] mb-4">
+              What Compensation Can You Seek?
+            </h2>
+
+            <p className="mb-4 font-urbanist text-[#425777] text-[18px] leading-[27px]">
+              Compensation typically covers medical costs and lost income. In
+              some cases, it can also include punitive damages.
+            </p>
+
+            <p className="mb-4 font-urbanist font-bold text-[#425777] text-[18px]">
+              Your compensation may include:
+            </p>
+
+            <ul className="list-none pl-0 space-y-3 mb-16 font-urbanist text-[18px] text-[#425777] leading-[27px]">
+              {compensationItems.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    className="mt-2 flex-shrink-0"
+                  >
+                    <circle cx="5" cy="5" r="5" fill="#162766" />
+                  </svg>
+
+                  <span>
+                    <strong>{item.title}</strong> {item.description}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <h2 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4">
+              How Can Connect2Attorney{" "}
+              <span className="text-[#F2C438]">Help You File</span> A Class
+              Action Lawsuit?
+            </h2>
+
+            <p className="mb-8 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px]">
+              Connect2Attorney guides you through the process of filing a mass
+              tort claim against the responsible company in just three simple
+              steps:
+            </p>
+
+            <StepsComponent />
           </div>
 
-          {/* Right Sidebar - CTA Card */}
-          <div className="w-full lg:w-[350px] flex-shrink-0">
-            <div className="bg-[#1a237e] rounded-lg overflow-hidden shadow-xl sticky top-8">
-              {/* Placeholder for Courthouse Image */}
-              <div className="h-48 overflow-hidden bg-gray-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Courthouse" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6 text-center text-white">
-                <h3 
-                  className="font-noto-serif font-normal capitalize mb-3"
-                  style={{
-                    fontSize: 'clamp(20px, 4vw, 28px)',
-                    lineHeight: 'clamp(28px, 5vw, 36px)',
-                    letterSpacing: '0px',
-                  }}
-                >
-                  Ready to Get Started?
-                </h3>
-                <p 
-                  className="text-gray-200 mb-6 font-urbanist font-normal"
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '24px',
-                    letterSpacing: '0px',
-                  }}
-                >
-                  Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.
-                </p>
-                <button 
-                  className="w-full bg-[#fccb48] hover:bg-[#eebb20] text-[#1a237e] font-urbanist font-semibold py-3 px-4 rounded uppercase transition-colors duration-200"
-                  style={{
-                    fontSize: '18px',
-                    lineHeight: '100%',
-                    letterSpacing: '0%',
-                    fontWeight: '600',
-                  }}
-                >
-                  Get a Free Case Review
-                </button>
+          {/* ================= RIGHT STICKY CTA ================= */}
+          <aside className="hidden lg:block w-[350px]">
+            <div
+              ref={ctaRef}
+              className={`w-[350px]
+              ${
+                isAtBottom
+                  ? "absolute bottom-12"
+                  : isFixed
+                  ? "fixed top-23"
+                  : "relative"
+              }`}
+            >
+              <div className="bg-[#162766] rounded-lg shadow-xl">
+                <div className="h-48">
+                  <Image
+                    src="/americanlawcourt.svg"
+                    alt="Courthouse"
+                    width={400}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="p-6 text-white">
+                  <h3 className="text-[26px] mb-3">Ready to Get Started?</h3>
+
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                    Don’t wait to protect your rights. Get a free case
+                    evaluation today.
+                  </p>
+                  <button className="w-full bg-[#fccb48] text-[#162766] font-semibold uppercase py-3 rounded">
+                    Get a Free Case Review
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
-
-        {/* Mass Tort Compensation Section */}
-        <div className="mb-16">
-          <h2 
-            className="font-noto-serif font-normal capitalize text-[#2d3663] mb-4"
-            style={{
-              fontSize: 'clamp(24px, 5vw, 48px)',
-              lineHeight: 'clamp(32px, 6vw, 60px)',
-              letterSpacing: '0px',
-            }}
-          >
-            What Compensation Can You Seek?
-          </h2>
-          <p 
-            className="mb-4 font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            Compensation typically covers medical costs and lost income. In some cases, it can also include punitive damages to hold the parties accountable.
-          </p>
-          <p 
-            className="font-urbanist font-semibold text-[#2d3663] mb-4"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-              fontWeight: '600',
-            }}
-          >
-            Your compensation may include:
-          </p>
-          
-          <ul 
-            className="custom-bullet font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            <li>
-              <strong className="text-[#2d3663]" style={{ fontWeight: '600' }}>Medical Expenses:</strong> Covers hospital stays, treatments, and procedures.
-            </li>
-            <li>
-              <strong className="text-[#2d3663]" style={{ fontWeight: '600' }}>Lost Income:</strong> Compensates for wages lost and reduced ability to earn in the future.
-            </li>
-            <li>
-              <strong className="text-[#2d3663]" style={{ fontWeight: '600' }}>Pain and Suffering:</strong> Pays for physical and emotional distress, and lower quality of life.
-            </li>
-            <li>
-              <strong className="text-[#2d3663]" style={{ fontWeight: '600' }}>Long-Term Disability:</strong> Pays for ongoing care and support for lasting impairments.
-            </li>
-            <li>
-              <strong className="text-[#2d3663]" style={{ fontWeight: '600' }}>Punitive Damages:</strong> Additional penalties for corporate negligence.
-            </li>
-          </ul>
-        </div>
-
-        {/* Connect2Attorney Steps Section 1 */}
-        <div className="mb-24">
-          <h2 
-            className="font-noto-serif font-normal capitalize text-[#2d3663] mb-4"
-            style={{
-              fontSize: 'clamp(24px, 5vw, 48px)',
-              lineHeight: 'clamp(32px, 6vw, 60px)',
-              letterSpacing: '0px',
-            }}
-          >
-            How Can Connect2Attorney Help You File A Mass Tort Lawsuit?
-          </h2>
-          <p 
-            className="mb-8 font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            Connect2Attorney guides you through the process of filing a mass tort claim against the responsible party, in just three simple steps:
-          </p>
-          <StepsComponent />
-        </div>
-
-
-        {/* ==================== SECTION 2: CLASS ACTION ==================== */}
-        
-        
       </div>
     </div>
   );
@@ -248,100 +228,98 @@ const MassTortLegalPage = () => {
 
 /* Reusable Steps Component */
 const StepsComponent = () => {
+  const steps = [
+    {
+      step: 1,
+      title: "Submit a Free Case Review",
+      description:
+        "Share details about your situation so we can understand your claim.",
+    },
+    {
+      step: 2,
+      title: "Confirm Eligibility",
+      description:
+        "Our legal team will review your case and let you know if you qualify.",
+    },
+    {
+      step: 3,
+      title: "Sign Agreement",
+      description:
+        "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* Step 1 */}
-      <div className="bg-[#f4f6f8] rounded-xl p-5 flex flex-row items-start gap-4">
-        <div className="bg-[#1a237e] text-white w-10 h-10 flex-shrink-0 rounded flex flex-col items-center justify-center leading-none">
-          <span className="text-[0.6rem] font-bold uppercase mt-1">Step</span>
-          <span className="text-lg font-bold">1</span>
-        </div>
-        <div>
-          <h4 
-            className="font-urbanist font-semibold text-[#1a237e] mb-1"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-              fontWeight: '600',
-            }}
-          >
-            Submit a Free Case Review
-          </h4>
-          <p 
-            className="text-gray-600 font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            Share details about your situation so we can understand your claim.
-          </p>
-        </div>
-      </div>
+      {steps.map((item) => (
+        <div
+          key={item.step}
+          className="
+          bg-[#f4f6f8]
+          rounded-xl
+          p-5
+          flex
+          flex-col
+          gap-3
+        "
+        >
+          {/* TOP ROW: STEP + TITLE */}
+          <div className="flex items-start gap-4">
+            {/* STEP BADGE */}
+            <div
+              className="
+              inline-flex
+              flex-col
+              aspect-square
+              h-[45px]
+              lg:h-[45px]
+              items-center
+              justify-center
+              rounded-[10px]
+              border
+              border-white
+              bg-[#162766]
+              text-white
+              shadow-[0_7.564px_11.346px_-2.269px_rgba(0,0,0,0.10)]
+            "
+            >
+              <span className="font-urbanist font-semibold uppercase text-[10px] leading-[12px]">
+                Step
+              </span>
+              <span className="font-urbanist font-bold text-[20px] leading-[24px]">
+                {item.step}
+              </span>
+            </div>
 
-      {/* Step 2 */}
-      <div className="bg-[#f4f6f8] rounded-xl p-5 flex flex-row items-start gap-4">
-        <div className="bg-[#1a237e] text-white w-10 h-10 flex-shrink-0 rounded flex flex-col items-center justify-center leading-none">
-          <span className="text-[0.6rem] font-bold uppercase mt-1">Step</span>
-          <span className="text-lg font-bold">2</span>
-        </div>
-        <div>
-          <h4 
-            className="font-urbanist font-semibold text-[#1a237e] mb-1"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-              fontWeight: '600',
-            }}
-          >
-            Confirm Eligibility
-          </h4>
-          <p 
-            className="text-gray-600 font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            Our legal team will review your case and let you know if you qualify.
-          </p>
-        </div>
-      </div>
+            {/* TITLE */}
+            <h4
+              className=" w-[130px]
+              font-urbanist
+              font-semibold
+              text-[#162766]
+              text-[18px]
+              leading-[24px]
+              mt-1
+            "
+            >
+              {item.title}
+            </h4>
+          </div>
 
-      {/* Step 3 */}
-      <div className="bg-[#f4f6f8] rounded-xl p-5 flex flex-row items-start gap-4">
-        <div className="bg-[#1a237e] text-white w-10 h-10 flex-shrink-0 rounded flex flex-col items-center justify-center leading-none">
-          <span className="text-[0.6rem] font-bold uppercase mt-1">Step</span>
-          <span className="text-lg font-bold">3</span>
-        </div>
-        <div>
-          <h4 
-            className="font-urbanist font-semibold text-[#1a237e] mb-1"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-              fontWeight: '600',
-            }}
+          {/* DESCRIPTION (BELOW BOTH, INSIDE BLUE BOX) */}
+          <p
+            className="
+            font-urbanist
+            font-normal
+            text-[#162766]
+            text-[16px]
+            leading-[20px]
+          "
           >
-            Sign Agreement
-          </h4>
-          <p 
-            className="text-gray-600 font-urbanist font-normal"
-            style={{
-              fontSize: '18px',
-              lineHeight: '24px',
-              letterSpacing: '0px',
-            }}
-          >
-            If eligible, sign a legal agreement. Your attorney will handle all legal formalities.
+            {item.description}
           </p>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

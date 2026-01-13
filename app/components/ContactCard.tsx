@@ -1,58 +1,171 @@
-import React from 'react';
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 const ContactCard = () => {
   return (
-    // 1. PAGE WRAPPER
-    // - Changed 'items-center' to 'items-end' to push content to bottom
-    // - Changed 'bg-center' to 'bg-bottom' so the background skyline isn't cut off
-    // - Adjusted padding: larger top padding, smaller bottom padding
-    <div className="w-full flex justify-center items-end 
-                    pt-24 pb-10 md:pt-32 md:pb-16 lg:pt-40 lg:pb-20
-                    min-h-[600px] md:min-h-[700px] lg:min-h-[800px]
-                    bg-[url('/LastSection.png')] 
-                    bg-no-repeat bg-cover bg-bottom">
-
-      {/* Container for image and overlay content */}
-      <div className="relative w-full max-w-6xl px-4">
-
-        {/* Mask group image */}
-        <img
+    <section
+      className="
+        relative w-full
+        flex justify-center items-end 
+        pt-24 pb-10
+        md:pt-32 md:pb-16
+        lg:pt-40 lg:pb-20
+        2xl:pt-48 2xl:pb-28
+        min-h-[360px]
+        md:min-h-[700px]
+        lg:min-h-[820px]
+        2xl:min-h-[980px]
+       bg-[url('/LastSection.png')]
+        bg-no-repeat bg-cover bg-bottom
+      "
+    >
+      {/* ================= DESKTOP (LG → 2XL) ================= */}
+      <div
+        className="
+          hidden lg:block
+          relative w-full
+          max-w-[75%]
+          2xl:max-w-[85%]
+          px-4 
+        "
+      >
+        {/* Background card image */}
+        <Image
           src="/Mask group.png"
           alt="Contact section"
-          className="w-full h-auto object-contain"
+          width={1093}
+          height={295}
+          priority
+          className="
+            w-full h-auto
+            object-contain
+            2xl:scale-[1.0]
+            2xl:origin-bottom
+          "
         />
 
-        {/* Text and button overlay */}
-        {/* Keeps original positioning logic so text doesn't break */}
-        <div className="absolute left-4 md:left-0 bottom-[10%] md:bottom-[15%] lg:bottom-[18%]
-                        transform translate-x-2 md:translate-x-12 lg:translate-x-16
-                        flex flex-col gap-2 md:gap-5 items-start text-left
-                        max-w-[90%] md:max-w-[55%] lg:max-w-[45%]">
-
+        {/* Text + CTA overlay */}
+        <div
+          className="
+            absolute left-0
+            bottom-[10%]
+            2xl:bottom-[14%]
+            translate-x-16
+            2xl:translate-x-24
+            flex flex-col
+            gap-4 2xl:gap-8
+            max-w-[45%]
+            2xl:max-w-[42%]
+            text-left
+          "
+        >
           <h2
-            className="font-noto-serif font-normal capitalize text-[#162766] leading-tight text-base sm:text-xl md:text-4xl lg:text-[60px]"
-            style={{ letterSpacing: '0px', lineHeight: '1.15' }}
+            className="
+              font-noto-serif
+              font-normal
+              text-[#162766]
+              capitalize
+              xl:text-[40px]
+              xleading-[50px]
+              lg:text-[30px]
+              lg:leading-[40px]
+              2xl:text-[56px]
+              2xl:leading-[68px]
+            "
           >
-            Still have more questions?
+            Still have more <br /> questions?
           </h2>
 
-          <div>
-            <button
-              className="px-4 py-2 md:px-8 md:py-3.5 lg:px-10 lg:py-4
-                              bg-[#F2C438] hover:bg-[#E0B030] text-[#162766] font-urbanist font-semibold
-                              rounded-lg md:rounded-xl
-                              transition-colors duration-200
-                              shadow-lg hover:shadow-xl
-                              transform hover:scale-105 transition-transform
-                              text-sm sm:text-base md:text-lg"
-              style={{ lineHeight: '100%', letterSpacing: '0%', fontWeight: '600' }}
-            >
-              Reach out to us
-            </button>
-          </div>
+          <Link
+            href="/contact-us"
+            className="
+              flex items-center justify-center
+              w-[242px] h-[65px]
+              bg-[#F2C438] hover:bg-[#162766]
+              text-[#162766] hover:text-[#fff]
+              font-urbanist font-semibold
+              text-[20px] leading-[30px]
+              2xl:text-[24px]
+              2xl:w-[300px]
+              2xl:h-[78px]
+              rounded-full
+              shadow-lg hover:shadow-xl
+              transition-all duration-200
+              hover:scale-105
+            "
+          >
+            Reach out to us
+          </Link>
         </div>
       </div>
-    </div>
+
+      {/* ================= MOBILE + TABLET ================= */}
+      <div className="lg:hidden relative w-full flex justify-center">
+        <Image
+          src="/footermobimg.svg"
+          alt="Contact section mobile"
+          width={358}
+          height={187}
+          className="
+            w-[92%]
+            max-w-[320px]
+            sm:max-w-[360px]
+            md:max-w-[480px]
+            h-auto
+            object-contain
+          "
+        />
+
+        <div
+          className="
+            absolute
+            bottom-[16%]
+            sm:bottom-[18%]
+            md:bottom-[20%]
+            left-1/2 -translate-x-1/2
+            flex flex-col items-center
+            gap-3 sm:gap-4 md:gap-5
+            text-center
+            w-full px-3 sm:px-4
+          "
+        >
+          <h2
+            className="
+              font-noto-serif
+              font-medium
+              text-[#162766]
+              capitalize
+              text-[25px]
+              leading-[30px]
+            "
+          >
+            Still have more <br /> questions?
+          </h2>
+
+          <Link
+            href="/contact-us"
+            className="
+              flex items-center justify-center
+              w-[200px] h-[52px]
+              bg-[#F2C438] hover:bg-[#E0B030]
+              text-[#162766]
+              font-urbanist font-semibold
+              text-[16px]
+              leading-normal
+              rounded-full
+              shadow-lg hover:shadow-xl
+              transition-all duration-200
+              hover:scale-105
+            "
+          >
+            Reach out to us
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,25 @@
+<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="-9.07692" y="-1.51282" width="63.1538" height="63.1538"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(9.08px);clip-path:url(#bgblur_0_1900_4582_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter0_d_1900_4582)" data-figma-bg-blur-radius="18.1538">
+<rect width="45" height="45" rx="10" fill="white" fill-opacity="0.1" shape-rendering="crispEdges"/>
+<rect x="0.378205" y="0.378205" width="44.2436" height="44.2436" rx="9.62179" stroke="url(#paint0_linear_1900_4582)" strokeWidth="0.75641" shape-rendering="crispEdges"/>
+<path d="M17.3553 30.8789H13.4968V18.4737H17.3553V30.8789ZM15.4053 16.8142C14.2021 16.8142 13.2064 15.777 13.2064 14.5323C13.2064 13.3291 14.2021 12.3334 15.4053 12.3334C16.65 12.3334 17.6457 13.3291 17.6457 14.5323C17.6457 15.777 16.65 16.8142 15.4053 16.8142ZM31.7519 30.8789H27.935V24.863C27.935 23.4109 27.8935 21.5854 25.902 21.5854C23.9105 21.5854 23.6201 23.1205 23.6201 24.7386V30.8789H19.7617V18.4737H23.4542V20.1748H23.4957C24.035 19.2205 25.2797 18.1833 27.1467 18.1833C31.0466 18.1833 31.7934 20.7556 31.7934 24.0747V30.8789H31.7519Z" fill="#F2C438"/>
+</g>
+<defs>
+<filter id="filter0_d_1900_4582" x="-9.07692" y="-1.51282" width="63.1538" height="63.1538" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2.26923" operator="erode" in="SourceAlpha" result="effect1_dropShadow_1900_4582"/>
+<feOffset dy="7.5641"/>
+<feGaussianBlur stdDeviation="5.67308"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1900_4582"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1900_4582" result="shape"/>
+</filter>
+<clipPath id="bgblur_0_1900_4582_clip_path" transform="translate(9.07692 1.51282)"><rect width="45" height="45" rx="10"/>
+</clipPath><linearGradient id="paint0_linear_1900_4582" x1="40.0658" y1="-9.57075e-06" x2="55.9297" y2="6.35573" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#162766"/>
+</linearGradient>
+</defs>
+</svg>

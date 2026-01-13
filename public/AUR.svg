@@ -1,18 +1,18 @@
 <svg width="307" height="149" viewBox="0 0 307 149" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <foreignObject x="9.53674e-07" y="-0.000124931" width="306.154" height="148.154"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(9.08px);clip-path:url(#bgblur_0_75_20071_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter0_d_75_20071)" data-figma-bg-blur-radius="18.1538">
 <rect x="9.07692" y="1.5127" width="288" height="130" rx="20" fill="black" fill-opacity="0.01" shape-rendering="crispEdges"/>
-<rect x="9.45513" y="1.8909" width="287.244" height="129.244" rx="19.6218" stroke="white" stroke-opacity="0.1" stroke-width="0.75641" shape-rendering="crispEdges"/>
+<rect x="9.45513" y="1.8909" width="287.244" height="129.244" rx="19.6218" stroke="white" stroke-opacity="0.1" strokeWidth="0.75641" shape-rendering="crispEdges"/>
 <g filter="url(#filter1_dd_75_20071)">
 <rect x="25.0769" y="17.5127" width="40" height="40" rx="20" fill="url(#pattern0_75_20071)" shape-rendering="crispEdges"/>
-<rect x="26.3269" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" stroke-width="2.5" shape-rendering="crispEdges"/>
+<rect x="26.3269" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" strokeWidth="2.5" shape-rendering="crispEdges"/>
 </g>
 <g filter="url(#filter2_dd_75_20071)">
 <rect x="53.7436" y="17.5127" width="40" height="40" rx="20" fill="url(#pattern1_75_20071)" shape-rendering="crispEdges"/>
-<rect x="54.9936" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" stroke-width="2.5" shape-rendering="crispEdges"/>
+<rect x="54.9936" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" strokeWidth="2.5" shape-rendering="crispEdges"/>
 </g>
 <g filter="url(#filter3_dd_75_20071)">
 <rect x="82.4103" y="17.5127" width="40" height="40" rx="20" fill="url(#pattern2_75_20071)" shape-rendering="crispEdges"/>
-<rect x="83.6603" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" stroke-width="2.5" shape-rendering="crispEdges"/>
+<rect x="83.6603" y="18.7627" width="37.5" height="37.5" rx="18.75" stroke="#F2C438" strokeWidth="2.5" shape-rendering="crispEdges"/>
 </g>
 <foreignObject x="96.0769" y="15.0127" width="80" height="70"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(15px);clip-path:url(#bgblur_1_75_20071_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter4_d_75_20071)" data-figma-bg-blur-radius="30">
 <rect x="111.077" y="17.5127" width="50" height="40" rx="20" fill="white" fill-opacity="0.1" shape-rendering="crispEdges"/>
@@ -22,8 +22,8 @@
 <path d="M186.724 109.513V104.754L199.349 92.3785C200.556 91.1592 201.562 90.0761 202.367 89.1292C203.172 88.1822 203.776 87.2648 204.178 86.377C204.581 85.4893 204.782 84.5423 204.782 83.5361C204.782 82.3879 204.522 81.4054 204.001 80.5887C203.48 79.7601 202.764 79.1209 201.852 78.6711C200.941 78.2213 199.905 77.9964 198.745 77.9964C197.55 77.9964 196.502 78.2449 195.602 78.7421C194.703 79.2274 194.004 79.9199 193.507 80.8195C193.022 81.7191 192.779 82.7904 192.779 84.0333H186.511C186.511 81.7251 187.038 79.7187 188.092 78.0141C189.145 76.3096 190.595 74.9897 192.442 74.0546C194.3 73.1195 196.431 72.6519 198.834 72.6519C201.272 72.6519 203.415 73.1076 205.261 74.0191C207.108 74.9305 208.54 76.1794 209.558 77.7655C210.588 79.3517 211.103 81.1628 211.103 83.1988C211.103 84.56 210.843 85.8976 210.322 87.2116C209.801 88.5255 208.884 89.9814 207.57 91.5795C206.268 93.1775 204.439 95.1128 202.083 97.3856L195.815 103.76V104.008H211.653V109.513H186.724ZM230.705 110.01C228.066 110.01 225.722 109.566 223.674 108.678C221.638 107.79 220.04 106.577 218.88 105.038C217.732 103.488 217.164 101.73 217.175 99.7648C217.164 98.2378 217.495 96.8351 218.17 95.5567C218.845 94.2783 219.756 93.213 220.904 92.3607C222.064 91.4966 223.354 90.9462 224.775 90.7094V90.4608C222.905 90.0465 221.389 89.0937 220.229 87.6022C219.081 86.0989 218.513 84.3647 218.525 82.3998C218.513 80.5295 219.034 78.8605 220.087 77.3927C221.141 75.9249 222.585 74.7707 224.42 73.9303C226.255 73.078 228.35 72.6519 230.705 72.6519C233.037 72.6519 235.115 73.078 236.938 73.9303C238.772 74.7707 240.216 75.9249 241.27 77.3927C242.335 78.8605 242.868 80.5295 242.868 82.3998C242.868 84.3647 242.282 86.0989 241.11 87.6022C239.95 89.0937 238.453 90.0465 236.618 90.4608V90.7094C238.038 90.9462 239.317 91.4966 240.453 92.3607C241.601 93.213 242.513 94.2783 243.188 95.5567C243.874 96.8351 244.217 98.2378 244.217 99.7648C244.217 101.73 243.637 103.488 242.477 105.038C241.317 106.577 239.719 107.79 237.683 108.678C235.659 109.566 233.333 110.01 230.705 110.01ZM230.705 104.932C232.067 104.932 233.25 104.701 234.256 104.239C235.263 103.766 236.044 103.103 236.6 102.251C237.157 101.398 237.441 100.416 237.452 99.3032C237.441 98.1431 237.139 97.1192 236.547 96.2314C235.967 95.3318 235.168 94.6275 234.15 94.1185C233.144 93.6095 231.996 93.355 230.705 93.355C229.403 93.355 228.243 93.6095 227.225 94.1185C226.207 94.6275 225.402 95.3318 224.81 96.2314C224.23 97.1192 223.946 98.1431 223.958 99.3032C223.946 100.416 224.219 101.398 224.775 102.251C225.331 103.091 226.112 103.748 227.119 104.222C228.137 104.695 229.332 104.932 230.705 104.932ZM230.705 88.3657C231.818 88.3657 232.8 88.1408 233.653 87.691C234.517 87.2412 235.197 86.6138 235.695 85.8089C236.192 85.0039 236.446 84.0747 236.458 83.0212C236.446 81.9796 236.198 81.0681 235.712 80.2868C235.227 79.4938 234.552 78.8841 233.688 78.458C232.824 78.02 231.83 77.801 230.705 77.801C229.557 77.801 228.545 78.02 227.669 78.458C226.805 78.8841 226.13 79.4938 225.645 80.2868C225.171 81.0681 224.941 81.9796 224.952 83.0212C224.941 84.0747 225.177 85.0039 225.663 85.8089C226.16 86.6019 226.84 87.2293 227.705 87.691C228.581 88.1408 229.581 88.3657 230.705 88.3657ZM250.41 109.513V73.1491H256.997V89.8572H257.441L271.628 73.1491H279.671L265.609 89.4665L279.795 109.513H271.876L261.028 93.9232L256.997 98.6817V109.513H250.41Z" fill="white"/>
 </g>
 <defs>
-<filter id="filter0_d_75_20071" x="9.53674e-07" y="-0.000124931" width="306.154" height="148.154" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_d_75_20071" x="9.53674e-07" y="-0.000124931" width="306.154" height="148.154" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="2.26923" operator="erode" in="SourceAlpha" result="effect1_dropShadow_75_20071"/>
 <feOffset dy="7.5641"/>
@@ -35,8 +35,8 @@
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 </filter>
 <clipPath id="bgblur_0_75_20071_clip_path" transform="translate(-9.53674e-07 0.000124931)"><rect x="9.07692" y="1.5127" width="288" height="130" rx="20"/>
-</clipPath><filter id="filter1_dd_75_20071" x="18.8269" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+</clipPath><filter id="filter1_dd_75_20071" x="18.8269" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="2.5" operator="erode" in="SourceAlpha" result="effect1_dropShadow_75_20071"/>
 <feOffset dy="2.5"/>
@@ -56,8 +56,8 @@
 <pattern id="pattern0_75_20071" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_75_20071" transform="scale(0.000976562)"/>
 </pattern>
-<filter id="filter2_dd_75_20071" x="47.4936" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter2_dd_75_20071" x="47.4936" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="2.5" operator="erode" in="SourceAlpha" result="effect1_dropShadow_75_20071"/>
 <feOffset dy="2.5"/>
@@ -77,8 +77,8 @@
 <pattern id="pattern1_75_20071" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image1_75_20071" transform="scale(0.000976562)"/>
 </pattern>
-<filter id="filter3_dd_75_20071" x="76.1603" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter3_dd_75_20071" x="76.1603" y="16.2627" width="52.5" height="52.5" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="2.5" operator="erode" in="SourceAlpha" result="effect1_dropShadow_75_20071"/>
 <feOffset dy="2.5"/>
@@ -98,8 +98,8 @@
 <pattern id="pattern2_75_20071" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image2_75_20071" transform="scale(0.000976562)"/>
 </pattern>
-<filter id="filter4_d_75_20071" x="96.0769" y="15.0127" width="80" height="70" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter4_d_75_20071" x="96.0769" y="15.0127" width="80" height="70" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="3.75" operator="erode" in="SourceAlpha" result="effect1_dropShadow_75_20071"/>
 <feOffset dy="12.5"/>

@@ -1,0 +1,21 @@
+<svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="2.6226e-05" y="4.52995e-05" width="67.6962" height="67.6962"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(11.56px);clip-path:url(#bgblur_0_825_3569_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter0_d_825_3569)" data-figma-bg-blur-radius="23.1206">
+<rect x="11.5603" y="1.92676" width="44.5756" height="44.5756" rx="15.4137" fill="white" fill-opacity="0.1" shape-rendering="crispEdges"/>
+<path d="M28.7034 32.5933H24.845V20.1881H28.7034V32.5933ZM26.7535 18.5285C25.5503 18.5285 24.5546 17.4913 24.5546 16.2466C24.5546 15.0435 25.5503 14.0477 26.7535 14.0477C27.9981 14.0477 28.9939 15.0435 28.9939 16.2466C28.9939 17.4913 27.9981 18.5285 26.7535 18.5285ZM43.1001 32.5933H39.2831V26.5774C39.2831 25.1253 39.2416 23.2998 37.2502 23.2998C35.2587 23.2998 34.9683 24.8348 34.9683 26.4529V32.5933H31.1098V20.1881H34.8023V21.8891H34.8438C35.3832 20.9349 36.6278 19.8977 38.4948 19.8977C42.3948 19.8977 43.1416 22.47 43.1416 25.7891V32.5933H43.1001Z" fill="#F2C438"/>
+</g>
+<defs>
+<filter id="filter0_d_825_3569" x="2.6226e-05" y="4.52995e-05" width="67.6962" height="67.6962" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2.89007" operator="erode" in="SourceAlpha" result="effect1_dropShadow_825_3569"/>
+<feOffset dy="9.63356"/>
+<feGaussianBlur stdDeviation="7.22517"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_825_3569"/>
+<feBlend mode="normal" in="BackgroundImageFix" in2="effect1_dropShadow_825_3569" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+</filter>
+<clipPath id="bgblur_0_825_3569_clip_path" transform="translate(-2.6226e-05 -4.52995e-05)"><rect x="11.5603" y="1.92676" width="44.5756" height="44.5756" rx="15.4137"/>
+</clipPath></defs>
+</svg>

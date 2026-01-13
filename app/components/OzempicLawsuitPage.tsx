@@ -64,6 +64,7 @@ const OzempicLawsuitPage: React.FC = () => {
           <p className="mb-4 text-base leading-relaxed">
             <strong>Ozempic (semaglutide)</strong> is a medication drug approved for Type 2 Diabetes but increasingly used for weight loss. It belongs to a class of medications called GLP-1 Receptor Agonists, which affect insulin levels and digestion.
           </p>
+          
           <p className="mb-4 text-base leading-relaxed">
             Users have reported severe gastrointestinal issues and other side effects that were not properly disclosed. As of 2023, Novo Nordisk faces multiple lawsuits claiming they failed to warn consumers about these risks. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation.
           </p>
@@ -81,7 +82,7 @@ const OzempicLawsuitPage: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#1b264f] to-[#1b264f]/90 pointer-events-none"></div>
             
             <div className="relative z-10 text-center md:text-left">
-              <h3 className="font-serif text-2xl font-bold mb-1">Start Your Free Case Review Today</h3>
+              <h3 className="font-serif text-[40px] font-bold mb-1">Start Your Free Case Review Today</h3>
               <p className="text-gray-300">Connect with top Ozempic attorneys now.</p>
             </div>
             <button className="relative z-10 bg-[#f0c441] hover:bg-[#d4ac39] text-[#1b264f] font-bold py-3 px-6 rounded uppercase text-sm tracking-wide transition-colors duration-300">

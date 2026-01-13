@@ -1,121 +1,81 @@
-// import React from 'react';
-
-// const MassTortInfo = () => {
-//   return (
-//     <div 
-//       className="relative w-11/12 md:w-10/12 h-[70vh] md:h-[72vh] mx-auto bg-center bg-no-repeat bg-contain overflow-hidden bg-[url('/MTHM.png')] md:bg-[url('/MTHD.png')]"
-//     >
-
-//       {/* Left-center heading */}
-//       <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 z-10">
-//         <p className="text-lg font-semibold uppercase tracking-[0.2em] text-white/70">
-//           Ready
-//         </p>
-//         <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight drop-shadow-sm">
-//           To Get Started?
-//         </h1>
-//       </div>
-
-//       {/* Center paragraph */}
-//       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[32rem] bg-white/10 border border-white/25 backdrop-blur-sm rounded-xl p-6 md:p-7 text-center z-10">
-//         <p className="text-white text-base md:text-lg leading-relaxed">
-//           Don't wait to seek the justice you deserve. Contact us today to schedule
-//           your free case evaluation.
-//         </p>
-//       </div>
-
-//       {/* Bottom-left button */}
-//       <button className="absolute bottom-12 left-6 md:left-12 bg-[#f3c041] hover:bg-[#e5b12f] text-[#0d1d4a] font-semibold py-3 px-8 rounded shadow-lg transition duration-300 uppercase tracking-wide z-10">
-//         Get a Free Case Review
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default MassTortInfo;
-
-import React from 'react';
+import React from "react";
+import Image from "next/image";
 
 const MassTortInfo = () => {
   return (
     <>
       {/* 2. Main Container */}
-      <div className="w-full flex justify-center items-center min-h-screen bg-white p-4 font-sans">
-        
-        <div 
+      <div className="w-full flex justify-center items-center bg-white px-4 md:px-8 lg:px-12 md:pb-12 font-sans">
+        <div
           className="
-            relative w-full max-w-7xl 
-            bg-[#19224D] 
-            rounded-3xl 
-            shadow-2xl 
-            overflow-hidden 
-            flex flex-col md:flex-row 
-            items-start md:items-center
-            min-h-[600px] md:min-h-[400px]
+            relative w-full max-w-[1440px]
+            bg-[#162766]
+            rounded-3xl
+            shadow-2xl
+            overflow-hidden
+            grid grid-cols-1 md:grid-cols-2
+            min-h-[260px] md:min-h-[240px] lg:min-h-[310px]
           "
         >
-          {/* 
-             Background Image Layer 
-             - Mobile: Positioned bottom-center (shows the person)
-             - Desktop: Positioned center-right (shows person on right)
-          */}
-          <div 
-            className="
-              absolute inset-0 z-0 
-              bg-no-repeat bg-cover bg-right md:bg-cover md:bg-right 
-              transition-all duration-500
-            bg-[url('/MTHM%20(2).png')] md:bg-[url('/MTHD%20(2).png')]
-            "
-          >
-            {/* 
-               Gradient Overlay 
-               - Mobile: Dark gradient from top to bottom so text is readable
-               - Desktop: Gradient from left to right to blend text area
-            */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#19224D] via-[#19224D]/90 to-transparent md:bg-gradient-to-r md:from-[#19224D] md:via-[#19224D]/80 md:to-transparent"></div>
-          </div>
-
-          {/* 3. Content Section */}
-          <div className="relative z-10 w-full md:w-3/5 p-8 md:p-16 flex flex-col justify-center">
-            
+          {/* ================= LEFT: CONTENT ================= */}
+          <div className="flex flex-col justify-center p-6 md:p-8 lg:p-[50px] z-10">
             <h1
-              className="font-noto-serif font-normal capitalize text-white mb-6"
+              className="font-noto-serif font-normal capitalize text-white
+                         text-[26px] md:text-[24px] lg:text-[35px] mb-2"
               style={{
-                fontSize: 'clamp(36px, 7vw, 60px)',
-                lineHeight: 'clamp(44px, 8vw, 70px)',
-                letterSpacing: '0px',
+                lineHeight: "clamp(34px, 6vw, 70px)",
+                letterSpacing: "0px",
               }}
             >
-              <span className="text-[#F2C94C]">Ready</span> To Get Started?
+              <span className="text-[#F2C94C] block md:inline">Ready</span> To Get
+              Started?
             </h1>
 
             <p
-              className="font-urbanist font-normal text-gray-200 mb-8 max-w-lg"
-              style={{ fontSize: '18px', lineHeight: '24px', letterSpacing: '0px' }}
+              className="font-urbanist font-normal text-[#F9F9F9]
+                         mb-6 lg:mb-8
+                         max-w-lg
+                         text-[14px] md:text-[13px] lg:text-[18px]"
+              style={{ lineHeight: "22px", letterSpacing: "0px" }}
             >
-              Don't Wait To Seek The Justice You Deserve. Contact Us Today To Schedule Your Free Case Evaluation.
+              Don&apos;t Wait To Seek The Justice You Deserve. Contact Us <br />
+              Today To Schedule Your Free Case Evaluation.
             </p>
 
-            <button 
+            <button
               className="
-                bg-[#F2C94C] 
-                text-[#19224D] 
-                font-urbanist font-semibold
-                uppercase 
-                tracking-wide 
-                py-4 px-8 
-                rounded-lg 
-                shadow-lg 
-                w-full max-w-md md:w-auto
+                bg-[#F2C94C]
+                text-[#19224D]
+                font-urbanist font-bold
+                uppercase
+                tracking-wide
+                py-3 md:py-2.5 lg:py-4
+                px-6 lg:px-8
+                rounded-lg
+                shadow-lg
+                w-full max-w-md md:max-w-[240px] lg:w-auto
                 transition-transform hover:-translate-y-1 hover:bg-[#ffd65c]
-                text-base
+                text-[11px] md:text-[11px] lg:text-[16px]
               "
-              style={{ lineHeight: '100%', letterSpacing: '0%', fontWeight: 600 }}
+              style={{ lineHeight: "100%", letterSpacing: "0%" }}
             >
               Start a Free Case Review
             </button>
           </div>
 
+          {/* ================= RIGHT: IMAGE ================= */}
+          <div className="relative w-full h-[200px] md:h-full">
+            {/* subtle gradient fade so image blends into blue */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-l from-transparent to-[#162766]" />
+
+            <Image
+              src="/bgimgmasstortbigfull.svg"
+              alt="Mass Tort"
+              fill
+              priority
+              className="object-contain object-right"
+            />
+          </div>
         </div>
       </div>
     </>

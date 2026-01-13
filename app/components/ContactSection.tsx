@@ -806,7 +806,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
               <div key={field.name} className="space-y-1">
                 <input
                   name={field.name}
-                  value={form[field.name]}
+                  value={String(form[field.name] ?? "")}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder={field.label}

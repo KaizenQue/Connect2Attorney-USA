@@ -594,7 +594,7 @@ const MoneyBagIcon = React.memo(() => (
   </svg>
 ));
 
-const ChevronDownIcon = React.memo(() => (
+const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
@@ -609,7 +609,7 @@ const ChevronDownIcon = React.memo(() => (
   >
     <polyline points="6 9 12 15 18 9"></polyline>
   </svg>
-));
+);
 
 const BlueShapeSVG = React.memo(() => (
   <svg
@@ -1107,7 +1107,6 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                     onCaptchaChange={onCaptchaChange}
                     resetTrigger={resetTrigger}
                     disabled={isSubmitting}
-                    compact={true}
                   />
                 </div>
               )}
@@ -2216,7 +2215,6 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
           onCaptchaChange={onCaptchaChange}
           resetTrigger={resetTrigger}
           disabled={isSubmitting}
-          compact={true}
         />
       </div>
     )}

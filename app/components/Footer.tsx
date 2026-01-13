@@ -56,11 +56,19 @@ import Image from "next/image";
 //   </svg>
 // );
 
+type BaseLink = {
+  name: string;
+  href: string;
+  highlight?: boolean;
+  active?: boolean;
+  mobileOnly?: boolean;
+  desktopOnly?: boolean;
+};
 
 const Footer = () => {
   
   // Data for links to keep JSX clean
-  const quickLinks = [
+  const quickLinks : BaseLink[] = [
     { name: "Home", href: "#", active: true },
     { name: "About Us", href: "/about-us" },
     { name: "Contact Us", href: "/contact-us" },
@@ -70,7 +78,7 @@ const Footer = () => {
     { name: "Blog", href: "#" },
   ];
 
-  const massTort = [
+const massTort: BaseLink[] = [
   { name: "Ozempic  ", href: "/mass-tort/ozempic-lawsuit" },
   { name: "Mesothelioma  ", href: "/mass-tort/mesothelioma-lawsuit" },
   { name: "Depo-Provera  ", href: "/mass-tort/depo-provera-lawsuit" },
@@ -79,7 +87,7 @@ const Footer = () => {
   { name: "See All", href: "/mass-tort", highlight: true },
   ];
 
-  const classAction = [
+const classAction: BaseLink[] = [
  {
     name: "Tesla Autopilot Recall  ",
     href: "/class-action/tesla-autopilot-recall-lawsuit",
@@ -89,7 +97,7 @@ const Footer = () => {
     href: "/class-action/maclaren-hall-sex-abuse-lawsuit",
   },  ];
 
-  const personalInjury = [
+const personalInjury: BaseLink[] = [
      {
     name: "Sexual Abuse  ",
     href: "/personal-injury/sexual-abuse-lawsuit",

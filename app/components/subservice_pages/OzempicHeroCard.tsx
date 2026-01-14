@@ -6,8 +6,7 @@ const OzempicHeroCard = () => {
     <div
       className="
         relative w-full
-        min-h-[520px]
-        sm:min-h-[560px]
+        
         lg:min-h-[540px]
         xl:min-h-[580px]
         2xl:min-h-[620px]
@@ -22,7 +21,7 @@ const OzempicHeroCard = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/ozempic_bg_dark.svg"
+          src="/ozempic_bg_dark.png"
           alt="Mass tort hero background"
           className="
             w-full h-full

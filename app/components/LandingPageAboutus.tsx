@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import PartnerStatsCard from "./PartnerStatsCard";
-
+import RotatingSvg from "./RotatingSvg";
 const ArrowUpRightIcon = React.memo(() => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -250,10 +250,10 @@ const DesktopLanding = () => {
           overflow-hidden
 
           /* LG IMAGE */
-          bg-[url('/aboutusbgfulllgonly.svg')]
+          bg-[url('/aboutusbgfulllgonly1.svg')]
 
           /* XL+ IMAGE */
-          xl:bg-[url('/aboutusbgfull.svg')]
+          xl:bg-[url('/aboutusbgfull1.svg')]
 
           bg-no-repeat
           bg-center
@@ -266,57 +266,63 @@ const DesktopLanding = () => {
           {/* ================= LEFT SIDE ================= */}
           <div className="relative">
 
-            {/* ======= ABOUT US BLOCK (POSITIONABLE) ======= */}
-            <div
-              className="
-                absolute
-                lg:left-[20%] lg:top-[10%]
-                xl:left-[10%] xl:top-[12%]
-                2xl:left-[10%] 2xl:top-[12%]
-                max-w-[520px]
-              "
-            >
-              <h1
-                className="
-                  font-noto-serif
-                  font-normal
-                  capitalize
-                  text-[#F2C438]
-                  text-[56px]
-                  leading-[64px]
-                  xl:text-[72px]
-                  xl:leading-[82px]
-                  2xl:text-[80px]
-                  2xl:leading-[90px]
-                  mb-8
-                "
-              >
-                About Us
-              </h1>
+{/* ======= ABOUT US BLOCK (POSITIONABLE) ======= */}
+<div
+  className="
+    absolute
+    lg:left-[20%] lg:top-[10%]
+    xl:left-[10%] xl:top-[12%]
+    2xl:left-[10%] 2xl:top-[12%]
+    max-w-[520px]
+    relative
+  "
+>
+  {/* ===== Rotating SVG pinned to top-right of About Us ===== */}
+  <div className="absolute -top-8 -right-8 xl:-top-7 xl:-right-34 2xl:-top-4 2xl:-right-50">
+    <RotatingSvg />
+  </div>
 
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <MagnifyingGlassIcon />
-                  <p className="text-blue-100 text-[18px] leading-[24px]">
-                    <span className="text-[#F2C438]">Free,</span> Confidential Case Reviews.
-                  </p>
-                </div>
+  <h1
+    className="
+      font-noto-serif
+      font-normal
+      capitalize
+      text-[#F2C438]
+      text-[56px]
+      leading-[64px]
+      xl:text-[72px]
+      xl:leading-[82px]
+      2xl:text-[80px]
+      2xl:leading-[90px]
+      mb-8
+    "
+  >
+    About Us
+  </h1>
 
-                <div className="flex items-start gap-4">
-                  <DocumentIcon />
-                  <p className="text-blue-100 text-[18px] leading-[24px]">
-                    Serving All <span className="text-[#F2C438]">50 States.</span>
-                  </p>
-                </div>
+  <div className="space-y-6">
+    <div className="flex items-start gap-4">
+      <MagnifyingGlassIcon />
+      <p className="text-blue-100 text-[18px] leading-[24px]">
+        <span className="text-[#F2C438]">Free,</span> Confidential Case Reviews.
+      </p>
+    </div>
 
-                <div className="flex items-start gap-4">
-                  <MoneyBagIcon />
-                  <p className="text-blue-100 text-[18px] leading-[24px]">
-                    <span className="text-[#F2C438]">No Fees</span> Unless You Win.
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div className="flex items-start gap-4">
+      <DocumentIcon />
+      <p className="text-blue-100 text-[18px] leading-[24px]">
+        Serving All <span className="text-[#F2C438]">50 States.</span>
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4">
+      <MoneyBagIcon />
+      <p className="text-blue-100 text-[18px] leading-[24px]">
+        <span className="text-[#F2C438]">No Fees</span> Unless You Win.
+      </p>
+    </div>
+  </div>
+</div>
 
             {/* ======= STATS CARD (INDEPENDENT) ======= */}
             <div

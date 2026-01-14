@@ -1579,23 +1579,26 @@ useEffect(() => {
 
   return (
     <div className="w-full  flex justify-center items-center p-3 sm:p-4">
-      <div
-        ref={containerRef}
-        className="
-          flex
-          flex-col
+<div
+  ref={containerRef}
+  className="
+    flex
+    flex-col
 
-          w-full
-          max-w-[447px]
+    w-full
+    max-w-[447px]
 
-          bg-white
-          rounded-xl
-          shadow-xl
+    bg-white
+    rounded-xl
+    shadow-xl
 
-          overflow-hidden
-          overflow-y-auto
-        "
-      >
+    
+    
+
+    overflow-hidden
+  "
+>
+
     {/* ---------------- STEP 1 ---------------- */}
 <Step active={step === 1} direction={direction}>
   <form 

@@ -168,9 +168,9 @@ const MassTortLegalPage = () => {
             </ul>
 
             <h2 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4">
-              How Can Connect2Attorney{" "}
-              <span className="text-[#F2C438]">Help You File</span> A Class
-              Action Lawsuit?
+              How Can Connect2Attorney{" "}<br/>
+              <span className="text-[#F2C438]">Help You File</span> A Mass Tort
+               Lawsuit?
             </h2>
 
             <p className="mb-8 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px]">

@@ -337,6 +337,7 @@ const CasesSection2: React.FC = () => {
                 shadow-lg
                 hover:shadow-xl
                 hover:-translate-y-1
+                w-full
               "
             >
               See All Services

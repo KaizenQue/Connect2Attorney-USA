@@ -1820,10 +1820,8 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
           2xl:min-h-[820px]
           overflow-hidden
 
-          /* LG IMAGE */
-          bg-[url('/contactusfinalsvglg.svg')]
+          bg-[url('/contactusfinalshvglgbigger.svg')]
 
-          /* XL+ IMAGE */
           xl:bg-[url('/contactusfinalsvg.svg')]
 
           bg-no-repeat
@@ -1887,21 +1885,39 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
             </div>
 
             {/* ======= STATS CARD (INDEPENDENT) ======= */}
-            <div
-              className="
-                absolute
-                lg:left-[30%] lg:bottom-[10%]
-                xl:left-[40%] xl:bottom-[10%]
-                2xl:left-[38%] 2xl:bottom-[12%]
-              "
-            >
-              <PartnerStatsCard />
-            </div>
+          <div
+  className="
+    absolute
+
+    lg:left-[20%] lg:bottom-[10%] lg:scale-[0.85]
+    xl:left-[40%] xl:bottom-[10%] xl:scale-[0.95]
+    2xl:left-[38%] 2xl:bottom-[12%] 2xl:scale-[1]
+  "
+>
+  <PartnerStatsCard />
+</div>
+
 
           </div>
 
           {/* ================= RIGHT SIDE ================= */}
-<div className="relative h-full xl:pr-[2%] lg:pr-[20%] pl-[42%] lg:pl-[40%] pt-[10%] xl:pt-[12%]">
+<div
+  className="
+    relative
+    h-full
+
+    pl-[42%] pt-[10%]
+
+    sm:pl-[42%] sm:pt-[10%]
+    md:pl-[42%] md:pt-[10%]
+
+    lg:pl-[30%] lg:pr-[20%] lg:pt-[10%]
+
+    xl:pl-[40%] xl:pr-[2%] xl:pt-[12%]
+
+    2xl:pl-[40%] 2xl:pr-[2%] 2xl:pt-[12%]
+  "
+>
 <form
   className="
     w-full

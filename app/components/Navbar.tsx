@@ -688,7 +688,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="relative w-full  p-4 mb-14 flex flex-col items-center justify-start gap-3 font-['Urbanist']">
+    <div className="relative w-full  p-4 mb-14 flex flex-col items-center justify-start gap-3 font-['Urbanist'] ">
       <DesktopNavbar scrolled={scrolled} />
       <MobileNavbar 
         scrolled={scrolled}

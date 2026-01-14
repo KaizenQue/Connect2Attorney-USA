@@ -17,8 +17,22 @@ const MassTortInfo = () => {
             min-h-[260px] md:min-h-[240px] lg:min-h-[310px]
           "
         >
+          {/* ================= MOBILE BACKGROUND IMAGE ================= */}
+          <div className="absolute inset-0 md:hidden z-0">
+            <Image
+              src="/bgimgmasstortbigfull.svg"
+              alt="Mass Tort"
+              fill
+              priority
+              className="object-contain object-left-bottom"
+            />
+          </div>
+
+          {/* Mobile overlay for readability */}
+          <div className="absolute inset-0 md:hidden bg-[#162766]/80 z-10" />
+
           {/* ================= LEFT: CONTENT ================= */}
-          <div className="flex flex-col justify-center p-6 md:p-8 lg:p-[50px] z-10">
+          <div className="flex flex-col justify-center p-6 md:p-8 lg:p-[50px] relative z-20">
             <h1
               className="font-noto-serif font-normal capitalize text-white
                          text-[26px] md:text-[24px] lg:text-[35px] mb-2"
@@ -63,8 +77,8 @@ const MassTortInfo = () => {
             </button>
           </div>
 
-          {/* ================= RIGHT: IMAGE ================= */}
-          <div className="relative w-full h-[200px] md:h-full">
+          {/* ================= RIGHT: IMAGE (DESKTOP/TABLET ONLY) ================= */}
+          <div className="relative w-full h-[200px] md:h-full hidden md:block">
             {/* subtle gradient fade so image blends into blue */}
             <div className="absolute inset-0 z-10 bg-gradient-to-l from-transparent to-[#162766]" />
 

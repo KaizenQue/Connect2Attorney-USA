@@ -16,9 +16,9 @@ const MassTortCard = () => {
     bg-white
     font-sans
 
-    pr-0 pb-14
+    
 
-    sm:pr-6 sm:pb-10
+    sm:pr-6 sm:pb-2
     md:pr-10 md:pb-14
     lg:pr-14 lg:pb-16
     xl:pr-20 xl:pb-20
@@ -33,7 +33,7 @@ const MassTortCard = () => {
       bg-[#f2f4f6]
       flex items-center
       overflow-hidden
-      min-h-[150px] sm:min-h-[150px] md:min-h-[300px]
+      min-h-[159px] sm:min-h-[159px] md:min-h-[300px]
       [clip-path:polygon(0_0,100%_0,100%_calc(100%-40px),calc(100%-40px)_100%,0_100%)]
     "
   >

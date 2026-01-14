@@ -45,25 +45,25 @@ const mobileCasesData: CaseItem[] = [
   {
     id: 1,
     title: "Sexual Abuse Lawsuit",
-    image: "/injuryimg.svg",
+    image: "/injuryimgmobile.svg",
     url: "/personal-injury/sexual-abuse-lawsuit",
   },
   {
     id: 2,
     title: "Motor Vehicle Accident Lawsuit",
-    image: "/motorimg.svg",
+    image: "/motorimgmobile.svg",
     url: "/personal-injury/motor-vehicle-accident-lawsuit",
   },
     {
     id: 3,
     title: "Slip and Fall Injury Lawsuit",
-    image: "/slipimg.svg",
+    image: "/slipimgmobile.svg",
     url: "/personal-injury/slip-and-fall-injury-lawsuit",
   },
   {
     id: 4,
     title: "18-Wheeler Accident Lawsuit",
-    image: "/truckimg.svg",
+    image: "/truckimgmobile.svg",
     url: "/personal-injury/18-wheeler-accident-lawsuit",
   },
 ];

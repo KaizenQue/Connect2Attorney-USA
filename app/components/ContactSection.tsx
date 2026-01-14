@@ -478,7 +478,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-    let offsets: number[] = [];
+    const offsets: number[] = [];
     
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
@@ -767,7 +767,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
         </div>
 
         {/* FORM */}
-        <div className="w-full lg:w-[52%] p-6 sm:p-12">
+        <div className="w-full lg:w-[52%] p-6 pt-40 sm:p-12">
          <h1 className="text-[50px] font-normal font-noto-serif text-[#162766] mb-8 text-center leading-[60px] capitalize">
   Take The <span className="text-[#F2C438]">First Step</span>
 </h1>

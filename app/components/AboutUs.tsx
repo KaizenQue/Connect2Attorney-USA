@@ -7,7 +7,7 @@ const AboutUs = () => {
       className="
     relative
     w-full
-    overflow-hidden
+    
     pl-[16px] md:pl-0
     my-10 md:mb-0 md:mt-10 lg:mb-12
     h-[460px]                  
@@ -71,10 +71,13 @@ const AboutUs = () => {
       </div>
 
       {/* 4. Left-Bottom Button */}
+
+      
       <a
         href="/about-us"
         className="
-  absolute bottom-[0%] md:bottom-[9%] left-[8%] md:left-[5%] lg:left-[2%] lg:bottom-[3%] xl:bottom-[1%]
+        
+  absolute top-[353px] md:top-[80%] left-[7%] md:left-[5%] lg:left-[2%] lg:bottom-[3%] xl:bottom-[1%]
   z-20 group bg-[#fbc02d] text-[#1a237e] rounded-xl
   lg:rounded-3xl font-urbanist font-semibold
   text-[13px] md:text-[16px] lg:text-[18px]  2xl:text-[24px]
@@ -84,7 +87,7 @@ const AboutUs = () => {
   min-[360px]:min-w-[200px] min-[360px]:min-h-[50px]   min-[375px]:min-w-[210px] min-[375px]:min-h-[50px]
   min-w-[180px] h-[52px]
   md:min-w-[400px] md:h-[72px]
-  lg:min-w-[210px] lg:h-[103px]  xl:min-w-[270px] xl:min-h-[103px]  
+  lg:min-w-[210px] lg:h-[90px]  xl:min-w-[270px] xl:min-h-[90px]  
 "
       >
         <span className="lg:hidden">Know more</span>

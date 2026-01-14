@@ -1,37 +1,39 @@
 import React from "react";
 import Form from "../subserviceform/FormMain";
 
-
 const OzempicHeroCard = () => {
   return (
-  <div
-  className="
-    relative w-full
-    h-[759px]
-    min-h-[600px]
-    max-h-[759px]
-    overflow-hidden
-    bg-[#162766]
-  "
->
-
-      {/* Background Image */}
+    <div
+      className="
+        relative w-full
+        min-h-[520px]
+        sm:min-h-[560px]
+        lg:min-h-[540px]
+        xl:min-h-[580px]
+        2xl:min-h-[620px]
+        max-h-[700px]
+        overflow-hidden
+        bg-[#162766]
+        flex
+        items-center
+        justify-center
+      "
+    >
+      {/* Background */}
       <div className="absolute inset-0 z-0">
-      <img
-  src="/ozempic_bg_dark.svg"
-  alt="Mass tort hero background"
-  className="
-    w-full h-full
-    object-cover
-    scale-[1.23]
-    translate-x-[-5px]
-    translate-y-[-50px]
-  "
-/>
-
+        <img
+          src="/ozempic_bg_dark.svg"
+          alt="Mass tort hero background"
+          className="
+            w-full h-full
+            object-cover
+            scale-[1.12]
+            translate-y-[-20px]
+          "
+        />
       </div>
 
-      {/* Main Container */}
+      {/* Content Row */}
       <div
         className="
           relative z-20
@@ -41,10 +43,9 @@ const OzempicHeroCard = () => {
           lg:flex-row
           items-center
           justify-center
-          lg:justify-start
         "
       >
-        {/* Left Text Content */}
+        {/* Left Text */}
         <div
           className="
             w-full
@@ -56,8 +57,6 @@ const OzempicHeroCard = () => {
             lg:ml-[5%]
             xl:ml-[10%]
             max-w-xl
-            mb-8
-            lg:mb-0
           "
         >
           <h1
@@ -70,29 +69,32 @@ const OzempicHeroCard = () => {
               text-[34px]
               sm:text-[42px]
               md:text-[50px]
-              lg:text-[60px]
+              lg:text-[45px]
+              xl:text-[55px]
               leading-tight
-              lg:leading-[70px]
+              lg:leading-[64px]
             "
           >
-            Ozempic and GLP-1 Drug Lawsuit
+            Ozempic and GLP-1
+            <br />
+            Drug Lawsuit
           </h1>
         </div>
 
-        {/* Right Container – Form */}
+        {/* Right Form — TRUE PERFECT CENTER */}
         <div
           className="
             w-full
+            h-full
             flex
+            items-center
             justify-center
-            lg:justify-end
             px-4
             sm:px-6
             lg:px-12
             xl:px-20
           "
         >
-          {/* Control form width only */}
           <div className="w-full max-w-[420px]">
             <Form />
           </div>

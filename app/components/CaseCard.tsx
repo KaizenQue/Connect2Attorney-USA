@@ -24,19 +24,22 @@ const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
     >
       <div
         className="
-          relative
+          relative 
 
-          /* HEIGHT */
+      
           h-[360px]
-          md:h-[300px]
+        
+          md:h-[350px]
           lg:h-[320px]
           xl:h-[380px]
           2xl:h-[420px]
+         
+          
 
           /* WIDTH */
           w-[280px]
           sm:w-[320px]
-          md:w-[260px]
+          md:w-[290px]
           lg:w-[230px]
           xl:w-[280px]
           2xl:w-[320px]
@@ -49,7 +52,7 @@ const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
 
           flex-shrink-0
           rounded-[18px]
-          overflow-hidden pb-10
+          overflow-hidden 
           mx-2 lg:mx-3 xl:mx-4
           transition-transform duration-300
           lg:hover:-translate-y-2
@@ -93,9 +96,9 @@ const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
         {/* Title */}
         <div
           className="
-            absolute bottom-4 left-4
-            md:bottom-7 md:left-7
-            lg:bottom-10 lg:left-6
+            absolute bottom-30 left-4
+            md:bottom-24 md:left-7
+            lg:bottom-25 lg:left-6
             xl:bottom-28 xl:left-6
             z-20
             max-w-[80%]

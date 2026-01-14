@@ -137,7 +137,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-    let offsets: number[] = [];
+    const offsets: number[] = [];
     
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
@@ -435,9 +435,9 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
   const inputClass = "w-full h-[48px] rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#808080] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844] disabled:opacity-50";
  
   return (
-    <div className="block lg:hidden w-full min-h-screen bg-white font-sans">
+    <div className="block lg:hidden w-full bg-white font-sans">
       {/* Form content - takes full screen height */}
-      <div className="w-full h-[calc(100vh-73px)] overflow-y-auto px-4 py-6">
+      <div className="w-full px-4 py-6 h-[100svh] md:h-auto ">
         <form className="w-full max-w-[420px] md:max-w-[680px] mx-auto" onSubmit={handleSubmit}>
           {/* Hidden TrustedForm Fields */}
           <input type="hidden" name="xxTrustedFormCertUrl" value={certId || ""} />
@@ -722,7 +722,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
             </div>
  
             {/* Claim help checkbox */}
-            <label className="flex items-start gap-2">
+            {/* <label className="flex items-start gap-2">
               <input
                 type="checkbox"
                 name="needHelp"
@@ -734,7 +734,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
               <span className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px]">
                 I would be needing help to file a claim?
               </span>
-            </label>
+            </label> */}
           </div>
  
           {/* Submit button */}

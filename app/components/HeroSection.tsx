@@ -63,7 +63,7 @@ const GlassCard = ({
         group
         cursor-pointer
         flex flex-col justify-between h-[129px] w-[105px]
-        lg:w-[111px] md:w-[111px] md:h-[111px] lg:h-[100px] xl:w-[105px] p-2 xl:p-2.5 rounded-xl
+        lg:w-[88px] md:w-[111px] md:h-[111px] lg:h-[100px] xl:w-[90px] p-2 xl:p-2.5 rounded-xl
         transition-all duration-300 ease-in-out
         hover:-translate-y-1
         bg-white/45 
@@ -355,15 +355,15 @@ const DataGridCompact = ({
 }: {
   grid: { label: string; value: string }[];
 }) => (
-  <div className="w-full max-w-[440px] h-[80px] mt-2 ">
+  <div className="w-full h-[80px] mt-2">
     <p className="text-[#162766] font-urbanist text-[15px] font-semibold mt-5 mb-2 pl-2">
       Case Summary
     </p>
-    <div className="grid grid-cols-3 gap-2 p-2 rounded-xl">
+    <div className="absolute grid grid-cols-3 gap-20 p-2 rounded-xl mr-20">
       {grid.map((item, idx) => (
         <div
           key={idx}
-          className="bg-white/70 p-2 xl:p-3 rounded-lg shadow-sm min-h-[80px] xl:min-h-[100px] flex flex-col justify-between shadow-xl w-[108px]"
+          className="bg-white/70 p-2 xl:p-3 rounded-lg shadow-sm min-h-[80px] xl:min-h-[100px] flex flex-col justify-between shadow-xl w-[80px]"
         >
           <p className="text-[9px] xl:text-[12px] font-urbanist text-[#808080] mb-1 leading-tight">
             {item.label}
@@ -1133,23 +1133,22 @@ const DesktopLandingHeroCompact = ({
 
   const selectedLawsuit = lawsuits[selectedIndex];
   return (
-    <div className="hidden lg:flex h-[650px] font-sans flex-col mx-10">
-      <div className="relative w-full  h-[650px] mt-4 overflow-hidden">
+    <div className="hidden lg:flex h-[650px] font-sans flex-col mx-10 ">
+      <div className="relative w-full  h-[650px] mt-4 overflow-hidden max-w-[1560px]">
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-contain "
         >
           <source src="/video1.mp4" type="video/mp4" />
-            <div className="absolute inset-0 bg-[#162766]/60 pointer-events-none" />
-
         </video>
+
         {/* left side content */}
 
-        <div className="relative top-0 z-10 px-12 xl:px-20 flex flex-col justify-start h-full pt-14 ">
+        <div className="relative top-0 z-10 xl:left-[160px] px-12 xl:px-20 flex flex-col justify-start h-full pt-14 ">
           <h1 className="lg:text-[55px] leading-none mb-4">
             <span className="font-[noto-serif] text-[#F2C438] block mb-2">
               Justice
@@ -1177,7 +1176,7 @@ const DesktopLandingHeroCompact = ({
         </div>
         {/* right side content */}
         <div className="absolute inset-y-0 -right-[4px] top-[20px] z-10 -ml-[140px]">
-          <div className="absolute top-[24px] right-[16px] w-[280px]">
+          <div className="absolute top-[24px] right-[16px] xl:right-[208px] w-[280px]">
             <div
               className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full h-[45px] cursor-pointer"
               onClick={() => setOpen(!open)}
@@ -1254,16 +1253,17 @@ const DesktopLandingHeroCompact = ({
           </div>
 
           {/* 🔹 MIDDLE ZONE — STATS + GRID */}
-          <div className="absolute top-[96px] right-[16px] w-[280px]">
+          <div className="absolute top-[96px] right-[16px] xl:right-[208px] w-[280px]">
             <StatisticsCard
               stats={selectedLawsuit.stats}
               chartConfig={selectedChartConfig}
             />
+
             <DataGridCompact grid={selectedLawsuit.dataGrid} />
           </div>
 
           {/* 🔹 BOTTOM ZONE — GLASS CARDS */}
-          <div className="absolute bottom-[28px] left-[24px] flex gap-2">
+          <div className="absolute bottom-[28px] right-[180px] xl:right-[375px] flex gap-2">
             <GlassCard
               icon={
                 <Image
@@ -1318,9 +1318,9 @@ const DesktopLandingHeroCompact = ({
           </div>
 
           {/* Scroll Button (unchanged) */}
-          <div className="absolute -bottom-2 right-0 z-50 scale-90 xl:scale-100 origin-bottom-right">
+          <div className="absolute bottom-8 right-0 z-50 scale-90 xl:scale-100 origin-bottom-right">
             <button
-              className="lg:w-[180px] h-[87px] text-white px-4 py-3 flex items-center gap-2 hover:scale-[1.08]"
+              className="lg:w-[190px] h-[87px] text-white px-4 py-3 flex items-center gap-2 hover:scale-[1.08]"
               onClick={scrollToNextSection}
             >
               <Image
@@ -1353,41 +1353,23 @@ const DesktopLandingHeroExpanded = ({
 
   const selectedLawsuit = lawsuits[selectedIndex];
   return (
-    <div className="hidden lg:flex bg-white overflow-hidden font-sans flex-col">
-      <div
-        className="relative
-    w-full
-    max-w-[1560px]
-    mx-auto  h-[750px]                     
-    overflow-hidden"
-      >
-        <div className="relative w-full h-full px-[40px] mt-2">
-          {/* --- LEFT SIDE (Blue) --- */}
-          {/* Fixed width on lg screens to allow overlaps */}
-          <div className="absolute inset-y-0 left-[40px] w-[58%] z-20">
-            <div className="absolute inset-0">
-              <BlueShapeSVG />
-
-              {/* <HeroClipDefs /> */}
-
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 w-full h-full object-cover 
-                   [clip-path:url(#blue-shape-clip-hero)]"
-              >
-                <source src="/herovideo.mp4" type="video/mp4" />
-              </video>
-
-              <div
-                className="absolute inset-0 bg-[#162766]/70 
-                      [clip-path:url(#blue-shape-clip-hero)]"
-              />
-            </div>
-            <div className="relative top-0 z-30 px-12 xl:px-20 flex flex-col justify-start h-full pt-14 ">
+    <div className="hidden lg:flex jbg-white overflow-hidden font-sans flex-col my-10">
+      <div className="relative max-w-[1560px] h-[70vh] min-h-[720px]">
+        <div className="relative">
+          {/* LEFT / VIDEO */}
+          <div className="relative w-full h-[700px]">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            >
+              <source src="/1920x860.mp4" type="video/mp4" />
+            </video>
+          </div>
+          {/* <div className="relative top-0 z-10 px-12 xl:px-20 flex flex-col justify-start h-full pt-14 ">
               <h1 className="lg:text-[80px] leading-none mb-4">
                 <span className="font-[noto-serif] text-[#F2C438] block mb-2">
                   Justice
@@ -1412,14 +1394,12 @@ const DesktopLandingHeroExpanded = ({
                   </span>
                 </button>
               </div>
-            </div>
-          </div>
+            </div> */}
+
           <div className="absolute inset-y-0 right-[40px] w-[48%] z-10 -ml-[140px]">
-            <LightShapeSVGExpanded>
-              {/* 1. Dropdown & Stats Card */}
-              <div className="w-full max-w-[370px] flex flex-col items-end relative pl-0 -translate-y-8">
-                {/* Dropdown Header */}
-                <div
+            {/* 1. Dropdown & Stats Card */}
+            <div className="w-full max-w-[370px] flex flex-col items-end relative pl-0 -translate-y-8">
+              {/* <div
                   className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full mb-3 xl:mb-4 cursor-pointer"
                   onClick={() => setOpen(!open)}
                 >
@@ -1459,10 +1439,10 @@ const DesktopLandingHeroExpanded = ({
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   )}
-                </div>
+                </div> */}
 
-                {/* Dropdown List */}
-                {open && (
+              {/* Dropdown List */}
+              {/* {open && (
                   <div className="absolute top-10 left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-[360px]">
                     {lawsuits.map((lawsuit, idx) => (
                       <div
@@ -1502,20 +1482,20 @@ const DesktopLandingHeroExpanded = ({
                       </div>
                     ))}
                   </div>
-                )}
+                )} */}
 
-                {/* Statistics and Data Grid */}
-                <div className="mt-4 w-full">
+              {/* Statistics and Data Grid */}
+              {/* <div className="mt-4 w-full">
                   <StatisticsCard
                     stats={selectedLawsuit.stats}
                     chartConfig={selectedChartConfig}
                   />
 
                   <DataGrid grid={selectedLawsuit.dataGrid} />
-                </div>
-              </div>
+                </div> */}
+            </div>
 
-              <div className="flex flex-row gap-2 w-full max-w-[500px] justify-start ml-0 transform -translate-x-8 lg:-translate-x-24 xl:-translate-x-22">
+            {/* <div className="flex flex-row gap-2 w-full max-w-[500px] justify-start ml-0 transform -translate-x-8 lg:-translate-x-24 xl:-translate-x-22">
                 <GlassCard
                   icon={
                     <Image
@@ -1567,15 +1547,14 @@ const DesktopLandingHeroExpanded = ({
                     </>
                   }
                 />
-              </div>
-            </LightShapeSVGExpanded>
+              </div> */}
 
             {/* 4. Scroll Button - MOVED OUTSIDE + SCALED UP */}
             {/* 
                        - scale-90 / scale-100: Makes it bigger.
                        - bottom-6 right-6: Positions it in the corner gap created by the margin above.
                     */}
-            <div className="absolute bottom-16 right-0 z-50 scale-90 xl:scale-100 origin-bottom-right translate-y-5 sm:translate-y-7 xl:translate-y-8">
+            {/* <div className="absolute bottom-16 right-0 z-50 scale-90 xl:scale-100 origin-bottom-right translate-y-5 sm:translate-y-7 xl:translate-y-8">
               <button
                 className="lg:w-[240px] h-[87px] text-white px-4 sm:px-5 py-3 flex items-center gap-2 hover:scale-[1.08]"
                 onClick={scrollToNextSection}
@@ -1588,7 +1567,7 @@ const DesktopLandingHeroExpanded = ({
                   className="block"
                 />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

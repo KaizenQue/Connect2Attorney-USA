@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const BlogsEducationCard2 = () => {
   return (
-    <section className="relative w-full overflow-hidden my-10 md:my-0">
+    <section className="relative w-full overflow-hidden md:my-0">
       {/* MOBILE */}
       <div className="relative w-full aspect-[375/260] md:hidden">
         <Image

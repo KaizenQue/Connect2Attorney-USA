@@ -113,8 +113,8 @@ const CasesSection: React.FC = () => {
   "
       >
         {/* Header */}
-        <div className="flex flex-col lg:items-start items-center mb-8 lg:pl-10 ">
-          <h1 className="font-noto-serif font-normal text-[30px] md:text-[44px] text-white md:mb-8 text-center lg:text-left leading-[50px] md:leading-[52px] lg:leading-[70px] capitalize">
+        <div className="flex flex-col lg:items-start items-center mt-4 md:mt-6 lg:m-0 mb-8 lg:pl-10">
+          <h1 className="font-noto-serif font-normal text-[30px] md:text-[44px] text-white mb-2 md:mb-8 text-center lg:text-left leading-[50px] md:leading-[52px] lg:leading-[70px] capitalize">
             <span className="text-[#fcc030]">Cases</span> We Handle
           </h1>
 
@@ -212,7 +212,7 @@ const CasesSection: React.FC = () => {
         <div
           className="
     flex md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 
-    gap-6 sm:gap-5 lg:gap-10
+    gap-6 sm:gap-5 lg:gap-10 h-[325px] md:h-auto
     w-full lg:pl-2 lg:pr-2  lg:pb-0
    
   "

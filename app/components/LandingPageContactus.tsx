@@ -222,7 +222,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-    let offsets: number[] = [];
+    const offsets: number[] = [];
     
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {

@@ -1,7 +1,14 @@
 import React from "react";
 import Form from "../subserviceform/FormMain";
+import Image from "next/image";
 
-const OzempicHeroCard = () => {
+
+
+type LawsuitsHeroCardProps = {
+  heroTitle: React.ReactNode;
+};
+
+const LawsuitsHeroCard = ({ heroTitle }:LawsuitsHeroCardProps) => {
   return (
     <div
       className="
@@ -20,9 +27,10 @@ const OzempicHeroCard = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src="/ozempic_bg_dark.png"
           alt="Mass tort hero background"
+         fill
           className="
             w-full h-full
             object-cover
@@ -74,9 +82,7 @@ const OzempicHeroCard = () => {
               lg:leading-[64px]
             "
           >
-            Ozempic and GLP-1
-            <br />
-            Drug Lawsuit
+         {heroTitle}
           </h1>
         </div>
 
@@ -103,4 +109,4 @@ const OzempicHeroCard = () => {
   );
 };
 
-export default OzempicHeroCard;
+export default LawsuitsHeroCard;

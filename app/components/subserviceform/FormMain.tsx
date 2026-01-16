@@ -184,7 +184,7 @@
 //       }
 //       setStep2Error(""); // Clear error if validation passes
 //     }
-    
+
 //     setDirection("next");
 //     setStep((s) => (s < 4 ? ((s + 1) as any) : s));
 //   };
@@ -360,7 +360,6 @@
 //   }
 // };
 
-
 //   return (
 //     <div className="w-full flex items-center justify-center p-2 sm:p-3">
 //       {/* Responsive height container - adjusts based on content */}
@@ -374,7 +373,7 @@
 
 //     min-h-[450px]
 //     p-[5px]
-    
+
 //   "
 // >
 // <div className="relative w-full flex flex-col">
@@ -486,7 +485,6 @@
 //   </div>
 // )}
 
-                
 //                 {/* Step 2 error message */}
 //                 {step2Error && (
 //                   <p className="text-red-500 text-xs mt-1">{step2Error}</p>
@@ -746,7 +744,6 @@
 //   </div>
 // </Step>
 
-
 //         </div>
 //       </div>
 //     </div>
@@ -791,7 +788,6 @@
 //     </div>
 //   );
 // }
-
 
 // function Choice({ label, onClick }: { label: string; onClick: () => void }) {
 //   return (
@@ -964,28 +960,9 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 
 /* ---------------- Config ---------------- */
@@ -993,7 +970,6 @@ import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 type Step = 1 | 2 | 3 | 4;
 
 const CASES = [
- 
   "Ozempic Lawsuit",
   "Mesothelioma Lawsuit",
   "Depo-Provera Lawsuit",
@@ -1005,8 +981,6 @@ const CASES = [
   "Motor Vehicle Accident Lawsuit",
   "Slip and Fall Injury Lawsuit",
   "18-Wheeler Accident Lawsuit",
-
-
 ];
 
 /* ---------------- Utils ---------------- */
@@ -1023,7 +997,6 @@ const getSourceUrl = () => {
 
   return initialLandingUrl;
 };
-
 
 const getIPAddress = async () => {
   try {
@@ -1047,11 +1020,26 @@ const formatPhone = (value: string) => {
     10
   )}`;
 };
+// eslint-disable-next-line react/display-name
 const PencilIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path  fillRule="evenodd" clipRule="evenodd" d="M17.8791 4.51278C17.9583 4.63296 17.9935 4.77677 17.979 4.91994C17.9644 5.06311 17.9008 5.19686 17.7991 5.29862L10.1382 12.9586C10.0599 13.0369 9.96209 13.093 9.85491 13.1211L6.66408 13.9544C6.5586 13.982 6.44777 13.9814 6.34257 13.9528C6.23738 13.9243 6.14148 13.8687 6.06441 13.7916C5.98733 13.7145 5.93175 13.6186 5.90319 13.5135C5.87462 13.4083 5.87407 13.2974 5.90158 13.1919L6.73491 10.002C6.75983 9.90642 6.80566 9.81761 6.86908 9.74195L14.5582 2.05778C14.6754 1.94074 14.8343 1.875 14.9999 1.875C15.1655 1.875 15.3244 1.94074 15.4416 2.05778L17.7991 4.41445C17.8282 4.44515 17.8549 4.47802 17.8791 4.51278ZM16.4732 4.85612L14.9999 3.38362L7.90158 10.4819L7.38075 12.4761L9.37491 11.9553L16.4732 4.85612Z" fill="#162766"/>
-  <path d="M16.3677 14.2981C16.5954 12.3514 16.6682 10.3897 16.5852 8.43144C16.5832 8.38529 16.5909 8.33924 16.6077 8.2962C16.6244 8.25316 16.65 8.21408 16.6827 8.18144L17.5027 7.36144C17.5251 7.33891 17.5535 7.32333 17.5846 7.31656C17.6156 7.3098 17.648 7.31215 17.6777 7.32333C17.7075 7.33451 17.7333 7.35404 17.7523 7.37957C17.7712 7.40511 17.7823 7.43556 17.7843 7.46728C17.9383 9.79332 17.8797 12.1285 17.6093 14.4439C17.4127 16.1289 16.0593 17.4498 14.3818 17.6373C11.4696 17.9596 8.53073 17.9596 5.61851 17.6373C3.94184 17.4498 2.58767 16.1289 2.39101 14.4439C2.0461 11.4901 2.0461 8.50613 2.39101 5.55228C2.58767 3.86728 3.94101 2.54644 5.61851 2.35894C7.82888 2.11482 10.0558 2.05544 12.276 2.18144C12.3078 2.18373 12.3382 2.19507 12.3638 2.21412C12.3893 2.23318 12.4088 2.25915 12.42 2.28896C12.4313 2.31877 12.4337 2.35118 12.4271 2.38234C12.4205 2.4135 12.4051 2.44211 12.3827 2.46478L11.5552 3.29144C11.5228 3.32382 11.4842 3.34918 11.4416 3.36595C11.399 3.38273 11.3534 3.39055 11.3077 3.38894C9.45497 3.32549 7.6001 3.39651 5.75767 3.60144C5.21929 3.66103 4.71672 3.90038 4.33114 4.28082C3.94555 4.66126 3.69948 5.16058 3.63267 5.69811C3.29839 8.55503 3.29839 11.4412 3.63267 14.2981C3.69948 14.8356 3.94555 15.335 4.33114 15.7154C4.71672 16.0958 5.21929 16.3352 5.75767 16.3948C8.55351 16.7073 11.4468 16.7073 14.2435 16.3948C14.7819 16.3352 15.2845 16.0958 15.67 15.7154C16.0556 15.335 16.3009 14.8356 16.3677 14.2981Z" fill="#162766"/>
-</svg>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M17.8791 4.51278C17.9583 4.63296 17.9935 4.77677 17.979 4.91994C17.9644 5.06311 17.9008 5.19686 17.7991 5.29862L10.1382 12.9586C10.0599 13.0369 9.96209 13.093 9.85491 13.1211L6.66408 13.9544C6.5586 13.982 6.44777 13.9814 6.34257 13.9528C6.23738 13.9243 6.14148 13.8687 6.06441 13.7916C5.98733 13.7145 5.93175 13.6186 5.90319 13.5135C5.87462 13.4083 5.87407 13.2974 5.90158 13.1919L6.73491 10.002C6.75983 9.90642 6.80566 9.81761 6.86908 9.74195L14.5582 2.05778C14.6754 1.94074 14.8343 1.875 14.9999 1.875C15.1655 1.875 15.3244 1.94074 15.4416 2.05778L17.7991 4.41445C17.8282 4.44515 17.8549 4.47802 17.8791 4.51278ZM16.4732 4.85612L14.9999 3.38362L7.90158 10.4819L7.38075 12.4761L9.37491 11.9553L16.4732 4.85612Z"
+      fill="#162766"
+    />
+    <path
+      d="M16.3677 14.2981C16.5954 12.3514 16.6682 10.3897 16.5852 8.43144C16.5832 8.38529 16.5909 8.33924 16.6077 8.2962C16.6244 8.25316 16.65 8.21408 16.6827 8.18144L17.5027 7.36144C17.5251 7.33891 17.5535 7.32333 17.5846 7.31656C17.6156 7.3098 17.648 7.31215 17.6777 7.32333C17.7075 7.33451 17.7333 7.35404 17.7523 7.37957C17.7712 7.40511 17.7823 7.43556 17.7843 7.46728C17.9383 9.79332 17.8797 12.1285 17.6093 14.4439C17.4127 16.1289 16.0593 17.4498 14.3818 17.6373C11.4696 17.9596 8.53073 17.9596 5.61851 17.6373C3.94184 17.4498 2.58767 16.1289 2.39101 14.4439C2.0461 11.4901 2.0461 8.50613 2.39101 5.55228C2.58767 3.86728 3.94101 2.54644 5.61851 2.35894C7.82888 2.11482 10.0558 2.05544 12.276 2.18144C12.3078 2.18373 12.3382 2.19507 12.3638 2.21412C12.3893 2.23318 12.4088 2.25915 12.42 2.28896C12.4313 2.31877 12.4337 2.35118 12.4271 2.38234C12.4205 2.4135 12.4051 2.44211 12.3827 2.46478L11.5552 3.29144C11.5228 3.32382 11.4842 3.34918 11.4416 3.36595C11.399 3.38273 11.3534 3.39055 11.3077 3.38894C9.45497 3.32549 7.6001 3.39651 5.75767 3.60144C5.21929 3.66103 4.71672 3.90038 4.33114 4.28082C3.94555 4.66126 3.69948 5.16058 3.63267 5.69811C3.29839 8.55503 3.29839 11.4412 3.63267 14.2981C3.69948 14.8356 3.94555 15.335 4.33114 15.7154C4.71672 16.0958 5.21929 16.3352 5.75767 16.3948C8.55351 16.7073 11.4468 16.7073 14.2435 16.3948C14.7819 16.3352 15.2845 16.0958 15.67 15.7154C16.0556 15.335 16.3009 14.8356 16.3677 14.2981Z"
+      fill="#162766"
+    />
+  </svg>
 ));
 /* ---------------- Validation ---------------- */
 
@@ -1089,7 +1077,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [charOffsets, setCharOffsets] = useState<number[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  
+
   // Use refs to track current state for cleanup
   const isSpeakingRef = useRef(false);
   const speechSynthRef = useRef<SpeechSynthesis | null>(null);
@@ -1101,17 +1089,18 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       isSpeakingRef.current = false;
     }
 
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-    let offsets: number[] = [];
-    
+    const offsets: number[] = [];
+
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
       // Generate offsets between -5 and 5
       offsets.push(parseFloat((Math.random() * 10 - 5).toFixed(2)));
     }
-    
+
     setCaptchaText(result);
     setCharOffsets(offsets);
     setUserInput("");
@@ -1123,7 +1112,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   useEffect(() => {
     generateCaptcha();
     speechSynthRef.current = window.speechSynthesis;
-    
+
     // Cleanup function
     return () => {
       if (speechSynthRef.current && isSpeakingRef.current) {
@@ -1168,13 +1157,16 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     // Try to find a male US voice
     if (voices.length > 0) {
-      selectedVoice = voices.find(
-        (voice) =>
-          voice.lang === "en-US" && 
-          voice.name.toLowerCase().includes("male") || 
-          voice.name.toLowerCase().includes("david") ||
-          voice.name.toLowerCase().includes("microsoft david")
-      ) || voices.find((voice) => voice.lang === "en-US") || voices[0];
+      selectedVoice =
+        voices.find(
+          (voice) =>
+            (voice.lang === "en-US" &&
+              voice.name.toLowerCase().includes("male")) ||
+            voice.name.toLowerCase().includes("david") ||
+            voice.name.toLowerCase().includes("microsoft david")
+        ) ||
+        voices.find((voice) => voice.lang === "en-US") ||
+        voices[0];
     }
 
     let currentIndex = 0;
@@ -1182,13 +1174,13 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       if (currentIndex < captchaText.length && isSpeakingRef.current) {
         const char = captchaText[currentIndex];
         const utterance = new SpeechSynthesisUtterance(char);
-        
+
         // Configure speech properties
         utterance.rate = 0.5;
         utterance.pitch = 0.9;
         utterance.volume = 1.0;
         utterance.lang = "en-US";
-        
+
         if (selectedVoice) {
           utterance.voice = selectedVoice;
         }
@@ -1223,7 +1215,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUserInput(value);
-    
+
     // Case-insensitive comparison for better UX
     const valid = value.toLowerCase() === captchaText.toLowerCase();
     setIsValid(valid);
@@ -1232,7 +1224,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
   const handleAudioToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAudioEnabled(e.target.checked);
-    
+
     // Cancel speech when disabling audio
     if (!e.target.checked && isSpeakingRef.current) {
       window.speechSynthesis.cancel();
@@ -1242,118 +1234,119 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   };
 
   return (
-<div className="mt-3">
-  <div className="flex items-center gap-2">
-    {/* CAPTCHA box */}
-    <div className="bg-gray-100 px-3 py-2 rounded font-mono text-[14px] tracking-wider select-none relative overflow-hidden min-w-[120px]">
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `repeating-linear-gradient(0deg, #ccc, #ccc 1px, transparent 1px, transparent 5px)`,
-          backgroundSize: "100% 10px",
-          backgroundPosition: "0 50%",
-        }}
-      />
-
-      {/* CAPTCHA text */}
-      <div className="relative z-10 flex justify-center">
-        {captchaText.split("").map((char, index) => (
-          <span
-            key={index}
+    <div className="mt-3">
+      <div className="flex items-center gap-2">
+        {/* CAPTCHA box */}
+        <div className="bg-gray-100 px-3 py-2 rounded font-mono text-[14px] tracking-wider select-none relative overflow-hidden min-w-[120px]">
+          {/* Background pattern */}
+          <div
+            className="absolute inset-0 opacity-30"
             style={{
-              transform: `translateY(${charOffsets[index] || 0}px)`,
-              display: "inline-block",
-              textShadow: "1px 1px 1px rgba(0,0,0,0.25)",
+              backgroundImage: `repeating-linear-gradient(0deg, #ccc, #ccc 1px, transparent 1px, transparent 5px)`,
+              backgroundSize: "100% 10px",
+              backgroundPosition: "0 50%",
             }}
-            className="mx-[1px]"
+          />
+
+          {/* CAPTCHA text */}
+          <div className="relative z-10 flex justify-center">
+            {captchaText.split("").map((char, index) => (
+              <span
+                key={index}
+                style={{
+                  transform: `translateY(${charOffsets[index] || 0}px)`,
+                  display: "inline-block",
+                  textShadow: "1px 1px 1px rgba(0,0,0,0.25)",
+                }}
+                className="mx-[1px]"
+              >
+                {char}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-1">
+          <button
+            type="button"
+            onClick={generateCaptcha}
+            disabled={disabled}
+            className={`w-8 h-8 text-[13px] text-gray-600 border border-gray-300 rounded flex items-center justify-center ${
+              disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
+            }`}
+            title="Refresh CAPTCHA"
           >
-            {char}
-          </span>
-        ))}
+            ↻
+          </button>
+
+          {audioEnabled && (
+            <button
+              type="button"
+              onClick={speakCaptcha}
+              disabled={disabled || isSpeaking}
+              className={`w-8 h-8 text-[13px] border border-gray-300 rounded flex items-center justify-center ${
+                disabled || isSpeaking
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-gray-50"
+              }`}
+              title={isSpeaking ? "Speaking..." : "Listen to CAPTCHA"}
+            >
+              🔊
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Audio toggle */}
+      <div className="flex items-center gap-2 mt-2">
+        <input
+          type="checkbox"
+          id="enableAudio"
+          checked={audioEnabled}
+          onChange={handleAudioToggle}
+          disabled={disabled}
+          className="w-3.5 h-3.5"
+        />
+        <label
+          htmlFor="enableAudio"
+          className={`text-[11px] ${
+            disabled ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          Enable audio
+        </label>
+      </div>
+
+      {/* Input */}
+      <div className="mt-2">
+        <input
+          type="text"
+          value={userInput}
+          onChange={handleInputChange}
+          disabled={disabled}
+          placeholder="Enter CAPTCHA"
+          className={`w-full h-[36px] px-3 text-[13px] border rounded-md focus:outline-none focus:ring-1 ${
+            disabled
+              ? "bg-gray-100 cursor-not-allowed border-gray-300"
+              : userInput !== "" && !isValid
+              ? "border-red-500 focus:ring-red-500"
+              : "border-gray-300 focus:ring-blue-500"
+          }`}
+        />
+
+        {/* Messages */}
+        {userInput !== "" && !isValid && !disabled && (
+          <p className="text-red-500 text-[11px] mt-1">
+            CAPTCHA does not match.
+          </p>
+        )}
+
+        {isValid && !disabled && (
+          <p className="text-green-500 text-[11px] mt-1">✓ Verified</p>
+        )}
       </div>
     </div>
-
-    {/* Buttons */}
-    <div className="flex gap-1">
-      <button
-        type="button"
-        onClick={generateCaptcha}
-        disabled={disabled}
-        className={`w-8 h-8 text-[13px] text-gray-600 border border-gray-300 rounded flex items-center justify-center ${
-          disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
-        }`}
-        title="Refresh CAPTCHA"
-      >
-        ↻
-      </button>
-
-      {audioEnabled && (
-        <button
-          type="button"
-          onClick={speakCaptcha}
-          disabled={disabled || isSpeaking}
-          className={`w-8 h-8 text-[13px] border border-gray-300 rounded flex items-center justify-center ${
-            disabled || isSpeaking ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
-          }`}
-          title={isSpeaking ? "Speaking..." : "Listen to CAPTCHA"}
-        >
-          🔊
-        </button>
-      )}
-    </div>
-  </div>
-
-  {/* Audio toggle */}
-  <div className="flex items-center gap-2 mt-2">
-    <input
-      type="checkbox"
-      id="enableAudio"
-      checked={audioEnabled}
-      onChange={handleAudioToggle}
-      disabled={disabled}
-      className="w-3.5 h-3.5"
-    />
-    <label
-      htmlFor="enableAudio"
-      className={`text-[11px] ${disabled ? "text-gray-400" : "text-gray-600"}`}
-    >
-      Enable audio
-    </label>
-  </div>
-
-  {/* Input */}
-  <div className="mt-2">
-    <input
-      type="text"
-      value={userInput}
-      onChange={handleInputChange}
-      disabled={disabled}
-      placeholder="Enter CAPTCHA"
-      className={`w-full h-[36px] px-3 text-[13px] border rounded-md focus:outline-none focus:ring-1 ${
-        disabled
-          ? "bg-gray-100 cursor-not-allowed border-gray-300"
-          : userInput !== "" && !isValid
-          ? "border-red-500 focus:ring-red-500"
-          : "border-gray-300 focus:ring-blue-500"
-      }`}
-    />
-
-    {/* Messages */}
-    {userInput !== "" && !isValid && !disabled && (
-      <p className="text-red-500 text-[11px] mt-1">
-        CAPTCHA does not match.
-      </p>
-    )}
-
-    {isValid && !disabled && (
-      <p className="text-green-500 text-[11px] mt-1">
-        ✓ Verified
-      </p>
-    )}
-  </div>
-</div>
-
   );
 };
 /* ---------------- Main ---------------- */
@@ -1381,48 +1374,54 @@ export default function Form() {
   const [description, setDescription] = useState("");
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [firstError, setFirstError] = useState("");
+  const [lastError, setLastError] = useState("");
+  const [zipError, setZipError] = useState("");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-useEffect(() => {
-  const url = new URL(window.location.href);
-  if (
-    url.searchParams.has("xxTrustedFormCertUrl") ||
-    url.searchParams.has("xxTrustedFormPingUrl")
-  ) {
-    window.history.replaceState({}, "", url.origin + url.pathname);
-  }
-}, []);
-useEffect(() => {
-  if (step === 4) {
-    const t = setTimeout(() => {
-      // 🔄 Full reset
-      setStep(1);
-      setDirection("next");
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (
+      url.searchParams.has("xxTrustedFormCertUrl") ||
+      url.searchParams.has("xxTrustedFormPingUrl")
+    ) {
+      window.history.replaceState({}, "", url.origin + url.pathname);
+    }
+  }, []);
+  useEffect(() => {
+    if (step === 4) {
+      const t = setTimeout(() => {
+        // 🔄 Full reset
+        setStep(1);
+        setDirection("next");
 
-      // reset form state
-      setForm({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        zip: "",
-      });
-      setCaseType("");
-      setDescription("");
-      setErrors({});
-      setDropdownOpen(false);
+        // reset form state
+        setForm({
+          firstName: "",
+          lastName: "",
+          phone: "",
+          email: "",
+          zip: "",
+        });
+        setCaseType("");
+        setDescription("");
+        setErrors({});
+        setDropdownOpen(false);
 
-      // reset captcha
-      setCaptchaVerified(false);
-      setShowCaptcha(false);
-      setRobotChecked(false);
-      setCaptchaResetTrigger((p) => !p);
-    }, 1000); // ⏱️ 1 second
+        // reset captcha
+        setCaptchaVerified(false);
+        setShowCaptcha(false);
+        setRobotChecked(false);
+        setCaptchaResetTrigger((p) => !p);
+      }, 1000); // ⏱️ 1 second
 
-    return () => clearTimeout(t);
-  }
-}, [step]);
+      return () => clearTimeout(t);
+    }
+  }, [step]);
 
   /* ---------------- TrustedForm ---------------- */
   useEffect(() => {
@@ -1440,7 +1439,7 @@ useEffect(() => {
       };
     }
   }, [step]);
-  
+
   useEffect(() => {
     if (step === 3) {
       setShowCaptcha(false);
@@ -1466,12 +1465,312 @@ useEffect(() => {
 
   /* ---------------- Validation ---------------- */
 
+  const formatUSAMobile = (input: string): string => {
+    if (!input) return "";
+
+    let raw = String(input).trim();
+
+    if (raw === "+") return "+";
+
+    const plus = raw.startsWith("+") ? "+" : "";
+    raw = plus + raw.replace(/\+/g, "").replace(/[^\d]/g, "");
+
+    let prefix = "";
+    let digits = "";
+
+    if (raw.startsWith("+1")) {
+      prefix = "+1";
+      digits = raw.slice(2);
+    } else if (raw.startsWith("0")) {
+      prefix = "0";
+      digits = raw.slice(1);
+    } else if (raw.startsWith("+")) {
+      prefix = "+";
+      digits = raw.slice(1);
+    } else {
+      digits = raw;
+    }
+
+    // Limit to exactly 9 digits
+    digits = digits.slice(0, 9);
+
+    // Format as XXX XXX XXX
+    let formatted = digits;
+    if (digits.length <= 3) {
+      formatted = digits;
+    } else if (digits.length <= 6) {
+      formatted = `${digits.slice(0, 3)} ${digits.slice(3)}`;
+    } else {
+      formatted = `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(
+        6
+      )}`;
+    }
+
+    // Construct output
+    if (prefix === "+1") {
+      return `${prefix} ${formatted}`.trim();
+    } else if (prefix === "0") {
+      return `${prefix}${formatted}`.trim();
+    } else if (prefix === "+") {
+      return formatted ? `+${formatted}` : "+";
+    } else {
+      return formatted;
+    }
+  };
+
+  // SIMPLIFIED validation - exactly 9 digits (after removing prefix)
+  const validateUSAMobile = (input: string): boolean => {
+    if (!input) return false;
+
+    const raw = String(input).trim();
+
+    // Remove all non-digits except the first + if present
+    let digitsOnly = raw.replace(/[^\d+]/g, "");
+
+    // Remove the prefix to count actual phone digits
+    if (digitsOnly.startsWith("+1")) {
+      digitsOnly = digitsOnly.slice(2);
+    } else if (digitsOnly.startsWith("0")) {
+      digitsOnly = digitsOnly.slice(1);
+    } else if (digitsOnly.startsWith("+")) {
+      digitsOnly = digitsOnly.slice(1);
+    }
+
+    // Must be exactly 9 digits
+    digitsOnly = digitsOnly.replace(/\D/g, "");
+    return digitsOnly.length === 9;
+  };
+
+  const formatEmail = (input: string): string => {
+    if (!input) return "";
+
+    let cleaned = String(input).trim().toLowerCase();
+    cleaned = cleaned.replace(/[^\w@.\-+]/g, "");
+
+    const atIndex = cleaned.indexOf("@");
+    if (atIndex !== -1) {
+      const beforeAt = cleaned.substring(0, atIndex);
+      const afterAt = cleaned.substring(atIndex + 1).replace(/@/g, "");
+      cleaned = beforeAt + "@" + afterAt;
+    }
+
+    return cleaned;
+  };
+
+  const validateEmail = (input: string) => {
+    if (!input) return { isValid: false, reason: "empty" };
+
+    const email = String(input).trim().toLowerCase();
+
+    const atCount = (email.match(/@/g) || []).length;
+    if (atCount !== 1) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    const [localPart, domainPart] = email.split("@");
+
+    if (!localPart || localPart.length === 0) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (localPart.includes("..")) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (localPart.startsWith(".") || localPart.endsWith(".")) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (!/^[a-zA-Z0-9._-]+$/.test(localPart)) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (!domainPart || domainPart.length === 0) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (domainPart.includes("..")) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (
+      domainPart.startsWith(".") ||
+      domainPart.endsWith(".") ||
+      domainPart.startsWith("-") ||
+      domainPart.endsWith("-")
+    ) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (!domainPart.includes(".")) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    if (!/^[a-zA-Z0-9.-]+$/.test(domainPart)) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    const domainParts = domainPart.split(".");
+
+    for (const part of domainParts) {
+      if (!part || part.length === 0) {
+        return { isValid: false, reason: "invalid" };
+      }
+
+      if (part.startsWith("-") || part.endsWith("-")) {
+        return { isValid: false, reason: "invalid" };
+      }
+
+      if (!/^[a-zA-Z0-9-]+$/.test(part)) {
+        return { isValid: false, reason: "invalid" };
+      }
+    }
+
+    const tld = domainParts[domainParts.length - 1];
+    if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) {
+      return { isValid: false, reason: "invalid" };
+    }
+
+    return { isValid: true, reason: null };
+  };
+
+  const handlePhoneChange = useCallback((value: string) => {
+    const formatted = formatUSAMobile(value);
+    let error = "";
+
+    if (!value.trim()) {
+      error = "Phone number is required";
+    } else if (!validateUSAMobile(formatted)) {
+      error = "Please enter a valid phone number";
+    }
+
+    setPhoneError(error);
+
+    setForm((prev) =>
+      prev.phone === formatted ? prev : { ...prev, phone: formatted }
+    );
+  }, []);
+
+  const handleEmailChange = useCallback((value: string) => {
+    const formatted = formatEmail(value);
+    let error = "";
+
+    try {
+      if (!value.trim()) {
+        error = "Email address is required";
+      } else if (!validateEmail(formatted).isValid) {
+        error = "Please enter a valid email address";
+      }
+    } catch {
+      error = "Please enter a valid email address";
+    }
+
+    setEmailError((prev) => (prev === error ? prev : error));
+
+    setForm((prev) =>
+      prev.email === formatted ? prev : { ...prev, email: formatted }
+    );
+  }, []);
+
+  const handleFirstNameChange = useCallback((value: string) => {
+    const cleaned = value.replace(/\s{2,}/g, " ").replace(/[^a-zA-Z\s'-]/g, "");
+    let error = "";
+
+    if (!cleaned.trim()) {
+      error = "First name is required";
+    } else if (cleaned.trim().length < 2) {
+      error = "First name must be at least 2 characters";
+    }
+
+    setFirstError(error);
+
+    setForm((prev) =>
+      prev.firstName === cleaned ? prev : { ...prev, firstName: cleaned }
+    );
+  }, []);
+
+  const handleLastNameChange = useCallback((value: string) => {
+    const cleaned = value.replace(/\s{2,}/g, " ").replace(/[^a-zA-Z\s'-]/g, "");
+    let error = "";
+
+    if (!cleaned.trim()) {
+      error = "Last name is required";
+    } else if (cleaned.trim().length < 2) {
+      error = "Last name must be at least 2 characters";
+    }
+
+    setLastError(error);
+
+    setForm((prev) =>
+      prev.lastName === cleaned ? prev : { ...prev, lastName: cleaned }
+    );
+  }, []);
+
+  const handleZipChange = useCallback((value: string) => {
+    const cleaned = value.replace(/\D/g, "").slice(0, 5);
+    let error = "";
+
+    if (!cleaned) {
+      error = "Zip code is required";
+    } else if (cleaned.length !== 5) {
+      error = "Please enter a valid 5-digit zip code";
+    }
+
+    setZipError(error);
+
+    setForm((prev) =>
+      prev.zip === cleaned ? prev : { ...prev, zip: cleaned }
+    );
+  }, []);
+
   const validateStep1 = useCallback(() => {
     const e: Record<string, string> = {};
-    e.firstName = validateRequired(form.firstName);
-    e.lastName = validateRequired(form.lastName);
-    e.phone = validatePhone(form.phone);
-    e.email = validateEmail(form.email);
+
+    // FIRST NAME
+    if (!form.firstName.trim()) {
+      e.firstName = "First name is required";
+    } else if (form.firstName.trim().length < 2) {
+      e.firstName = "First name must be at least 2 characters";
+    }
+
+    // LAST NAME
+    if (!form.lastName.trim()) {
+      e.lastName = "Last name is required";
+    } else if (form.lastName.trim().length < 2) {
+      e.lastName = "Last name must be at least 2 characters";
+    }
+    // PHONE
+    try {
+      const formattedPhone = formatUSAMobile(form.phone);
+
+      if (!form.phone.trim()) {
+        e.phone = "Phone number is required";
+      } else if (!validateUSAMobile(formattedPhone)) {
+        e.phone = "Please enter a valid phone number";
+      }
+    } catch {
+      e.phone = "Please enter a valid phone number";
+    }
+
+    // EMAIL
+    try {
+      const formattedEmail = formatEmail(form.email);
+      if (!form.email?.trim()) {
+        e.email = "Email address is required";
+      } else if (!validateEmail(formattedEmail).isValid) {
+        e.email = "Please enter a valid email address";
+      }
+    } catch {
+      e.email = "Please enter a valid email address";
+    }
+
+    // ZIP
+    if (!form.zip.trim()) {
+      e.zip = "Zip code is required";
+    } else if (form.zip.length !== 5) {
+      e.zip = "Please enter a valid 5-digit zip code";
+    }
+
     e.zip = validateRequired(form.zip);
 
     Object.keys(e).forEach((k) => !e[k] && delete e[k]);
@@ -1526,14 +1825,18 @@ useEffect(() => {
     setIsSubmitting(true);
     try {
       const tfCertUrl =
-        (document.querySelector(
-          'input[name="xxTrustedFormCertUrl"]'
-        ) as HTMLInputElement)?.value || "";
+        (
+          document.querySelector(
+            'input[name="xxTrustedFormCertUrl"]'
+          ) as HTMLInputElement
+        )?.value || "";
 
       const tfPingUrl =
-        (document.querySelector(
-          'input[name="xxTrustedFormPingUrl"]'
-        ) as HTMLInputElement)?.value || "";
+        (
+          document.querySelector(
+            'input[name="xxTrustedFormPingUrl"]'
+          ) as HTMLInputElement
+        )?.value || "";
 
       const tfCertId = tfCertUrl ? tfCertUrl.split("/").pop() || "" : "";
 
@@ -1541,7 +1844,7 @@ useEffect(() => {
         countryName: "USA",
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
-        formname: "Enquiry Form",
+        formname: "Stepper Section Form",
         sourceUrl: getSourceUrl(),
         data: {
           name: `${form.firstName} ${form.lastName}`,
@@ -1579,97 +1882,92 @@ useEffect(() => {
 
   return (
     <div className="w-full  flex justify-center items-center p-3 sm:p-4">
-<div
-  ref={containerRef}
-  className="
+      <div
+        ref={containerRef}
+        className="
     flex
     flex-col
-
     w-full
     max-w-[447px]
-
     bg-white
     rounded-xl
     shadow-xl
-
-    
-    
-
     overflow-hidden
   "
->
+      >
+        {/* ---------------- STEP 1 ---------------- */}
+        <Step active={step === 1} direction={direction}>
+          <form
+            className="flex flex-col h-full p-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              next();
+            }}
+          >
+            {/* TrustedForm hidden fields */}
+            <input type="hidden" name="xxTrustedFormCertUrl" />
+            <input type="hidden" name="xxTrustedFormCertToken" />
+            <input type="hidden" name="xxTrustedFormPingUrl" />
 
-    {/* ---------------- STEP 1 ---------------- */}
-<Step active={step === 1} direction={direction}>
-  <form 
-    className="flex flex-col h-full p-4"
-    onSubmit={(e) => {
-      e.preventDefault(); 
-      next();
-    }}
-  >
-    {/* TrustedForm hidden fields */}
-    <input type="hidden" name="xxTrustedFormCertUrl" />
-    <input type="hidden" name="xxTrustedFormCertToken" />
-    <input type="hidden" name="xxTrustedFormPingUrl" />
+            {/* Content Section - Takes available space */}
+            <div className="flex-1 space-y-2">
+              {" "}
+              {/* Reduced from space-y-3 */}
+              <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
+                It&apos;s easy to get started
+              </h2>
+              <p className="text-[#6E6E6E] font-urbanist text-[14px] font-medium mb-2">
+                {" "}
+                {/* Added mb-2 */}
+                Provide a few details and our team will take it from here.
+              </p>
+              <Input
+                label="First name"
+                value={form.firstName}
+                error={firstError || errors.firstName}
+                onChange={handleFirstNameChange}
+              />
+              <Input
+                label="Last name"
+                value={form.lastName}
+                error={lastError || errors.lastName}
+                onChange={handleLastNameChange}
+              />
+              <Input
+                label="Phone number"
+                value={form.phone}
+                error={phoneError || errors.phone}
+                onChange={handlePhoneChange}
+              />
+              <Input
+                label="Email"
+                value={form.email}
+                error={emailError || errors.email}
+                onChange={handleEmailChange}
+              />
+              <Input
+                label="Zip code"
+                value={form.zip}
+                error={zipError || errors.zip}
+                onChange={handleZipChange}
+              />
+            </div>
 
-    {/* Content Section - Takes available space */}
-    <div className="flex-1 space-y-2"> {/* Reduced from space-y-3 */}
-      <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-        It's easy to get started
-      </h2>
-      <p className="text-[#6E6E6E] font-urbanist text-[14px] font-medium mb-2"> {/* Added mb-2 */}
-        Provide a few details and our team will take it from here.
-      </p>
+            {/* Progress Bar & Button Section - Always at bottom */}
+            <div className="mt-4 pt-4 -mx-5">
+              <ProgressBar step={step} />
+            </div>
 
-      <Input 
-        label="First name" 
-        value={form.firstName} 
-        error={errors.firstName} 
-        onChange={(v) => setForm(p => ({...p, firstName: v}))}
-      />
-      <Input 
-        label="Last name" 
-        value={form.lastName} 
-        error={errors.lastName} 
-        onChange={(v) => setForm(p => ({...p, lastName: v}))}
-      />
-      <Input 
-        label="Phone number" 
-        value={formatPhone(form.phone)} 
-        error={errors.phone} 
-        onChange={(v) => setForm(p => ({...p, phone: normalizePhone(v)}))}
-      />
-      <Input 
-        label="Email" 
-        value={form.email} 
-        error={errors.email} 
-        onChange={(v) => setForm(p => ({...p, email: v}))}
-      />
-      <Input 
-        label="Zip code" 
-        value={form.zip} 
-        error={errors.zip} 
-        onChange={(v) => setForm(p => ({...p, zip: v}))}
-      />
-    </div>
-
-   {/* Progress Bar & Button Section - Always at bottom */}
-<div className="mt-4 pt-4 -mx-5">
-  <ProgressBar step={step} />
-</div>
-
-<div>
-  <button
-    type="submit"
-    className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
-  >
-    Next
-  </button>
-</div>
-
-  </form>
-</Step>
+            <div>
+              <button
+                type="submit"
+                className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </Step>
 
         {/* ---------------- STEP 2 ---------------- */}
         <Step active={step === 2} direction={direction}>
@@ -1686,44 +1984,53 @@ useEffect(() => {
                 onClick={() => setDropdownOpen((v) => !v)}
                 className="w-full h-[50px] px-4 rounded-[10px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[16px] font-medium text-[#303030]"
               >
-                <span className="truncate">{caseType || "Choose from the list"}</span>
-                {dropdownOpen ? <ChevronUp size={18}/> : <ChevronDown size={18}/>}
+                <span className="truncate">
+                  {caseType || "Choose from the list"}
+                </span>
+                {dropdownOpen ? (
+                  <ChevronUp size={18} />
+                ) : (
+                  <ChevronDown size={18} />
+                )}
               </button>
 
-             {dropdownOpen && (
-  <div className="mt-1 w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[176px] overflow-y-auto">
-    {CASES.map((item) => {
-      const isSelected = caseType === item;
-      return (
-        <div
-          key={item}
-          onClick={() => {
-            setCaseType(item);
-            setDropdownOpen(false);
-            setErrors({});
-          }}
-          className={`group h-[44px] px-3 flex items-center justify-between cursor-pointer transition-colors ${
-            isSelected
-              ? "bg-[#162766] text-white"
-              : "text-[#162766] hover:bg-[#162766] hover:text-white"
-          }`}
-        >
-          <span className="truncate">{item}</span>
-          <span
-            className={`text-[#F2C438] ${
-              isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-            }`}
-          >
-            ✓
-          </span>
-        </div>
-      );
-    })}
-  </div>
-)}
+              {dropdownOpen && (
+                <div className="mt-1 w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[176px] overflow-y-auto">
+                  {CASES.map((item) => {
+                    const isSelected = caseType === item;
+                    return (
+                      <div
+                        key={item}
+                        onClick={() => {
+                          setCaseType(item);
+                          setDropdownOpen(false);
+                          setErrors({});
+                        }}
+                        className={`group h-[44px] px-3 flex items-center justify-between cursor-pointer transition-colors ${
+                          isSelected
+                            ? "bg-[#162766] text-white"
+                            : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                        }`}
+                      >
+                        <span className="truncate">{item}</span>
+                        <span
+                          className={`text-[#F2C438] ${
+                            isSelected
+                              ? "opacity-100"
+                              : "opacity-0 group-hover:opacity-100"
+                          }`}
+                        >
+                          ✓
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
-
-              {errors.caseType && <p className="text-xs text-red-500">{errors.caseType}</p>}
+              {errors.caseType && (
+                <p className="text-xs text-red-500">{errors.caseType}</p>
+              )}
 
               <input
                 placeholder="Please describe what happened"
@@ -1733,27 +2040,25 @@ useEffect(() => {
               />
             </div>
 
-         {/* Progress Bar & Button Section - Always at bottom */}
-<div className="mt-4 pt-4 -mx-5">
-  <ProgressBar step={step} />
-</div>
+            {/* Progress Bar & Button Section - Always at bottom */}
+            <div className="mt-4 pt-4 -mx-5">
+              <ProgressBar step={step} />
+            </div>
 
-<div>
-  <button
-    onClick={next}
-    className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
-  >
-    Next
-  </button>
-</div>
-
+            <div>
+              <button
+                onClick={next}
+                className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </Step>
 
         {/* ---------------- STEP 3 ---------------- */}
         <Step active={step === 3} direction={direction}>
           <div className="flex flex-col h-full">
-
             {/* ================= CONTENT ================= */}
             <div className="flex-1 p-4 space-y-4">
               <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
@@ -1786,7 +2091,6 @@ useEffect(() => {
 
               {/* ================= CONSENT + CAPTCHA ================= */}
               <div className="pt-2 space-y-3">
-
                 {/* Checkbox + Text */}
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
@@ -1809,12 +2113,18 @@ useEffect(() => {
                   />
 
                   <span className="font-urbanist text-[12px] font-normal tracking-[0.24px] leading-[16px] text-[#425777]">
-                    I hereby expressly consent to receive automated communications including calls, texts, emails, and/or prerecorded messages.
+                    I hereby expressly consent to receive automated
+                    communications including calls, texts, emails, and/or
+                    prerecorded messages.
                     <br />
                     <br />
                     By submitting this form, you agree to our{" "}
-                    <span className="underline cursor-pointer">Terms</span> & acknowledge our{" "}
-                    <span className="underline cursor-pointer">Privacy Policy</span>.
+                    <span className="underline cursor-pointer">Terms</span> &
+                    acknowledge our{" "}
+                    <span className="underline cursor-pointer">
+                      Privacy Policy
+                    </span>
+                    .
                   </span>
                 </label>
 
@@ -1836,62 +2146,59 @@ useEffect(() => {
 
             {/* ================= BOTTOM BAR ================= */}
             {/* Full-width progress bar */}
-<div className="-mx-4">
-  <ProgressBar step={step} />
-</div>
+            <div className="-mx-4">
+              <ProgressBar step={step} />
+            </div>
 
-{/* Button stays padded */}
-<div className="p-4">
-  <button
-    disabled={isSubmitting || !captchaVerified}
-    className={`w-full h-[48px] rounded-lg font-semibold transition-all ${
-      isSubmitting || !captchaVerified
-        ? "bg-gray-300 cursor-not-allowed text-gray-600"
-        : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
-    }`}
-    onClick={handleSubmit}
-  >
-    {isSubmitting ? "Submitting..." : "Submit"}
-  </button>
-</div>
-
+            {/* Button stays padded */}
+            <div className="p-4">
+              <button
+                disabled={isSubmitting || !captchaVerified}
+                className={`w-full h-[48px] rounded-lg font-semibold transition-all ${
+                  isSubmitting || !captchaVerified
+                    ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                    : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
+                }`}
+                onClick={handleSubmit}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
+            </div>
           </div>
         </Step>
 
-{/* ---------------- STEP 4 ---------------- */}
-<Step active={step === 4} direction={direction} >
-  {/* This wrapper fills the available step area */}
-  <div className="relative w-full min-h-[450px]">
-    {/* Background */}
-    <img
-      src="/bgshape.svg"
-      alt=""
-      className="absolute top-0 left-0 w-full pointer-events-none"
-    />
+        {/* ---------------- STEP 4 ---------------- */}
+        <Step active={step === 4} direction={direction}>
+          {/* This wrapper fills the available step area */}
+          <div className="relative w-full min-h-[450px]">
+            {/* Background */}
+            <img
+              src="/bgshape.svg"
+              alt=""
+              className="absolute top-0 left-0 w-full pointer-events-none"
+            />
 
-    {/* Absolute center container */}
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="relative z-10 flex flex-col items-center text-center px-4">
-        <img
-          src="/success_check.svg"
-          alt="Submission successful"
-          className="w-24 h-24 mb-4"
-        />
+            {/* Absolute center container */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative z-10 flex flex-col items-center text-center px-4">
+                <img
+                  src="/success_check.svg"
+                  alt="Submission successful"
+                  className="w-24 h-24 mb-4"
+                />
 
-        <h2 className="font-urbanist text-[#162766] font-medium text-xl sm:text-2xl md:text-3xl leading-tight mb-2">
-          Thank You!
-        </h2>
+                <h2 className="font-urbanist text-[#162766] font-medium text-xl sm:text-2xl md:text-3xl leading-tight mb-2">
+                  Thank You!
+                </h2>
 
-       <p className="font-urbanist text-[#6E6E6E] font-medium text-[16px] leading-normal text-center max-w-[260px]">
-  We've received your request and will begin processing it shortly.
-</p>
-
-      </div>
-    </div>
-  </div>
-</Step>
-
-
+                <p className="font-urbanist text-[#6E6E6E] font-medium text-[16px] leading-normal text-center max-w-[260px]">
+                  We&apos;ve received your request and will begin processing it
+                  shortly.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Step>
       </div>
     </div>
   );
@@ -1899,10 +2206,24 @@ useEffect(() => {
 
 /* ---------------- Components ---------------- */
 
-function Step({ active, direction, children }: { active: boolean; direction: "next" | "back"; children: React.ReactNode }) {
+function Step({
+  active,
+  direction,
+  children,
+}: {
+  active: boolean;
+  direction: "next" | "back";
+  children: React.ReactNode;
+}) {
   if (!active) return null;
   return (
-    <div className={`transition-all duration-300 ease-out ${direction === "next" ? "animate-in slide-in-from-right" : "animate-in slide-in-from-left"}`}>
+    <div
+      className={`transition-all duration-300 ease-out ${
+        direction === "next"
+          ? "animate-in slide-in-from-right"
+          : "animate-in slide-in-from-left"
+      }`}
+    >
       {children}
     </div>
   );
@@ -1920,7 +2241,9 @@ function Input({
   error?: string;
 }) {
   return (
-    <div className="mb-1"> {/* Reduced vertical spacing between inputs */}
+    <div className="mb-1">
+      {" "}
+      {/* Reduced vertical spacing between inputs */}
       <input
         className={`
           w-full
@@ -1952,9 +2275,10 @@ function Input({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-
       {error && (
-        <p className="text-[10px] text-red-500 mt-0.5 pl-1"> {/* Reduced from text-xs (12px) to 10px, tighter margin */}
+        <p className="text-[10px] text-red-500 mt-0.5 pl-1">
+          {" "}
+          {/* Reduced from text-xs (12px) to 10px, tighter margin */}
           {error}
         </p>
       )}
@@ -1962,17 +2286,11 @@ function Input({
   );
 }
 
-
-
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-gray-500 whitespace-nowrap">
-        {label}:
-      </span>
-      <span className="font-medium text-[#162766] break-all">
-        {value}
-      </span>
+      <span className="text-gray-500 whitespace-nowrap">{label}:</span>
+      <span className="font-medium text-[#162766] break-all">{value}</span>
     </div>
   );
 }

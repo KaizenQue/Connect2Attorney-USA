@@ -6,46 +6,45 @@ const AboutUs = () => {
     <div
       className="
     relative
-    w-full
-    
+    w-full  
     pl-[16px] md:pl-0
     my-10 md:mb-0 md:mt-10 lg:mb-12
-    h-[460px]                  
-    [@media(min-height:850px)]:h-[520px]  
-    [@media(min-height:950px)]:h-[600px]  
+    h-[400px]
+    md:h-[600px]
+    lg:h-[590px]
+    2xl:h-[650px]
   "
     >
       {/* 1. Background Image - Mobile */}
-  {/* ================= MOBILE BACKGROUND ================= */}
-<Image
-  src="/aboutmob.png"
-  alt="About Us Background"
-  className="absolute inset-y-0 w-full h-[403px] md:h-[539px] lg:hidden"
-  width={374}
-  height={403}
-/>
+      {/* ================= MOBILE BACKGROUND ================= */}
+      <Image
+        src="/aboutmob.png"
+        alt="About Us Background"
+        className="absolute inset-y-0 w-full h-[403px] md:h-[539px] lg:hidden"
+        width={374}
+        height={403}
+      />
 
-{/* ================= DESKTOP (NORMAL) ================= */}
-<Image
-  src="/aboutdesktop.png"
-  alt="About Us Background"
-  className="absolute inset-0 w-full h-full hidden lg:block xl:hidden"
-  width={1440}
-  height={542}
-/>
+      {/* ================= DESKTOP (NORMAL) ================= */}
+      <Image
+        src="/aboutdesktop.png"
+        alt="About Us Background"
+        className="absolute inset-0 w-full h-full hidden lg:block xl:hidden"
+        width={1440}
+        height={542}
+      />
 
-{/* ================= DESKTOP (BIGGER / XL+) ================= */}
-<Image
-  src="/aboutdesktopbigger.png"
-  alt="About Us Background"
-  className="absolute inset-0 w-full h-full hidden xl:block"
-  width={1920}
-  height={700}
-/>
-
+      {/* ================= DESKTOP (BIGGER / XL+) ================= */}
+      <Image
+        src="/aboutdesktopbigger.png"
+        alt="About Us Background"
+        className="absolute inset-0 w-full h-full hidden xl:block"
+        width={1920}
+        height={700}
+      />
 
       {/* 3. Left-Center Text Content */}
-      <div className="absolute top-[1%] md:top-[15%] left-[3%] md:left-[5%]  z-20 max-w-[90%] md:max-w-[600px] w-[94%] md:w-[90%] px-2 md:px-0 pl-[20px]">
+      <div className="absolute top-[1%] md:top-[15%] left-[3%] md:left-[5%] z-20 max-w-[90%] md:max-w-[600px] w-[94%] md:w-[90%] px-2 md:px-0 pl-[20px]">
         <h1
           className="font-noto-serif font-normal capitalize  md:mb-6 text-[30px] md:text-[60px] lg:text-[60px] xl:text-[60px] 2xl:text-[80px]"
           style={{
@@ -72,7 +71,6 @@ const AboutUs = () => {
 
       {/* 4. Left-Bottom Button */}
 
-      
       <a
         href="/about-us"
         className="
@@ -87,7 +85,7 @@ const AboutUs = () => {
   min-[360px]:min-w-[200px] min-[360px]:min-h-[50px]   min-[375px]:min-w-[210px] min-[375px]:min-h-[50px]
   min-w-[180px] h-[52px]
   md:min-w-[400px] md:h-[72px]
-  lg:min-w-[210px] lg:h-[90px]  xl:min-w-[270px] xl:min-h-[90px]  
+  lg:min-w-[210px] lg:h-[90px]  xl:min-w-[310px]  xl:min-h-[90px]  
 "
       >
         <span className="lg:hidden">Know more</span>

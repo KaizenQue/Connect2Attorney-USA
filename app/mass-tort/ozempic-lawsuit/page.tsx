@@ -33,6 +33,9 @@ const faqData = [
       "We specialize in personal injury, worker's compensation, and medical malpractice. If you aren't sure if your case qualifies, give us a call for a free evaluation.",
   },
 ];
+const title="oz";
+const imgurl="ozy.img";
+
 
 export default function MassTortPage() {
   return (
@@ -40,7 +43,7 @@ export default function MassTortPage() {
       <OzempicHeroCard />
       {/* <MassTortCard /> */}
       {/* <CasesSection2 /> */}
-      <OzempicLegalPage />
+      <OzempicLegalPage  />
       <TimeLineCard/>
       <OzempicInfo />
       <FaqSection faqData={faqData} />;

@@ -753,7 +753,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   ];
 
   return (
-    <div className="flex items-center justify-center bg-white font-sans  h-[508px] my-18">
+<div className="flex items-start justify-center bg-white font-sans min-h-[508px] md:min-h-[508px] h-auto  ">
       <div className="flex w-full max-w-7xl">
         {/* LEFT IMAGE */}
         <div className="hidden lg:flex w-1/2 items-center justify-center p-8">
@@ -767,8 +767,8 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
         </div>
 
         {/* FORM */}
-        <div className="w-full lg:w-[52%] p-6 pt-40 sm:p-12">
-         <h1 className="text-[50px] font-normal font-noto-serif text-[#162766] mb-8 text-center leading-[60px] capitalize">
+        <div className="w-full lg:w-[52%] p-6  sm:p-12">
+         <h1 className="text-[35px] md:text-[50px] font-normal font-noto-serif text-[#162766] mb-8 text-center leading-[60px] capitalize">
   Take The <span className="text-[#F2C438]">First Step</span>
 </h1>
 

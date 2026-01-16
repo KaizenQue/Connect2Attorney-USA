@@ -711,10 +711,20 @@ const checkboxClass = `
 `;
 
 const categories = [
-  "Personal Injury",
-  "Class Action",
-  "Medical Malpractice",
-  "Other",
+ 
+  "Ozempic Lawsuit",
+  "Mesothelioma Lawsuit",
+  "Depo-Provera Lawsuit",
+  "Roundup Cancer Lawsuit",
+  "Talcum Powder Lawsuit",
+  "Tesla Autopilot Recall Lawsuit",
+  "MacLaren Sexual Abuse Lawsuit",
+  "Sexual Abuse Lawsuit",
+  "Motor Vehicle Accident Lawsuit",
+  "Slip and Fall Injury Lawsuit",
+  "18-Wheeler Accident Lawsuit",
+
+
 ];
 // Add this stepper component near the top of your file, after the existing components
 const StepperForm: React.FC<DesktopLandingProps> = ({

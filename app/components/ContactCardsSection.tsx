@@ -33,7 +33,7 @@ const ContactCardsSection = () => {
   ];
 
   return (
-    <section className="bg-white py-10 lg:py-14 mb-20 font-sans">
+    <section className="bg-white py-10 lg:py-14 md:mb-10 font-sans">
       <div className="max-w-[1400px] mx-auto px-6">
         <div
           className="

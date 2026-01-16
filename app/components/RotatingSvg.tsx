@@ -2,7 +2,7 @@ import React from 'react'
 
 const RotatingSvg = () => {
   return (
- <div className="hidden lg:block absolute top-[15%] right-[5%] md:top-[25%] md:right-[15%] lg:right-[5%] lg:top-[40%] w-32 h-32 md:w-40 md:h-40">
+ <div className="hidden lg:block absolute  w-32 h-32 md:w-40 md:h-40">
           {/* Spinning Text */}
           <div className="w-full h-full animate-[spin_20s_linear_infinite]">
             <svg viewBox="0 0 100 100" className="w-full h-full">

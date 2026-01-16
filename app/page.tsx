@@ -44,14 +44,9 @@ export default function Home() {
       <HowItWorks />
       <AboutUs />
       <BlogsEducationCard2 />
-       
       <ContactSection />
       <FaqSection faqData={faqData} />
-
-
-     
       {/* <BlogsEducationCard /> */}
-   
       <ContactCard />
       <Footer />
     </main>

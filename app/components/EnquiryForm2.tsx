@@ -425,13 +425,23 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [showFullConsent, setShowFullConsent] = useState(false);
  
-  const categories = [
-    "Personal Injury",
-    "Class Action",
-    "Medical Malpractice",
-    "Other",
-  ];
+  
+ const categories = [
  
+  "Ozempic Lawsuit",
+  "Mesothelioma Lawsuit",
+  "Depo-Provera Lawsuit",
+  "Roundup Cancer Lawsuit",
+  "Talcum Powder Lawsuit",
+  "Tesla Autopilot Recall Lawsuit",
+  "MacLaren Sexual Abuse Lawsuit",
+  "Sexual Abuse Lawsuit",
+  "Motor Vehicle Accident Lawsuit",
+  "Slip and Fall Injury Lawsuit",
+  "18-Wheeler Accident Lawsuit",
+
+
+];
   const inputClass = "w-full h-[48px] rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#808080] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844] disabled:opacity-50";
  
   return (
@@ -882,12 +892,22 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
   }, []);
 
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const categories = [
-    "Personal Injury",
-    "Class Action",
-    "Medical Malpractice",
-    "Other",
-  ];
+const categories = [
+ 
+  "Ozempic Lawsuit",
+  "Mesothelioma Lawsuit",
+  "Depo-Provera Lawsuit",
+  "Roundup Cancer Lawsuit",
+  "Talcum Powder Lawsuit",
+  "Tesla Autopilot Recall Lawsuit",
+  "MacLaren Sexual Abuse Lawsuit",
+  "Sexual Abuse Lawsuit",
+  "Motor Vehicle Accident Lawsuit",
+  "Slip and Fall Injury Lawsuit",
+  "18-Wheeler Accident Lawsuit",
+
+
+];
 
   const inputClass =
     "h-[36px] w-full rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#9aa1b2] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844]";

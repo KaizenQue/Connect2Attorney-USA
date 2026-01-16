@@ -249,10 +249,8 @@ const DesktopLanding = () => {
           2xl:min-h-[820px]
           overflow-hidden
 
-          /* LG IMAGE */
           bg-[url('/aboutusbgfulllgonly1.svg')]
 
-          /* XL+ IMAGE */
           xl:bg-[url('/aboutusbgfull1.svg')]
 
           bg-no-repeat
@@ -265,20 +263,18 @@ const DesktopLanding = () => {
 
           {/* ================= LEFT SIDE ================= */}
           <div className="relative">
-
-{/* ======= ABOUT US BLOCK (POSITIONABLE) ======= */}
-<div
-  className="
-    absolute
-    lg:left-[20%] lg:top-[10%]
-    xl:left-[10%] xl:top-[12%]
-    2xl:left-[10%] 2xl:top-[12%]
-    max-w-[520px]
-    relative
-  "
->
+        <div
+          className="
+            absolute
+            lg:left-[20%] lg:top-[10%]
+            xl:left-[10%] xl:top-[12%]
+            2xl:left-[10%] 2xl:top-[12%]
+            max-w-[520px]
+            relative
+          "
+        >
   {/* ===== Rotating SVG pinned to top-right of About Us ===== */}
-  <div className="absolute -top-8 -right-8 xl:-top-7 xl:-right-34 2xl:-top-4 2xl:-right-50">
+  <div className="absolute top-[15%] right-[5%] md:top-[25%] md:right-[15%] lg:right-[25%] lg:top-[10%] xl:right-[5%] xl:top-[10%] 2xl:hidden">
     <RotatingSvg />
   </div>
 
@@ -337,6 +333,9 @@ const DesktopLanding = () => {
             </div>
 
           </div>
+ <div className="hidden 2xl:block absolute left-[50%] top-[10%]">
+  <RotatingSvg />
+</div>
 
           {/* ================= RIGHT SIDE ================= */}
 <div className="relative  xl:pr-[2%] lg:pr-[20%] pl-[42%] lg:pl-[40%] pt-[10%] xl:pt-[12%]">

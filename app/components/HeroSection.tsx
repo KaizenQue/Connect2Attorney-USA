@@ -1192,7 +1192,7 @@ const DesktopLandingHeroCompact = ({
   };
 
   return (
-    <div className="hidden lg:flex h-[490px] font-sans flex-col mx-10">
+    <div className="hidden lg:flex h-[490px] font-sans flex-col justify-center items-center mx-10">
       <div className="relative w-full h-[650px] mt-2 overflow-hidden max-w-[1560px]">
         {/* ================= VIDEO BACKGROUND ================= */}
         {/* < 1168 */}
@@ -1231,7 +1231,7 @@ const DesktopLandingHeroCompact = ({
           <source src="/1920x860.mp4" type="video/mp4" />
         </video>
 
-        <div className="relative top-0 z-10 xl:left-15 px-12 xl:px-20 flex flex-col justify-start h-full pt-14">
+        <div className="relative top-0 z-10 xl:left-30 2xl:left-50 px-12 xl:px-20 flex flex-col justify-start h-full pt-14">
           <h1 className="lg:text-[55px] leading-none mb-4">
             <span className="font-[noto-serif] text-[#F2C438] block mb-2">
               Justice
@@ -1268,7 +1268,14 @@ const DesktopLandingHeroCompact = ({
             transition-all duration-300
           ">
             {/* Dropdown Menu */}
-            <div className="absolute top-1 right-4 [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px] xl:right-[200px] w-[280px]">
+            <div className="absolute top-5 right-4     
+            [@media(min-width:1024px)_and_(max-width:1167px)]:right-[18px]
+            [@media(min-width:1168px)_and_(max-width:1279px)]:right-[60px]
+            [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px]
+            [@media(min-width:1440px)_and_(max-width:1535px)]:right-[163px]
+            [@media(min-width:1536px)_and_(max-width:1919px)]:right-[225px]
+            [@media(min-width:1920px)_and_(max-width:2559px)]:right-[200px]
+            [@media(min-width:2560px)]:right-[280px] w-[280px]">
               <div
                 className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full h-[45px] cursor-pointer"
                 onClick={() => setOpen(!open)}
@@ -1345,7 +1352,14 @@ const DesktopLandingHeroCompact = ({
             </div>
 
             {/* Statistics Card */}
-            <div className="absolute top-18 right-4 [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px] xl:right-[208px] w-[280px]">
+            <div className="absolute top-18 right-4    
+           [@media(min-width:1024px)_and_(max-width:1167px)]:right-[18px]
+            [@media(min-width:1168px)_and_(max-width:1279px)]:right-[60px]
+            [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px]
+            [@media(min-width:1440px)_and_(max-width:1535px)]:right-[163px]
+            [@media(min-width:1536px)_and_(max-width:1919px)]:right-[225px]
+            [@media(min-width:1920px)_and_(max-width:2559px)]:right-[200px]
+            [@media(min-width:2560px)]:right-[280px] w-[280px]">
               <StatisticsCard
                 stats={selectedLawsuit.stats}
                 chartConfig={selectedChartConfig}
@@ -1361,7 +1375,7 @@ const DesktopLandingHeroCompact = ({
   transition-all duration-300
 
   /* 1024–1167 */
-  lg:top-75 lg:right-45
+  lg:top-75 lg:right-44
 
   /* 1168–1279 (Small laptop) */
   [@media(min-width:1168px)_and_(max-width:1279px)]:top-80
@@ -1373,22 +1387,22 @@ const DesktopLandingHeroCompact = ({
 
   /* 1400–1535 (1440 design) */
   [@media(min-width:1400px)_and_(max-width:1535px)]:top-80
-  [@media(min-width:1400px)_and_(max-width:1535px)]:right-95
+  [@media(min-width:1400px)_and_(max-width:1535px)]:right-90
 
   /* 1536–1919 (2XL small) */
-  [@media(min-width:1536px)_and_(max-width:1919px)]:top-85
-  [@media(min-width:1536px)_and_(max-width:1919px)]:right-70
+  [@media(min-width:1536px)_and_(max-width:1919px)]:top-80
+  [@media(min-width:1536px)_and_(max-width:1919px)]:right-105
 
   /* 1920+ (Large desktop) */
-  [@media(min-width:1920px)]:top-90
-  [@media(min-width:1920px)]:right-45
+  [@media(min-width:1920px)]:top-80
+  [@media(min-width:1920px)]:right-115
 "
 
 >
 
               {/* ===== Header Row ===== */}
               <div className="flex items-center justify-between mb-0 px-1">
-                <p className="text-[#162766] font-urbanist text-[14px] xl:text-[15px] font-semibold transition-all duration-300">
+                <p className="text-[#162766] font-urbanist text-[14px] xl:text-[15px] ml-5 font-semibold transition-all duration-300">
                   {heroMiniSlide === 0 ? "Case Summary" : "Why Choose Us"}
                 </p>
 
@@ -1491,12 +1505,12 @@ const DesktopLandingHeroCompact = ({
   [@media(min-width:1400px)_and_(max-width:1535px)]:bottom-[2px]
 
   /* 1536–1919 */
-  [@media(min-width:1536px)_and_(max-width:1919px)]:right-[-60px]
-  [@media(min-width:1536px)_and_(max-width:1919px)]:bottom-[18px]
+  [@media(min-width:1536px)_and_(max-width:1919px)]:right-[178px]
+  [@media(min-width:1536px)_and_(max-width:1919px)]:bottom-[0px]
 
   /* 1920+ */
-  [@media(min-width:1920px)]:right-[-80px]
-  [@media(min-width:1920px)]:bottom-[20px]
+  [@media(min-width:1920px)]:right-[240px]
+  [@media(min-width:1920px)]:bottom-[0px]
 "
 
 

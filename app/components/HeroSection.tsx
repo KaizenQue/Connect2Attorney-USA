@@ -1,7 +1,5 @@
-/* eslint-disable react/display-name */
 "use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -14,42 +12,63 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import {
+  ArrowUpRightIcon,
+  BAR_COLORS,
+  lawsuits,
+  TALC_CONFIG,
+  ROUNDUP_CONFIG,
+  MESO_CONFIG,
+  DEPO_CONFIG,
+  CHART_CONFIGS,
+  ChevronDownIcon,
+} from "./homecomponents/lawsuitData";
+import {
+  BlueShapeSVG,
+  LightShapeSVG,
+  LightShapeSVGExpanded,
 
-const ArrowUpRightIcon = React.memo(() => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    className="w-[18px] h-[18px]"
-  >
-    <line x1="7" y1="17" x2="17" y2="7"></line>
-    <polyline points="7 7 17 7 17 17"></polyline>
-  </svg>
-));
+} from "./homecomponents/svg"
+
+/* ================= TYPES ================= */
+type ChartConfig = {
+  title: string;
+  xAxisLabel: string;
+  yAxisLabel: string;
+  xLabels: string[];
+  yTicks: number[];
+  maxY: number;
+  bars: number[];
+  stats: {
+    averageSettlement: string;
+    settlementTime: string;
+    courtTime: string;
+  };
+};
+type Lawsuit = (typeof lawsuits)[number];
+type DataGridItem = Lawsuit["dataGrid"][number];
+type TabletLandingProps = {
+  selectedLawsuit: Lawsuit;
+  selectedChartConfig: ChartConfig;
+  selectedIndex: number;
+  setSelectedIndex: (v: number) => void;
+  dropdownOpen: boolean;
+  setDropdownOpen: (v: boolean) => void;
+  setOpen: (v: boolean) => void;
+  open: boolean;
+};
+type Props = {
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+};
+
+type GridItem = {
+  label: string;
+  value: string;
+};
 
 
-const ChevronDownIcon = React.memo(() => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#162766"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <polyline points="6 9 12 15 18 9"></polyline>
-  </svg>
-));
-
+/* ================= SUBCOMPONENTS ================= */
 const GlassCard = ({
   icon,
   title,
@@ -86,8 +105,8 @@ const GlassCard = ({
         className="
           bg-white rounded-lg flex items-center justify-center mb-2 shadow-sm
 
-          w-[44px] h-[44px]
-          lg:w-[40px] lg:h-[40px]
+          w-11 h-11
+          lg:w-10 lg:h-10
           xl:w-[34px] xl:h-[34px]
         "
       >
@@ -110,152 +129,117 @@ const GlassCard = ({
   );
 };
 
+const GlassCardExtend = ({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: React.ReactNode;
+}) => {
+  return (
+    <div
+      className="
+        group cursor-pointer
+        flex flex-col justify-between
+        rounded-xl
+        transition-all duration-300 ease-in-out
+        hover:-translate-y-1
+        bg-white/45 backdrop-blur-md 
+        shadow-[0_4px_16px_0_rgba(31,38,135,0.1)]
+        hover:bg-white/65
+        
+        /* LG: optimized for smaller screen */
+        lg:w-[72px] lg:h-[78px] lg:p-1.5
+        xl:w-[84px] xl:h-[92px] xl:p-2
+        2xl:w-[90px] 2xl:h-[100px] 2xl:p-2.5
+      "
+    >
+      {/* Icon */}
+      <div
+        className="
+          bg-white rounded-lg flex items-center justify-center shadow-sm
+          lg:w-7 lg:h-7 lg:mb-1
+          xl:w-9 xl:h-9 xl:mb-2
+          2xl:w-10 2xl:h-10 2xl:mb-2.5
+        "
+      >
+        {icon}
+      </div>
 
-
-const BAR_COLORS = ["#E5E7EB", "#8B93B3", "#162766"];
-
-const lawsuits = [
-  {
-    title: "Talcum Powder Lawsuit",
-    stats: "1,88,511",
-    statsImage: "/talcCard/svg",
-    dataGrid: [
-      { label: "Average Settlement", value: "$100K – $1M" },
-      { label: "Time to Receive Settlement", value: "18–30 Months" },
-      { label: "Time in Court (if not settled)", value: "4–5 Weeks" },
-    ],
-  },
-  {
-    title: "Roundup Lawsuit",
-    stats: "11,860",
-    statsImage: "/roundupcard/svg",
-    dataGrid: [
-      { label: "Average Settlement", value: "$80K – $250K" },
-      { label: "Time to Receive Settlement", value: "12–24 Months" },
-      { label: "Time in Court (if not settled)", value: "4–6 Weeks" },
-    ],
-  },
-  {
-    title: "Mesothelioma Lawsuit",
-    stats: "85,000",
-    statsImage: "/mesocard.svg",
-    dataGrid: [
-      { label: "Average Settlement", value: "$1M – $2.4M" },
-      { label: "Time to Receive Settlement", value: "18–24 Months" },
-      { label: "Time in Court (if not settled)", value: "3–4 Weeks" },
-    ],
-  },
-  {
-    title: "Depo-Provera Lawsuit",
-    stats: "8,600",
-    statsImage: "/depocard.svg",
-    dataGrid: [
-      { label: "Average Settlement", value: "$300K – $700K" },
-      { label: "Time to Receive Settlement", value: "12–18 Months" },
-      { label: "Time in Court (if not settled)", value: "2–3 Weeks" },
-    ],
-  },
-];
-
-type ChartConfig = {
-  title: string;
-  xAxisLabel: string;
-  yAxisLabel: string;
-  xLabels: string[];
-  yTicks: number[];
-  maxY: number;
-  bars: number[];
-  stats: {
-    averageSettlement: string;
-    settlementTime: string;
-    courtTime: string;
-  };
+      {/* Title */}
+      <h3
+        className="
+          font-urbanist text-[#0f1c4d] font-semibold leading-tight
+          lg:text-[10px]
+          xl:text-[11px]
+          2xl:text-[12px]
+        "
+      >
+        {title}
+      </h3>
+    </div>
+  );
 };
+const DataGridCompactExtend = ({
+  grid,
+}: {
+  grid: { label: string; value: string }[];
+}) => (
+  <div className="w-full lg:mt-1 xl:mt-2">
+    <p className="
+      text-[#162766] font-urbanist font-semibold mb-1 lg:mb-1.5 xl:mb-2 pl-1
+      lg:text-[13px]
+      xl:text-[14px]
+      2xl:text-[15px]
+    ">
+      Case Summary
+    </p>
 
-export const TALC_CONFIG: ChartConfig = {
-  title: "Talcum Powder Pending MDL Cases",
-  xAxisLabel: "Month (2025)",
-  yAxisLabel: "# of Pending Cases",
+    <div className="grid grid-cols-3 gap-x-2 lg:gap-x-2.5 xl:gap-x-3 gap-y-1.5 lg:gap-y-2 xl:gap-y-2.5">
+      {grid.map((item, idx) => (
+        <div
+          key={idx}
+          className="
+            flex flex-col items-start
+            bg-white/70 border border-[#DDE6FF]
+            rounded-[10px] 
+            shadow-[0_4px_11px_rgba(0,0,0,0.08)] backdrop-blur-[6px]
+            
+            /* LG padding */
+            lg:p-1.5
+            /* XL padding */
+            xl:p-2.5
+            
+            /* LG dimensions */
+            lg:w-[68px] lg:min-h-[58px] lg:gap-2
+            /* XL dimensions */
+            xl:w-[85px] xl:min-h-[70px] xl:gap-2.5
+            /* 2XL dimensions */
+            2xl:w-[95px] 2xl:min-h-[78px] 2xl:gap-3
+          "
+        >
+          <p className="
+            text-[#808080] font-urbanist font-medium leading-none
+            lg:text-[9px]
+            xl:text-[11px]
+            2xl:text-[12px]
+          ">
+            {item.label}
+          </p>
 
-  xLabels: ["Apr", "Jul", "Sept"],
-  yTicks: [10000, 30000, 60000, 90000],
-  maxY: 90000,
-
-  bars: [58208, 63693, 66910],
-
-  stats: {
-    averageSettlement: "$100K – $1M",
-    settlementTime: "18–30 months",
-    courtTime: "4–5 weeks",
-  },
-};
-
-export const ROUNDUP_CONFIG: ChartConfig = {
-  title: "Roundup Pending Federal MDL Cases",
-  xAxisLabel: "Year",
-  yAxisLabel: "# of Pending Cases",
-
-  xLabels: ["2020", "2023", "2025"],
-  yTicks: [1000, 3000, 6000, 9000],
-  maxY: 9000,
-
-  bars: [3460, 4000, 4400],
-
-  stats: {
-    averageSettlement: "$80K – $250K",
-    settlementTime: "12–24 months",
-    courtTime: "4–6 weeks",
-  },
-};
-
-export const MESO_CONFIG: ChartConfig = {
-  title: "Pending Mesothelioma / Asbestos Cases",
-  xAxisLabel: "Month (Sample)",
-  yAxisLabel: "# of Pending Cases",
-
-  // user requested Apr / Jul / Sept
-  xLabels: ["1991", "2018", "2025"],
-
-  // reasonable ticks for Mesothelioma
-  yTicks: [10000, 30000, 60000, 90000],
-  maxY: 90000,
-
-  // 3 bars (match xLabels)
-  bars: [52000, 78000, 13000],
-
-  stats: {
-    averageSettlement: "$1M – $2.4M",
-    settlementTime: "18–24 months",
-    courtTime: "3–4 weeks",
-  },
-};
-
-export const DEPO_CONFIG: ChartConfig = {
-  title: "Depo-Provera Lawsuits Filed Over Time",
-  xAxisLabel: "Year",
-  yAxisLabel: "# of Cases Filed",
-
-  // user requested 1991, 2018, 2022
-  xLabels: ["2023", "2024", "2025"],
-  yTicks: [1000, 2000, 3000, 4000],
-  maxY: 4000,
-
-  // 3 bars (match xLabels)
-  bars: [2100, 3000, 3500],
-
-  stats: {
-    averageSettlement: "$300K – $700K",
-    settlementTime: "12–18 months",
-    courtTime: "2–3 weeks",
-  },
-};
-
-const CHART_CONFIG_MAP: Record<number, ChartConfig> = {
-  0: TALC_CONFIG,
-  1: ROUNDUP_CONFIG,
-  2: MESO_CONFIG,
-  3: DEPO_CONFIG,
-};
+          <p className="
+            text-[#162766] font-urbanist font-semibold leading-none
+            lg:text-[11px]
+            xl:text-[13px]
+            2xl:text-[14px]
+          ">
+            {item.value}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const ClearBarChart = ({ config }: { config: ChartConfig }) => {
   const data = config.xLabels.map((label, i) => ({
@@ -318,7 +302,7 @@ const StatisticsCard = ({
       className="
         w-full h-[216px] flex flex-col p-[15px]
 
-        border border-[0.756px] border-[#DDE6FF]
+        border border-[#DDE6FF]
         rounded-[12.103px]
 
         bg-[rgba(255,255,255,0.30)]
@@ -343,12 +327,12 @@ const StatisticsCard = ({
       </div>
 
       {/* ===== FULL WIDTH DIVIDER ===== */}
-      <div className="relative mt-1 mb-3 h-[6px] w-full">
+      <div className="relative mt-1 mb-3 h-1.5 w-full">
         {/* Yellow fixed segment */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[3px] w-[48px] bg-[#F5C844] rounded-l-full z-10" />
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[3px] w-12 bg-[#F5C844] rounded-l-full z-10" />
 
         {/* Blue flexible segment */}
-        <div className="absolute left-[48px] right-0 top-[-5px] h-[6px]">
+        <div className="absolute left-12 right-0 top-[-5px] h-1.5">
           <svg
             className="w-full h-full"
             viewBox="0 0 232 6"
@@ -373,8 +357,6 @@ const StatisticsCard = ({
     </div>
   );
 };
-
-
 
 const DataGrid = ({ grid }: { grid: { label: string; value: string }[] }) => (
   <div className="w-full max-w-[440px] mt-2 ">
@@ -415,10 +397,10 @@ const DataGridCompact = ({
           key={idx}
           className="
             flex flex-col items-start
-            gap-[14px] xl:gap-[19px]
+            gap-3.5 xl:gap-[19px]
 
             w-[86px] xl:w-[91px]
-            min-h-[70px] xl:min-h-[80px]
+            min-h-[70px] xl:min-h-20
 
             bg-white/70
             border border-[#DDE6FF]
@@ -442,133 +424,85 @@ const DataGridCompact = ({
   </div>
 );
 
-
-
-const BlueShapeSVG = React.memo(() => (
-  <svg width="0" height="0" aria-hidden>
-    <defs>
-      <clipPath id="blue-shape-clip-hero" clipPathUnits="objectBoundingBox">
-        <path
-          transform="scale(0.00114155 0.00155521)"
-          d="M0 30C0 13.4314 13.4315 0 30 0H846C862.569 0 876 13.4315 876 30V246.743C876 252.713 873.333 258.372 868.727 262.171L627.503 461.171C622.897 464.971 620.23 470.629 620.23 476.599V613C620.23 629.569 606.799 643 590.23 643H151.809C142.474 643 133.671 638.655 127.994 631.244L20.6175 491.084C7.24625 473.63 0 452.256 0 430.269V267.171V30Z"
-        />
-      </clipPath>
-    </defs>
-  </svg>
-));
-
-const LightShapeSVG = React.memo(
-  ({ children }: { children?: React.ReactNode }) => (
-    <svg
-      viewBox="0 0 665 643"
-      className="w-full h-full object-cover"
-      preserveAspectRatio="none"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
+const GlassCardCompactLG = ({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: React.ReactNode;
+}) => {
+  return (
+    <div
+      className="
+        group
+        cursor-pointer
+        flex flex-col justify-between
+        w-[84px] h-[92px]
+        p-2
+        rounded-xl
+        transition-all duration-300 ease-in-out
+        hover:-translate-y-1
+        bg-white/45 
+        backdrop-blur-md 
+        shadow-[0_4px_16px_0_rgba(31,38,135,0.1)]
+        hover:bg-white/65
+      "
     >
-      <defs>
-        <path
-          id="light-shape-path-hero"
-          d="M482.667 523C478.63 523 474.989 525.427 473.436 529.154L433.693 624.538C429.034 635.718 418.111 643 406 643H30.0002C13.4317 643 0.000244141 629.569 0.000244141 613V509.978C0.000244141 501.019 4.00494 492.528 10.9188 486.829L240.212 297.829C249.431 290.23 254.77 278.909 254.77 266.963V30C254.77 13.4315 268.202 0 284.77 0H558H635C651.569 0 665 13.4315 665 30V493C665 509.569 651.569 523 635 523H482.667Z"
-        />
-        <clipPath id="light-shape-clip-hero">
-          <use href="#light-shape-path-hero" />
-        </clipPath>
-      </defs>
-      <use href="#light-shape-path-hero" fill="#F0F2F4" />
-      <image
-        href="/Homeherowhite.png"
-        width="665"
-        height="643"
-        preserveAspectRatio="xMidYMid slice"
-        clipPath="url(#light-shape-clip-hero)"
-      />
-
-      {/* Removed 'xmlns' to fix TypeScript error in React */}
-      <foreignObject
-        x="0"
-        y="0"
-        width="665"
-        height="643"
-        clipPath="url(#light-shape-clip-hero)"
-        style={{ overflow: "visible" }}
+      <div
+        className="
+          bg-white rounded-lg flex items-center justify-center mb-1 shadow-sm
+          w-[34px] h-[34px]
+        "
       >
-        <div className="w-full h-full relative pointer-events-auto ">
-          {children}
+        {icon}
+      </div>
+
+      <h3
+        className="
+          font-urbanist text-[#0f1c4d] font-semibold leading-tight
+          text-[11px]
+        "
+      >
+        {title}
+      </h3>
+    </div>
+  );
+};
+
+
+
+const DataGridCompactLG = ({ grid }: { grid: GridItem[] }) => (
+  <div className="w-full">
+    <div className="grid grid-cols-3 gap-x-[6px] gap-y-[6px]">
+      {grid.map((item, idx) => (
+        <div
+          key={idx}
+          className="
+            flex flex-col justify-between
+            w-[84px] h-[92px]
+            rounded-xl
+            bg-white/70
+            border border-[#DDE6FF]
+            p-2
+            shadow-[0_4px_11px_rgba(0,0,0,0.08)]
+            backdrop-blur-[6px]
+          "
+        >
+          <p className="text-[#808080] font-urbanist font-medium text-[11px] leading-tight">
+            {item.label}
+          </p>
+
+          <p className="text-[#162766] font-urbanist font-semibold text-[13px] leading-tight">
+            {item.value}
+          </p>
         </div>
-      </foreignObject>
-    </svg>
-  )
+      ))}
+    </div>
+  </div>
 );
 
-const LightShapeSVGExpanded = React.memo(
-  ({ children }: { children?: React.ReactNode }) => (
-    <svg
-      viewBox="0 0 665 643"
-      className="w-full h-full object-cover"
-      preserveAspectRatio="none"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <defs>
-        <path
-          id="light-shape-path-hero"
-          d="M482.667 523C478.63 523 474.989 525.427 473.436 529.154L433.693 624.538C429.034 635.718 418.111 643 406 643H30.0002C13.4317 643 0.000244141 629.569 0.000244141 613V509.978C0.000244141 501.019 4.00494 492.528 10.9188 486.829L240.212 297.829C249.431 290.23 254.77 278.909 254.77 266.963V30C254.77 13.4315 268.202 0 284.77 0H558H635C651.569 0 665 13.4315 665 30V493C665 509.569 651.569 523 635 523H482.667Z"
-        />
-        <clipPath id="light-shape-clip-hero">
-          <use href="#light-shape-path-hero" />
-        </clipPath>
-      </defs>
-      <use href="#light-shape-path-hero" fill="#F0F2F4" />
-      <image
-        href="/Homeherowhite.png"
-        width="665"
-        height="643"
-        preserveAspectRatio="xMidYMid slice"
-        clipPath="url(#light-shape-clip-hero)"
-      />
 
-      <foreignObject
-        x="0"
-        y="0"
-        width="665"
-        height="643"
-        clipPath="url(#light-shape-clip-hero)"
-        style={{ overflow: "visible" }}
-      >
-        <div className="w-full h-full relative pointer-events-auto flex flex-col justify-center items-end">
-          <div className="w-full pr-4 flex flex-col gap-1 items-end mt-2">
-            {children}
-          </div>
-        </div>
-      </foreignObject>
-    </svg>
-  )
-);
-// const MobileBlueShapeSVG = React.memo(() => (
-//   <svg
-//     viewBox="0 0 876 643"
-//     className="w-full h-full"
-//     preserveAspectRatio="xMidYMid slice"
-//     aria-hidden
-//     focusable="false"
-//   >
-//     <defs>
-//       <path
-//         id="mobile-shape-path"
-//         d="M0 30C0 13.4314 13.4315 0 30 0H846C862.569 0 876 13.4315 876 30V246.743C876 252.713 873.333 258.372 868.727 262.171L627.503 461.171C622.897 464.971 620.23 470.629 620.23 476.599V613C620.23 629.569 606.799 643 590.23 643H151.809C142.474 643 133.671 638.655 127.994 631.244L20.6175 491.084C7.24625 473.63 0 452.256 0 430.269V267.171V30Z"
-//       />
-//       <clipPath id="blue-shape-clip-hero-mobile">
-//         <use href="#mobile-shape-path" />
-//       </clipPath>
-//     </defs>
 
-//     {/* Visible filled shape to act as container background */}
-//     <use href="#mobile-shape-path" fill="#162766" />
-//   </svg>
-// ));
 
 const scrollToNextSection = () => {
   const el = document.getElementById("next-section");
@@ -580,6 +514,10 @@ const scrollToNextSection = () => {
   window.scrollTo({ top: y, behavior: "smooth" });
 };
 
+
+
+
+/* ================= MOBILE ================= */
 const MobileLanding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const link = "/contact-us";
@@ -648,8 +586,7 @@ const MobileLanding = () => {
   const [open, setOpen] = useState(false);
 
   const selectedLawsuit = lawsuits[selectedIndex];
-  const selectedChartConfig = CHART_CONFIG_MAP[selectedIndex];
-
+  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
   return (
     <div className="block lg:hidden  w-full bg-white flex flex-col items-stretch justify-center p-0 font-sans">
       <div className="relative w-full bg-white flex flex-col mt-2">
@@ -679,7 +616,7 @@ const MobileLanding = () => {
         </div>
 
         <div
-          className="absolute top-0 inset-x-0 mx-[15px] lg:hidden hidden md:block  aspect-[357/358] md:aspect-[357/260]"
+          className="absolute top-0 inset-x-0 mx-[15px] lg:hidden hidden md:block  aspect-357/358 md:aspect-357/260"
           style={{
             WebkitMaskImage: "url(/tabtophero.png)",
             WebkitMaskRepeat: "no-repeat",
@@ -703,7 +640,7 @@ const MobileLanding = () => {
           <div className="absolute inset-0 bg-[#162766]/60" />
         </div>
 
-        <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-[40px] min-[360px]:bottom-[208px] min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
+        <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-10 min-[360px]:bottom-52 min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
           <Image
             src="/HPR.png"
             alt="Hero bottom background"
@@ -728,7 +665,7 @@ const MobileLanding = () => {
             </p>
 
             <button
-              className=" w-[160px] h-[38px]      
+              className=" w-40 h-[38px]      
     min-[360px]:w-[180px] min-[360px]:h-[42px] md:px-4 md:py-2 md:w-[220px] md:h-[50px]
     min-[375px]:w-[201px] min-[375px]:h-[45px] bg-[#f2c94c] hover:bg-[#e0b840] transition-colors text-[#1a2b5e] text-[11px] min-[375px]:text-[14px] sm:text-[16px] font-urbanist font-semibold rounded-full flex items-center justify-center gap-3 shadow-lg"
               onClick={() => router.push("/contact-us")}
@@ -744,7 +681,7 @@ const MobileLanding = () => {
             </button>
           </div>
 
-          <div className="mt-[40px] min-[375px]:mt-[28px] min-[425px]:mt-[90px]  min-[360px]:mt-[80px] md:mt-[230px] ">
+          <div className="mt-10 min-[375px]:mt-7 min-[425px]:mt-[90px]  min-[360px]:mt-20 md:mt-[230px] ">
             <div className="flex justify-end">
               <div className="flex justify-end relative">
                 <div
@@ -1003,20 +940,8 @@ const MobileLanding = () => {
 };
 
 
-type Lawsuit = (typeof lawsuits)[number];
-type DataGridItem = Lawsuit["dataGrid"][number];
 
-
-type TabletLandingProps = {
-  selectedLawsuit: Lawsuit;
-  selectedChartConfig: ChartConfig;
-  selectedIndex: number;
-  setSelectedIndex: (v: number) => void;
-  dropdownOpen: boolean;
-  setDropdownOpen: (v: boolean) => void;
-  setOpen: (v: boolean) => void;
-  open: boolean;
-};
+/* ================= TABLET ================= */
 
 const TabletLanding = ({
   selectedLawsuit,
@@ -1030,7 +955,7 @@ const TabletLanding = ({
 }: TabletLandingProps) => {
   return (
     <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-15">
-      <div className="relative w-full h-[500px] rounded-[32px]">
+      <div className="relative w-full h-[500px] rounded-4xl">
         {/* HPR BACKGROUND */}
         <Image
           src="/tabhero.png"
@@ -1040,11 +965,11 @@ const TabletLanding = ({
           className="object-cover"
         />
 
-        <div className="absolute inset-0 z-10 flex flex-col gap-4 px-[25px] py-[20px]">
+        <div className="absolute inset-0 z-10 flex flex-col gap-4 px-[25px] py-5">
           <div className="flex justify-end relative mr-2 z-40">
             <div
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-white shadow-2xl flex items-center justify-between gap-4 bg-[#eff2f6] border border-white rounded-xl px-4 py-2 shadow-sm cursor-pointer w-[355px] h-[55px]"
+              className="bg-white shadow-2xl flex items-center justify-between gap-4 border border-white rounded-xl px-4 py-2 shadow-sm cursor-pointer w-[355px] h-[55px]"
             >
               <span className="text-[#162766] font-semibold text-[16px]">
                 {selectedLawsuit.title}
@@ -1190,13 +1115,7 @@ const TabletLanding = ({
   );
 };
 
-
-/* ================= TYPES ================= */
-type Props = {
-  selectedIndex: number;
-  setSelectedIndex: (index: number) => void;
-};
-
+/* ================= DESKTOP WITH HEIGHT <850  ================= */
 
 const DesktopLandingHeroCompact = ({
   selectedIndex,
@@ -1206,75 +1125,113 @@ const DesktopLandingHeroCompact = ({
   setSelectedIndex: (index: number) => void;
 }) => {
   const link = "/contact-us";
-
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
-  const selectedChartConfig = CHART_CONFIG_MAP[selectedIndex];
-
+  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
   const selectedLawsuit = lawsuits[selectedIndex];
+  const [heroSlide, setHeroSlide] = useState(0);
+
+  type HeroSlide =
+    | {
+        id: number;
+        type: "stats";
+        title: string;
+        items: { label: string; value: string }[];
+      }
+    | {
+        id: number;
+        type: "info";
+        title: string;
+        items: string[];
+      };
+
+  const heroSlides: HeroSlide[] = [
+    {
+      id: 1,
+      type: "stats",
+      title: "Case Summary",
+      items: [
+        { label: "Average Settlement", value: "$100K – $1M" },
+        { label: "Time to Settlement", value: "18–30 Months" },
+        { label: "Time in Court", value: "4–5 Weeks" },
+      ],
+    },
+    {
+      id: 2,
+      type: "info",
+      title: "Why Choose Us",
+      items: ["Serving Nationwide", "No Win, No Fee"],
+    },
+  ];
+
+  const [heroMiniSlide, setHeroMiniSlide] = useState(0);
+
+  const nextHeroMini = () => {
+    setHeroMiniSlide((prev) => (prev === 1 ? 0 : 1));
+  };
+
+  const prevHeroMini = () => {
+    setHeroMiniSlide((prev) => (prev === 0 ? 1 : 0));
+  };
+
+  const dragStartX = useRef<number | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    dragStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (dragStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - dragStartX.current;
+
+    if (Math.abs(delta) > 40) {
+      delta < 0 ? nextHeroMini() : prevHeroMini();
+    }
+    dragStartX.current = null;
+  };
+
   return (
-    <div className="hidden lg:flex h-[650px] font-sans flex-col mx-10 ">
-      <div className="relative w-full  h-[650px] mt-4 overflow-hidden max-w-[1560px]">
-      {/* Normal screens (below xl) */}
-{/* ================= VIDEO BACKGROUND ================= */}
+    <div className="hidden lg:flex h-[490px] font-sans flex-col mx-10">
+      <div className="relative w-full h-[650px] mt-2 overflow-hidden max-w-[1560px]">
+        {/* ================= VIDEO BACKGROUND ================= */}
+        {/* < 1168 */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-contain block [@media(min-width:1168px)]:hidden"
+        >
+          <source src="/1920x860.mp4" type="video/mp4" />
+        </video>
 
-{/* < 1168 */}
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  preload="auto"
-  className="
-    absolute inset-0 w-full h-full object-contain
+        {/* 1168 → 1279 (CUSTOM RANGE) */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-contain hidden [@media(min-width:1168px)]:block [@media(min-width:1280px)]:hidden"
+        >
+          <source src="/1920x860.mp4" type="video/mp4" />
+        </video>
 
-    block
-    [@media(min-width:1168px)]:hidden
-  "
->
-  <source src="/video1.mp4" type="video/mp4" />
-</video>
+        {/* >= 1280 */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-contain hidden [@media(min-width:1280px)]:block"
+        >
+          <source src="/1920x860.mp4" type="video/mp4" />
+        </video>
 
-{/* 1168 → 1279 (CUSTOM RANGE) */}
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  preload="auto"
-  className="
-    absolute inset-0 w-full h-full object-contain
-
-    hidden
-    [@media(min-width:1168px)]:block
-    [@media(min-width:1280px)]:hidden
-  "
->
-  <source src="/1440x720.mp4" type="video/mp4" />
-</video>
-
-{/* >= 1280 */}
-<video
-  autoPlay
-  loop
-  muted
-  playsInline
-  preload="auto"
-  className="
-    absolute inset-0 w-full h-full object-contain
-
-    hidden
-    [@media(min-width:1280px)]:block
-  "
->
-  <source src="/1440x720.mp4" type="video/mp4" />
-</video>
-
-
-        {/* left side content */}
-
-        <div className="relative top-0 z-10 xl:left-[10px] px-12 xl:px-20 flex flex-col justify-start h-full pt-14 ">
+        <div className="relative top-0 z-10 xl:left-15 px-12 xl:px-20 flex flex-col justify-start h-full pt-14">
           <h1 className="lg:text-[55px] leading-none mb-4">
             <span className="font-[noto-serif] text-[#F2C438] block mb-2">
               Justice
@@ -1290,7 +1247,7 @@ const DesktopLandingHeroCompact = ({
           <div className="mt-5">
             <button
               aria-label="Check if you qualify"
-              className="font-urbanist group flex items-center bg-[#F5C844] text-[#162766] px-1 pl-6 py-1 rounded-full  text-[15px] shadow-lg hover:bg-[#e0b533] transition-all w-[243px]"
+              className="font-urbanist group flex items-center bg-[#F5C844] text-[#162766] px-1 pl-6 py-1 rounded-full text-[15px] shadow-lg hover:bg-[#e0b533] transition-all w-[243px]"
               onClick={() => router.push("/contact-us")}
             >
               <span className="mr-6">Check if you Qualify</span>
@@ -1300,182 +1257,271 @@ const DesktopLandingHeroCompact = ({
             </button>
           </div>
         </div>
-        {/* right side content */}
-        <div className="absolute inset-y-0 -right-[4px] top-[20px] z-10 -ml-[140px]">
-          <div className="absolute top-[24px] right-[16px] xl:right-[100px] w-[280px]">
-            <div
-              className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full h-[45px] cursor-pointer"
-              onClick={() => setOpen(!open)}
-            >
-              <span className="text-[#162766] font-bold font-urbanist text-[14px] leading-[1.45]">
-                {selectedLawsuit.title}
-              </span>
+        
+        {/* ================= RIGHT SIDE CONTENT CONTAINER ================= */}
+        <div className="absolute inset-y-0 -right-1 top-5 z-10 w-[280px]">
+          {/* Adjust the left positioning based on your parent container logic */}
+          <div className="
+            -ml-[140px] 
+            [@media(min-width:1168px)]:-ml-[120px]
+            [@media(min-width:1280px)]:-ml-[100px]
+            transition-all duration-300
+          ">
+            {/* Dropdown Menu */}
+            <div className="absolute top-1 right-4 [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px] xl:right-[200px] w-[280px]">
+              <div
+                className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full h-[45px] cursor-pointer"
+                onClick={() => setOpen(!open)}
+              >
+                <span className="text-[#162766] font-bold font-urbanist text-[14px] leading-[1.45]">
+                  {selectedLawsuit.title}
+                </span>
 
-              {open ? (
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="rotate-180 text-[#F2C438] bg-[#142A66] rounded transition-all duration-200"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              ) : (
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-white bg-[#F2C438] rounded transition-all duration-200"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
+                {open ? (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="rotate-180 text-[#F2C438] bg-[#142A66] rounded transition-all duration-200"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white bg-[#F2C438] rounded transition-all duration-200"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                )}
+              </div>
+
+              {open && (
+                <div className="absolute top-[52px] left-0 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-full">
+                  {lawsuits.map((lawsuit, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex items-center justify-between px-4 py-2 cursor-pointer text-[#162766] font-urbanist text-[12px] ${
+                        selectedIndex === idx ? "font-bold" : ""
+                      }`}
+                      onClick={() => {
+                        setSelectedIndex(idx);
+                        setOpen(false);
+                      }}
+                    >
+                      <span>{lawsuit.title}</span>
+                      {selectedIndex === idx && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <rect width="14" height="14" rx="4" fill="#162766" />
+                          <path
+                            d="M5 7L6.1847 8.1847C6.61501 8.61501 7.32668 8.56443 7.69181 8.07759L10 5"
+                            stroke="#F2C438"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
 
-            {open && (
-              <div className="absolute top-[52px] left-0 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-full">
-                {lawsuits.map((lawsuit, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex items-center justify-between px-4 py-2 cursor-pointer text-[#162766] font-urbanist text-[12px] ${
-                      selectedIndex === idx ? "font-bold" : ""
-                    }`}
-                    onClick={() => {
-                      setSelectedIndex(idx);
-                      setOpen(false);
-                    }}
-                  >
-                    <span>{lawsuit.title}</span>
-                    {selectedIndex === idx && (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                      >
-                        <rect width="14" height="14" rx="4" fill="#162766" />
-                        <path
-                          d="M5 7L6.1847 8.1847C6.61501 8.61501 7.32668 8.56443 7.69181 8.07759L10 5"
-                          stroke="#F2C438"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+            {/* Statistics Card */}
+            <div className="absolute top-18 right-4 [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px] xl:right-[208px] w-[280px]">
+              <StatisticsCard
+                stats={selectedLawsuit.stats}
+                chartConfig={selectedChartConfig}
+              />
+            </div>
 
-          {/* 🔹 MIDDLE ZONE — STATS + GRID */}
-          <div className="absolute top-[96px] right-[16px] xl:right-[108px] w-[280px]">
-            <StatisticsCard
-              stats={selectedLawsuit.stats}
-              chartConfig={selectedChartConfig}
-            />
-
-            <DataGridCompact grid={selectedLawsuit.dataGrid} />
-          </div>
-
-          {/* 🔹 BOTTOM ZONE — GLASS CARDS */}
-<div
+            {/* ================= MINI INFO SLIDER ================= */}
+     <div
   className="
-    absolute
-    bottom-7
-    [@media(min-width:1168px)_and_(max-width:1279px)]:bottom-[58px]
+  absolute
+  w-[280px]
+  group
+  transition-all duration-300
 
-    xl:bottom-[18px]
+  /* 1024–1167 */
+  lg:top-75 lg:right-45
 
-    right-[205px]
-    xl:right-[275px]
+  /* 1168–1279 (Small laptop) */
+  [@media(min-width:1168px)_and_(max-width:1279px)]:top-80
+  [@media(min-width:1168px)_and_(max-width:1279px)]:right-55
 
-    flex gap-2
-  "
+  /* 1280–1399 (1280 design) */
+  [@media(min-width:1280px)_and_(max-width:1399px)]:top-80
+  [@media(min-width:1280px)_and_(max-width:1399px)]:right-68
+
+  /* 1400–1535 (1440 design) */
+  [@media(min-width:1400px)_and_(max-width:1535px)]:top-80
+  [@media(min-width:1400px)_and_(max-width:1535px)]:right-95
+
+  /* 1536–1919 (2XL small) */
+  [@media(min-width:1536px)_and_(max-width:1919px)]:top-85
+  [@media(min-width:1536px)_and_(max-width:1919px)]:right-70
+
+  /* 1920+ (Large desktop) */
+  [@media(min-width:1920px)]:top-90
+  [@media(min-width:1920px)]:right-45
+"
+
 >
 
-            <GlassCard
-              icon={
-                <Image
-                  src="/handshakeicon.svg"
-                  alt="Case Review"
-                  width={44}
-                  height={44}
-                />
-              }
-              title={
-                <>
-                  Free case
-                  <br />
-                  Review
-                </>
-              }
-            />
-            <GlassCard
-              icon={
-                <Image
-                  src="/scaleicon.svg"
-                  alt="Serving Nationwide"
-                  width={44}
-                  height={44}
-                />
-              }
-              title={
-                <>
-                  Serving
-                  <br />
-                  Nationwide
-                </>
-              }
-            />
-            <GlassCard
-              icon={
-                <Image
-                  src="/gavelicon.svg"
-                  alt="No Win No Fee"
-                  width={44}
-                  height={44}
-                />
-              }
-              title={
-                <>
-                  No Win,
-                  <br />
-                  No Fee
-                </>
-              }
-            />
-          </div>
+              {/* ===== Header Row ===== */}
+              <div className="flex items-center justify-between mb-0 px-1">
+                <p className="text-[#162766] font-urbanist text-[14px] xl:text-[15px] font-semibold transition-all duration-300">
+                  {heroMiniSlide === 0 ? "Case Summary" : "Why Choose Us"}
+                </p>
 
-          {/* Scroll Button (unchanged) */}
-          <div className="absolute bottom-8 right-0 z-50 scale-90 xl:scale-100 origin-bottom-right">
-            <button
-              className="lg:w-[190px] h-[87px] text-white px-4 py-3 flex items-center gap-2 hover:scale-[1.08]"
-              onClick={scrollToNextSection}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={prevHeroMini}
+                    className="
+                      w-6 h-6 bg-white shadow-md rounded-full
+                      flex items-center justify-center
+                      opacity-100 scale-90
+                      hover:scale-100
+                      transition-all
+                    "
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#162766" strokeWidth="3">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+
+                  <button
+                    onClick={nextHeroMini}
+                    className="
+                      w-6 h-6 bg-white shadow-md rounded-full
+                      flex items-center justify-center
+                      opacity-100 scale-90
+                      hover:scale-100
+                      transition-all
+                    "
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#162766" strokeWidth="3">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              {/* ===== Viewport ===== */}
+              <div
+                className="relative overflow-hidden rounded-xl w-full h-[155px]"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+              >
+                <div
+                  className="flex h-full transition-transform duration-500 ease-out will-change-transform"
+                  style={{ transform: `translateX(-${heroMiniSlide * 100}%)` }}
+                >
+                  {/* ===== Slide 1: Data Grid ===== */}
+                  <div className="min-w-full h-full flex items-start pt-1">
+                    <DataGridCompactLG grid={selectedLawsuit.dataGrid} />
+                  </div>
+
+                  {/* ===== Slide 2: Glass Cards ===== */}
+                  <div className="min-w-full h-full flex items-start pt-1">
+                    <div className="w-full flex justify-between gap-[6px]">
+                      <div className="transition-all duration-500 delay-[0ms]">
+                        <GlassCardCompactLG
+                          icon={<Image src="/handshakeicon.svg" alt="" width={40} height={40} />}
+                          title={<>Free case<br />Review</>}
+                        />
+                      </div>
+                      <div className="transition-all duration-500 delay-[120ms]">
+                        <GlassCardCompactLG
+                          icon={<Image src="/scaleicon.svg" alt="" width={40} height={40} />}
+                          title={<>Serving<br />Nationwide</>}
+                        />
+                      </div>
+                      <div className="transition-all duration-500 delay-[240ms]">
+                        <GlassCardCompactLG
+                          icon={<Image src="/gavelicon.svg" alt="" width={40} height={40} />}
+                          title={<>No Win<br />No Fee</>}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Scroll Down Button */}
+            <div 
+      className="
+  absolute
+  z-50
+  scale-90
+  xl:scale-100
+  origin-bottom-right
+  transition-all duration-300
+
+  /* 1024–1167 */
+  lg:right-[5px] lg:bottom-[30px]
+
+  /* 1168–1279 */
+  [@media(min-width:1168px)_and_(max-width:1279px)]:right-[-70px]
+  [@media(min-width:1168px)_and_(max-width:1279px)]:bottom-[20px]
+
+  /* 1280–1399 */
+  [@media(min-width:1280px)_and_(max-width:1399px)]:right-[40px]
+  [@media(min-width:1280px)_and_(max-width:1399px)]:bottom-[4px]
+
+  /* 1400–1535 */
+  [@media(min-width:1400px)_and_(max-width:1535px)]:right-[130px]
+  [@media(min-width:1400px)_and_(max-width:1535px)]:bottom-[2px]
+
+  /* 1536–1919 */
+  [@media(min-width:1536px)_and_(max-width:1919px)]:right-[-60px]
+  [@media(min-width:1536px)_and_(max-width:1919px)]:bottom-[18px]
+
+  /* 1920+ */
+  [@media(min-width:1920px)]:right-[-80px]
+  [@media(min-width:1920px)]:bottom-[20px]
+"
+
+
             >
-              <Image
-                src="/scrolldown.png"
-                alt="scroll"
-                width={195}
-                height={87}
-              />
-            </button>
+              <button
+                className="lg:w-[190px] h-[87px] text-white px-4 py-3 flex items-center gap-2 hover:scale-[1.08] transition-transform duration-200"
+                onClick={scrollToNextSection}
+                aria-label="Scroll to next section"
+              >
+                <Image
+                  src="/scrolldown.png"
+                  alt="scroll down"
+                  width={195}
+                  height={87}
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+/* ================= DESKTOP WITH HEIGHT >850 ================= */
 
 const DesktopLandingHeroExpanded: React.FC<Props> = ({
   selectedIndex,
@@ -1484,34 +1530,54 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const selectedChartConfig = CHART_CONFIG_MAP[selectedIndex];
+  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
   const selectedLawsuit = lawsuits[selectedIndex];
 
   return (
-    <div className="hidden lg:flex justify-center font-sans px-4 xl:px-8 2xl:px-10">
+    <div className="hidden lg:flex justify-center font-sans px-4 xl:px-8 2xl:px-10 mt-4">
       <div
         className="
           relative overflow-hidden rounded-2xl
-
-          w-[1024px]
-          h-[560px]
-
-          xl:w-full
-          xl:max-w-[1440px]
-          xl:h-[620px]
-
-          2xl:max-w-[1560px]
-          2xl:h-[720px]
+          w-full
+          
+          /* LG specific sizing */
+          lg:w-[calc(100%-2rem)] lg:max-w-[1200px]
+          xl:w-full xl:max-w-[1440px]
+          [@media(min-width:1600px)]:max-w-[1560px]
+          
+          /* Heights */
+          h-[480px]           /* LG - compact height */
+          xl:h-[620px]        /* XL - expanded height */
+          2xl:h-[720px]       /* 2XL - even taller */
         "
       >
         {/* ================= VIDEO BACKGROUND ================= */}
+        {/* LG only (1024-1279) */}
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="
+            absolute inset-0 w-full h-full object-contain
+            block lg:block xl:hidden
+          "
+        >
+          <source src="/1280x503.mp4" type="video/mp4" />
+        </video>
+
+        {/* XL+ (1280px+) */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="
+            absolute inset-0 w-full h-full object-cover
+            hidden xl:block
+          "
         >
           <source src="/1920x860.mp4" type="video/mp4" />
         </video>
@@ -1520,54 +1586,76 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
         <div
           className="
             relative z-10 grid h-full
-
-            grid-cols-[1.25fr_0.75fr]
-
-            xl:grid-cols-[1.15fr_0.85fr]
-
-            2xl:grid-cols-[1.1fr_0.9fr]
-
-            gap-6
-
-            px-[48px]
-            py-[48px]
-
-            xl:px-12
-            2xl:px-16
-            xl:py-12
+            
+            /* LG: More space for content */
+            lg:grid-cols-[1.1fr_0.9fr]
+            xl:grid-cols-[1.25fr_0.75fr]
+            
+            /* Gap adjustments */
+            lg:gap-6
+            xl:gap-8
+            2xl:gap-10
+            
+            /* Padding */
+            lg:px-10 lg:py-10
+            xl:px-12 xl:py-12
+            2xl:px-16 2xl:py-14
           "
         >
           {/* ================= LEFT COLUMN ================= */}
-          <div className="flex flex-col justify-start max-w-[720px]">
-            <h1 className="leading-none mb-4">
-              <span className="block font-[noto-serif] text-[#F2C438] text-[56px] xl:text-[64px] 2xl:text-[76px]">
+          <div className="flex flex-col justify-center max-w-[720px]">
+            <h1 className="leading-none">
+              <span className="
+                block font-[noto-serif] text-[#F2C438]
+                /* LG adjustments for better fit */
+                lg:text-[48px] lg:mb-[-5px]
+                xl:text-[60px] xl:mb-0
+                2xl:text-[68px]
+                [@media(min-width:1600px)]:text-[76px]
+              ">
                 Justice
               </span>
-              <span className="block font-[noto-serif] text-white text-[56px] xl:text-[64px] 2xl:text-[80px]">
+              <span className="
+                block font-[noto-serif] text-white
+                /* LG adjustments for better fit */
+                lg:text-[48px]
+                xl:text-[60px]
+                2xl:text-[72px]
+                [@media(min-width:1600px)]:text-[80px]
+              ">
                 Starts Here
               </span>
             </h1>
 
-            <p className="text-blue-100 text-[16px] xl:text-[17px] 2xl:text-[18px] mt-6 max-w-md font-light leading-relaxed">
+            <p className="
+              text-blue-100 font-light leading-relaxed mt-4
+              /* LG text adjustments */
+              lg:text-[14px] lg:mt-3 lg:max-w-[360px]
+              xl:text-[16px] xl:mt-6 xl:max-w-md
+              2xl:text-[17px]
+            ">
               Free, confidential case reviews. Serving all 50 states. No fees
               unless you win.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-6 xl:mt-8">
               <button
                 aria-label="Check if you qualify"
                 onClick={() => router.push("/contact-us")}
                 className="
                   group flex items-center justify-center
-                  h-[55px]
-                  px-[16px] pl-[26px]
-                  gap-[14px]
-                  rounded-[32px]
+                  /* LG button - slightly smaller but proportional */
+                  lg:h-[46px] lg:px-3 lg:pl-[20px] lg:gap-2.5 lg:w-[240px]
+                  /* XL button - original size */
+                  xl:h-[55px] xl:px-4 xl:pl-[26px] xl:gap-3.5 xl:w-[280px]
+                  
+                  rounded-4xl
                   bg-[#F2C438]
                   text-[#162766]
-                  font-urbanist font-medium text-[16px]
+                  font-urbanist font-medium
+                  lg:text-[14px]
+                  xl:text-[16px]
                   shadow-lg hover:brightness-95 transition-all
-                  w-[240px]
                 "
               >
                 <span className="whitespace-nowrap">Check if you Qualify</span>
@@ -1575,12 +1663,15 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                 <span
                   className="
                     flex items-center justify-center
-                    w-[38px] h-[38px]
                     rounded-full
                     bg-[#162766] text-white
                     shadow
                     group-hover:rotate-45 transition-transform
                     shrink-0
+                    /* LG icon */
+                    lg:w-[32px] lg:h-[32px]
+                    /* XL icon */
+                    xl:w-[38px] xl:h-[38px]
                   "
                 >
                   <ArrowUpRightIcon />
@@ -1590,98 +1681,126 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
           </div>
 
           {/* ================= RIGHT COLUMN ================= */}
-          <div className="relative h-full flex items-start justify-end">
-            <div className="relative h-full w-[280px] xl:w-[300px] 2xl:w-[320px] flex flex-col pt-[40px]">
+          <div className="relative h-full flex items-center justify-end">
+            <div className="
+              relative h-full flex flex-col justify-center
+              /* LG width for better fit */
+              lg:w-[260px]
+              xl:w-[320px]
+              2xl:w-[360px]
+              [@media(min-width:1600px)]:w-[380px]
+              
+              /* Positioning */
+              lg:right-[-5px]
+              xl:right-[-10px]
+              2xl:right-[-20px]
+            ">
               {/* ===== DROPDOWN ===== */}
-           <div className="relative z-30">
-<div
-  className="
-    flex items-center justify-between
-    bg-[#F4F6F7]
-    border border-[#DDE6FF]
-    rounded-[10px]
-    shadow-[0_4px_11px_0_rgba(0,0,0,0.10)]
+              <div className="relative z-30">
+                <div
+                  className="
+                    flex items-center justify-between
+                    bg-[#F4F6F7]
+                    border border-[#DDE6FF]
+                    rounded-[10px]
+                    shadow-[0_4px_11px_0_rgba(0,0,0,0.10)]
+                    cursor-pointer
+                    
+                    /* LG dropdown */
+                    lg:px-3 lg:h-[38px] lg:mb-3
+                    /* XL dropdown */
+                    xl:px-4 xl:h-[46px] xl:mb-4
+                    
+                    w-full
+                  "
+                  onClick={() => setOpen(!open)}
+                >
+                  <span className="
+                    text-[#162766] font-bold truncate
+                    lg:text-[13px]
+                    xl:text-[14px]
+                  ">
+                    {selectedLawsuit.title}
+                  </span>
 
-    px-3 sm:px-4
-    w-full h-[42px] sm:h-[46px]
-    cursor-pointer
-  "
-  onClick={() => setOpen(!open)}
->
-  <span className="text-[#162766] font-bold text-[13px] sm:text-[14px] truncate">
-    {selectedLawsuit.title}
-  </span>
+                  <div
+                    className="
+                      flex items-center justify-center
+                      rounded
+                      bg-[#F2C438]
+                      lg:w-[20px] lg:h-[20px]
+                      xl:w-[22px] xl:h-[22px]
+                    "
+                  >
+                    {open ? (
+                      <ChevronUp
+                        className="
+                          text-[#162766] font-black
+                          lg:text-[9px]
+                          xl:text-[10px]
+                          2xl:text-[11px]
+                        "
+                        strokeWidth={3}
+                      />
+                    ) : (
+                      <ChevronDown
+                        className="
+                          text-[#162766] font-black
+                          lg:text-[9px]
+                          xl:text-[10px]
+                          2xl:text-[11px]
+                        "
+                        strokeWidth={3}
+                      />
+                    )}
+                  </div>
+                </div>
 
-  <div
-    className="
-      flex items-center justify-center
-      rounded
-
-      bg-[#F2C438]
-
-      w-[20px] h-[20px]
-      sm:w-[22px] sm:h-[22px]
-    "
-  >
-    {open ? (
-      <ChevronUp
-        className="
-          text-[#162766]
-          font-black
-          text-[9px]
-          sm:text-[10px]
-          xl:text-[11px]
-          2xl:text-[12px]
-        "
-        size={10}
-        strokeWidth={3}
-      />
-    ) : (
-      <ChevronDown
-        className="
-          text-[#162766]
-          font-black
-          text-[9px]
-          sm:text-[10px]
-          xl:text-[11px]
-          2xl:text-[12px]
-        "
-        size={10}
-        strokeWidth={3}
-      />
-    )}
-  </div>
-</div>
-
-
-  {open && (
-    <div className="absolute top-[52px] left-0 bg-white rounded-xl shadow-lg border border-gray-200 w-full overflow-hidden">
-      {lawsuits.map((lawsuit, idx) => (
-        <div
-          key={idx}
-          className={`px-4 py-2 cursor-pointer text-[12px] sm:text-[13px] text-[#162766] ${
-            selectedIndex === idx ? "font-bold" : ""
-          }`}
-          onClick={() => {
-            setSelectedIndex(idx);
-            setOpen(false);
-          }}
-        >
-          {lawsuit.title}
-        </div>
-      ))}
-    </div>
-  )}
-</div>
-
+                {open && (
+                  <div className="
+                    absolute
+                    lg:top-[42px]
+                    xl:top-[52px]
+                    
+                    left-0 bg-white rounded-xl shadow-lg border border-gray-200
+                    w-full overflow-hidden z-40
+                  ">
+                    {lawsuits.map((lawsuit, idx) => (
+                      <div
+                        key={idx}
+                        className={`
+                          px-3 xl:px-4 py-2 cursor-pointer
+                          text-[#162766]
+                          lg:text-[12px]
+                          xl:text-[13px]
+                          ${selectedIndex === idx ? "font-bold" : ""}
+                        `}
+                        onClick={() => {
+                          setSelectedIndex(idx);
+                          setOpen(false);
+                        }}
+                      >
+                        {lawsuit.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {/* ===== CONTENT ===== */}
-              <div className="mt-4 flex-1 flex flex-col gap-4">
+              <div className="
+                flex-1 flex flex-col
+                lg:gap-3
+                xl:gap-4
+                /* Ensure content fills available space */
+                lg:h-[calc(100%-50px)]
+                xl:h-[calc(100%-60px)]
+              ">
                 <StatisticsCard
                   stats={selectedLawsuit.stats}
                   chartConfig={selectedChartConfig}
                 />
-                <DataGridCompact grid={selectedLawsuit.dataGrid} />
+                <DataGridCompactExtend grid={selectedLawsuit.dataGrid} />
               </div>
             </div>
           </div>
@@ -1690,40 +1809,70 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
         {/* ================= FLOATING CARDS ================= */}
         <div
           className="
-            absolute flex gap-3 z-20
-            bottom-[32px]
-
-            /* 🔒 LOCKED POSITION */
-            right-[300px]
-
-            /* 🔓 XL */
-            xl:right-[380px]
-
-            /* 🔓 2XL */
-            2xl:right-[440px]
+            absolute flex z-20
+            
+            /* Vertical positioning */
+            lg:bottom-7
+            xl:bottom-8
+            2xl:bottom-10
+            
+            /* Horizontal positioning */
+            lg:right-[calc(260px+1rem)]  /* Right column width + gap */
+            xl:right-[calc(320px+2rem)]
+            2xl:right-[calc(360px+2.5rem)]
+            
+            /* Gap */
+            lg:gap-2
+            xl:gap-3
+            2xl:gap-4
           "
         >
-          <GlassCard
-            icon={<Image src="/handshakeicon.svg" alt="" width={44} height={44} />}
+          <GlassCardExtend
+            icon={<Image src="/handshakeicon.svg" alt="" width={40} height={40} 
+              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
             title={<>Free case<br />Review</>}
           />
-          <GlassCard
-            icon={<Image src="/scaleicon.svg" alt="" width={44} height={44} />}
+          <GlassCardExtend
+            icon={<Image src="/scaleicon.svg" alt="" width={40} height={40} 
+              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
             title={<>Serving<br />Nationwide</>}
           />
-          <GlassCard
-            icon={<Image src="/gavelicon.svg" alt="" width={44} height={44} />}
+          <GlassCardExtend
+            icon={<Image src="/gavelicon.svg" alt="" width={40} height={40} 
+              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
             title={<>No Win,<br />No Fee</>}
           />
         </div>
 
         {/* ================= SCROLL BUTTON ================= */}
-        <div className="absolute bottom-[24px] right-[24px] z-30">
+        <div className="
+          absolute bottom-6 right-6 z-30
+          
+          /* Scale adjustments */
+          lg:scale-[0.75]
+          xl:scale-90
+          2xl:scale-100
+          
+          origin-bottom-right
+          transition-all duration-300
+        ">
           <button
-            className="w-[180px] h-[80px] hover:scale-[1.05] transition-transform"
+            className="
+              lg:w-[130px] lg:h-[58px]
+              xl:w-[160px] xl:h-[71px]
+              2xl:w-[180px] 2xl:h-20
+              
+              hover:scale-[1.05] transition-transform
+            "
             onClick={scrollToNextSection}
           >
-            <Image src="/scrolldown.png" alt="scroll" width={180} height={80} />
+            <Image 
+              src="/scrolldown.png" 
+              alt="scroll" 
+              width={180} 
+              height={80}
+              className="w-full h-full"
+            />
           </button>
         </div>
       </div>
@@ -1731,20 +1880,27 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
   );
 };
 
-// --- Landing Page ---
+
+
+/* ================= LANDING PAGE  ================= */
 const LandingPage = () => {
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
-  const [isTallScreen, setIsTallScreen] = useState<boolean | null>(null);
+  const [isTallScreen, setIsTallScreen] = useState<boolean>(false);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const selectedLawsuit = lawsuits[selectedIndex];
-  const selectedChartConfig = CHART_CONFIG_MAP[selectedIndex];
-  const [open, setOpen] = useState(false);
+  const selectedChartConfig = CHART_CONFIGS[selectedIndex];  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const updateDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+      const desktop = window.innerWidth >= 1024;
+      setIsDesktop(desktop);
+      
+      // Update height logic immediately when checking desktop
+      if (desktop) {
+        setIsTallScreen(window.innerHeight >= 850);
+      }
     };
 
     updateDesktop();
@@ -1753,10 +1909,11 @@ const LandingPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isDesktop !== true) return;
+    // Only track height for desktop screens
+    if (!isDesktop) return;
 
     const updateHeight = () => {
-      setIsTallScreen(window.innerHeight >= 850);
+      setIsTallScreen(window.innerHeight >= 845);
     };
 
     updateHeight();
@@ -1765,7 +1922,7 @@ const LandingPage = () => {
   }, [isDesktop]);
 
   /* PREVENT HYDRATION / FLASH */
-  if (isDesktop === null || (isDesktop && isTallScreen === null)) {
+  if (isDesktop === null) {
     return null;
   }
 
@@ -1806,3 +1963,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

@@ -8,11 +8,6 @@ import Footer from "../../components/Footer";
 import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPage";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import { LawsuitContent } from "../_content/types";
-import { sexualabuselawsuitContent } from "../_content/sexualabuselawsuit";
-import { mvaContent } from "../_content/mva";
-import { slipnfallContent } from "../_content/slipnfall";
-import { trucklawsuitContent } from "../_content/18wheeler";
 import SexualAbuseLegalPage from "../../components/SubserviceLawsuitsLegalPages/SexualAbuseLawsuitsLegalPage";
 import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/DepoLawsuitsLegalPage";
@@ -162,7 +157,7 @@ export default function MassTortPage() {
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
       {LEGAL_PAGE_BY_SLUG[slug]}
-      <TimeLineCard />
+      {/* <TimeLineCard /> */}
       <OzempicInfo />
       <FaqSection faqData={faqData} />
       <ContactCard />

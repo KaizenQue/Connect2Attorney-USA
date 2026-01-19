@@ -19,7 +19,7 @@ import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages
 import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/DepoLawsuitsLegalPage";
 import RoundupLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RoundupLawsuitsLegalPage";
 import TalcumLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TalcumLawsuitsLegalPage";
-
+import { ozempicTimelineData } from "../../components/timelines/ozempicTimelineData";
 // const faqData = [
 //   {
 //     question: "How much does it cost to start a case?",
@@ -111,21 +111,80 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
       answer:
         "You need medical records, a confirmed diagnosis, and evidence of asbestos exposure linked to a job, product, or location.",
     },
-  ],
-
-  "roundup-lawsuit": [
     {
-      question: "Is Roundup linked to cancer?",
+      question: "How should I file a mesothelioma claim?",
       answer:
-        "Several studies and jury verdicts have linked Roundup exposure to non-Hodgkin’s lymphoma.",
+        "Start by contacting an experienced attorney. They will guide you through eligibility, paperwork, and the legal process.",
     },
     {
-      question: "Can I still file a Roundup claim?",
+      question: "Who can be held responsible for asbestos exposure?",
       answer:
-        "Yes, even if exposure happened years ago, you may still qualify.",
+        "Companies that made or used asbestos products, employers, or property owners may be legally responsible.",
+    },
+    {
+      question: "Can you still file a claim if exposure happened decades ago?",
+      answer:
+        "Yes. Mesothelioma often appears years later, and most states allow claims if they are filed within the legal time limit after diagnosis.",
+    },
+  ],
+
+  "depo-provera-lawsuit": [
+    {
+      question: "Who is eligible to file a Depo Provera lawsuit?",
+      answer:
+        "You may be eligible if you used Depo-Provera (the depo shot) and were later diagnosed with a brain tumor such as meningioma, especially if you were not warned about this risk before using the drug.",
+    },
+    {
+      question: "What health conditions are linked to Depo-Provera lawsuits?",
+      answer:
+        "Most Depo Provera lawsuits focus on meningioma, a type of brain tumor. Claims may involve symptoms such as severe headaches, vision problems, seizures, or the need for surgery or long-term medical care.",
+    },
+    {
+      question: "What legal claims are being filed in Depo Provera cases?",
+      answer:
+        "Claims generally allege failure to warn, inadequate safety disclosures, and negligent marketing. Plaintiffs argue that manufacturers did not properly inform patients about known or potential brain tumor risks.",
+    },
+    {
+      question: "What compensation may be available in a Depo Provera lawsuit?",
+      answer:
+        "Compensation may include medical expenses, lost income, pain and suffering, future treatment costs, and other damages related to the injury. The amount depends on the severity of the condition and individual case details.",
+    },
+    {
+      question: "How do I start a Depo Provera lawsuit claim?",
+      answer:
+        "The first step is to speak with a qualified attorney who can review your medical history and Depo-Provera use. A lawyer can help determine eligibility, file the claim, and guide you through the legal process.",
+    },
+  ],
+
+  "talcum-lawsuit": [
+    {
+      question: "Which companies are named in talcum powder lawsuits?",
+      answer:
+        "Johnson & Johnson is the primary company named, along with some of its subsidiaries and suppliers.",
+    },
+    {
+      question: "Which cancers are linked to talcum powder?",
+      answer:
+        "Ovarian cancer and mesothelioma are the main cancers linked to talcum powder exposure.",
+    },
+    {
+      question: "What is the current status of talcum powder lawsuits?",
+      answer:
+        "Thousands of cases are ongoing, with many settlements reached, but no official admission of guilt by the company.",
+    },
+    {
+      question: "What evidence is needed to file a talcum powder lawsuit?",
+      answer:
+        "You need proof of product use, a cancer diagnosis linked to talcum exposure, and medical records supporting the connection.",
+    },
+    {
+      question: "Can family members file a wrongful death talcum powder lawsuit?",
+      answer:
+        "Yes, surviving family members can file wrongful death claims if their loved one died from talcum-related cancer.",
     },
   ],
 };
+
 
 export const CONTENT_BY_SLUG: Record<string, LawsuitContent> = {
   "ozempic-lawsuit": ozempicContent,
@@ -167,7 +226,10 @@ export default function MassTortPage() {
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
 {LEGAL_PAGE_BY_SLUG[slug]}
-      <TimeLineCard />
+      <TimeLineCard title="Ozempic Lawsuit Timeline"
+  timelineData={ozempicTimelineData}
+  defaultYear="2025"
+/>
       <OzempicInfo />
       <FaqSection faqData={faqData} />
       <ContactCard />

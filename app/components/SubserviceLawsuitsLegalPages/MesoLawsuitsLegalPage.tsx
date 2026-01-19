@@ -338,7 +338,7 @@ const LawsuitsLegalPage = () => {
                             <p>{content.pageContent.mainParagraphs[4]}</p>
                             <br/>
                                           <p className="font-bold">{content.pageContent.mainParagraphs[5]}</p>
-                                          <ul className="font-bold">
+<ul className="font-bold list-disc pl-6 space-y-1">
                                             <li>{content.pageContent.mainParagraphs[6]}</li>
                                             <li>{content.pageContent.mainParagraphs[7]}</li>
                                             <li>{content.pageContent.mainParagraphs[8]}</li>
@@ -347,7 +347,57 @@ const LawsuitsLegalPage = () => {
                                           </ul>
 
             </div>
+      <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
+                <h2
+                  id={content.sectionIds.whoQualifiesTitle}
+                  className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+                >
+                  <span className="">
+                    {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
+                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
+                  </span>{" "}
+                  {content.pageContent.whoQualifiesTitle
+                    .split(" ")
+                    .slice(2)
+                    .join(" ")}
+                </h2>
 
+         
+
+                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                  {content.pageContent.whoQualifiesSubtitle}
+                </p>
+
+                <ul className="space-y-3 mb-8">
+                  {content.whoQualifies.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Yellow Bullet */}
+                      <span className="mt-[6px] flex-shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <ellipse
+                            cx="6.83621"
+                            cy="6.9697"
+                            rx="6.83621"
+                            ry="6.9697"
+                            fill="#F2C438"
+                          />
+                        </svg>
+                      </span>
+
+                      {/* Text */}
+                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                        {item.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             {/* <Ozempicfreecasecard /> */}
             <h2
               id={content.sectionIds.allegationsTitle}
@@ -465,57 +515,7 @@ const LawsuitsLegalPage = () => {
 
 
 
-              <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-                <h2
-                  id={content.sectionIds.whoQualifiesTitle}
-                  className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-                >
-                  <span className="">
-                    {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
-                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
-                  </span>{" "}
-                  {content.pageContent.whoQualifiesTitle
-                    .split(" ")
-                    .slice(2)
-                    .join(" ")}
-                </h2>
-
-         
-
-                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
-                  {content.pageContent.whoQualifiesSubtitle}
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {content.whoQualifies.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Yellow Bullet */}
-                      <span className="mt-[6px] flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                        >
-                          <ellipse
-                            cx="6.83621"
-                            cy="6.9697"
-                            rx="6.83621"
-                            ry="6.9697"
-                            fill="#F2C438"
-                          />
-                        </svg>
-                      </span>
-
-                      {/* Text */}
-                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                        {item.description}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        
 
               <h2
                 id={content.sectionIds.compensationTitle}

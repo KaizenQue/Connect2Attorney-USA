@@ -9,7 +9,6 @@ import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPa
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
 import { LawsuitContent } from "../_content/types";
-import { ozempicContent } from "../_content/ozempic";
 import { mesotheliomaContent } from "../_content/mesothelioma";
 import { depoproveraContent } from "../_content/depoprovera";
 import { roundupContent } from "../_content/roundup";
@@ -192,17 +191,10 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
   ],
 };
 
-export const CONTENT_BY_SLUG: Record<string, LawsuitContent> = {
-  "ozempic-lawsuit": ozempicContent,
-  "mesothelioma-lawsuit": mesotheliomaContent,
-  "depo-provera-lawsuit": depoproveraContent,
-  "roundup-lawsuit": roundupContent,
-  "talcum-lawsuit": talcumContent,
-};
 
 export default function MassTortPage() {
   const { slug } = useParams<{ slug: string }>();
-  const content: LawsuitContent | undefined = CONTENT_BY_SLUG[slug];
+  // const content: LawsuitContent | undefined = CONTENT_BY_SLUG[slug];
   const heroTitle: ReactNode = HERO_TITLES[slug] ?? (
     <>
       Mass Tort
@@ -247,9 +239,9 @@ export default function MassTortPage() {
     },
   ];
 
-  if (!slug || !content) {
-    return null; // or a loader, or notFound()
-  }
+  // if (!slug || !content) {
+  //   return null; // or a loader, or notFound()
+  // }
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
     "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,

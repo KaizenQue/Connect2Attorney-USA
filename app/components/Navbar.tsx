@@ -55,6 +55,10 @@ interface MobileNavbarProps {
 const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  // Close dropdown when route changes
+  useEffect(() => {
+    setOpenDropdown(null);
+  }, [pathname]);
 
   // Close dropdown when clicking outside
   useEffect(() => {

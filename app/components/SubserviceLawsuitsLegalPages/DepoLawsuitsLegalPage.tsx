@@ -5,196 +5,244 @@ import TableOfContents from "../subservice_pages/TableOfContents";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { LawsuitContent } from "../../mass-tort/_content/types";
 
-// Centralized text content object for reusability
-// export const content = {
-//   realStories: [
-//     {
-//       name: "Todd Engel",
-//       story:
-//         "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
-//     },
-//     {
-//       name: "Paulsen Bronston",
-//       story:
-//         "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
-//     },
-//     {
-//       name: "Monica Church",
-//       story:
-//         "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
-//     },
-//   ],
 
-//   eligibilityPoints: [
-//     {
-//       title: "Failure to Warn of Gastroparesis:",
-//       description:
-//         "Patients were not adequately warned about the risk of gastroparesis — a severe form of stomach paralysis that can cause persistent nausea, vomiting, abdominal pain, and long-term digestive complications.",
-//     },
-//     {
-//       title: "Misleading Marketing and Safety Claims:",
-//       description:
-//         "Marketing materials allegedly minimized or downplayed serious side effects, creating the impression that the drug was safer than evidence suggested.",
-//     },
-//     {
-//       title: "Omission of Vision Loss Warnings:",
-//       description:
-//         "Despite emerging reports and studies linking the drug to potential vision problems, these risks were not clearly disclosed on warning labels or patient information.",
-//     },
-//     {
-//       title: "Ignoring Critical Safety Signals:",
-//       description:
-//         "Internal data, adverse event reports, and patient complaints describing gastrointestinal harm were allegedly dismissed, delayed, or overlooked instead of being promptly addressed.",
-//     },
-//   ],
+export const content = {
+  sectionIds: {
+    mainTitle: "main-title",
+    allegationsTitle: "allegations-title",
+    healthRisksTitle: "health-risks-title",
+    whoQualifiesTitle: "who-qualifies-title",
+    compensationTitle: "compensation-title",
+    mdllitigationTitle: "mdl-litigation-title",
+    realStoriesTitle: "real-stories-title",
+    stepsTitle: "steps-title",
+  },
 
-//   healthRisks: [
-//     {
-//       number: "01",
-//       title: "Severe Gastrointestinal Issues",
-//       description:
-//         "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
-//     },
-//     {
-//       number: "02",
-//       title: "Uncontrollable Vomiting",
-//       description:
-//         "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
-//     },
-//     {
-//       number: "03",
-//       title: "Gallbladder Diseases",
-//       description:
-//         "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
-//     },
-//     {
-//       number: "04",
-//       title: "Pancreatitis",
-//       description:
-//         "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
-//     },
-//     {
-//       number: "05",
-//       title: "Intestinal Blockage",
-//       description:
-//         "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
-//     },
-//   ],
+  realStories: [
+    {
+      name: "Todd Engel",
+      story:
+        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
+    },
+    {
+      name: "Paulsen Bronston",
+      story:
+        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
+    },
+    {
+      name: "Monica Church",
+      story:
+        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
+    },
+  ],
 
-//   whoQualifies: [
-//     {
-//       description:
-//         "You took Ozempic, Wegovy, Mounjaro, Rybelsus, Saxenda, Trulicity, or Zepbound as prescribed for weight loss or diabetes management.",
-//     },
-//     {
-//       description:
-//         "You were diagnosed with gastroparesis, intestinal blockage, or experienced chronic and uncontrollable vomiting that required medical treatment.",
-//     },
-//     {
-//       description:
-//         "Your symptoms began during treatment or shortly after taking the medication, without a prior history of the condition or with a significant worsening of existing symptoms.",
-//     },
-//     {
-//       description:
-//         "You are within your state's statute of limitations, meaning you may still be eligible to file a lawsuit and pursue compensation.",
-//     },
-//   ],
+  eligibilityPoints: [
+    {
+      title: "Failure to Warn of Gastroparesis:",
+      description:
+        "You were prescribed Ozempic for diabetes or off-label weight loss",
+    },
+    {
+      title: "Misleading Marketing and Safety Claims:",
+      description:
+        "You experienced severe or persistent gastrointestinal side effects ",
+    },
+    {
+      title: "Omission of Vision Loss Warnings:",
+      description:
+        "You were diagnosed with conditions such as gastroparesis, intestinal blockage, or severe vomiting ",
+    },
+    {
+      title: "Ignoring Critical Safety Signals:",
+      description:
+        "Your injuries required medical treatment, hospitalization, or surgery\nEligibility depends on medical records, duration of use, and severity of injuries.",
+    },
+  ],
 
-//   compensation: [
-//     {
-//       title: "Medical Expenses",
-//       description:
-//         "Compensation for hospital stays, doctor visits, medications, diagnostic testing, and surgeries required to treat Ozempic-related health complications.",
-//     },
-//     {
-//       title: "Lost Wages",
-//       description:
-//         "Reimbursement for income lost due to missed work, reduced earning capacity, or extended recovery caused by severe side effects and ongoing medical treatment.",
-//     },
-//     {
-//       title: "Pain and Suffering",
-//       description:
-//         "Financial compensation for physical pain, emotional distress, mental anguish, and the diminished quality of life caused by serious injuries.",
-//     },
-//     {
-//       title: "Punitive Damages",
-//       description:
-//         "In certain cases, additional damages may be awarded if the manufacturer is found to have knowingly withheld safety information or acted with reckless disregard for patient health.",
-//     },
-//   ],
+  healthRisks: [
+    {
+      number: "01",
+      title: "Severe Gastrointestinal Issues",
+      description:
+        "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
+    },
+    {
+      number: "02",
+      title: "Uncontrollable Vomiting",
+      description:
+        "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
+    },
+    {
+      number: "03",
+      title: "Gallbladder Diseases",
+      description:
+        "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
+    },
+    {
+      number: "04",
+      title: "Pancreatitis",
+      description:
+        "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
+    },
+    {
+      number: "05",
+      title: "Intestinal Blockage",
+      description:
+        "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
+    },
+  ],
 
-//   pageContent: {
-//     mainTitle: "What is an Ozempic Lawsuit?",
-//     mainParagraphs: [
-//       "<span class='font-bold'>Ozempic (semaglutide)</span> is an injectable drug approved for type 2 diabetes but increasingly used for weight loss. It belongs to a class of medications called GLP-1 receptor agonists, which affect insulin levels and appetite.",
-//       "Users have reported severe gastrointestinal issues and other side effects that were not properly disclosed. As of 2025, Novo Nordisk faces multiple lawsuits for failing to warn consumers about these risks If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We're ready to help you take action.",
-//       "More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. These lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects.",
-//     ],
+whoQualifies: [
+  {
+    description:
+      "Review your medical history to determine your eligibility to file an Ozempic lawsuit claim.",
+  },
+  {
+    description:
+      "Gather medical records, prescriptions, and supporting evidence to build your case.",
+  },
+  {
+    description:
+      "File your lawsuit within all applicable legal deadlines and statute of limitations requirements.",
+  },
+  {
+    description:
+      "Pursue compensation for medical bills, lost income, pain and suffering, and other damages.",
+  },
+  {
+    description:
+      "Navigate the MDL process and participate in potential settlement negotiations or trial proceedings.",
+  },
+],
 
-//     allegationsTitle: "What are the Allegations Against Ozempic?",
-//     allegationsParagraph:
-//       "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-//     allegationsSubtitle: "Allegations against the manufacturers include:",
+ compensation: [
+  {
+    title: "Medical Expenses",
+    description:
+      "Reimbursement for hospital visits, medications, and surgeries needed to treat Ozempic-related health complications.",
+  },
+  {
+    title: "Lost Wages",
+    description:
+      "Compensation for time missed from work due to severe side effects and ongoing medical treatments.",
+  },
+  {
+    title: "Pain and Suffering",
+    description:
+      "Financial awards for physical pain, emotional distress, and diminished quality of life.",
+  },
+  {
+    title: "Punitive Damages",
+    description:
+      "In cases where the manufacturer is found to have knowingly withheld information about the drug’s risks, additional punitive damages may be awarded.",
+  },
+],
 
-//     healthRisksTitle: "What are the Health Risks of Ozempic?",
-//     healthRisksParagraph:
-//       "Affected individuals argue that the manufacturer failed to disclose the potential risks associated with prolonged use of the drug.",
-//     healthRisksSubtitle: "These health issues include:",
+mdllitigationPoints: [
+  {
+    title:"Grouped Cases:",
+    description:
+      "The Ozempic lawsuits have been combined in a federal court case called MDL No. 3094 to handle similar claims in the Eastern District of Pennsylvania.",
+  },
+  {
+    title:"Current Status:",
+    description:
+      "As of December 2025, there are 2,947 lawsuits pending, overseen by Judge Karen Spencer Marston, with timelines for case management being set.",
+  },
+  {
+    title:"Ongoing Filings:",
+    description:
+      "People are continuing to file new Ozempic lawsuits every day, showing that more individuals are coming forward with claims.",
+  },
+],
 
-//     whoQualifiesTitle: "Who Qualifies for an Ozempic Lawsuit?",
-//     whoQualifiesParagraph:
-//       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
-//     whoQualifiesSubtitle: "You may be eligible to file a claim if:",
+  pageContent: {
+    mainTitle: "What is an Ozempic Lawsuit?",
+    mainParagraphs: [
+      "Ozempic has gained widespread attention as a treatment for type 2 diabetes and for its off-label use in weight loss. However, growing reports of severe gastrointestinal injuries have led many patients to file Ozempic lawsuits against drug manufacturers. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We’re ready to help you take action.",
+      "Ozempic lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects of the drug. More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. As of 2025, Novo Nordisk faces multiple lawsuits for allegedly failing to warn consumers about the risks associated with Ozempic",
+      "What Is Ozempic?",
+      "Ozempic (semaglutide) is an FDA-approved prescription medication used to manage type 2 diabetes. It belongs to a class of drugs called GLP-1 receptor agonists, which help regulate blood sugar by slowing digestion and increasing insulin production. While Ozempic is not FDA-approved for weight loss, it has been widely prescribed off-label for that purpose. ",
+    ],
 
-//     compensationTitle: "What Compensation Can You Seek?",
-//     compensationParagraph:
-//       "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
-//     compensationSubtitle:
-//       "If eligible, you may be able to recover damages such as:",
+    allegationsTitle: "Who is Eligible to File a Claim? ",
+    allegationsParagraph:
+      "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
+    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
 
-//     realStoriesTitle: "Real Stories Behind Lawsuit",
+    healthRisksTitle: "What are the Ozempic Side Effects? ",
+    healthRisksParagraph:
+      "While mild nausea and digestive discomfort were disclosed, many patients reported far more serious complications that were not clearly warned about. ",
+    healthRisksSubtitle: "Health Risks Linked to Ozempic Use ",
+    healthRisksSubtitle2:
+      "Reported health risks associated with Ozempic include: ",
+    whoQualifiesTitle: "How Can an Ozempic Lawyer Help You Recover Compensation? ",
+    whoQualifiesParagraph:
+      "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
+    whoQualifiesSubtitle: "An experienced Ozempic lawyer can help you: ",
+mdllitigationTitle:
+  "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
 
-//     stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
-//     stepsParagraph:
-//       "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
-//   },
+mdllitigationParagraph:
+  "Individuals are filing Ozempic lawsuits against Novo Nordisk due to gastroparesis and other serious gastrointestinal injuries. These cases have been consolidated into a federal multidistrict litigation (MDL) to streamline proceedings.",
 
-//   ctaContent: {
-//     title: "Ready to Get Started?",
-//     description:
-//       "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
-//     buttonText: "Get a Free Case Review",
-//   },
+    compensationTitle: "What Compensation Can You Seek?",
+    compensationParagraph:
+      "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
+    compensationSubtitle:
+      "If eligible, you may be able to recover damages such as:",
 
-//   steps: [
-//     {
-//       step: 1,
-//       title: "Submit a Free Case Review",
-//       description:
-//         "Share details about your situation so we can understand your claim.",
-//     },
-//     {
-//       step: 2,
-//       title: "Confirm Eligibility",
-//       description:
-//         "Our legal team will review your case and let you know if you qualify.",
-//     },
-//     {
-//       step: 3,
-//       title: "Sign Agreement",
-//       description:
-//         "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
-//     },
-//   ],
-// };
+    realStoriesTitle: "Real Stories Behind Lawsuit",
 
-type Props = {
-  content: LawsuitContent;
+    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    stepsParagraph:
+      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+  },
+
+  ctaContent: {
+    title: "Ready to Get Started?",
+    description:
+      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+    buttonText: "Get a Free Case Review",
+  },
+
+  steps: [
+    {
+      step: 1,
+      title: "Submit a Free Case Review",
+      description:
+        "Share details about your situation so we can understand your claim.",
+    },
+    {
+      step: 2,
+      title: "Confirm Eligibility",
+      description:
+        "Our legal team will review your case and let you know if you qualify.",
+    },
+    {
+      step: 3,
+      title: "Sign Agreement",
+      description:
+        "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
+    },
+  ],
+  
 };
-
-const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
+const OZEMPIC_TOC = [
+   { label: "What is an Ozempic Lawsuit?", id: "main-title" },
+    { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+    { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
+    { label: "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?", id: "mdl-litigation-title" },
+    { label: "How Can an Ozempic Lawyer Help You Recover Compensation?", id: "who-qualifies-title" },
+    { label: "What Compensation Can You Seek?", id: "compensation-title" },
+    { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
+    { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
+    { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
+    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
+    { label: "FAQs", id: "faq-section" },
+];
+const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
 
@@ -221,18 +269,21 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <div
       ref={wrapperRef}
-      className=" bg-white
-    relative
-    mx-auto
-    max-w-[1440px]
-    2xl:max-w-[1600px]
-    px-4
-    sm:px-6
-    lg:px-3
-    2xl:px-20"
+      className="
+        bg-white
+        relative
+        mx-auto
+        max-w-[1440px]
+        2xl:max-w-[1600px]
+        px-4
+        sm:px-6
+        lg:px-3
+        2xl:px-20
+      "
     >
       {" "}
       {/* Custom Bullet Styling */}
@@ -256,7 +307,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          <TableOfContents items={OZEMPIC_TOC} />
+
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -267,22 +319,18 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
             >
               {content.pageContent.mainTitle}
             </h1>
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+              <p>{content.pageContent.mainParagraphs[0]}</p>
 
-            <p className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px]">
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: content.pageContent.mainParagraphs[0],
-                }}
-              />
-              <br />
-              {content.pageContent.mainParagraphs[1]}
-              <br />
-              <br />
-              {content.pageContent.mainParagraphs[2]}
+              <p>{content.pageContent.mainParagraphs[1]}</p>
 
-              <br />
-              {content.pageContent.mainParagraphs[3]}
-            </p>
+              <h3 className=" font-bold">
+                {content.pageContent.mainParagraphs[2]}
+              </h3>
+
+              <p>{content.pageContent.mainParagraphs[3]}</p>
+            </div>
+
             {/* <Ozempicfreecasecard /> */}
             <h2
               id={content.sectionIds.allegationsTitle}
@@ -291,19 +339,28 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
               {content.pageContent.allegationsTitle}
             </h2>
 
-            <p className="mb-4 font-urbanist font-medium text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-              {content.pageContent.allegationsParagraph}
-            </p>
-
             <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
               {content.pageContent.allegationsSubtitle}
             </p>
 
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
+            <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
               {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="pl-2">
-                  <span className="text-[#425777] font-bold">{item.title}</span>{" "}
-                  {item.description}
+                <li key={index} className="flex items-start gap-3">
+                  {/* Custom bullet */}
+                  <span className="mt-[7px] shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <circle cx="7" cy="7" r="7" fill="#162766" />
+                    </svg>
+                  </span>
+
+                  {/* Text */}
+                  <span>{item.description}</span>
                 </li>
               ))}
             </ul>
@@ -324,7 +381,9 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                 {content.pageContent.healthRisksSubtitle}
               </p>
-
+              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                {content.pageContent.healthRisksSubtitle2}
+              </p>
               <div className="space-y-4 w-full mb-16">
                 {content.healthRisks.map((item, index) => (
                   <div
@@ -333,7 +392,7 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
-                      {item.number} – {item.title}
+                      {item.title}
                     </h4>
 
                     {/* Description */}
@@ -343,13 +402,58 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                   </div>
                 ))}
               </div>
+    
+    
+        <h2
+  id={content.sectionIds.mdllitigationTitle}
+  className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+>
+  {content.pageContent.mdllitigationTitle}
+</h2>
+
+<p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+  {content.pageContent.mdllitigationParagraph}
+</p>
+
+<ul className="space-y-3 mb-8 whitespace-pre-line">
+  {content.mdllitigationPoints.map((item, index) => (
+    <li key={index} className="flex items-start gap-3">
+      {/* Custom bullet */}
+      <span className="mt-[7px] shrink-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+        >
+          <circle cx="7" cy="7" r="7" fill="#162766" />
+        </svg>
+      </span>
+
+      {/* Text */}
+      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+        <span className="font-bold">
+          {item.title}
+        </span>{" "}
+        <span className="font-normal">
+          {item.description}
+        </span>
+      </span>
+    </li>
+  ))}
+</ul>
+
+
+
+
 
               <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
                 <h2
                   id={content.sectionIds.whoQualifiesTitle}
                   className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
                 >
-                  <span className="text-[#F2C438]">
+                  <span className="">
                     {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
                     {content.pageContent.whoQualifiesTitle.split(" ")[1]}
                   </span>{" "}
@@ -359,9 +463,7 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                     .join(" ")}
                 </h2>
 
-                <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
-                  {content.pageContent.whoQualifiesParagraph}
-                </p>
+         
 
                 <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
                   {content.pageContent.whoQualifiesSubtitle}
@@ -493,8 +595,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                 isAtBottom
                   ? "absolute bottom-12"
                   : isFixed
-                  ? "fixed top-23"
-                  : "relative"
+                    ? "fixed top-23"
+                    : "relative"
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
@@ -524,7 +626,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                <TableOfContents items={OZEMPIC_TOC} />
+
               </div>
             </div>
           </aside>

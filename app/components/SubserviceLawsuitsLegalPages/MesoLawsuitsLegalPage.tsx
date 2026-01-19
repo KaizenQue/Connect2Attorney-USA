@@ -5,196 +5,252 @@ import TableOfContents from "../subservice_pages/TableOfContents";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { LawsuitContent } from "../../mass-tort/_content/types";
 
-// Centralized text content object for reusability
-// export const content = {
-//   realStories: [
-//     {
-//       name: "Todd Engel",
-//       story:
-//         "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
-//     },
-//     {
-//       name: "Paulsen Bronston",
-//       story:
-//         "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
-//     },
-//     {
-//       name: "Monica Church",
-//       story:
-//         "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
-//     },
-//   ],
 
-//   eligibilityPoints: [
-//     {
-//       title: "Failure to Warn of Gastroparesis:",
-//       description:
-//         "Patients were not adequately warned about the risk of gastroparesis — a severe form of stomach paralysis that can cause persistent nausea, vomiting, abdominal pain, and long-term digestive complications.",
-//     },
-//     {
-//       title: "Misleading Marketing and Safety Claims:",
-//       description:
-//         "Marketing materials allegedly minimized or downplayed serious side effects, creating the impression that the drug was safer than evidence suggested.",
-//     },
-//     {
-//       title: "Omission of Vision Loss Warnings:",
-//       description:
-//         "Despite emerging reports and studies linking the drug to potential vision problems, these risks were not clearly disclosed on warning labels or patient information.",
-//     },
-//     {
-//       title: "Ignoring Critical Safety Signals:",
-//       description:
-//         "Internal data, adverse event reports, and patient complaints describing gastrointestinal harm were allegedly dismissed, delayed, or overlooked instead of being promptly addressed.",
-//     },
-//   ],
+export const content = {
+  sectionIds: {
+    mainTitle: "main-title",
+    allegationsTitle: "allegations-title",
+    healthRisksTitle: "health-risks-title",
+    whoQualifiesTitle: "who-qualifies-title",
+    compensationTitle: "compensation-title",
+    mdllitigationTitle: "mdl-litigation-title",
+    realStoriesTitle: "real-stories-title",
+    stepsTitle: "steps-title",
+  },
 
-//   healthRisks: [
-//     {
-//       number: "01",
-//       title: "Severe Gastrointestinal Issues",
-//       description:
-//         "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
-//     },
-//     {
-//       number: "02",
-//       title: "Uncontrollable Vomiting",
-//       description:
-//         "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
-//     },
-//     {
-//       number: "03",
-//       title: "Gallbladder Diseases",
-//       description:
-//         "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
-//     },
-//     {
-//       number: "04",
-//       title: "Pancreatitis",
-//       description:
-//         "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
-//     },
-//     {
-//       number: "05",
-//       title: "Intestinal Blockage",
-//       description:
-//         "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
-//     },
-//   ],
+  realStories: [
+    {
+      name: "Robert Miller",
+      story:
+        "Robert worked in shipyards for over 20 years and was exposed to asbestos daily. Decades later, he was diagnosed with pleural mesothelioma, requiring aggressive chemotherapy and surgery.",
+    },
+    {
+      name: "James Carter",
+      story:
+        "James worked as an auto mechanic and regularly handled asbestos brake pads. He was diagnosed with peritoneal mesothelioma after experiencing unexplained abdominal pain and swelling.",
+    },
+    {
+      name: "Linda Thompson",
+      story:
+        "Linda was exposed secondhand through her husband’s work clothes. She later developed mesothelioma and now faces lifelong treatment and medical expenses.",
+    },
+  ],
 
-//   whoQualifies: [
-//     {
-//       description:
-//         "You took Ozempic, Wegovy, Mounjaro, Rybelsus, Saxenda, Trulicity, or Zepbound as prescribed for weight loss or diabetes management.",
-//     },
-//     {
-//       description:
-//         "You were diagnosed with gastroparesis, intestinal blockage, or experienced chronic and uncontrollable vomiting that required medical treatment.",
-//     },
-//     {
-//       description:
-//         "Your symptoms began during treatment or shortly after taking the medication, without a prior history of the condition or with a significant worsening of existing symptoms.",
-//     },
-//     {
-//       description:
-//         "You are within your state's statute of limitations, meaning you may still be eligible to file a lawsuit and pursue compensation.",
-//     },
-//   ],
+  eligibilityPoints: [
+    {
+      title: "Failure to Warn:",
+      description:
+        "Companies did not warn workers or consumers about the dangers of asbestos exposure.",
+    },
+    {
+      title: "Negligent Exposure:",
+      description:
+        "You were exposed to asbestos at work, home, or through a product.",
+    },
+    {
+      title: "Confirmed Diagnosis:",
+      description:
+        "You have been diagnosed with mesothelioma or another asbestos-related disease.",
+    },
+    {
+      title: "Severe Damages:",
+      description:
+        "Your illness caused major medical costs, lost income, or death in the family.",
+    },
+  ],
 
-//   compensation: [
-//     {
-//       title: "Medical Expenses",
-//       description:
-//         "Compensation for hospital stays, doctor visits, medications, diagnostic testing, and surgeries required to treat Ozempic-related health complications.",
-//     },
-//     {
-//       title: "Lost Wages",
-//       description:
-//         "Reimbursement for income lost due to missed work, reduced earning capacity, or extended recovery caused by severe side effects and ongoing medical treatment.",
-//     },
-//     {
-//       title: "Pain and Suffering",
-//       description:
-//         "Financial compensation for physical pain, emotional distress, mental anguish, and the diminished quality of life caused by serious injuries.",
-//     },
-//     {
-//       title: "Punitive Damages",
-//       description:
-//         "In certain cases, additional damages may be awarded if the manufacturer is found to have knowingly withheld safety information or acted with reckless disregard for patient health.",
-//     },
-//   ],
+  healthRisks: [
+    {
+      number: "01",
+      title: "Mesothelioma",
+      description:
+        "A rare and aggressive cancer affecting the lining of the lungs, abdomen, heart, or testes.",
+    },
+    {
+      number: "02",
+      title: "Asbestosis",
+      description:
+        "A chronic lung disease that causes scarring of lung tissue and long-term breathing problems.",
+    },
+    {
+      number: "03",
+      title: "Lung Cancer",
+      description:
+        "Asbestos exposure significantly increases the risk of developing lung cancer.",
+    },
+    {
+      number: "04",
+      title: "Pleural Disease",
+      description:
+        "Thickening and fluid buildup around the lungs, causing chest pain and breathing difficulty.",
+    },
+    {
+      number: "05",
+      title: "Organ Damage",
+      description:
+        "Ingested or inhaled asbestos fibers can damage organs and weaken the immune system.",
+    },
+  ],
 
-//   pageContent: {
-//     mainTitle: "What is an Ozempic Lawsuit?",
-//     mainParagraphs: [
-//       "<span class='font-bold'>Ozempic (semaglutide)</span> is an injectable drug approved for type 2 diabetes but increasingly used for weight loss. It belongs to a class of medications called GLP-1 receptor agonists, which affect insulin levels and appetite.",
-//       "Users have reported severe gastrointestinal issues and other side effects that were not properly disclosed. As of 2025, Novo Nordisk faces multiple lawsuits for failing to warn consumers about these risks If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We're ready to help you take action.",
-//       "More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. These lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects.",
-//     ],
+  whoQualifies: [
+    {
+      description:
+        "Evaluate your medical diagnosis and asbestos exposure history.",
+    },
+    {
+      description:
+        "Identify responsible companies, employers, or product manufacturers.",
+    },
+    {
+      description:
+        "File your claim within your state’s statute of limitations.",
+    },
+    {
+      description:
+        "Pursue compensation for medical bills, lost income, and suffering.",
+    },
+    {
+      description:
+        "Handle negotiations, settlements, or trial proceedings on your behalf.",
+    },
+  ],
 
-//     allegationsTitle: "What are the Allegations Against Ozempic?",
-//     allegationsParagraph:
-//       "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-//     allegationsSubtitle: "Allegations against the manufacturers include:",
+  compensation: [
+    {
+      title: "Medical Expenses",
+      description:
+        "Coverage for surgeries, chemotherapy, hospital stays, medications, and long-term treatment.",
+    },
+    {
+      title: "Lost Wages",
+      description:
+        "Compensation for time missed from work or permanent inability to work.",
+    },
+    {
+      title: "Pain and Suffering",
+      description:
+        "Financial recovery for physical pain, emotional distress, and reduced quality of life.",
+    },
+    {
+      title: "Punitive Damages",
+      description:
+        "Additional damages in cases where companies knowingly exposed people to asbestos.",
+    },
+  ],
 
-//     healthRisksTitle: "What are the Health Risks of Ozempic?",
-//     healthRisksParagraph:
-//       "Affected individuals argue that the manufacturer failed to disclose the potential risks associated with prolonged use of the drug.",
-//     healthRisksSubtitle: "These health issues include:",
+  mdllitigationPoints: [
+    {
+      title: "Widespread Litigation:",
+      description:
+        "Hundreds of thousands of asbestos-related claims have been filed across the U.S. over several decades.",
+    },
+    {
+      title: "Massive Payouts:",
+      description:
+        "Asbestos lawsuits have resulted in over $70 billion in total compensation to victims.",
+    },
+    {
+      title: "Ongoing Filings:",
+      description:
+        "New mesothelioma lawsuits continue to be filed each year due to the long latency period of the disease.",
+    },
+  ],
 
-//     whoQualifiesTitle: "Who Qualifies for an Ozempic Lawsuit?",
-//     whoQualifiesParagraph:
-//       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
-//     whoQualifiesSubtitle: "You may be eligible to file a claim if:",
+  pageContent: {
+    mainTitle: "What is a Mesothelioma  Lawsuit?",
+    mainParagraphs: [
+      "A Mesothelioma lawsuit helps individuals diagnosed with mesothelioma cancer and families who lost loved ones, seek compensation for asbestos exposure. These legal claims focus on holding negligent companies accountable for exposing people to asbestos and failing to warn about its dangers. ",
+      "At Connect 2 Attorney, we help connect you with experienced mesothelioma attorneys who understand the medical, emotional, and financial challenges involved. ",
+      "A mesothelioma lawsuit is a legal claim filed by patients or families against asbestos manufacturers, employers, or distributors responsible for asbestos exposure. Over 3,700 asbestos claims are filed in the United States each year. Most cases are handled by a specialized mesothelioma law firm and resolved through settlements, asbestos trust fund claims, or jury verdicts.",
+      "What is Mesothelioma?",
+      "Mesothelioma is a rare and aggressive cancer caused exclusively by asbestos exposure. It affects the lining of the lungs (pleural mesothelioma), abdomen (peritoneal mesothelioma), heart (pericardial mesothelioma), or testes (testicular mesothelioma).",
+      "Common mesothelioma symptoms include: ",
+      "Shortness of breath ",
+      "Chest or abdominal pain ",
+      "Persistent cough ",
+      "Fatigue and unexplained weight loss",    
+    ],
 
-//     compensationTitle: "What Compensation Can You Seek?",
-//     compensationParagraph:
-//       "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
-//     compensationSubtitle:
-//       "If eligible, you may be able to recover damages such as:",
+    allegationsTitle: "What Are the Allegations in Mesothelioma Lawsuits?",
+    allegationsParagraph:
+      "Mesothelioma lawsuits allege that companies knowingly exposed workers and consumers to asbestos while hiding the dangers and failing to provide proper safety warnings or protections.",
+    allegationsSubtitle: "Common allegations include:",
 
-//     realStoriesTitle: "Real Stories Behind Lawsuit",
+    healthRisksTitle: "What Are the Health Risks of Asbestos Exposure?",
+    healthRisksParagraph:
+      "Asbestos fibers can remain in the body for decades and cause severe, life-threatening diseases. Many victims are diagnosed only after irreversible damage has occurred.",
+    healthRisksSubtitle: "Serious conditions linked to asbestos include:",
+    healthRisksSubtitle2:
+      "Long-term exposure can lead to:",
 
-//     stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
-//     stepsParagraph:
-//       "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
-//   },
+    whoQualifiesTitle: "Who Qualifies for a Mesothelioma Lawsuit?",
+    whoQualifiesParagraph:
+      "Many people develop mesothelioma years after workplace or secondary exposure. You may qualify even if the exposure happened decades ago.",
+    whoQualifiesSubtitle: "You may qualify if you:",
 
-//   ctaContent: {
-//     title: "Ready to Get Started?",
-//     description:
-//       "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
-//     buttonText: "Get a Free Case Review",
-//   },
+    mdllitigationTitle:
+      "What Is the Current Status of Mesothelioma and Asbestos Litigation?",
+    mdllitigationParagraph:
+      "Asbestos litigation is one of the longest-running mass torts in U.S. history. Claims continue to be filed due to the long latency period of mesothelioma.",
 
-//   steps: [
-//     {
-//       step: 1,
-//       title: "Submit a Free Case Review",
-//       description:
-//         "Share details about your situation so we can understand your claim.",
-//     },
-//     {
-//       step: 2,
-//       title: "Confirm Eligibility",
-//       description:
-//         "Our legal team will review your case and let you know if you qualify.",
-//     },
-//     {
-//       step: 3,
-//       title: "Sign Agreement",
-//       description:
-//         "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
-//     },
-//   ],
-// };
+    compensationTitle: "What Compensation Can You Seek?",
+    compensationParagraph:
+      "Average mesothelioma settlements typically range from $1 million to $2 million, depending on exposure history, severity of illness, and responsible parties.",
+    compensationSubtitle:
+      "You may be eligible to recover:",
 
-type Props = {
-  content: LawsuitContent;
+    realStoriesTitle: "Real Stories Behind Mesothelioma Lawsuits",
+
+    stepsTitle: "How to File a Mesothelioma Lawsuit with Connect2Attorney?",
+    stepsParagraph:
+      "Connect2Attorney makes the process simple and stress-free with just three steps:",
+  },
+
+  ctaContent: {
+    title: "Get Legal Help Today",
+    description:
+      "If you or a loved one has been diagnosed with mesothelioma, don’t wait. You may be entitled to substantial compensation.",
+    buttonText: "Get a Free Case Review",
+  },
+
+  steps: [
+    {
+      step: 1,
+      title: "Submit a Free Case Review",
+      description:
+        "Share your diagnosis and exposure history so we can evaluate your claim.",
+    },
+    {
+      step: 2,
+      title: "Confirm Eligibility",
+      description:
+        "Our legal team reviews your case and matches you with the right attorney.",
+    },
+    {
+      step: 3,
+      title: "Start Your Claim",
+      description:
+        "Your lawyer handles everything while you focus on your health.",
+    },
+  ],
 };
 
-const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
+const MESOTHELIOMA_TOC = [
+  { label: "What is a Mesothelioma / Asbestos Lawsuit?", id: "main-title" },
+  { label: "What Are the Allegations in Mesothelioma Lawsuits?", id: "allegations-title" },
+  { label: "What Are the Health Risks of Asbestos Exposure?", id: "health-risks-title" },
+  { label: "Who Qualifies for a Mesothelioma Lawsuit?", id: "who-qualifies-title" },
+  { label: "What Is the Current Status of Mesothelioma Litigation?", id: "mdl-litigation-title" },
+  { label: "What Compensation Can You Seek?", id: "compensation-title" },
+  { label: "Real Stories Behind Mesothelioma Lawsuits", id: "real-stories-title" },
+  { label: "How to File a Mesothelioma Lawsuit with Connect2Attorney?", id: "steps-title" },
+  { label: "Mesothelioma Lawsuit Timeline", id: "timeline-section" },
+  { label: "Get Legal Support from Connect2Attorney", id: "get-legal-support" },
+  { label: "FAQs", id: "faq-section" },
+];
+
+const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
 
@@ -221,18 +277,21 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <div
       ref={wrapperRef}
-      className=" bg-white
-    relative
-    mx-auto
-    max-w-[1440px]
-    2xl:max-w-[1600px]
-    px-4
-    sm:px-6
-    lg:px-3
-    2xl:px-20"
+      className="
+        bg-white
+        relative
+        mx-auto
+        max-w-[1440px]
+        2xl:max-w-[1600px]
+        px-4
+        sm:px-6
+        lg:px-3
+        2xl:px-20
+      "
     >
       {" "}
       {/* Custom Bullet Styling */}
@@ -256,7 +315,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          <TableOfContents items={MESOTHELIOMA_TOC } />
+
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -267,22 +327,27 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
             >
               {content.pageContent.mainTitle}
             </h1>
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+              <p>{content.pageContent.mainParagraphs[0]}</p>
 
-            <p className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px]">
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: content.pageContent.mainParagraphs[0],
-                }}
-              />
-              <br />
-              {content.pageContent.mainParagraphs[1]}
-              <br />
-              <br />
-              {content.pageContent.mainParagraphs[2]}
+              <p>{content.pageContent.mainParagraphs[1]}</p>
 
-              <br />
-              {content.pageContent.mainParagraphs[3]}
-            </p>
+              <p>{content.pageContent.mainParagraphs[2]}</p>
+              <br/>
+              <p className="font-bold">{content.pageContent.mainParagraphs[3]}</p>
+                            <p>{content.pageContent.mainParagraphs[4]}</p>
+                            <br/>
+                                          <p className="font-bold">{content.pageContent.mainParagraphs[5]}</p>
+                                          <ul className="font-bold">
+                                            <li>{content.pageContent.mainParagraphs[6]}</li>
+                                            <li>{content.pageContent.mainParagraphs[7]}</li>
+                                            <li>{content.pageContent.mainParagraphs[8]}</li>
+                                            <li>{content.pageContent.mainParagraphs[9]}</li>
+                                            
+                                          </ul>
+
+            </div>
+
             {/* <Ozempicfreecasecard /> */}
             <h2
               id={content.sectionIds.allegationsTitle}
@@ -291,19 +356,28 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
               {content.pageContent.allegationsTitle}
             </h2>
 
-            <p className="mb-4 font-urbanist font-medium text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-              {content.pageContent.allegationsParagraph}
-            </p>
-
             <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
               {content.pageContent.allegationsSubtitle}
             </p>
 
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
+            <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
               {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="pl-2">
-                  <span className="text-[#425777] font-bold">{item.title}</span>{" "}
-                  {item.description}
+                <li key={index} className="flex items-start gap-3">
+                  {/* Custom bullet */}
+                  <span className="mt-[7px] shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <circle cx="7" cy="7" r="7" fill="#162766" />
+                    </svg>
+                  </span>
+
+                  {/* Text */}
+                  <span>{item.description}</span>
                 </li>
               ))}
             </ul>
@@ -324,7 +398,9 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                 {content.pageContent.healthRisksSubtitle}
               </p>
-
+              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                {content.pageContent.healthRisksSubtitle2}
+              </p>
               <div className="space-y-4 w-full mb-16">
                 {content.healthRisks.map((item, index) => (
                   <div
@@ -333,7 +409,7 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
-                      {item.number} – {item.title}
+                      {item.title}
                     </h4>
 
                     {/* Description */}
@@ -343,13 +419,58 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                   </div>
                 ))}
               </div>
+    
+    
+        <h2
+  id={content.sectionIds.mdllitigationTitle}
+  className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+>
+  {content.pageContent.mdllitigationTitle}
+</h2>
+
+<p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+  {content.pageContent.mdllitigationParagraph}
+</p>
+
+<ul className="space-y-3 mb-8 whitespace-pre-line">
+  {content.mdllitigationPoints.map((item, index) => (
+    <li key={index} className="flex items-start gap-3">
+      {/* Custom bullet */}
+      <span className="mt-[7px] shrink-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+        >
+          <circle cx="7" cy="7" r="7" fill="#162766" />
+        </svg>
+      </span>
+
+      {/* Text */}
+      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+        <span className="font-bold">
+          {item.title}
+        </span>{" "}
+        <span className="font-normal">
+          {item.description}
+        </span>
+      </span>
+    </li>
+  ))}
+</ul>
+
+
+
+
 
               <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
                 <h2
                   id={content.sectionIds.whoQualifiesTitle}
                   className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
                 >
-                  <span className="text-[#F2C438]">
+                  <span className="">
                     {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
                     {content.pageContent.whoQualifiesTitle.split(" ")[1]}
                   </span>{" "}
@@ -359,9 +480,7 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                     .join(" ")}
                 </h2>
 
-                <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
-                  {content.pageContent.whoQualifiesParagraph}
-                </p>
+         
 
                 <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
                   {content.pageContent.whoQualifiesSubtitle}
@@ -493,8 +612,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                 isAtBottom
                   ? "absolute bottom-12"
                   : isFixed
-                  ? "fixed top-23"
-                  : "relative"
+                    ? "fixed top-23"
+                    : "relative"
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
@@ -524,7 +643,8 @@ const LawsuitsLegalPage: React.FC<Props> = ({ content }) => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                <TableOfContents items={MESOTHELIOMA_TOC } />
+
               </div>
             </div>
           </aside>

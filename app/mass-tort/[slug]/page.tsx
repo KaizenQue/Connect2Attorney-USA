@@ -184,20 +184,20 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "You need proof of product use, a cancer diagnosis linked to talcum exposure, and medical records supporting the connection.",
     },
     {
-      question: "Can family members file a wrongful death talcum powder lawsuit?",
+      question:
+        "Can family members file a wrongful death talcum powder lawsuit?",
       answer:
         "Yes, surviving family members can file wrongful death claims if their loved one died from talcum-related cancer.",
     },
   ],
 };
 
-
 export const CONTENT_BY_SLUG: Record<string, LawsuitContent> = {
   "ozempic-lawsuit": ozempicContent,
   "mesothelioma-lawsuit": mesotheliomaContent,
-  "depo-provera-lawsuit":depoproveraContent,
-  "roundup-lawsuit":roundupContent,
-  "talcum-lawsuit":talcumContent,
+  "depo-provera-lawsuit": depoproveraContent,
+  "roundup-lawsuit": roundupContent,
+  "talcum-lawsuit": talcumContent,
 };
 
 export default function MassTortPage() {
@@ -210,35 +210,35 @@ export default function MassTortPage() {
       Lawsuits
     </>
   );
-const TIMELINE_BY_SLUG: Record<
-  string,
-  { title: string; data: TimelineData }
-> = {
-  "ozempic-lawsuit": {
-    title: "Ozempic Lawsuit Timeline",
-    data: ozempicTimelineData,
-  },
+  const TIMELINE_BY_SLUG: Record<
+    string,
+    { title: string; data: TimelineData }
+  > = {
+    "ozempic-lawsuit": {
+      title: "Ozempic Lawsuit Timeline",
+      data: ozempicTimelineData,
+    },
 
-  "mesothelioma-lawsuit": {
-    title: "Mesothelioma Lawsuit Timeline",
-    data: mesotheliomaTimelineData,
-  },
+    "mesothelioma-lawsuit": {
+      title: "Mesothelioma Lawsuit Timeline",
+      data: mesotheliomaTimelineData,
+    },
 
-  "depo-provera-lawsuit": {
-    title: "Depo Provera Lawsuit Timeline",
-    data: depoTimelineData,
-  },
+    "depo-provera-lawsuit": {
+      title: "Depo Provera Lawsuit Timeline",
+      data: depoTimelineData,
+    },
 
-  "roundup-lawsuit": {
-    title: "Roundup Lawsuit Timeline",
-    data: roundupTimelineData,
-  },
+    "roundup-lawsuit": {
+      title: "Roundup Lawsuit Timeline",
+      data: roundupTimelineData,
+    },
 
-  "talcum-lawsuit": {
-    title: "Talcum Powder Lawsuit Timeline",
-    data: talcumTimelineData,
-  },
-};
+    "talcum-lawsuit": {
+      title: "Talcum Powder Lawsuit Timeline",
+      data: talcumTimelineData,
+    },
+  };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
     {
@@ -249,24 +249,32 @@ const TIMELINE_BY_SLUG: Record<
 
   if (!slug || !content) {
     return null; // or a loader, or notFound()
-  }const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
-  "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
-  "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,
-  "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
-  "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
-  "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
-};
+  }
+  const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
+    "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
+    "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,
+    "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
+    "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
+    "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
+  };
 
   return (
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
-{LEGAL_PAGE_BY_SLUG[slug]}
-      <TimeLineCard title="Ozempic Lawsuit Timeline"
-  timelineData={ozempicTimelineData}
-  defaultYear="2025"
-/>
+      {LEGAL_PAGE_BY_SLUG[slug]}
+      <div id="timeline-section">
+        <TimeLineCard
+          title={TIMELINE_BY_SLUG[slug].title}
+          timelineData={TIMELINE_BY_SLUG[slug].data}
+          defaultYear="2025"
+        />
+      </div>
+      <div id="get-legal-support" >
       <OzempicInfo />
-      <FaqSection faqData={faqData} />
+      </div>
+      <div id="faq-section">
+        <FaqSection faqData={faqData} />
+      </div>
       <ContactCard />
       <Footer />
     </main>

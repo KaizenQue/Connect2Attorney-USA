@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+
 export const content = {
   sectionIds: {
     mainTitle: "main-title",
@@ -228,7 +229,19 @@ mdllitigationParagraph:
   ],
   
 };
-
+const OZEMPIC_TOC = [
+   { label: "What is an Ozempic Lawsuit?", id: "main-title" },
+    { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+    { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
+    { label: "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?", id: "mdl-litigation-title" },
+    { label: "How Can an Ozempic Lawyer Help You Recover Compensation?", id: "who-qualifies-title" },
+    { label: "What Compensation Can You Seek?", id: "compensation-title" },
+    { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
+    { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
+    { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
+    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
+    { label: "FAQs", id: "faq-section" },
+];
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
@@ -294,7 +307,8 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          <TableOfContents items={OZEMPIC_TOC} />
+
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -612,7 +626,8 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                <TableOfContents items={OZEMPIC_TOC} />
+
               </div>
             </div>
           </aside>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+
 export const content = {
   sectionIds: {
     mainTitle: "main-title",
@@ -20,189 +21,196 @@ export const content = {
 
   realStories: [
     {
-      name: "Todd Engel",
+      name: "Robert Miller",
       story:
-        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
+        "Robert worked in shipyards for over 20 years and was exposed to asbestos daily. Decades later, he was diagnosed with pleural mesothelioma, requiring aggressive chemotherapy and surgery.",
     },
     {
-      name: "Paulsen Bronston",
+      name: "James Carter",
       story:
-        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
+        "James worked as an auto mechanic and regularly handled asbestos brake pads. He was diagnosed with peritoneal mesothelioma after experiencing unexplained abdominal pain and swelling.",
     },
     {
-      name: "Monica Church",
+      name: "Linda Thompson",
       story:
-        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
+        "Linda was exposed secondhand through her husband’s work clothes. She later developed mesothelioma and now faces lifelong treatment and medical expenses.",
     },
   ],
 
   eligibilityPoints: [
     {
-      title: "Failure to Warn of Gastroparesis:",
+      title: "Failure to Warn:",
       description:
-        "You were prescribed Ozempic for diabetes or off-label weight loss",
+        "Companies did not warn workers or consumers about the dangers of asbestos exposure.",
     },
     {
-      title: "Misleading Marketing and Safety Claims:",
+      title: "Negligent Exposure:",
       description:
-        "You experienced severe or persistent gastrointestinal side effects ",
+        "You were exposed to asbestos at work, home, or through a product.",
     },
     {
-      title: "Omission of Vision Loss Warnings:",
+      title: "Confirmed Diagnosis:",
       description:
-        "You were diagnosed with conditions such as gastroparesis, intestinal blockage, or severe vomiting ",
+        "You have been diagnosed with mesothelioma or another asbestos-related disease.",
     },
     {
-      title: "Ignoring Critical Safety Signals:",
+      title: "Severe Damages:",
       description:
-        "Your injuries required medical treatment, hospitalization, or surgery\nEligibility depends on medical records, duration of use, and severity of injuries.",
+        "Your illness caused major medical costs, lost income, or death in the family.",
     },
   ],
 
   healthRisks: [
     {
       number: "01",
-      title: "Severe Gastrointestinal Issues",
+      title: "Mesothelioma",
       description:
-        "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
+        "A rare and aggressive cancer affecting the lining of the lungs, abdomen, heart, or testes.",
     },
     {
       number: "02",
-      title: "Uncontrollable Vomiting",
+      title: "Asbestosis",
       description:
-        "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
+        "A chronic lung disease that causes scarring of lung tissue and long-term breathing problems.",
     },
     {
       number: "03",
-      title: "Gallbladder Diseases",
+      title: "Lung Cancer",
       description:
-        "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
+        "Asbestos exposure significantly increases the risk of developing lung cancer.",
     },
     {
       number: "04",
-      title: "Pancreatitis",
+      title: "Pleural Disease",
       description:
-        "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
+        "Thickening and fluid buildup around the lungs, causing chest pain and breathing difficulty.",
     },
     {
       number: "05",
-      title: "Intestinal Blockage",
+      title: "Organ Damage",
       description:
-        "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
+        "Ingested or inhaled asbestos fibers can damage organs and weaken the immune system.",
     },
   ],
 
-whoQualifies: [
-  {
-    description:
-      "Review your medical history to determine your eligibility to file an Ozempic lawsuit claim.",
-  },
-  {
-    description:
-      "Gather medical records, prescriptions, and supporting evidence to build your case.",
-  },
-  {
-    description:
-      "File your lawsuit within all applicable legal deadlines and statute of limitations requirements.",
-  },
-  {
-    description:
-      "Pursue compensation for medical bills, lost income, pain and suffering, and other damages.",
-  },
-  {
-    description:
-      "Navigate the MDL process and participate in potential settlement negotiations or trial proceedings.",
-  },
-],
+  whoQualifies: [
+    {
+      description:
+        "Evaluate your medical diagnosis and asbestos exposure history.",
+    },
+    {
+      description:
+        "Identify responsible companies, employers, or product manufacturers.",
+    },
+    {
+      description:
+        "File your claim within your state’s statute of limitations.",
+    },
+    {
+      description:
+        "Pursue compensation for medical bills, lost income, and suffering.",
+    },
+    {
+      description:
+        "Handle negotiations, settlements, or trial proceedings on your behalf.",
+    },
+  ],
 
- compensation: [
-  {
-    title: "Medical Expenses",
-    description:
-      "Reimbursement for hospital visits, medications, and surgeries needed to treat Ozempic-related health complications.",
-  },
-  {
-    title: "Lost Wages",
-    description:
-      "Compensation for time missed from work due to severe side effects and ongoing medical treatments.",
-  },
-  {
-    title: "Pain and Suffering",
-    description:
-      "Financial awards for physical pain, emotional distress, and diminished quality of life.",
-  },
-  {
-    title: "Punitive Damages",
-    description:
-      "In cases where the manufacturer is found to have knowingly withheld information about the drug’s risks, additional punitive damages may be awarded.",
-  },
-],
+  compensation: [
+    {
+      title: "Medical Expenses",
+      description:
+        "Coverage for surgeries, chemotherapy, hospital stays, medications, and long-term treatment.",
+    },
+    {
+      title: "Lost Wages",
+      description:
+        "Compensation for time missed from work or permanent inability to work.",
+    },
+    {
+      title: "Pain and Suffering",
+      description:
+        "Financial recovery for physical pain, emotional distress, and reduced quality of life.",
+    },
+    {
+      title: "Punitive Damages",
+      description:
+        "Additional damages in cases where companies knowingly exposed people to asbestos.",
+    },
+  ],
 
-mdllitigationPoints: [
-  {
-    title:"Grouped Cases:",
-    description:
-      "The Ozempic lawsuits have been combined in a federal court case called MDL No. 3094 to handle similar claims in the Eastern District of Pennsylvania.",
-  },
-  {
-    title:"Current Status:",
-    description:
-      "As of December 2025, there are 2,947 lawsuits pending, overseen by Judge Karen Spencer Marston, with timelines for case management being set.",
-  },
-  {
-    title:"Ongoing Filings:",
-    description:
-      "People are continuing to file new Ozempic lawsuits every day, showing that more individuals are coming forward with claims.",
-  },
-],
+  mdllitigationPoints: [
+    {
+      title: "Widespread Litigation:",
+      description:
+        "Hundreds of thousands of asbestos-related claims have been filed across the U.S. over several decades.",
+    },
+    {
+      title: "Massive Payouts:",
+      description:
+        "Asbestos lawsuits have resulted in over $70 billion in total compensation to victims.",
+    },
+    {
+      title: "Ongoing Filings:",
+      description:
+        "New mesothelioma lawsuits continue to be filed each year due to the long latency period of the disease.",
+    },
+  ],
 
   pageContent: {
-    mainTitle: "What is an Ozempic Lawsuit?",
+    mainTitle: "What is a Mesothelioma  Lawsuit?",
     mainParagraphs: [
-      "Ozempic has gained widespread attention as a treatment for type 2 diabetes and for its off-label use in weight loss. However, growing reports of severe gastrointestinal injuries have led many patients to file Ozempic lawsuits against drug manufacturers. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We’re ready to help you take action.",
-      "Ozempic lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects of the drug. More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. As of 2025, Novo Nordisk faces multiple lawsuits for allegedly failing to warn consumers about the risks associated with Ozempic",
-      "What Is Ozempic?",
-      "Ozempic (semaglutide) is an FDA-approved prescription medication used to manage type 2 diabetes. It belongs to a class of drugs called GLP-1 receptor agonists, which help regulate blood sugar by slowing digestion and increasing insulin production. While Ozempic is not FDA-approved for weight loss, it has been widely prescribed off-label for that purpose. ",
+      "A Mesothelioma lawsuit helps individuals diagnosed with mesothelioma cancer and families who lost loved ones, seek compensation for asbestos exposure. These legal claims focus on holding negligent companies accountable for exposing people to asbestos and failing to warn about its dangers. ",
+      "At Connect 2 Attorney, we help connect you with experienced mesothelioma attorneys who understand the medical, emotional, and financial challenges involved. ",
+      "A mesothelioma lawsuit is a legal claim filed by patients or families against asbestos manufacturers, employers, or distributors responsible for asbestos exposure. Over 3,700 asbestos claims are filed in the United States each year. Most cases are handled by a specialized mesothelioma law firm and resolved through settlements, asbestos trust fund claims, or jury verdicts.",
+      "What is Mesothelioma?",
+      "Mesothelioma is a rare and aggressive cancer caused exclusively by asbestos exposure. It affects the lining of the lungs (pleural mesothelioma), abdomen (peritoneal mesothelioma), heart (pericardial mesothelioma), or testes (testicular mesothelioma).",
+      "Common mesothelioma symptoms include: ",
+      "Shortness of breath ",
+      "Chest or abdominal pain ",
+      "Persistent cough ",
+      "Fatigue and unexplained weight loss",    
     ],
 
-    allegationsTitle: "Who is Eligible to File a Claim? ",
+    allegationsTitle: "What Are the Allegations in Mesothelioma Lawsuits?",
     allegationsParagraph:
-      "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
+      "Mesothelioma lawsuits allege that companies knowingly exposed workers and consumers to asbestos while hiding the dangers and failing to provide proper safety warnings or protections.",
+    allegationsSubtitle: "Common allegations include:",
 
-    healthRisksTitle: "What are the Ozempic Side Effects? ",
+    healthRisksTitle: "What Are the Health Risks of Asbestos Exposure?",
     healthRisksParagraph:
-      "While mild nausea and digestive discomfort were disclosed, many patients reported far more serious complications that were not clearly warned about. ",
-    healthRisksSubtitle: "Health Risks Linked to Ozempic Use ",
+      "Asbestos fibers can remain in the body for decades and cause severe, life-threatening diseases. Many victims are diagnosed only after irreversible damage has occurred.",
+    healthRisksSubtitle: "Serious conditions linked to asbestos include:",
     healthRisksSubtitle2:
-      "Reported health risks associated with Ozempic include: ",
-    whoQualifiesTitle: "How Can an Ozempic Lawyer Help You Recover Compensation? ",
-    whoQualifiesParagraph:
-      "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
-    whoQualifiesSubtitle: "An experienced Ozempic lawyer can help you: ",
-mdllitigationTitle:
-  "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
+      "Long-term exposure can lead to:",
 
-mdllitigationParagraph:
-  "Individuals are filing Ozempic lawsuits against Novo Nordisk due to gastroparesis and other serious gastrointestinal injuries. These cases have been consolidated into a federal multidistrict litigation (MDL) to streamline proceedings.",
+    whoQualifiesTitle: "Who Qualifies for a Mesothelioma Lawsuit?",
+    whoQualifiesParagraph:
+      "Many people develop mesothelioma years after workplace or secondary exposure. You may qualify even if the exposure happened decades ago.",
+    whoQualifiesSubtitle: "You may qualify if you:",
+
+    mdllitigationTitle:
+      "What Is the Current Status of Mesothelioma and Asbestos Litigation?",
+    mdllitigationParagraph:
+      "Asbestos litigation is one of the longest-running mass torts in U.S. history. Claims continue to be filed due to the long latency period of mesothelioma.",
 
     compensationTitle: "What Compensation Can You Seek?",
     compensationParagraph:
-      "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
+      "Average mesothelioma settlements typically range from $1 million to $2 million, depending on exposure history, severity of illness, and responsible parties.",
     compensationSubtitle:
-      "If eligible, you may be able to recover damages such as:",
+      "You may be eligible to recover:",
 
-    realStoriesTitle: "Real Stories Behind Lawsuit",
+    realStoriesTitle: "Real Stories Behind Mesothelioma Lawsuits",
 
-    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    stepsTitle: "How to File a Mesothelioma Lawsuit with Connect2Attorney?",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+      "Connect2Attorney makes the process simple and stress-free with just three steps:",
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "Get Legal Help Today",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+      "If you or a loved one has been diagnosed with mesothelioma, don’t wait. You may be entitled to substantial compensation.",
     buttonText: "Get a Free Case Review",
   },
 
@@ -211,23 +219,36 @@ mdllitigationParagraph:
       step: 1,
       title: "Submit a Free Case Review",
       description:
-        "Share details about your situation so we can understand your claim.",
+        "Share your diagnosis and exposure history so we can evaluate your claim.",
     },
     {
       step: 2,
       title: "Confirm Eligibility",
       description:
-        "Our legal team will review your case and let you know if you qualify.",
+        "Our legal team reviews your case and matches you with the right attorney.",
     },
     {
       step: 3,
-      title: "Sign Agreement",
+      title: "Start Your Claim",
       description:
-        "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
+        "Your lawyer handles everything while you focus on your health.",
     },
   ],
-  
 };
+
+const MESOTHELIOMA_TOC = [
+  { label: "What is a Mesothelioma / Asbestos Lawsuit?", id: "main-title" },
+  { label: "What Are the Allegations in Mesothelioma Lawsuits?", id: "allegations-title" },
+  { label: "What Are the Health Risks of Asbestos Exposure?", id: "health-risks-title" },
+  { label: "Who Qualifies for a Mesothelioma Lawsuit?", id: "who-qualifies-title" },
+  { label: "What Is the Current Status of Mesothelioma Litigation?", id: "mdl-litigation-title" },
+  { label: "What Compensation Can You Seek?", id: "compensation-title" },
+  { label: "Real Stories Behind Mesothelioma Lawsuits", id: "real-stories-title" },
+  { label: "How to File a Mesothelioma Lawsuit with Connect2Attorney?", id: "steps-title" },
+  { label: "Mesothelioma Lawsuit Timeline", id: "timeline-section" },
+  { label: "Get Legal Support from Connect2Attorney", id: "get-legal-support" },
+  { label: "FAQs", id: "faq-section" },
+];
 
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -294,7 +315,8 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          <TableOfContents items={MESOTHELIOMA_TOC } />
+
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -310,11 +332,20 @@ const LawsuitsLegalPage = () => {
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
 
-              <h3 className=" font-bold">
-                {content.pageContent.mainParagraphs[2]}
-              </h3>
+              <p>{content.pageContent.mainParagraphs[2]}</p>
+              <br/>
+              <p className="font-bold">{content.pageContent.mainParagraphs[3]}</p>
+                            <p>{content.pageContent.mainParagraphs[4]}</p>
+                            <br/>
+                                          <p className="font-bold">{content.pageContent.mainParagraphs[5]}</p>
+                                          <ul className="font-bold">
+                                            <li>{content.pageContent.mainParagraphs[6]}</li>
+                                            <li>{content.pageContent.mainParagraphs[7]}</li>
+                                            <li>{content.pageContent.mainParagraphs[8]}</li>
+                                            <li>{content.pageContent.mainParagraphs[9]}</li>
+                                            
+                                          </ul>
 
-              <p>{content.pageContent.mainParagraphs[3]}</p>
             </div>
 
             {/* <Ozempicfreecasecard /> */}
@@ -612,7 +643,8 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                <TableOfContents items={MESOTHELIOMA_TOC } />
+
               </div>
             </div>
           </aside>

@@ -20,6 +20,12 @@ import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages
 import RoundupLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RoundupLawsuitsLegalPage";
 import TalcumLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TalcumLawsuitsLegalPage";
 import { ozempicTimelineData } from "../../components/timelines/ozempicTimelineData";
+import { mesotheliomaTimelineData } from "../../components/timelines/mesotheliomaTimelineData";
+import { depoTimelineData } from "../../components/timelines/depoTimelineData";
+import { roundupTimelineData } from "../../components/timelines/roundupTimelineData";
+import { talcumTimelineData } from "../../components/timelines/talcumTimelineData";
+
+import { TimelineData } from "@/app/components/timelineTypes";
 // const faqData = [
 //   {
 //     question: "How much does it cost to start a case?",
@@ -204,6 +210,35 @@ export default function MassTortPage() {
       Lawsuits
     </>
   );
+const TIMELINE_BY_SLUG: Record<
+  string,
+  { title: string; data: TimelineData }
+> = {
+  "ozempic-lawsuit": {
+    title: "Ozempic Lawsuit Timeline",
+    data: ozempicTimelineData,
+  },
+
+  "mesothelioma-lawsuit": {
+    title: "Mesothelioma Lawsuit Timeline",
+    data: mesotheliomaTimelineData,
+  },
+
+  "depo-provera-lawsuit": {
+    title: "Depo Provera Lawsuit Timeline",
+    data: depoTimelineData,
+  },
+
+  "roundup-lawsuit": {
+    title: "Roundup Lawsuit Timeline",
+    data: roundupTimelineData,
+  },
+
+  "talcum-lawsuit": {
+    title: "Talcum Powder Lawsuit Timeline",
+    data: talcumTimelineData,
+  },
+};
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
     {

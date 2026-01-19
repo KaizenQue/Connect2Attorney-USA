@@ -14,6 +14,11 @@ import { mesotheliomaContent } from "../_content/mesothelioma";
 import { depoproveraContent } from "../_content/depoprovera";
 import { roundupContent } from "../_content/roundup";
 import { talcumContent } from "../_content/talcum";
+import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";
+import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
+import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/DepoLawsuitsLegalPage";
+import RoundupLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RoundupLawsuitsLegalPage";
+import TalcumLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TalcumLawsuitsLegalPage";
 
 // const faqData = [
 //   {
@@ -150,11 +155,18 @@ export default function MassTortPage() {
 
   if (!slug || !content) {
     return null; // or a loader, or notFound()
-  }
+  }const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
+  "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
+  "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,
+  "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
+  "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
+  "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
+};
+
   return (
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
-      <LawsuitsLegalPage content={content} />
+{LEGAL_PAGE_BY_SLUG[slug]}
       <TimeLineCard />
       <OzempicInfo />
       <FaqSection faqData={faqData} />

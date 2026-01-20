@@ -11,7 +11,7 @@ import type { ReactNode } from "react";
 import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";
 import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage"
-
+import MaclarenLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MaclarenLawsuitsLegalPage";
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -23,34 +23,63 @@ const HERO_TITLES: Record<string, string> = {
 };
 /* ================= FAQ DATA ================= */
 const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
-  "ozempic-lawsuit": [
+  "maclaren-hall-sex-abuse-lawsuit": [
     {
-      question: "What is the Ozempic lawsuit about?",
+      question: "What is the MacLaren Hall Sex Abuse Lawsuit about?",
       answer:
-        "The Ozempic lawsuit involves claims that the drug caused serious gastrointestinal injuries, such as gastroparesis, and that the manufacturer failed to provide adequate warnings.",
+        "It involves survivors who were abused or neglected at the facility, claiming Los Angeles County failed to protect them.",
     },
     {
-      question: "Who can file an Ozempic lawsuit?",
+      question: "What types of abuse occurred?",
       answer:
-        "Individuals who used Ozempic and experienced severe digestive issues, required medical treatment, or suffered long-term health problems may be eligible to file a claim.",
+        "Survivors have reported sexual assault, physical abuse, emotional abuse, neglect, and traumatic living conditions.",
     },
     {
-      question: "What are the problems caused by Ozempic?",
+      question: "Who qualifies for compensation?",
       answer:
-        "Reported problems include gastroparesis (stomach paralysis), nausea, vomiting, intestinal blockage, and other painful stomach conditions.",
+        "Anyone who lived at MacLaren Hall from 1961 to 2003 and suffered abuse or trauma may be eligible for compensation.",
     },
     {
-      question: "What kind of compensation can I recover?",
+      question: "How much can survivors receive?",
       answer:
-        "Eligible plaintiffs may recover compensation for medical bills, lost income, pain and suffering, and other damages caused by Ozempic-related injuries.",
+        "Compensation varies depending on the severity of the abuse, the lasting impact on the survivor, and legal factors involved in the claim.",
     },
     {
-      question: "How do I start an Ozempic claim?",
+      question: "Is this handled as a class action?",
       answer:
-        "You can start by contacting an experienced Ozempic lawyer for a free case review. They can evaluate your eligibility, gather medical records, and guide you through the lawsuit process.",
+        "Many MacLaren Hall cases fall under institutional abuse class actions or group settlements due to the number of victims involved.",
+    },
+  ],
+
+  "tesla-autopilot-recall-lawsuit": [
+    {
+      question: "What is the Tesla Autopilot recall lawsuit about?",
+      answer:
+        "It alleges Tesla misled consumers about Autopilot safety and failed to prevent crashes caused by defective driver-assistance systems.",
+    },
+    {
+      question: "What are the safety risks?",
+      answer:
+        "Reported risks include lane-keeping failures, sudden braking, crashes into stationary vehicles, and over-reliance on the system due to misleading marketing.",
+    },
+    {
+      question: "Is Tesla being forced to remove Autopilot?",
+      answer:
+        "No. Tesla has issued recalls and software updates, but Autopilot remains available in its vehicles.",
+    },
+    {
+      question: "How much compensation can I receive?",
+      answer:
+        "The amount depends on the severity of your injuries, property damage, and financial losses. Serious injury cases may result in significant settlements.",
+    },
+    {
+      question: "Do I need to pay an attorney upfront?",
+      answer:
+        "No. Most attorneys handle Tesla Autopilot cases on a contingency fee basis, meaning you only pay if your case is successful.",
     },
   ],
 };
+
 
 
 export default function MassTortPage() {
@@ -75,7 +104,7 @@ export default function MassTortPage() {
   }
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "tesla-autopilot-recall-lawsuit": <TeslaLawsuitsLegalPage />,
-    "maclaren-hall-sex-abuse-lawsuit": <MesoLawsuitsLegalPage />,
+    "maclaren-hall-sex-abuse-lawsuit": <MaclarenLawsuitsLegalPage />,
   };
 
   return (

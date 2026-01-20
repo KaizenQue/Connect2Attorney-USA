@@ -22,7 +22,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ faqData }) => {
   };
 
   return (
-    <div className="bg-white font-inter flex justify-end w-full px-0 sm:px-6 md:px-0 lg:px-0 lg:pl-14 py-8 md:py-10 lg:py-24 lg:pt-0 text-white lg:overflow-x-hidden  lg:bg-white">
+    <div id= "faqs" className="bg-white font-inter flex justify-end w-full px-0 sm:px-6 md:px-0 lg:px-0 lg:pl-14 py-8 md:py-10 lg:py-24 lg:pt-0 text-white lg:overflow-x-hidden  lg:bg-white">
       <main
         className="
     relative flex flex-col w-full max-w-none

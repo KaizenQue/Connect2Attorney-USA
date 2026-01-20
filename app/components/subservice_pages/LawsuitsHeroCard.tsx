@@ -75,7 +75,7 @@ const LawsuitsHeroCard = ({ heroTitle }:LawsuitsHeroCardProps) => {
               text-[#F2C438]
               text-[34px]
               sm:text-[42px]
-              md:text-[50px]
+              md:text-[30px]
               lg:text-[45px]
               xl:text-[55px]
               leading-tight

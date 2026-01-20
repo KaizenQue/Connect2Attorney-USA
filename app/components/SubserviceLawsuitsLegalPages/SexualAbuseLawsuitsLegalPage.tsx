@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-// import Ozempicfreecasecard from "./Ozempicfreecasecard";
-// import TableOfContents from "../subservice_pages/TableOfContents";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -11,13 +9,13 @@ export const content = {
   sectionIds: {
     mainTitle: "what-is-sexual-abuse-lawsuit",
     allegationsTitle: "allegations-against-sexual-abuse",
-    eligibleTitle:"eligible-claim",
+    eligibleTitle: "eligible-claim",
     typesTitle: "types-sexual-abuse",
     legalRightsTitle: "legal-rights-sexual-abuse",
-    limitationsTitle:"limitations-explained-sexual-abuse",
+    limitationsTitle: "limitations-explained-sexual-abuse",
     currentLegalTitle: "current-legal-dev",
     compensationTitle: "compensation-title",
-    helpsurvivorsTitle:  "help-survivors",
+    helpsurvivorsTitle: "help-survivors",
     stepsTitle: "steps-title",
   },
 
@@ -46,23 +44,6 @@ export const content = {
       title: "Harassment and Intimidation:",
       description:
         "Allegations that victims were threatened or coerced to remain silent.",
-    },
-  ],
-  realStories: [
-    {
-      name: "Todd Engel",
-      story:
-        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
-    },
-    {
-      name: "Paulsen Bronston",
-      story:
-        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
-    },
-    {
-      name: "Monica Church",
-      story:
-        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
     },
   ],
 
@@ -556,8 +537,10 @@ const LawsuitsLegalPage = () => {
             {/* ==================== Limitations SECTION ==================== */}
 
             <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5">
-              <h2 id={content.sectionIds.limitationsTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4">
+              <h2
+                id={content.sectionIds.limitationsTitle}
+                className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+              >
                 {content.pageContent.limitationsTitle}
               </h2>
 
@@ -835,7 +818,10 @@ const StepsComponent = () => {
 };
 
 const tocItems1 = [
-  { label: "What is a Sexual Abuse Lawsuit?", id: "what-is-sexual-abuse-lawsuit" },
+  {
+    label: "What is a Sexual Abuse Lawsuit?",
+    id: "what-is-sexual-abuse-lawsuit",
+  },
   {
     label: "What are the Allegations in Sexual Abuse Lawsuits?",
     id: "allegations-against-sexual-abuse",
@@ -854,7 +840,7 @@ const tocItems1 = [
     label: "Sexual Abuse Lawsuit Update: Current Legal Developments",
     id: "current-legal-dev",
   },
-   {
+  {
     label: "Settlements & Compensation in Sexual Abuse Lawsuits",
     id: "compensation-title",
   },
@@ -870,7 +856,7 @@ const tocItems1 = [
 
   {
     label: " Sexual Abuse Lawsuit Timeline",
-    id: "sexual-abuse-lawsuit-timeline",
+    id: "timeline-section",
   },
   { label: "Get Legal Support from Connect2Attorney", id: "support" },
   { label: "FAQs", id: "faqs" },
@@ -890,7 +876,7 @@ const TableOfContents = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mt-6 w-full">
+    <div className="w-full">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}
@@ -913,8 +899,10 @@ const TableOfContents = () => {
           className="
             w-8 h-8
             rounded-lg
-            bg-[#162766]
-            text-white
+            bg-[#F2C338]
+            text-[#162766]
+            border border-[#DDE6FF]
+            shadow-lg
             flex items-center justify-center
           "
         >

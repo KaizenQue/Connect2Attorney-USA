@@ -68,7 +68,7 @@ const OzempicInfo = () => {
   return (
     <>
       {/*================= MOBILE VERSION ===================== */}
-  <div className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
+  <div id="support" className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
   <div
     className="
       relative
@@ -140,7 +140,7 @@ const OzempicInfo = () => {
 
 
 
-   <div className="hidden md:flex w-full justify-center bg-white font-sans px-4 md:px-6 lg:px-8 xl:px-10 py-8">
+   <div id= "support"  className="hidden md:flex w-full justify-center bg-white font-sans px-4 md:px-6 lg:px-8 xl:px-10 py-8">
   <div
     className="
       relative w-full

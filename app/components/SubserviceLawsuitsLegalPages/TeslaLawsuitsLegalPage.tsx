@@ -37,57 +37,62 @@ export const content = {
 
   eligibilityPoints: [
     {
-      title: "Failure to Warn of Gastroparesis:",
       description:
-      "You were prescribed Ozempic for diabetes or off-label weight loss",
+        "You were driving a Tesla Model S, 3, X, or Y equipped with Autopilot or Full Self-Driving.",
     },
     {
-      title: "Misleading Marketing and Safety Claims:",
       description:
-      "You experienced severe or persistent gastrointestinal side effects "
+        "You were involved in a crash where Autopilot was engaged, partially engaged, or unexpectedly disengaged.  ",
     },
     {
-      title: "Omission of Vision Loss Warnings:",
-      description:
-      "You were diagnosed with conditions such as gastroparesis, intestinal blockage, or severe vomiting "
+      description: "The crash caused injury, death, or major property damage. ",
     },
     {
-      title: "Ignoring Critical Safety Signals:",
+      description: "You are within your state’s statute of limitations. ",
+    },
+    {
+      description: "Autopilot failed to detect another vehicle",
+    },
+    {
+      description: "Autopilot caused sudden braking or acceleration",
+    },
+    {
+      description: "Lane-keeping malfunction leading to crash",
+    },
+    {
+      description: "Misleading marketing caused over-trust in Autopilot",
+    },
+    {
       description:
-        "Internal data, adverse event reports, and patient complaints describing gastrointestinal harm were allegedly dismissed, delayed, or overlooked instead of being promptly addressed.",
+        "Vehicle struck a stationary object or emergency vehicle while Autopilot was active",
     },
   ],
 
   healthRisks: [
     {
-      number: "01",
-      title: "Severe Gastrointestinal Issues",
+      title: "Fatal Crashes",
       description:
-        "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
+        "Autopilot has reportedly failed to detect stopped vehicles, trucks, and emergency responders, leading to deadly collisions.  ",
     },
     {
-      number: "02",
-      title: "Uncontrollable Vomiting",
+      title: "Unexpected Braking",
       description:
-        "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
+        "“Phantom braking” causes the vehicle to brake suddenly without warning, risking rear-end crashes.  ",
     },
     {
-      number: "03",
-      title: "Gallbladder Diseases",
+      title: "Lane-Keeping Failures",
       description:
-        "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
+        "Autopilot may drift into other lanes or fail to navigate turns safely. ",
     },
     {
-      number: "04",
-      title: "Pancreatitis",
+      title: "Acceleration Malfunctions",
       description:
-        "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
+        "Some drivers report sudden unintended acceleration before a crash.  ",
     },
     {
-      number: "05",
-      title: "Intestinal Blockage",
+      title: "Reduced Driver Awareness",
       description:
-        "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
+        "Autopilot’s design may lead drivers to over-rely on it, increasing reaction times during emergencies. ",
     },
   ],
 
@@ -110,16 +115,16 @@ export const content = {
     },
   ],
 
-  compensation: [
+  currentDevsPoints: [
     {
-      title: "Medical Expenses",
+      title: "$243 Million Federal Jury Verdict",
       description:
-        "Compensation for hospital stays, doctor visits, medications, diagnostic testing, and surgeries required to treat Ozempic-related health complications.",
+      "In August 2025, a federal jury found Tesla partially liable in a fatal 2019 Autopilot crash, awarding $243 million in damages. The case marked one of the first major jury verdicts holding Tesla accountable for Autopilot-related failures. ",
     },
     {
-      title: "Lost Wages",
+      title: "Consumer Misrepresentation Rulings ",
       description:
-        "Reimbursement for income lost due to missed work, reduced earning capacity, or extended recovery caused by severe side effects and ongoing medical treatment.",
+      "In late December 2025, the California DMV said that Tesla made Autopilot sound more advanced than it really is. Many drivers believed the car could drive itself, but Autopilot still needs full human control and attention. Because of this, the DMV warned Tesla that it must change how Autopilot is named or advertised. If Tesla does not fix this, it could face limits on selling its cars in California, which is Tesla’s biggest U.S. market.  "
     },
     {
       title: "Pain and Suffering",
@@ -134,36 +139,37 @@ export const content = {
   ],
 
   pageContent: {
-    mainTitle: "What is an Ozempic Lawsuit?",
+    mainTitle: "What is the Tesla Autopilot Lawsuit?",
     mainParagraphs: [
-      "Ozempic has gained widespread attention as a treatment for type 2 diabetes and for its off-label use in weight loss. However, growing reports of severe gastrointestinal injuries have led many patients to file Ozempic lawsuits against drug manufacturers. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We’re ready to help you take action.",
-      "Ozempic lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects of the drug. More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. As of 2025, Novo Nordisk faces multiple lawsuits for allegedly failing to warn consumers about the risks associated with Ozempic",
-"What Is Ozempic?",
-      "Ozempic (semaglutide) is an FDA-approved prescription medication used to manage type 2 diabetes. It belongs to a class of drugs called GLP-1 receptor agonists, which help regulate blood sugar by slowing digestion and increasing insulin production. While Ozempic is not FDA-approved for weight loss, it has been widely prescribed off-label for that purpose. ",
-          ],
+      "The Tesla Autopilot Recall Lawsuit centers on claims that Tesla vehicles equipped with Autopilot contain serious safety defects that increase the risk of crashes, injuries, and fatalities. Following a major Tesla recall, affected drivers and families are now pursuing legal action to hold Tesla accountable for failures tied to misleading technology, inadequate warnings, and delayed safety fixes. If you or a loved one were injured in a Tesla crash involving Autopilot, we are here to help you.",
+      "The Tesla Autopilot Recall Lawsuit involves injury and wrongful death claims filed by drivers, passengers, and pedestrians who allege Tesla’s Autopilot system failed to operate safely. Lawsuits argue that Tesla overstated Autopilot’s capabilities, encouraged driver overreliance, and released vehicles with known safety defects, resulting in preventable crashes. ",
+      "Federal regulators, including the National Highway Traffic Safety Administration (NHTSA), launched a multi-year investigation into Tesla’s Autopilot after hundreds of crashes.",
+      "What is the Tesla Autopilot Recall?",
+      "The Tesla Autopilot Recall was issued after federal regulators found that Autopilot and Full Self-Driving (FSD) systems may fail to adequately ensure the driver’s attention. According to regulators, the software allowed misuse, including driving without proper supervision, increasing crash risks. This recall affected millions of vehicles and added to a growing list of safety-related actions, including the Tesla power steering recall, Tesla Cybertruck recall, and other high-profile Tesla recalls.",
+    ],
 
     allegationsTitle: "Who is Eligible to File a Claim? ",
-    allegationsParagraph:
-      "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
+    allegationsSubtitle: "You may be eligible to file a Tesla lawsuit if: ",
 
-    healthRisksTitle: "What are the Health Risks of Ozempic?",
-    healthRisksParagraph:
-      "You were prescribed Ozempic for diabetes or off-label weight loss .",
-    healthRisksSubtitle: "These health issues include:",
+    risksTitle: "Tesla Autopilot Safety Issues: Crash Defects & Injury Risks",
 
-    whoQualifiesTitle: "Who Qualifies for an Ozempic Lawsuit?",
+    risksSubtitle:
+      "Investigations link Tesla Autopilot to multiple safety concerns, including:",
+
+    defectsTitle: "Tesla Autopilot Recall Details: Affected Models & Defects Explained ",
     whoQualifiesParagraph:
       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
     whoQualifiesSubtitle: "You may be eligible to file a claim if:",
 
     compensationTitle: "What Compensation Can You Seek?",
     compensationParagraph:
-      "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
-    compensationSubtitle:
-      "If eligible, you may be able to recover damages such as:",
+    "The Tesla recall related to Autopilot impacts several popular models, including Model S, Model 3, Model X, and Model Y. ",
+    "Defects focus on Autopilot’s inability to prevent misuse and insufficient safeguards to ensure active driver engagement. These issues mirror broader concerns seen in other recalls, including the Tesla Cybertruck recall and steering-related defects. ",
+    
+    currenDevsTitle:"Tesla Autopilot Recall Lawsuit Update: Current Court Developments ",
 
-    realStoriesTitle: "Real Stories Behind Lawsuit",
+    currentDevsParagraph:"Tesla users have reported real-world consequences that affect not only safety but also trust, financial stability, and emotional well-being. The system, marketed as an advanced driver-assistance feature, has often been criticized for inconsistent performance. ",
+   
 
     stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
     stepsParagraph:
@@ -275,39 +281,64 @@ const LawsuitsLegalPage = () => {
             >
               {content.pageContent.mainTitle}
             </h1>
-<div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
-  <p>{content.pageContent.mainParagraphs[0]}</p>
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+              <p>{content.pageContent.mainParagraphs[0]}</p>
+              <br />
+              <p>{content.pageContent.mainParagraphs[1]}</p>
+              <br />
+              <p>{content.pageContent.mainParagraphs[2]}</p>
+              <br />
+              <h4 className="font-bold">
+                {content.pageContent.mainParagraphs[3]}
+              </h4>
 
-  <p>{content.pageContent.mainParagraphs[1]}</p>
+              <p>{content.pageContent.mainParagraphs[4]}</p>
+            </div>
 
-  <h3 className=" font-bold">
-    {content.pageContent.mainParagraphs[2]}
-  </h3>
+            <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
+              <h2
+                id={content.sectionIds.whoQualifiesTitle}
+                className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+              >
+                {content.pageContent.allegationsTitle}
+              </h2>
 
-  <p>{content.pageContent.mainParagraphs[3]}</p>
-</div>
+              <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                {content.pageContent.allegationsSubtitle}
+              </p>
 
-            {/* <Ozempicfreecasecard /> */}
-            <h2
-              id={content.sectionIds.allegationsTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-            >
-              {content.pageContent.allegationsTitle}
-            </h2>
+              <ul className="space-y-3 mb-8">
+                {content.eligibilityPoints.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    {/* Yellow Bullet */}
+                    <span className="mt-[6px] flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <ellipse
+                          cx="6.83621"
+                          cy="6.9697"
+                          rx="6.83621"
+                          ry="6.9697"
+                          fill="#F2C438"
+                        />
+                      </svg>
+                    </span>
 
-          
+                    {/* Text */}
+                    <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                      {item.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
-              {content.pageContent.allegationsSubtitle}
-            </p>
-
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
-              {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="pl-2">
-                  {item.description}
-                </li>
-              ))}
-            </ul>
+  
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
@@ -315,15 +346,11 @@ const LawsuitsLegalPage = () => {
                 id={content.sectionIds.healthRisksTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
               >
-                {content.pageContent.healthRisksTitle}
+                {content.pageContent.risksTitle}
               </h2>
 
-              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.healthRisksParagraph}
-              </p>
-
               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.healthRisksSubtitle}
+                {content.pageContent.risksSubtitle}
               </p>
 
               <div className="space-y-4 w-full mb-16">
@@ -334,7 +361,7 @@ const LawsuitsLegalPage = () => {
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
-                      {item.number} – {item.title}
+                      {item.title}
                     </h4>
 
                     {/* Description */}
@@ -494,8 +521,8 @@ const LawsuitsLegalPage = () => {
                 isAtBottom
                   ? "absolute bottom-12"
                   : isFixed
-                  ? "fixed top-23"
-                  : "relative"
+                    ? "fixed top-23"
+                    : "relative"
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">

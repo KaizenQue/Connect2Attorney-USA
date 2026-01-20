@@ -126,16 +126,7 @@ export const content = {
       description:
       "In late December 2025, the California DMV said that Tesla made Autopilot sound more advanced than it really is. Many drivers believed the car could drive itself, but Autopilot still needs full human control and attention. Because of this, the DMV warned Tesla that it must change how Autopilot is named or advertised. If Tesla does not fix this, it could face limits on selling its cars in California, which is Tesla’s biggest U.S. market.  "
     },
-    {
-      title: "Pain and Suffering",
-      description:
-        "Financial compensation for physical pain, emotional distress, mental anguish, and the diminished quality of life caused by serious injuries.",
-    },
-    {
-      title: "Punitive Damages",
-      description:
-        "In certain cases, additional damages may be awarded if the manufacturer is found to have knowingly withheld safety information or acted with reckless disregard for patient health.",
-    },
+   
   ],
 
   pageContent: {
@@ -157,14 +148,12 @@ export const content = {
       "Investigations link Tesla Autopilot to multiple safety concerns, including:",
 
     defectsTitle: "Tesla Autopilot Recall Details: Affected Models & Defects Explained ",
-    whoQualifiesParagraph:
-      "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
-    whoQualifiesSubtitle: "You may be eligible to file a claim if:",
+    defectsParagraph:[
+     "The Tesla recall related to Autopilot impacts several popular models, including Model S, Model 3, Model X, and Model Y. ",
+    "Defects focus on Autopilot’s inability to prevent misuse and insufficient safeguards to ensure active driver engagement. These issues mirror broader concerns seen in other recalls, including the Tesla Cybertruck recall and steering-related defects.",
+    
 
-    compensationTitle: "What Compensation Can You Seek?",
-    compensationParagraph:
-    "The Tesla recall related to Autopilot impacts several popular models, including Model S, Model 3, Model X, and Model Y. ",
-    "Defects focus on Autopilot’s inability to prevent misuse and insufficient safeguards to ensure active driver engagement. These issues mirror broader concerns seen in other recalls, including the Tesla Cybertruck recall and steering-related defects. ",
+    ],
     
     currenDevsTitle:"Tesla Autopilot Recall Lawsuit Update: Current Court Developments ",
 
@@ -270,7 +259,7 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          {/* <TableOfContents /> */}
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -372,77 +361,23 @@ const LawsuitsLegalPage = () => {
                 ))}
               </div>
 
-              <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-                <h2
-                  id={content.sectionIds.whoQualifiesTitle}
-                  className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-                >
-                  <span className="text-[#F2C438]">
-                    {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
-                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
-                  </span>{" "}
-                  {content.pageContent.whoQualifiesTitle
-                    .split(" ")
-                    .slice(2)
-                    .join(" ")}
-                </h2>
-
-                <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
-                  {content.pageContent.whoQualifiesParagraph}
-                </p>
-
-                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
-                  {content.pageContent.whoQualifiesSubtitle}
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {content.whoQualifies.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Yellow Bullet */}
-                      <span className="mt-[6px] flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                        >
-                          <ellipse
-                            cx="6.83621"
-                            cy="6.9697"
-                            rx="6.83621"
-                            ry="6.9697"
-                            fill="#F2C438"
-                          />
-                        </svg>
-                      </span>
-
-                      {/* Text */}
-                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                        {item.description}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            
 
               <h2
                 id={content.sectionIds.compensationTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
               >
-                {content.pageContent.compensationTitle}
+                {content.pageContent.defectsTitle}
               </h2>
 
               <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.compensationParagraph}
+                {content.pageContent.defectsParagraph}
               </p>
 
-              <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.compensationSubtitle}
-              </p>
+             
 
               <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
-                {content.compensation.map((item, index) => (
+                {content.currentDevsPoints.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Blue Bullet */}
                     <span className="mt-[6px] text-[#162766] text-[16px] sm:text-[18px]">
@@ -466,12 +401,7 @@ const LawsuitsLegalPage = () => {
 
               <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
                 {/* Section Title */}
-                <h3
-                  id={content.sectionIds.realStoriesTitle}
-                  className="font-noto-serif text-[#162766] text-[20px] sm:text-[22px] font-medium mb-4"
-                >
-                  {content.pageContent.realStoriesTitle}
-                </h3>
+              
 
                 {/* Stories */}
                 <ul className="space-y-4">
@@ -552,7 +482,7 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                {/* <TableOfContents /> */}
               </div>
             </div>
           </aside>

@@ -9,171 +9,248 @@ import { useEffect, useRef, useState } from "react";
 export const content = {
   sectionIds: {
     mainTitle: "main-title",
-    allegationsTitle: "allegations-title",
+    eligibleTitle: "allegations-title",
     healthRisksTitle: "health-risks-title",
+    allegationsTitle: "allegations-title",
     whoQualifiesTitle: "who-qualifies-title",
     compensationTitle: "compensation-title",
+    settlementImpactTitle: "settlement-impact-title",
     realStoriesTitle: "real-stories-title",
     stepsTitle: "steps-title",
+    updateTitle: "lawsuit-update-title",
+
   },
+updatePoints: [
+  {
+    item: "More than 6,800 survivors of childhood sexual abuse are covered under the agreement.",
+  },
+  {
+    item: "Over 3,500 former MacLaren Hall residents are included among the beneficiaries.",
+  },
+  {
+    item: "Claims span abuse allegations dating back several decades.",
+  },
+  {
+    item: "Compensation will be distributed through independent claims administrators based on severity of abuse, duration, and supporting evidence.",
+  },
+],
 
   realStories: [
     {
-      name: "Todd Engel",
+      name: "Survivor A",
       story:
-        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
+        "Described being repeatedly assaulted by staff while others ignored their cries for help.",
     },
     {
-      name: "Paulsen Bronston",
+      name: "Survivor B",
       story:
-        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
+        "Was physically beaten for minor infractions and left in isolation for hours at a time.",
     },
     {
-      name: "Monica Church",
+      name: "Survivor C",
       story:
-        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
+        "Reported living in constant fear, witnessing other children being abused, and receiving no emotional support.",
     },
   ],
+settlementTakeaways: [
+  { item: "Nearly 7,000 sexual abuse claims were resolved." },
+  { item: "Average estimated compensation is approximately $570,000 per survivor (not a guarantee)." },
+  { item: "Claims are reviewed through a structured, tiered or point-based evaluation system." },
+],
 
-  eligibilityPoints: [
-    {
-      title: "Failure to Warn of Gastroparesis:",
-      description:
-      "You were prescribed Ozempic for diabetes or off-label weight loss",
-    },
-    {
-      title: "Misleading Marketing and Safety Claims:",
-      description:
-      "You experienced severe or persistent gastrointestinal side effects "
-    },
-    {
-      title: "Omission of Vision Loss Warnings:",
-      description:
-      "You were diagnosed with conditions such as gastroparesis, intestinal blockage, or severe vomiting "
-    },
-    {
-      title: "Ignoring Critical Safety Signals:",
-      description:
-        "Internal data, adverse event reports, and patient complaints describing gastrointestinal harm were allegedly dismissed, delayed, or overlooked instead of being promptly addressed.",
-    },
-  ],
+settlementFactors: [
+  { item: "Severity, duration, and frequency of abuse." },
+  { item: "Survivor’s age at the time of abuse." },
+  { item: "Long-term psychological or physical harm." },
+  { item: "Evidence of institutional failures or cover-ups." },
+],
 
-  healthRisks: [
-    {
-      number: "01",
-      title: "Severe Gastrointestinal Issues",
-      description:
-        "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
-    },
-    {
-      number: "02",
-      title: "Uncontrollable Vomiting",
-      description:
-        "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
-    },
-    {
-      number: "03",
-      title: "Gallbladder Diseases",
-      description:
-        "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
-    },
-    {
-      number: "04",
-      title: "Pancreatitis",
-      description:
-        "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
-    },
-    {
-      number: "05",
-      title: "Intestinal Blockage",
-      description:
-        "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
-    },
-  ],
+ eligibilityPoints: [
+  {
+    title: "Resident at MacLaren Hall:",
+    description:
+      "You were housed at MacLaren Hall as a minor between 1961 and 2003.",
+  },
+  {
+    title: "Experienced Sexual Abuse:",
+    description:
+      "You experienced sexual abuse, assault, or other inappropriate conduct while in the facility.",
+  },
+  {
+    title: "Abuse by Authority Figures:",
+    description:
+      "The abuse was committed by staff, contractors, or others in positions of authority.",
+  },
+  {
+    title: "Long-Term Harm:",
+    description:
+      "You suffered long-term emotional, psychological, or physical harm as a result of the abuse.",
+  },
+],
+
+
+healthRisks: [
+  {
+    number: "01",
+    title: "Emotional Distress and Psychological Trauma",
+    description:
+      "Survivors often suffer from long-term emotional distress, PTSD, anxiety, depression, and other psychological injuries resulting from the abuse.",
+  },
+  {
+    number: "02",
+    title: "Pain and Suffering",
+    description:
+      "Compensation may be sought for the physical pain, emotional anguish, fear, humiliation, and lasting suffering caused by the abuse.",
+  },
+  {
+    number: "03",
+    title: "Loss of Quality of Life",
+    description:
+      "Many survivors experience difficulty maintaining relationships, working, or enjoying daily life due to lasting trauma.",
+  },
+  {
+    number: "04",
+    title: "Therapy, Counseling, and Medical Expenses",
+    description:
+      "Survivors often require years of therapy, psychiatric care, medications, and other medical treatment to cope with the effects of abuse.",
+  },
+  {
+    number: "05",
+    title: "Lost Educational or Career Opportunities",
+    description:
+      "Abuse and trauma can disrupt education and career paths, leading to long-term financial and professional losses.",
+  },
+  {
+    number: "06",
+    title: "Punitive Damages",
+    description:
+      "In cases involving gross negligence or intentional misconduct, courts may award punitive damages to punish and deter wrongful conduct.",
+  },
+],
+
 
   whoQualifies: [
     {
-      description:
-        "You took Ozempic, Wegovy, Mounjaro, Rybelsus, Saxenda, Trulicity, or Zepbound as prescribed for weight loss or diabetes management.",
+      description: "You lived at MacLaren Hall between 1961 and 2003.",
     },
     {
       description:
-        "You were diagnosed with gastroparesis, intestinal blockage, or experienced chronic and uncontrollable vomiting that required medical treatment.",
+        "You were sexually abused, physically abused, emotionally abused, or severely neglected.",
     },
     {
       description:
-        "Your symptoms began during treatment or shortly after taking the medication, without a prior history of the condition or with a significant worsening of existing symptoms.",
+        "You suffer from lasting emotional trauma, PTSD, depression, or psychological injuries.",
     },
     {
       description:
-        "You are within your state's statute of limitations, meaning you may still be eligible to file a lawsuit and pursue compensation.",
+        "You are filing within California’s allowed statute of limitations or revival window.",
     },
   ],
 
   compensation: [
     {
-      title: "Medical Expenses",
+      title: "Evaluate your eligibility for a sex abuse lawsuit ",
       description:
-        "Compensation for hospital stays, doctor visits, medications, diagnostic testing, and surgeries required to treat Ozempic-related health complications.",
+        "Compensation for therapy, counseling, psychiatric care, medications, and long-term mental health treatment.",
     },
     {
-      title: "Lost Wages",
+      title: "Gather records, testimony, and supporting evidence ",
       description:
-        "Reimbursement for income lost due to missed work, reduced earning capacity, or extended recovery caused by severe side effects and ongoing medical treatment.",
+        "Damages for emotional trauma, PTSD, fear, humiliation, and lifelong psychological harm.",
     },
     {
-      title: "Pain and Suffering",
+      title: "Handle all legal filings and deadlines ",
       description:
-        "Financial compensation for physical pain, emotional distress, mental anguish, and the diminished quality of life caused by serious injuries.",
+        "Compensation for relationship difficulties, work impairment, and lasting emotional distress.",
     },
     {
-      title: "Punitive Damages",
+      title: "Negotiate settlements or pursue trial if needed ",
       description:
-        "In certain cases, additional damages may be awarded if the manufacturer is found to have knowingly withheld safety information or acted with reckless disregard for patient health.",
+        "In some cases, courts may award additional damages to punish systemic and institutional misconduct.",
+    },
+    {
+      title:"Protect your privacy and advocate for survivor-focused justice",
     },
   ],
 
+allegationPoints: [
+  {
+    item: "Sexual abuse by staff members and other authority figures.",
+  },
+  {
+    item: "Physical violence and excessive or cruel punishment.",
+  },
+  {
+    item: "Neglect, intimidation, and emotional or psychological abuse.",
+  },
+  {
+    item: "Unsafe, overcrowded, and unsanitary living conditions.",
+  },
+],
+
+
+
   pageContent: {
-    mainTitle: "What is an Ozempic Lawsuit?",
+    mainTitle: "MacLaren Hall Sex Abuse Lawsuit",
     mainParagraphs: [
-      "Ozempic has gained widespread attention as a treatment for type 2 diabetes and for its off-label use in weight loss. However, growing reports of severe gastrointestinal injuries have led many patients to file Ozempic lawsuits against drug manufacturers. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We’re ready to help you take action.",
-      "Ozempic lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects of the drug. More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. As of 2025, Novo Nordisk faces multiple lawsuits for allegedly failing to warn consumers about the risks associated with Ozempic",
-"What Is Ozempic?",
-      "Ozempic (semaglutide) is an FDA-approved prescription medication used to manage type 2 diabetes. It belongs to a class of drugs called GLP-1 receptor agonists, which help regulate blood sugar by slowing digestion and increasing insulin production. While Ozempic is not FDA-approved for weight loss, it has been widely prescribed off-label for that purpose. ",
-          ],
+      "The MacLaren Hall sex abuse lawsuit gives survivors of abuse at the former Los Angeles County juvenile facility a legal path to seek justice, accountability, and compensation. Survivors who suffered sexual abuse, physical abuse, or neglect while housed at MacLaren Hall may now have expanded rights under California law to file a sex abuse lawsuit, even decades after the abuse occurred. ",
+"Connect 2 Attorney helps survivors understand their legal options and connect with experienced attorneys who handle institutional sex abuse lawsuits with compassion and confidentiality. If you or someone you love was abused at MacLaren Hall, you are eligible for justice and compensation. ",
+"The MacLaren Hall sex abuse lawsuit refers to legal claims filed by former residents who allege they were sexually abused, assaulted, or mistreated while detained at MacLaren Hall, a now-closed juvenile detention and assessment facility operated by Los Angeles County. This lawsuit typically falls under child sexual abuse lawsuits and holds government entities and responsible parties accountable for failing to protect vulnerable children. ",
+      "About MacLaren Hall Sex Abuse ",
+      "MacLaren Hall was operational from 1961 to 2003 as an intake and detention center for children in Los Angeles County’s foster care and juvenile justice systems. Many children housed at MacLaren Hall were already vulnerable, making the alleged abuse especially traumatic. These reports eventually led to investigations, public scrutiny, and the facility’s permanent closure. ",
+    ],
 
-    allegationsTitle: "Who is Eligible to File a Claim? ",
-    allegationsParagraph:
-      "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
-
-    healthRisksTitle: "What are the Health Risks of Ozempic?",
+    eligibleTitle: "Who is Eligible to File a Claim?",
+    eligibleParagraph:
+      "You may be eligible to file a MacLaren Hall sex abuse lawsuit if: ",
+    allegationsSubtitle: "You may be eligible to file a MacLaren Hall lawsuit if:",
+allegationsTitle:"Allegations of Abuse at MacLaren Hall: What Survivors Report?  ",
+allegationsParagraph:"Survivors describe an environment of rampant cruelty, neglect, and terror. Over the years, survivors have reported:",
+    healthRisksTitle: "Settlements & Compensation in MacLaren Hall Sex Abuse Cases  ",
     healthRisksParagraph:
-      "You were prescribed Ozempic for diabetes or off-label weight loss .",
-    healthRisksSubtitle: "These health issues include:",
-
-    whoQualifiesTitle: "Who Qualifies for an Ozempic Lawsuit?",
+      "Survivors of sexual abuse at MacLaren Hall may be entitled to significant financial compensation through a civil sex abuse lawsuit. These claims aim to address the deep and lasting harm caused by institutional abuse and the county’s failure to protect children in its care. ",
+    healthRisksSubtitle: "Compensation in MacLaren Hall abuse cases may include damages for: ",
+healthRisksFooter:" Every claim is evaluated individually, and compensation depends on the specific facts of the survivor’s experience.  ",
+    whoQualifiesTitle: "Who Qualifies for a MacLaren Hall Lawsuit?",
     whoQualifiesParagraph:
-      "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
+      "Many former residents continue to suffer long-term trauma due to the abuse and neglect they endured at MacLaren Hall.",
     whoQualifiesSubtitle: "You may be eligible to file a claim if:",
 
-    compensationTitle: "What Compensation Can You Seek?",
+    compensationTitle: "How a MacLaren Hall Sex Abuse Attorney Can Help You?  ",
     compensationParagraph:
-      "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
-    compensationSubtitle:
-      "If eligible, you may be able to recover damages such as:",
+      "An experienced MacLaren Hall sex abuse lawyer can: ",
+    compensationSubtitle: "If eligible, you may be able to recover damages such as:",
+updateTitle: "MacLaren Hall Sex Abuse Lawsuit Update: Court Status & Developments",
 
-    realStoriesTitle: "Real Stories Behind Lawsuit",
+updateParagraph:
+  "The MacLaren Hall Sex Abuse Lawsuit has reached a historic turning point. In April 2025, the Los Angeles County Board of Supervisors unanimously approved a $4 billion settlement to resolve thousands of sexual abuse claims involving MacLaren Hall and other county-run juvenile detention facilities. This unprecedented resolution is among the largest institutional sex abuse settlements in U.S. history and reflects decades of alleged systemic failures to protect children in county care.",
+updatesubtitle:
+"Key Developments in the MacLaren Hall Lawsuit:",
+updateFooter:
+  "This settlement represents formal accountability by Los Angeles County and acknowledges the widespread and systemic nature of abuse across its juvenile facilities.",
+settlementImpactTitle: "Impact Of The $4 Billion Los Angeles County Settlement",
 
-    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+settlementImpactParagraph:
+  "In 2025, Los Angeles County approved a historic $4 billion settlement resolving thousands of childhood sexual abuse claims connected to MacLaren Hall and other juvenile facilities. This landmark agreement is reshaping how MacLaren Hall claims are evaluated and valued going forward.",
+
+settlementImpactSubtitle1: "Key takeaways from the settlement include:",
+
+settlementImpactSubtitle2: "Factors considered in settlement evaluations typically include:",
+
+settlementImpactFooter:
+  "Because evidence tied to MacLaren Hall is particularly strong, survivors from this facility may be well-positioned for higher settlement valuations.",
+
+    realStoriesTitle: "Real Stories Behind the MacLaren Hall Abuse Claims",
+
+    stepsTitle: "How to File a MacLaren Hall Abuse Lawsuit with Connect2Attorney?",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+      "Connect2Attorney helps survivors pursue justice through a private and supportive legal process:",
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "You Are Not Alone",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+      "If you or someone you love was abused at MacLaren Hall, you deserve justice. Get a free and confidential case review today.",
     buttonText: "Get a Free Case Review",
   },
 
@@ -182,22 +259,23 @@ export const content = {
       step: 1,
       title: "Submit a Free Case Review",
       description:
-        "Share details about your situation so we can understand your claim.",
+        "Share your experience privately with our legal intake team.",
     },
     {
       step: 2,
       title: "Confirm Eligibility",
       description:
-        "Our legal team will review your case and let you know if you qualify.",
+        "Our attorneys review your case and confirm whether you qualify under California law.",
     },
     {
       step: 3,
-      title: "Sign Agreement",
+      title: "File Your Case",
       description:
-        "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
+        "If eligible, your legal team will handle filing, negotiations, and the entire legal process.",
     },
   ],
 };
+
 
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -279,35 +357,157 @@ const LawsuitsLegalPage = () => {
   <p>{content.pageContent.mainParagraphs[0]}</p>
 
   <p>{content.pageContent.mainParagraphs[1]}</p>
+  <br/>
 
+  <p>{content.pageContent.mainParagraphs[2]}</p>
+
+<br/>
   <h3 className=" font-bold">
-    {content.pageContent.mainParagraphs[2]}
+    {content.pageContent.mainParagraphs[3]}
   </h3>
 
-  <p>{content.pageContent.mainParagraphs[3]}</p>
+  <p>{content.pageContent.mainParagraphs[4]}</p>
 </div>
 
-            {/* <Ozempicfreecasecard /> */}
-            <h2
-              id={content.sectionIds.allegationsTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-            >
-              {content.pageContent.allegationsTitle}
-            </h2>
+           <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
+                         <h2
+                           id={content.sectionIds.eligibleTitle}
+                           className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+                         >
+                           <span className="text-[#FCCB48]">
+                             {content.pageContent.eligibleTitle.split(" ")[0]}{" "}
+                             {content.pageContent.eligibleTitle.split(" ")[1]}{" "}
+                             {content.pageContent.eligibleTitle.split(" ")[2]}
+         
+                           </span>{" "}
+                           {content.pageContent.eligibleTitle
+                             .split(" ")
+                             .slice(3)
+                             .join(" ")}
+                         </h2>
+         
+                  
+         
+                         <p className="mb-4 font-urbanist  font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                           {content.pageContent.eligibleParagraph}
+                         </p>
+         
+                         <ul className="space-y-3 mb-8">
+                           {content.eligibilityPoints.map((item, index) => (
+                             <li key={index} className="flex items-start gap-3">
+                               {/* Yellow Bullet */}
+                               <span className="mt-[6px] flex-shrink-0">
+                                 <svg
+                                   xmlns="http://www.w3.org/2000/svg"
+                                   width="14"
+                                   height="14"
+                                   viewBox="0 0 14 14"
+                                   fill="none"
+                                 >
+                                   <ellipse
+                                     cx="6.83621"
+                                     cy="6.9697"
+                                     rx="6.83621"
+                                     ry="6.9697"
+                                     fill="#F2C438"
+                                   />
+                                 </svg>
+                               </span>
+         
+                               {/* Text */}
+                               <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                                 {item.description}
+                               </p>
+                             </li>
+                           ))}
+                         </ul>
+                       </div>
 
-          
+<div>
+   <h2
+                  id={content.sectionIds.allegationsTitle}
+                  className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+                >
+                  {content.pageContent.allegationsTitle}
+                </h2>
+  
+                <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[30px] capitalize">
+                  {content.pageContent.allegationsParagraph}
+                </p>
+             
+                <ul className="space-y-5 mb-8 whitespace-pre-line">
+                  {content.allegationPoints.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Custom bullet */}
+                      <span className="mt-[7px] shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <circle cx="7" cy="7" r="7" fill="#162766" />
+                        </svg>
+                      </span>
+                      {/* Text */}
+                      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+                        <span className="font-bold">
+                          {item.item}
+                        </span>{" "}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+</div>
 
-            <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
-              {content.pageContent.allegationsSubtitle}
-            </p>
 
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
-              {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="pl-2">
-                  {item.description}
-                </li>
-              ))}
-            </ul>
+
+         {/* ==================== LAWSUIT UPDATE SECTION ==================== */}
+<div className="mb-16">
+<h2
+  id={content.sectionIds.updateTitle}
+  className="font-noto-serif font-normal text-[#162766] text-[40px] leading-[50px] capitalize mb-4"
+>
+  {content.pageContent.updateTitle}
+</h2>
+
+
+  <p className="mb-6 font-poppins font-normal text-[#425777] text-[18px] leading-[30px]">
+    {content.pageContent.updateParagraph}
+  </p>
+  <p className="mb-6 font-poppins font-bold text-[#425777] text-[18px] leading-[30px]">
+    {content.pageContent.updatesubtitle}
+  </p>
+  <ul className="space-y-5 mb-8">
+    {content.updatePoints.map((item, index) => (
+      <li key={index} className="flex items-start gap-3">
+        {/* Bullet */}
+        <span className="mt-[7px] shrink-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+          >
+            <circle cx="7" cy="7" r="7" fill="#162766" />
+          </svg>
+        </span>
+
+        {/* Text */}
+        <span className="font-urbanist text-[#425777] text-[18px] font-bold leading-[27px]">
+          {item.item}
+        </span>
+      </li>
+    ))}
+  </ul>
+
+  <p className="font-poppins font-medium text-[#425777] text-[18px] leading-[30px]">
+    {content.pageContent.updateFooter}
+  </p>
+</div>
+
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
@@ -334,74 +534,109 @@ const LawsuitsLegalPage = () => {
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
-                      {item.number} – {item.title}
+                    {item.title}
                     </h4>
-
-                    {/* Description */}
-                    <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                      {item.description}
-                    </p>
+                  
                   </div>
                 ))}
+                <p className="mb-4 font-urbanist  text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                {content.pageContent.healthRisksFooter}
+              </p>
               </div>
+              
 
-              <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-                <h2
-                  id={content.sectionIds.whoQualifiesTitle}
-                  className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-                >
-                  <span className="text-[#F2C438]">
-                    {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
-                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
-                  </span>{" "}
-                  {content.pageContent.whoQualifiesTitle
-                    .split(" ")
-                    .slice(2)
-                    .join(" ")}
-                </h2>
+                 {/* ==================== LAWSUIT UPDATE SECTION ==================== */}
+{/* ==================== SETTLEMENT IMPACT SECTION ==================== */}
+<div className="mb-10">
+  <h2
+    id={content.sectionIds.settlementImpactTitle}
+    className="font-noto-serif font-normal text-[#162766] text-[40px] leading-[50px] capitalize mb-4"
+  >
+    {content.pageContent.settlementImpactTitle}
+  </h2>
 
-                <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
-                  {content.pageContent.whoQualifiesParagraph}
-                </p>
+  <p className="mb-6 font-poppins font-normal text-[#425777] text-[18px] leading-[30px]">
+    {content.pageContent.settlementImpactParagraph}
+  </p>
 
-                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
-                  {content.pageContent.whoQualifiesSubtitle}
-                </p>
+  {/* Key Takeaways */}
+  <p className="mb-4 font-urbanist font-bold text-[#162766] text-[18px] leading-[27px]">
+    {content.pageContent.settlementImpactSubtitle1}
+  </p>
 
-                <ul className="space-y-3 mb-8">
-                  {content.whoQualifies.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Yellow Bullet */}
-                      <span className="mt-[6px] flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                        >
-                          <ellipse
-                            cx="6.83621"
-                            cy="6.9697"
-                            rx="6.83621"
-                            ry="6.9697"
-                            fill="#F2C438"
-                          />
-                        </svg>
-                      </span>
+  <ul className="space-y-5 mb-8">
+    {content.settlementTakeaways.map((item, index) => (
+      <li key={index} className="flex items-start gap-3">
+        <span className="mt-[7px] shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+            <circle cx="7" cy="7" r="7" fill="#162766" />
+          </svg>
+        </span>
+        <span className="font-urbanist font-bold text-[#425777] text-[18px] leading-[27px]">
+          {item.item}
+        </span>
+      </li>
+    ))}
+  </ul>
 
-                      {/* Text */}
-                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                        {item.description}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+  {/* Factors */}
+  <p className="mb-4 font-urbanist font-bold text-[#162766] text-[18px] leading-[27px]">
+    {content.pageContent.settlementImpactSubtitle2}
+  </p>
+
+  <ul className="space-y-5 mb-8">
+    {content.settlementFactors.map((item, index) => (
+      <li key={index} className="flex items-start gap-3">
+        <span className="mt-[7px] shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+            <circle cx="7" cy="7" r="7" fill="#162766" />
+          </svg>
+        </span>
+        <span className="font-urbanist font-bold text-[#425777] text-[18px] leading-[27px]">
+          {item.item}
+        </span>
+      </li>
+    ))}
+  </ul>
+
+  <p className="font-poppins font-medium text-[#425777] text-[18px] leading-[30px]">
+    {content.pageContent.settlementImpactFooter}
+  </p>
+</div>
+<div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
+  {/* Section Title */}
+  <h3
+    id={content.sectionIds.realStoriesTitle}
+    className="font-noto-serif text-[#162766] text-[20px] sm:text-[22px] font-medium mb-6"
+  >
+    {content.pageContent.realStoriesTitle}
+  </h3>
+
+  {/* Stories */}
+  <div className="space-y-5">
+    {content.realStories.map((item, index) => (
+      <div
+        key={index}
+        className=" rounded-md p-4 sm:p-5 "
+      >
+        {/* Name */}
+        <h4 className="font-urbanist font-semibold text-[#162766] text-[15px] sm:text-[16px] mb-1">
+          {item.name}
+        </h4>
+
+        {/* Story */}
+        <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
+          {item.story}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
               <h2
                 id={content.sectionIds.compensationTitle}
-                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+                className="mt-10 font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
               >
                 {content.pageContent.compensationTitle}
               </h2>
@@ -410,62 +645,29 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.compensationParagraph}
               </p>
 
-              <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.compensationSubtitle}
-              </p>
+              
 
-              <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
+              <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 ">
                 {content.compensation.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Blue Bullet */}
-                    <span className="mt-[6px] text-[#162766] text-[16px] sm:text-[18px]">
+                    <span className="mt-[6px] text-[#162766] text-[20px] sm:text-[20px]">
                       •
                     </span>
 
                     <div>
                       {/* Title */}
                       <h4 className="font-noto-serif text-[#162766] text-[18px] sm:text-[20px] font-medium leading-normal mb-1">
-                        {item.title}:
+                        {item.title}
                       </h4>
 
-                      {/* Description */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        {item.description}
-                      </p>
+                   
                     </div>
                   </li>
                 ))}
               </ul>
 
-              <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
-                {/* Section Title */}
-                <h3
-                  id={content.sectionIds.realStoriesTitle}
-                  className="font-noto-serif text-[#162766] text-[20px] sm:text-[22px] font-medium mb-4"
-                >
-                  {content.pageContent.realStoriesTitle}
-                </h3>
-
-                {/* Stories */}
-                <ul className="space-y-4">
-                  {content.realStories.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Bullet */}
-                      <span className="mt-[6px] text-[#162766] text-[16px]">
-                        •
-                      </span>
-
-                      {/* Text */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        <strong className="font-semibold text-[#162766]">
-                          {item.name}:
-                        </strong>{" "}
-                        {item.story}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+             
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}

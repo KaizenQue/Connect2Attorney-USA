@@ -815,7 +815,7 @@ const TableOfContents = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className="lg:mt-6 w-full">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}

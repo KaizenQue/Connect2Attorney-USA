@@ -4,7 +4,7 @@ export interface TimelineItem {
 }
 
 export interface TimelineYearData {
-  firstHalf: TimelineItem[];
+  firstHalf: TimelineItem[]; 
   secondHalf: TimelineItem[];
 }
 

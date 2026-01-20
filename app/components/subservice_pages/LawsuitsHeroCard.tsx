@@ -2,22 +2,19 @@ import React from "react";
 import Form from "../subserviceform/FormMain";
 import Image from "next/image";
 
-
-
 type LawsuitsHeroCardProps = {
   heroTitle: React.ReactNode;
 };
 
-const LawsuitsHeroCard = ({ heroTitle }:LawsuitsHeroCardProps) => {
+const LawsuitsHeroCard = ({ heroTitle }: LawsuitsHeroCardProps) => {
   return (
     <div
       className="
         relative w-full
-        
         lg:min-h-[540px]
         xl:min-h-[580px]
         2xl:min-h-[620px]
-        max-h-[700px]
+        h-[800px]
         overflow-hidden
         bg-[#162766]
         flex
@@ -30,7 +27,7 @@ const LawsuitsHeroCard = ({ heroTitle }:LawsuitsHeroCardProps) => {
         <Image
           src="/ozempic_bg_dark.png"
           alt="Mass tort hero background"
-         fill
+          fill
           className="
             w-full h-full
             object-cover
@@ -48,48 +45,48 @@ const LawsuitsHeroCard = ({ heroTitle }:LawsuitsHeroCardProps) => {
           flex
           flex-col
           lg:flex-row
-          items-center
-          justify-center
+          items-center justify-center
+          lg:justify-evenly
         "
       >
         {/* Left Text */}
         <div
           className="
-            w-full
-            text-center
+            w-full lg:w-auto
+            text-center 
             lg:text-left
             px-4
             sm:px-6
             lg:px-0
             lg:ml-[5%]
-            xl:ml-[10%]
+            
             max-w-xl
           "
         >
           <h1
             className="
-              font-noto-serif
+              font-noto-serif text-left
               font-normal
               capitalize
-              mb-4
+              mb-4 mt-6
               text-[#F2C438]
               text-[34px]
               sm:text-[42px]
-              md:text-[30px]
+              md:text-[38px]
               lg:text-[45px]
               xl:text-[55px]
               leading-tight
               lg:leading-[64px]
             "
           >
-         {heroTitle}
+            {heroTitle}
           </h1>
         </div>
 
         {/* Right Form — TRUE PERFECT CENTER */}
         <div
           className="
-            w-full
+            w-full lg:w-auto
             h-full
             flex
             items-center

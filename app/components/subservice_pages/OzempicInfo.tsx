@@ -68,7 +68,7 @@ const OzempicInfo = () => {
   return (
     <>
       {/*================= MOBILE VERSION ===================== */}
-  <div id="support" className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
+  <div className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
   <div
     className="
       relative

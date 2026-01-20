@@ -5,13 +5,13 @@ import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
-import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPage";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";
-import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage"
+import { teslaTimelineData } from "@/app/components/timelines/teslaTimelineData";
+import { TimelineData } from "@/app/components/timelineTypes";
 import MaclarenLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MaclarenLawsuitsLegalPage";
+import { maclarenHallTimelineData } from "@/app/components/timelines/maclarenTimelineData";
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -92,6 +92,20 @@ export default function MassTortPage() {
     </>
   );
 
+    const TIMELINE_BY_SLUG: Record<
+      string,
+      { title: string; data: TimelineData }
+    > = {
+      "tesla-autopilot-recall-lawsuit": {
+        title: "Tesla Autopilot Timeline",
+        data: teslaTimelineData,
+      },
+      "maclaren-hall-sex-abuse-lawsuit": {
+        title: "Maclaren Hall Lawsuit Timeline",
+        data: maclarenHallTimelineData,
+      },
+    };
+
   const faqData = FAQ_BY_SLUG[slug] ?? [
     {
       question: "How much does it cost to start a case?",
@@ -107,11 +121,23 @@ export default function MassTortPage() {
     "maclaren-hall-sex-abuse-lawsuit": <MaclarenLawsuitsLegalPage />,
   };
 
+    const timelineConfig = TIMELINE_BY_SLUG[slug];
   return (
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
       {LEGAL_PAGE_BY_SLUG[slug]}
-      {/* <TimeLineCard /> */}
+     <div id="timeline-section">
+        {timelineConfig && (
+          <div id="timeline-section">
+            <TimeLineCard
+              title={timelineConfig.title}
+              timelineData={timelineConfig.data}
+              defaultYear="2025"
+            />
+          </div>
+        )}
+      </div>
+
       <OzempicInfo />
       <FaqSection faqData={faqData} />
       <ContactCard />

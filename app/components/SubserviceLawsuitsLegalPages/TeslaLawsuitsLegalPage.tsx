@@ -1,39 +1,21 @@
 "use client";
 import React from "react";
-// import Ozempicfreecasecard from "./Ozempicfreecasecard";
-import TableOfContents from "../subservice_pages/TableOfContents";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const content = {
   sectionIds: {
-    mainTitle: "main-title",
-    allegationsTitle: "allegations-title",
-    healthRisksTitle: "health-risks-title",
-    whoQualifiesTitle: "who-qualifies-title",
-    compensationTitle: "compensation-title",
-    realStoriesTitle: "real-stories-title",
-    stepsTitle: "steps-title",
+    mainTitle: "title",
+    risksTitle: "risks",
+    defectsTitle: "defects",
+    currenDevsTitle:"defects",
+    compensationTitle: "compensation",
+    helpTitle:"help",
+    realStoriesTitle: "stories",
+    stepsTitle: "help-section",
   },
-
-  realStories: [
-    {
-      name: "Todd Engel",
-      story:
-        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
-    },
-    {
-      name: "Paulsen Bronston",
-      story:
-        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
-    },
-    {
-      name: "Monica Church",
-      story:
-        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
-    },
-  ],
 
   eligibilityPoints: [
     {
@@ -96,37 +78,84 @@ export const content = {
     },
   ],
 
-  whoQualifies: [
-    {
-      description:
-        "You took Ozempic, Wegovy, Mounjaro, Rybelsus, Saxenda, Trulicity, or Zepbound as prescribed for weight loss or diabetes management.",
-    },
-    {
-      description:
-        "You were diagnosed with gastroparesis, intestinal blockage, or experienced chronic and uncontrollable vomiting that required medical treatment.",
-    },
-    {
-      description:
-        "Your symptoms began during treatment or shortly after taking the medication, without a prior history of the condition or with a significant worsening of existing symptoms.",
-    },
-    {
-      description:
-        "You are within your state's statute of limitations, meaning you may still be eligible to file a lawsuit and pursue compensation.",
-    },
-  ],
-
   currentDevsPoints: [
     {
       title: "$243 Million Federal Jury Verdict",
       description:
-      "In August 2025, a federal jury found Tesla partially liable in a fatal 2019 Autopilot crash, awarding $243 million in damages. The case marked one of the first major jury verdicts holding Tesla accountable for Autopilot-related failures. ",
+        "In August 2025, a federal jury found Tesla partially liable in a fatal 2019 Autopilot crash, awarding $243 million in damages. The case marked one of the first major jury verdicts holding Tesla accountable for Autopilot-related failures. ",
     },
     {
       title: "Consumer Misrepresentation Rulings ",
       description:
-      "In late December 2025, the California DMV said that Tesla made Autopilot sound more advanced than it really is. Many drivers believed the car could drive itself, but Autopilot still needs full human control and attention. Because of this, the DMV warned Tesla that it must change how Autopilot is named or advertised. If Tesla does not fix this, it could face limits on selling its cars in California, which is Tesla’s biggest U.S. market.  "
+        "In late December 2025, the California DMV said that Tesla made Autopilot sound more advanced than it really is. Many drivers believed the car could drive itself, but Autopilot still needs full human control and attention. Because of this, the DMV warned Tesla that it must change how Autopilot is named or advertised. If Tesla does not fix this, it could face limits on selling its cars in California, which is Tesla’s biggest U.S. market.  ",
     },
-   
+  ],
+
+  compensationPoints: [
+    {
+      title: "Medical Expenses",
+      description:
+        "Hospitalization, surgeries, therapy, rehabilitation, and long-term care.  ",
+    },
+    {
+      title: "Vehicle & Property Damage",
+      description:
+        "Repair or replacement of your Tesla and any other property damaged in the crash.  ",
+    },
+    {
+      title: "Lost Income",
+      description:
+        "Compensation for missed workdays and loss of future earning potential.  ",
+    },
+    {
+      title: "Pain and Suffering",
+      description:
+        "Awards for physical trauma, emotional distress, PTSD, or long-term disability.  ",
+    },
+    {
+      title: "Wrongful Death Damages",
+      description: "For fatal crashes involving Autopilot malfunction.",
+    },
+    {
+      title: "Punitive Damages",
+      description:
+        "Tesla could face punitive damages if the court finds reckless disregard for safety.",
+    },
+  ],
+
+  helpPoints: [
+    {
+      description: "Investigate Autopilot and recall-related defects ",
+    },
+    {
+      description: "Gather crash data and vehicle software evidence ",
+    },
+    {
+      description: "Work with accident reconstruction experts ",
+    },
+    {
+      description: "Handle negotiations with Tesla and insurers  ",
+    },
+    {
+      description: "File a lawsuit and pursue maximum compensation ",
+    },
+  ],
+  realStories: [
+    {
+      name: "Jeremy Banner (Fatal Crash) : ",
+      story:
+        "Banner died when his Tesla Model 3 crashed into a truck that the Autopilot failed to detect. His family claims Tesla oversold the system’s capabilities. ",
+    },
+    {
+      name: "California Family (Autopilot Highway Collision) :",
+      story:
+        "California Family (Autopilot Highway Collision) : A family survived a highway crash after Autopilot drifted into a concrete divider. They sustained severe injuries and suffered long-term trauma. ",
+    },
+    {
+      name: "“Phantom Braking” Victims  : ",
+      story:
+        "Multiple drivers reported sudden braking at high speeds, causing rear-end collisions and serious whiplash injuries. ",
+    },
   ],
 
   pageContent: {
@@ -147,22 +176,45 @@ export const content = {
     risksSubtitle:
       "Investigations link Tesla Autopilot to multiple safety concerns, including:",
 
-    defectsTitle: "Tesla Autopilot Recall Details: Affected Models & Defects Explained ",
-    defectsParagraph:[
-     "The Tesla recall related to Autopilot impacts several popular models, including Model S, Model 3, Model X, and Model Y. ",
-    "Defects focus on Autopilot’s inability to prevent misuse and insufficient safeguards to ensure active driver engagement. These issues mirror broader concerns seen in other recalls, including the Tesla Cybertruck recall and steering-related defects.",
-    
-
+    defectsTitle:
+      "Tesla Autopilot Recall Details: Affected Models & Defects Explained ",
+    defectsParagraph: [
+      "The Tesla recall related to Autopilot impacts several popular models, including Model S, Model 3, Model X, and Model Y. ",
+      "Defects focus on Autopilot’s inability to prevent misuse and insufficient safeguards to ensure active driver engagement. These issues mirror broader concerns seen in other recalls, including the Tesla Cybertruck recall and steering-related defects.",
     ],
-    
-    currenDevsTitle:"Tesla Autopilot Recall Lawsuit Update: Current Court Developments ",
 
-    currentDevsParagraph:"Tesla users have reported real-world consequences that affect not only safety but also trust, financial stability, and emotional well-being. The system, marketed as an advanced driver-assistance feature, has often been criticized for inconsistent performance. ",
-   
+    currenDevsTitle:
+      "Tesla Autopilot Recall Lawsuit Update: Current Court Developments ",
 
-    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    currentDevsParagraph:
+      "Tesla users have reported real-world consequences that affect not only safety but also trust, financial stability, and emotional well-being. The system, marketed as an advanced driver-assistance feature, has often been criticized for inconsistent performance. ",
+
+    compensationTitle:
+      "Compensation & Settlements in Tesla Autopilot Recall Claims ",
+    compensationParagraph:
+      "Compensation depends on the severity of injuries and damages caused by the Autopilot malfunction.  ",
+    compensationSubtitle: "You may be eligible to recover:  ",
+
+    settlementTitle: "Settlement",
+    settlementParagraph: [
+      "Tesla’s Autopilot and Full Self-Driving (FSD) systems have faced increasing legal scrutiny following crashes linked to these driver-assistance features. Multiple lawsuits and settlements highlight growing concerns over safety, responsibility, and consumer expectations. ",
+      "Florida Jury Verdict ",
+      "A Florida jury awarded $243 million in damages to victims of a 2019 crash involving a Tesla Model S operating with Autopilot. Tesla reportedly offered $60 million to settle, but the offer was rejected, leading to the landmark verdict. ",
+      "Confidential California Settlements",
+      "Tesla also reached confidential settlements in two California lawsuits involving fatal crashes that occurred in 2019. These cases were closely watched because Tesla’s business value is strongly tied to its self-driving technology claims.",
+      "Settlement Amounts Vary",
+      "Compensation in Tesla Autopilot crash cases varies widely and depends on factors such as injury severity, medical costs, long-term impact, and evidence showing Tesla may be liable under product liability laws.",
+    ],
+
+    helpTitle: "How a Tesla Autopilot Recall Lawyer Can Help Your Case? ",
+    helpSubtitle: "A qualified Tesla Autopilot recall lawyer can: ",
+    helpParagraph:
+      "At Connect 2 Attorney, we help injured victims connect with experienced Tesla recall attorneys nationwide at no upfront cost. ",
+
+    realStoriesTitle: "Real Stories Behind Lawsuit ",
+    stepsTitle: "How to File a Tesla Autopilot Lawsuit with Connect2Attorney? ",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+      "Connect2Attorney guides you through the process of filing an Tesla lawsuit against the responsible party, in just three simple steps:",
   },
 
   ctaContent: {
@@ -259,8 +311,8 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          {/* <TableOfContents /> */}
-        </div>
+          <TableOfContents />
+          </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
@@ -286,7 +338,7 @@ const LawsuitsLegalPage = () => {
 
             <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
               <h2
-                id={content.sectionIds.whoQualifiesTitle}
+                
                 className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
               >
                 {content.pageContent.allegationsTitle}
@@ -327,14 +379,10 @@ const LawsuitsLegalPage = () => {
               </ul>
             </div>
 
-  
-
-            {/* ==================== HEALTH RISKS SECTION ==================== */}
+            {/* ==================== RISKS SECTION ==================== */}
             <div className="mb-16">
-              <h2
-                id={content.sectionIds.healthRisksTitle}
-                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
-              >
+              <h2 id={content.sectionIds.risksTitle}
+              className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4">
                 {content.pageContent.risksTitle}
               </h2>
 
@@ -360,71 +408,190 @@ const LawsuitsLegalPage = () => {
                   </div>
                 ))}
               </div>
+            </div>
 
-            
+            {/* ==================== Defects SECTION ==================== */}
 
-              <h2
-                id={content.sectionIds.compensationTitle}
-                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
-              >
-                {content.pageContent.defectsTitle}
-              </h2>
+            <h2
+              id={content.sectionIds.defectsTitle}
+              className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+            >
+              {content.pageContent.defectsTitle}
+            </h2>
 
-              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.defectsParagraph}
-              </p>
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.defectsParagraph[0]}
+            </p>
+            <br />
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.defectsParagraph[1]}
+            </p>
 
-             
+            <h2
+              id={content.sectionIds.currenDevsTitle}
+              className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+            >
+              {content.pageContent.currenDevsTitle}
+            </h2>
 
-              <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
-                {content.currentDevsPoints.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    {/* Blue Bullet */}
-                    <span className="mt-[6px] text-[#162766] text-[16px] sm:text-[18px]">
-                      •
-                    </span>
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.currentDevsParagraph}
+            </p>
 
-                    <div>
-                      {/* Title */}
-                      <h4 className="font-noto-serif text-[#162766] text-[18px] sm:text-[20px] font-medium leading-normal mb-1">
-                        {item.title}:
-                      </h4>
+            <div className="space-y-4 w-full mb-16">
+              {content.currentDevsPoints.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5"
+                >
+                  {/* Title + Number */}
+                  <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
+                    {item.title}
+                  </h4>
 
-                      {/* Description */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        {item.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                  {/* Description */}
+                  <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-              <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
-                {/* Section Title */}
-              
+            {/* Section Title */}
 
-                {/* Stories */}
-                <ul className="space-y-4">
-                  {content.realStories.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Bullet */}
-                      <span className="mt-[6px] text-[#162766] text-[16px]">
-                        •
-                      </span>
+            <h2
+              id={content.sectionIds.compensationTitle}
+              className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+            >
+              {content.pageContent.compensationTitle}
+            </h2>
 
-                      {/* Text */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        <strong className="font-semibold text-[#162766]">
-                          {item.name}:
-                        </strong>{" "}
-                        {item.story}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.compensationParagraph}
+            </p>
+
+            <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.compensationSubtitle}
+            </p>
+
+            <div className="space-y-4 w-full mb-16">
+              {content.compensationPoints.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5"
+                >
+                  {/* Title + Number */}
+                  <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
+                    {item.title}
+                  </h4>
+
+                  {/* Description */}
+                  <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+
+              <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-4 py-6">
+                <h2
+                  id={content.sectionIds.compensationTitle}
+                  className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+                >
+                  {content.pageContent.settlementTitle}
+                </h2>
+
+                <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[0]}
+                </p>
+                <br />
+                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[1]}
+                </p>
+                <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[2]}
+                </p>
+                <br />
+                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[3]}
+                </p>
+                <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[4]}
+                </p>
+                <br />
+                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[5]}
+                </p>
+                <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                  {content.pageContent.settlementParagraph[6]}
+                </p>
               </div>
             </div>
 
+            {/* ==================== Help SECTION ==================== */}
+
+            <h2
+              id={content.sectionIds.helpTitle}
+              className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4"
+            >
+              {content.pageContent.helpTitle}
+            </h2>
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.helpSubtitle}
+            </p>
+            <ul className="list-none list-outside space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
+              {content.helpPoints.map((item, index) => (
+                <li key={index} className="">
+                  <span className="inline-block mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <circle cx="7" cy="7" r="7" fill="#162766" />
+                    </svg>
+                  </span>
+                  <span className="text-[#425777] font-bold">
+                    {" "}
+                    {item.description}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.helpParagraph}
+            </p>
+
+            {/* ==================== Real Stories SECTION ==================== */}
+
+            <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6 mb-8">
+              <h2
+                id={content.sectionIds.realStoriesTitle}
+                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[26px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+              >
+                {content.pageContent.realStoriesTitle}
+              </h2>
+              <ul className="space-y-4">
+                {content.realStories.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    {/* Bullet */}
+                    <span className="mt-[6px] text-[#162766] text-[16px]">
+                      •
+                    </span>
+
+                    {/* Text */}
+                    <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
+                      <strong className="font-semibold text-[#162766]">
+                        {item.name}:
+                      </strong>{" "}
+                      {item.story}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
             {/* ==================== STEPS SECTION ==================== */}
             <div className="mb-24">
               <h2
@@ -482,8 +649,8 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                {/* <TableOfContents /> */}
-              </div>
+                <TableOfContents />
+                </div>
             </div>
           </aside>
           {/* Content Table */}
@@ -583,6 +750,156 @@ const StepsComponent = () => {
           </p>
         </div>
       ))}
+    </div>
+  );
+};
+
+const tocItems1 = [
+  {
+    label: "What is the Tesla Autopilot Recall Lawsuit?",
+    id: "title",
+  },
+  {
+    label: "Tesla Autopilot Safety Issues: Crash Defects & Injury Risks",
+    id: "risks",
+  },
+  {
+    label:
+      "Tesla Autopilot Recall Details: Affected Models & Defects Explained",
+    id: "defects",
+  },
+  {
+    label: "Tesla Autopilot Recall Lawsuit Update: Current Court Developments",
+    id: "currentdev",
+  },
+  {
+    label: "Compensation & Settlements in Tesla Autopilot Recall Claims",
+    id: "compensation",
+  },
+  {
+    label: "How a Tesla Autopilot Recall Lawyer Can Help Your Case?   ",
+    id: "help",
+  },
+  {
+    label: "Real Stories Behind the Tesla Autopilot Claims ",
+    id: "stories",
+  },
+
+  {
+    label:
+      " How to File a Tesla Autopilot Recall Lawsuit with Connect2Attorney ",
+    id: "help-section",
+  },
+  {
+    label: "Tesla Autopilot Lawsuit Timeline ",
+    id: "timeline-section",
+  },
+  { label: "Get Legal Support from Connect2Attorney", id: "support" },
+  { label: "FAQs", id: "faqs" },
+];
+
+const TableOfContents = () => {
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const yOffset = -100; // adjust for sticky navbar
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="lg:mt-6 w-full">
+      {/* Header */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="
+          w-full h-[60px]
+          flex items-center justify-between
+          px-4
+          rounded-xl
+          border border-[#d9e0ff]
+          bg-white
+          
+        "
+        aria-expanded={open}
+      >
+        <span className="text-[#162766] font-urbanist text-[20px] font-bold">
+          Table of Contents
+        </span>
+
+        <span
+          className="
+            w-8 h-8
+            rounded-lg
+            bg-[#F2C338]
+            text-[#162766]
+            border border-[#DDE6FF]
+            shadow-lg
+            flex items-center justify-center
+          "
+        >
+          {open ? (
+            <ChevronUp size={18} strokeWidth={2.5} />
+          ) : (
+            <ChevronDown size={18} strokeWidth={2.5} />
+          )}
+        </span>
+      </button>
+
+      {/* Content */}
+      {open && (
+        <div
+          className="
+            mt-2
+            flex flex-col
+            gap-3
+            rounded-xl
+            border border-[#d9e0ff]
+            bg-[#f9fafc]
+            p-4 
+          "
+        >
+          <div
+            className="
+              max-h-[300px]     
+              overflow-y-auto
+              flex flex-col
+              gap-2
+              pr-1           
+            "
+          >
+            {tocItems1.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => {
+                  scrollToSection(item.id);
+                  setOpen(false);
+                }}
+                className="
+      w-full
+      flex items-center
+      px-4 py-3.5
+      bg-white
+      rounded-lg
+      text-[#162766]
+      font-urbanist
+      text-[15px] xl:text-[16px]
+      font-medium
+      cursor-pointer
+      hover:bg-[#eef1ff]
+      transition
+    "
+              >
+                <span className="leading-snug">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

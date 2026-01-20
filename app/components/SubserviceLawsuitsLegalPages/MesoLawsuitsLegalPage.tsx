@@ -60,80 +60,88 @@ export const content = {
     },
   ],
 
-  healthRisks: [
-    {
-      number: "01",
-      title: "Mesothelioma",
-      description:
-        "A rare and aggressive cancer affecting the lining of the lungs, abdomen, heart, or testes.",
-    },
-    {
-      number: "02",
-      title: "Asbestosis",
-      description:
-        "A chronic lung disease that causes scarring of lung tissue and long-term breathing problems.",
-    },
-    {
-      number: "03",
-      title: "Lung Cancer",
-      description:
-        "Asbestos exposure significantly increases the risk of developing lung cancer.",
-    },
-    {
-      number: "04",
-      title: "Pleural Disease",
-      description:
-        "Thickening and fluid buildup around the lungs, causing chest pain and breathing difficulty.",
-    },
-    {
-      number: "05",
-      title: "Organ Damage",
-      description:
-        "Ingested or inhaled asbestos fibers can damage organs and weaken the immune system.",
-    },
-  ],
+healthRisks: [
+  {
+    number: "01",
+    title: "Pulmonary Fibrosis",
+    description:
+      "Scarring in the lungs that makes breathing difficult and reduces lung function.",
+  },
+  {
+    number: "02",
+    title: "Asbestosis",
+    description:
+      "A chronic lung disease caused by long-term asbestos exposure, leading to shortness of breath and chest pain.",
+  },
+  {
+    number: "03",
+    title: "Laryngitis",
+    description:
+      "Inflammation of the voice box due to asbestos fiber irritation.",
+  },
+  {
+    number: "04",
+    title: "Cardiovascular Problems",
+    description:
+      "Reduced lung function can strain the heart, increasing the risk of heart disease.",
+  },
+  {
+    number: "05",
+    title: "Gastrointestinal Issues",
+    description:
+      "Ingested asbestos fibers may contribute to stomach or colon disorders over time.",
+  },
+  {
+    number: "06",
+    title: "Immune System Effects",
+    description:
+      "Long-term exposure can weaken the immune response, making the body more vulnerable to other illnesses.",
+  },
+],
+
 
   whoQualifies: [
-    {
-      description:
-        "Evaluate your medical diagnosis and asbestos exposure history.",
-    },
-    {
-      description:
-        "Identify responsible companies, employers, or product manufacturers.",
-    },
-    {
-      description:
-        "File your claim within your state’s statute of limitations.",
-    },
-    {
-      description:
-        "Pursue compensation for medical bills, lost income, and suffering.",
-    },
-    {
-      description:
-        "Handle negotiations, settlements, or trial proceedings on your behalf.",
-    },
-  ],
+  {
+    description: "You have been diagnosed with mesothelioma cancer.",
+  },
+  {
+    description:
+      "You were exposed to asbestos at work, during military service, or through products.",
+  },
+  {
+    description:
+      "You are a family member filing a wrongful death claim.",
+  },
+  {
+    description:
+      "You experienced secondary exposure (e.g., asbestos carried home on clothing).",
+  },
+],
+
 
   compensation: [
     {
-      title: "Medical Expenses",
+      title: "Medical bills and ongoing mesothelioma treatment ",
       description:
         "Coverage for surgeries, chemotherapy, hospital stays, medications, and long-term treatment.",
     },
     {
-      title: "Lost Wages",
+      title: "Costs related to the treatment of mesothelioma, including travel and care ",
       description:
         "Compensation for time missed from work or permanent inability to work.",
     },
     {
-      title: "Pain and Suffering",
+      title: "Lost wages and reduced earning capacity ",
+      description:
+        "Compensation for time missed from work or permanent inability to work.",
+    },
+    {
+      title: "Pain, suffering, and emotional distress ",
       description:
         "Financial recovery for physical pain, emotional distress, and reduced quality of life.",
     },
     {
-      title: "Punitive Damages",
+      title: "Financial security for surviving family members ",
       description:
         "Additional damages in cases where companies knowingly exposed people to asbestos.",
     },
@@ -141,17 +149,17 @@ export const content = {
 
   mdllitigationPoints: [
     {
-      title: "Widespread Litigation:",
+      title: "Experienced mesothelioma law firms",
       description:
         "Hundreds of thousands of asbestos-related claims have been filed across the U.S. over several decades.",
     },
     {
-      title: "Massive Payouts:",
+      title: "Attorneys with a proven track record in asbestos claims ",
       description:
         "Asbestos lawsuits have resulted in over $70 billion in total compensation to victims.",
     },
     {
-      title: "Ongoing Filings:",
+      title: "Legal teams offering free case reviews and no upfront fees ",
       description:
         "New mesothelioma lawsuits continue to be filed each year due to the long latency period of the disease.",
     },
@@ -177,34 +185,34 @@ export const content = {
       "Mesothelioma lawsuits allege that companies knowingly exposed workers and consumers to asbestos while hiding the dangers and failing to provide proper safety warnings or protections.",
     allegationsSubtitle: "Common allegations include:",
 
-    healthRisksTitle: "What Are the Health Risks of Asbestos Exposure?",
+    healthRisksTitle: "What are the Other Health Risks of Asbestos Exposure?  ",
     healthRisksParagraph:
-      "Asbestos fibers can remain in the body for decades and cause severe, life-threatening diseases. Many victims are diagnosed only after irreversible damage has occurred.",
-    healthRisksSubtitle: "Serious conditions linked to asbestos include:",
+      "Asbestos is a well-known carcinogen. Inhaled fibers can stay in the body for years, leading to serious and sometimes fatal health conditions. While mesothelioma is the most recognized outcome, asbestos exposure is also linked to diseases like:  ",
+    healthRisksSubtitle: "These health issues include: ",
     healthRisksSubtitle2:
       "Long-term exposure can lead to:",
 
-    whoQualifiesTitle: "Who Qualifies for a Mesothelioma Lawsuit?",
+    whoQualifiesTitle: "Who is Eligible to File a Claim? ",
     whoQualifiesParagraph:
       "Many people develop mesothelioma years after workplace or secondary exposure. You may qualify even if the exposure happened decades ago.",
-    whoQualifiesSubtitle: "You may qualify if you:",
+    whoQualifiesSubtitle: "Even if the exposure happened decades ago, you may still qualify for compensation with proper mesothelioma attorney assistance. You may be eligible to file a mesothelioma lawsuit if:",
 
     mdllitigationTitle:
-      "What Is the Current Status of Mesothelioma and Asbestos Litigation?",
+      "Top Mesothelioma Attorneys for Asbestos Claims ",
     mdllitigationParagraph:
-      "Asbestos litigation is one of the longest-running mass torts in U.S. history. Claims continue to be filed due to the long latency period of mesothelioma.",
+      "Choosing the right legal support matters. A skilled mesothelioma attorney understands asbestos laws, exposure history investigation, and available compensation sources. Through Connect2Attorney, we help you connect with: ",
 
-    compensationTitle: "What Compensation Can You Seek?",
+    compensationTitle: "Mesothelioma Compensation & Settlements: What You Can Expect ",
     compensationParagraph:
-      "Average mesothelioma settlements typically range from $1 million to $2 million, depending on exposure history, severity of illness, and responsible parties.",
+      "A mesothelioma diagnosis can bring not only physical pain but also emotional and financial strain. Patients face costly treatments, loss of income, and lasting damage to their quality of life.  Average settlements typically range from $1 million to $2 million, though the exact amount depends on the specifics of each case. ",
     compensationSubtitle:
-      "You may be eligible to recover:",
+      "Compensation from a mesothelioma lawsuit can help cover: ",
 
     realStoriesTitle: "Real Stories Behind Mesothelioma Lawsuits",
 
     stepsTitle: "How to File a Mesothelioma Lawsuit with Connect2Attorney?",
     stepsParagraph:
-      "Connect2Attorney makes the process simple and stress-free with just three steps:",
+      "Connect2Attorney guides you through the process of filing a mesothelioma/asbestos lawsuit against the responsible party in simple steps:  ",
   },
 
   ctaContent: {
@@ -237,18 +245,36 @@ export const content = {
 };
 
 const MESOTHELIOMA_TOC = [
-  { label: "What is a Mesothelioma / Asbestos Lawsuit?", id: "main-title" },
-  { label: "What Are the Allegations in Mesothelioma Lawsuits?", id: "allegations-title" },
-  { label: "What Are the Health Risks of Asbestos Exposure?", id: "health-risks-title" },
-  { label: "Who Qualifies for a Mesothelioma Lawsuit?", id: "who-qualifies-title" },
-  { label: "What Is the Current Status of Mesothelioma Litigation?", id: "mdl-litigation-title" },
-  { label: "What Compensation Can You Seek?", id: "compensation-title" },
-  { label: "Real Stories Behind Mesothelioma Lawsuits", id: "real-stories-title" },
-  { label: "How to File a Mesothelioma Lawsuit with Connect2Attorney?", id: "steps-title" },
-  { label: "Mesothelioma Lawsuit Timeline", id: "timeline-section" },
-  { label: "Get Legal Support from Connect2Attorney", id: "get-legal-support" },
-  { label: "FAQs", id: "faq-section" },
+  {
+    label: "What is a Mesothelioma Lawsuit?",
+    id: content.sectionIds.mainTitle,
+  },
+  {
+    label: "Who is Eligible to File a Claim?",
+    id: content.sectionIds.whoQualifiesTitle,
+  },
+  {
+    label: "What are the Other Health Risks of Asbestos Exposure?",
+    id: content.sectionIds.healthRisksTitle,
+  },
+  {
+    label: "Top Mesothelioma Attorneys for Asbestos Claims",
+    id: content.sectionIds.mdllitigationTitle,
+  },
+  {
+    label: "Mesothelioma Compensation & Settlements: What You Can Expect",
+    id: content.sectionIds.compensationTitle,
+  },
+  {
+    label: "Real Stories Behind Mesothelioma Lawsuits",
+    id: content.sectionIds.realStoriesTitle,
+  },
+  {
+    label: "How to File a Mesothelioma Lawsuit with Connect2Attorney?",
+    id: content.sectionIds.stepsTitle,
+  },
 ];
+
 
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -352,19 +378,21 @@ const LawsuitsLegalPage = () => {
                   id={content.sectionIds.whoQualifiesTitle}
                   className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
                 >
-                  <span className="">
+                  <span className="text-[#FCCB48]">
                     {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
-                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
+                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}{" "}
+                    {content.pageContent.whoQualifiesTitle.split(" ")[2]}
+
                   </span>{" "}
                   {content.pageContent.whoQualifiesTitle
                     .split(" ")
-                    .slice(2)
+                    .slice(3)
                     .join(" ")}
                 </h2>
 
          
 
-                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                <p className="mb-4 font-urbanist  text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
                   {content.pageContent.whoQualifiesSubtitle}
                 </p>
 
@@ -399,7 +427,7 @@ const LawsuitsLegalPage = () => {
                 </ul>
               </div>
             {/* <Ozempicfreecasecard /> */}
-            <h2
+            {/* <h2
               id={content.sectionIds.allegationsTitle}
               className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
             >
@@ -408,12 +436,11 @@ const LawsuitsLegalPage = () => {
 
             <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
               {content.pageContent.allegationsSubtitle}
-            </p>
+            </p> */}
 
-            <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
+            {/* <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
               {content.eligibilityPoints.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  {/* Custom bullet */}
                   <span className="mt-[7px] shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -426,11 +453,10 @@ const LawsuitsLegalPage = () => {
                     </svg>
                   </span>
 
-                  {/* Text */}
                   <span>{item.description}</span>
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
@@ -448,9 +474,7 @@ const LawsuitsLegalPage = () => {
               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                 {content.pageContent.healthRisksSubtitle}
               </p>
-              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.healthRisksSubtitle2}
-              </p>
+           
               <div className="space-y-4 w-full mb-16">
                 {content.healthRisks.map((item, index) => (
                   <div
@@ -459,7 +483,7 @@ const LawsuitsLegalPage = () => {
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
-                      {item.title}
+                      {item.number} - {item.title}
                     </h4>
 
                     {/* Description */}
@@ -470,8 +494,8 @@ const LawsuitsLegalPage = () => {
                 ))}
               </div>
     
-    
-        <h2
+    <div className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
+ <h2
   id={content.sectionIds.mdllitigationTitle}
   className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
 >
@@ -482,41 +506,15 @@ const LawsuitsLegalPage = () => {
   {content.pageContent.mdllitigationParagraph}
 </p>
 
-<ul className="space-y-3 mb-8 whitespace-pre-line">
+<ul className="space-y-3  whitespace-pre-line list-disc pl-6">
   {content.mdllitigationPoints.map((item, index) => (
-    <li key={index} className="flex items-start gap-3">
-      {/* Custom bullet */}
-      <span className="mt-[7px] shrink-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-        >
-          <circle cx="7" cy="7" r="7" fill="#162766" />
-        </svg>
-      </span>
-
-      {/* Text */}
-      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-        <span className="font-bold">
-          {item.title}
-        </span>{" "}
-        <span className="font-normal">
-          {item.description}
-        </span>
-      </span>
+    <li key={index} className="text-[#425777] text-[18px] leading-[27px] mb-6">
+      <span className="font-bold">{item.title}</span>{" "}
     </li>
   ))}
 </ul>
-
-
-
-
-
-        
-
+    </div>
+       
               <h2
                 id={content.sectionIds.compensationTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
@@ -532,28 +530,56 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.compensationSubtitle}
               </p>
 
-              <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
-                {content.compensation.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    {/* Blue Bullet */}
-                    <span className="mt-[6px] text-[#162766] text-[16px] sm:text-[18px]">
-                      •
-                    </span>
+           <div className="space-y-4 sm:space-y-5 w-full mb-16">
+  {content.compensation.map((item, index) => (
+    <div
+      key={index}
+      className="
+        flex
+        flex-col
+        items-start
+        gap-[10px]
+        self-stretch
+        p-[20px]
+        rounded-[10px]
+        bg-[#F0F2F4]
+      "
+    >
+      <h4
+        className="
+          text-[#162766]
+          font-noto-serif
+          text-[20px]
+          sm:text-[22px]
+          lg:text-[24px]
+          font-bold
+          leading-normal
+        "
+      >
+        {item.title}
+      </h4>
+      
+    </div>
+  ))}
+  <p
+  className="
+    mt-[20px]
+    text-[#162766]
+    font-urbanist
+    text-[16px]
+    font-semibold
+    underline
+    underline-offset-auto
+  "
+>
+  Here’s an article on Mesothelioma Lawsuit.{" "}
+  <a href="#" className="underline font-urbanist font-semibold">
+    Click here to read.
+  </a>
+</p>
 
-                    <div>
-                      {/* Title */}
-                      <h4 className="font-noto-serif text-[#162766] text-[18px] sm:text-[20px] font-medium leading-normal mb-1">
-                        {item.title}:
-                      </h4>
-
-                      {/* Description */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        {item.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+</div>
+ 
 
               <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
                 {/* Section Title */}

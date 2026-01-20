@@ -1,56 +1,111 @@
 import { TimelineData } from "../timelineTypes";
 
-
 export const roundupTimelineData: TimelineData = {
+  "2026": {
+    firstHalf: [
+      {
+        date: "January",
+        text: "About 170,000 Roundup claims have been filed as of January 2026.",
+      },
+    ],
+    secondHalf: [],
+  },
+
   "2025": {
     firstHalf: [
-      { date: "June 21", text: "A lawsuit filed in New Jersey Superior Court alleges that Wegovy caused a man to develop NAION (non-arteritic anterior ischemic optic neuropathy), resulting in permanent vision loss." },
-      { date: "June 17", text: "Twenty-one plaintiffs in New Jersey seek to consolidate NAION-related vision loss cases into multicounty litigation, citing the severe and irreversible nature of the injuries." },
-      { date: "June 12", text: "The GLP-1 MDL (MDL No. 3094) in the Eastern District of Pennsylvania now includes 1,882 active gastrointestinal injury cases, though NAION-related vision claims are not part of the MDL." },
-      { date: "June 10", text: "Doctors and advocacy groups urge the FDA to issue a black box warning on semaglutide drugs due to mounting evidence of vision loss risks such as NAION." },
-      { date: "May 19", text: "Patients begin filing lawsuits alleging Ozempic caused NAION and that Novo Nordisk failed to warn of vision risks despite accumulating scientific evidence." },
-      { date: "May 2", text: "More than 500 new cases were added to the GLP-1 MDL in April alone, bringing the total to 1,685 and reflecting growing awareness of stomach paralysis claims." },
-      { date: "April 24", text: "A woman from North Carolina files suit against Novo Nordisk after suffering permanent vision loss from NAION allegedly caused by Ozempic." },
-      { date: "April 22", text: "Oral arguments are held on motions to dismiss, with plaintiffs asserting their GI injury claims are well-supported and defendants arguing they are overly vague." },
-      { date: "April 21", text: "A CDC-backed study reports nearly 25,000 semaglutide-related emergency room visits during 2022–2023, many involving hospitalization for GI or hypoglycemic events." },
-      { date: "April 1", text: "The GLP-1 MDL adds 164 new cases in March as parties prepare for a Rule 702 hearing that may determine which expert testimony is admissible." },
-      { date: "March 26", text: "A new direct-filed Illinois case alleges Ozempic caused gastroparesis requiring hospitalization and claims Novo Nordisk failed to warn users of the risk." },
-      { date: "March 17", text: "Eli Lilly requests that only gastroparesis claims supported by objective diagnostic testing be permitted, challenging broader clinical evaluations." },
-      { date: "February 26", text: "A JAMA Ophthalmology study suggests semaglutide users may face an increased risk of NAION, raising concerns doctors should weigh before prescribing." },
-      { date: "February 25", text: "Eli Lilly announces price reductions for Zepbound amid slower-than-expected sales, with costs lowered to between $349 and $499 depending on dosage." },
-      { date: "February 6", text: "January filings surge to 110 new cases, a sharp rise from December 2024, bringing the GLP-1 MDL to 1,443 active cases." },
-      { date: "February 1", text: "A Michigan woman files suit against Novo Nordisk alleging severe gastrointestinal injuries from Ozempic, including vomiting, ileus, and dehydration requiring hospitalization." },
-      { date: "January 22", text: "A 2025 study finds Ozempic may increase risks of pancreatitis, kidney stones, arthritis, and fainting, complicating its perceived benefits." },
-      { date: "January 9", text: "The court schedules a Rule 702 hearing for May 14, 2025, to evaluate the admissibility of causation expert testimony across all GLP-1 lawsuits." }
+      {
+        date: "January",
+        text: "Monsanto has appealed a verdict that awarded a plaintiff $175 million in total damages, including $25 million in compensatory damages and $150 million in punitive damages.",
+      },
+      {
+        date: "February",
+        text: "Bayer is advocating legislation in the state of Iowa that would protect the company from Roundup-related cancer lawsuits in state courts.",
+      },
+      {
+        date: "March",
+        text: "A Georgia jury has awarded about $2.1 billion to a plaintiff, who claimed to have developed non-Hodgkin lymphoma after 20 years of using Roundup.",
+      },
+      {
+        date: "April",
+        text: "The federal Roundup MDL saw a minor update this month. Only one new case was filed, bringing the total number of lawsuits to 4,415.",
+      },
+      {
+        date: "May",
+        text: "A Missouri appellate court has upheld a $611 million verdict against Monsanto, holding the company liable for Roundup exposure.",
+      },
+      {
+        date: "June",
+        text: "Monsanto has reached a settlement in a Roundup cancer lawsuit filed by a Texas plaintiff. The case was tried in the St. Louis County Circuit Court.",
+      },
     ],
     secondHalf: [
-      { date: "December 12", text: "The court issues pretrial scheduling orders outlining discovery deadlines and bellwether selection criteria for the GLP-1 MDL." },
-      { date: "October 18", text: "Plaintiffs submit expert reports linking semaglutide to delayed gastric emptying and long-term gastrointestinal injury." },
-      { date: "August 6", text: "Defense motions seek summary judgment on failure-to-warn claims, arguing federal labeling compliance." }
-    ]
+      {
+        date: "July",
+        text: "A new study has found that glyphosate, the active ingredient in Roundup, increases the risk of multiple cancers in rats.",
+      },
+      {
+        date: "August",
+        text: "Bayer has added $1.37 billion to its litigation reserves related to Roundup as new cancer-related lawsuits continue to emerge.",
+      },
+      {
+        date: "September",
+        text: "The appellate court in Illinois has upheld Monsanto’s trial victory in a Cook County Roundup case.",
+      },
+      {
+        date: "October",
+        text: "The Missouri Supreme Court has declined to hear Bayer's appeal of a $611 million Roundup verdict.",
+      },
+    ],
   },
 
   "2024": {
     firstHalf: [
-      { date: "June 14", text: "The Judicial Panel on Multidistrict Litigation centralizes federal GLP-1 gastrointestinal injury cases in the Eastern District of Pennsylvania." },
-      { date: "April 30", text: "Early lawsuits allege Ozempic and Wegovy caused severe gastroparesis, nausea, and vomiting requiring hospitalization." },
-      { date: "February 12", text: "Medical literature begins highlighting delayed gastric emptying associated with GLP-1 receptor agonists." }
+      {
+        date: "January",
+        text: "A Pennsylvania jury awarded $2.25 billion to a plaintiff who claimed that Roundup caused his non-Hodgkin lymphoma.",
+      },
+      {
+        date: "March",
+        text: "A Roundup wrongful death trial in Delaware ended in a hung jury.",
+      },
+      {
+        date: "April",
+        text: "A judge reduced the $1.56 billion jury verdict issued in Missouri state court in November of last year to $611 million.",
+      },
+      {
+        date: "May",
+        text: "Legislation that would protect Bayer from future Roundup lawsuits is advancing through the Missouri General Assembly.",
+      },
+      {
+        date: "June",
+        text: "The Philadelphia Court of Common Pleas reduced the verdict in the McKivison case from $2.25 billion to $400 million.",
+      },
     ],
     secondHalf: [
-      { date: "November 19", text: "The MDL surpasses 900 active cases as consumer awareness grows through national media coverage." },
-      { date: "September 7", text: "Initial case management conferences set discovery protocols and preservation obligations for defendants." },
-      { date: "July 22", text: "Plaintiffs move for coordinated discovery on internal safety data and adverse event reporting." }
-    ]
+      {
+        date: "July",
+        text: "A plaintiff won an appeal of a jury verdict. The appellate court ruled that the trial court failed by excluding testimony from his expert, Dr. Charles Benbrook.",
+      },
+      {
+        date: "August",
+        text: "The Third Circuit Court ruled that federal pesticide labeling regulations preempt state laws.",
+      },
+      {
+        date: "September",
+        text: "In Young v. Monsanto, a Philadelphia jury rejected the plaintiff’s claims that Roundup weedkiller caused non-Hodgkin lymphoma.",
+      },
+      {
+        date: "October",
+        text: "A jury in Philadelphia awarded $78 million to a plaintiff who was diagnosed with non-Hodgkin lymphoma after decades of using Roundup.",
+      },
+      {
+        date: "November",
+        text: "A jury in Philadelphia absolved Monsanto of liability. This marked the third consecutive victory for Monsanto in Philadelphia’s Roundup mass tort litigation.",
+      },
+      {
+        date: "December",
+        text: "A mistrial was declared in the Chicago Roundup trial after the defense improperly referenced a past criminal charge against the plaintiff during cross-examination.",
+      },
+    ],
   },
-
-  "2023": {
-    firstHalf: [
-      { date: "May 8", text: "Physicians report increased patient complaints of persistent nausea and abdominal pain linked to GLP-1 medications." },
-      { date: "March 3", text: "FDA adverse event data reflects rising reports of gastrointestinal complications tied to semaglutide use." }
-    ],
-    secondHalf: [
-      { date: "December 1", text: "The first product liability lawsuits are filed alleging manufacturers failed to adequately warn of severe GI risks." },
-      { date: "October 11", text: "Consumer advocacy groups call for stronger post-market surveillance of GLP-1 weight loss drugs." }
-    ]
-  }
 };

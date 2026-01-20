@@ -8,11 +8,6 @@ import Footer from "../../components/Footer";
 import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPage";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import { LawsuitContent } from "../_content/types";
-import { mesotheliomaContent } from "../_content/mesothelioma";
-import { depoproveraContent } from "../_content/depoprovera";
-import { roundupContent } from "../_content/roundup";
-import { talcumContent } from "../_content/talcum";
 import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";
 import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/DepoLawsuitsLegalPage";
@@ -189,6 +184,34 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Yes, surviving family members can file wrongful death claims if their loved one died from talcum-related cancer.",
     },
   ],
+    "roundup-lawsuit": [
+    {
+      question: "What cancers qualify for Roundup lawsuits?",
+      answer:
+        "Most cases involve non-Hodgkin’s lymphoma, but some related blood cancers like leukemia may also qualify.",
+    },
+    {
+      question: "What is the average settlement for a Roundup case?",
+      answer:
+        "Settlements typically range from $5,000 to $250,000, depending on the severity of the case.",
+    },
+    {
+      question: "What proof do you need for a Roundup lawsuit?",
+      answer:
+        "You’ll need a medical diagnosis and evidence linking your condition to Roundup exposure.",
+    },
+    {
+      question: "How long does it take to get a settlement for Roundup?",
+      answer:
+        "Most cases take several months to a few years, depending on the court process and case complexity.",
+    },
+    {
+      question: "How to prove exposure to Roundup?",
+      answer:
+        "Proof may include work records, receipts, personal use history, or witness statements.",
+    },
+  ],
+
 };
 
 
@@ -210,12 +233,11 @@ export default function MassTortPage() {
       title: "Ozempic Lawsuit Timeline",
       data: ozempicTimelineData,
     },
-
-    "mesothelioma-lawsuit": {
-      title: "Mesothelioma Lawsuit Timeline",
-      data: mesotheliomaTimelineData,
-    },
-
+    // content not given for mesothelioma timeline
+    // "mesothelioma-lawsuit": {
+    //   title: "Mesothelioma Lawsuit Timeline",
+    //   data: mesotheliomaTimelineData,
+    // },
     "depo-provera-lawsuit": {
       title: "Depo Provera Lawsuit Timeline",
       data: depoTimelineData,
@@ -249,18 +271,23 @@ export default function MassTortPage() {
     "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
     "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
   };
+const timelineConfig = TIMELINE_BY_SLUG[slug];
 
   return (
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
       {LEGAL_PAGE_BY_SLUG[slug]}
-      <div id="timeline-section">
-        <TimeLineCard
-          title={TIMELINE_BY_SLUG[slug].title}
-          timelineData={TIMELINE_BY_SLUG[slug].data}
-          defaultYear="2025"
-        />
-      </div>
+   {timelineConfig && (
+  <div id="timeline-section">
+    <TimeLineCard
+      title={timelineConfig.title}
+      timelineData={timelineConfig.data}
+      defaultYear="2025"
+    />
+  </div>
+)}
+
+
       <div id="get-legal-support" >
       <OzempicInfo />
       </div>

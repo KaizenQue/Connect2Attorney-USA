@@ -20,22 +20,18 @@ export const content = {
   },
 
   realStories: [
-    {
-      name: "Todd Engel",
-      story:
-        "He was prescribed Ozempic in 2023 to manage his type 2 diabetes. Within four months, he was diagnosed with nonarteritic anterior ischemic optic neuropathy (NAION), which resulted in irreversible vision loss.",
-    },
-    {
-      name: "Paulsen Bronston",
-      story:
-        "Paul was prescribed Ozempic to lower his blood sugar. He experienced severe side effects, including persistent diarrhea, which ultimately required gallbladder removal.",
-    },
-    {
-      name: "Monica Church",
-      story:
-        "She began taking Ozempic to treat diabetes and soon developed symptoms including pain, vomiting, and gastroparesis. Monica reports she was not warned about the risk of serious digestive side effects before starting the medication.",
-    },
-  ],
+  {
+    name: "John Barnes",
+    story:
+      "In 2021, he filed a lawsuit against Monsanto after being diagnosed with non-Hodgkin’s lymphoma, which he linked to long-term Roundup exposure. A Georgia jury later ordered Bayer to pay approximately $2.1 billion in damages for his injuries.",
+  },
+  {
+    name: "John McKivison",
+    story:
+      "He accused Bayer of causing his non-Hodgkin’s lymphoma after using Roundup on his property for more than two decades. A Philadelphia jury ordered the company to pay $2.25 billion in damages for his suffering and losses.",
+  },
+],
+
 
   eligibilityPoints: [
     {
@@ -61,119 +57,128 @@ export const content = {
   ],
 
   healthRisks: [
-    {
-      number: "01",
-      title: "Severe Gastrointestinal Issues",
-      description:
-        "Reports indicate that Ozempic users have suffered from gastroparesis, a condition where the stomach muscles stop working properly, leading to chronic nausea, vomiting, and bloating.",
-    },
-    {
-      number: "02",
-      title: "Uncontrollable Vomiting",
-      description:
-        "Lawsuits have highlighted cases where individuals experienced excessive and repeated vomiting, leading to emergency medical treatment.",
-    },
-    {
-      number: "03",
-      title: "Gallbladder Diseases",
-      description:
-        "Medical studies have linked Ozempic to an increased risk of gallbladder problems. This includes gallstones and inflammation, requiring surgery in some cases.",
-    },
-    {
-      number: "04",
-      title: "Pancreatitis",
-      description:
-        "This inflammation of the pancreas causes severe abdominal pain and, in some cases, requires hospitalization and surgery.",
-    },
-    {
-      number: "05",
-      title: "Intestinal Blockage",
-      description:
-        "Paralysis or inflammation can cause food to build up in the intestines. This may lead to surgery or bowel removal.",
-    },
-  ],
+  {
+    number: "01",
+    title: "Breathing Problems",
+    description:
+      "Inhalation of talc particles can cause coughing, wheezing, or shortness of breath, particularly in infants and individuals with pre-existing respiratory conditions.",
+  },
+  {
+    number: "02",
+    title: "Talc Pneumoconiosis",
+    description:
+      "Prolonged exposure to talc dust, especially in industrial or occupational settings, can lead to lung inflammation and scarring, a condition known as talc pneumoconiosis.",
+  },
+  {
+    number: "03",
+    title: "Skin Irritation",
+    description:
+      "Frequent or long-term use of talc-based products may cause skin irritation, rashes, or allergic reactions in people with sensitive skin.",
+  },
+  {
+    number: "04",
+    title: "Lung Cancer",
+    description:
+      "Workers exposed to asbestos-contaminated talc may face a significantly higher risk of serious diseases such as mesothelioma or lung cancer.",
+  },
+],
+
 
 whoQualifies: [
   {
     description:
-      "Review your medical history to determine your eligibility to file an Ozempic lawsuit claim.",
+      "Used talcum powder or baby powder regularly over several years.",
   },
   {
     description:
-      "Gather medical records, prescriptions, and supporting evidence to build your case.",
+      "Was diagnosed with ovarian cancer or mesothelioma.",
   },
   {
     description:
-      "File your lawsuit within all applicable legal deadlines and statute of limitations requirements.",
+      "Has medical records linking the diagnosis to talcum powder exposure.",
   },
   {
     description:
-      "Pursue compensation for medical bills, lost income, pain and suffering, and other damages.",
-  },
-  {
-    description:
-      "Navigate the MDL process and participate in potential settlement negotiations or trial proceedings.",
+      "Is filing on behalf of a deceased family member (wrongful death claim).",
   },
 ],
 
- compensation: [
+
+compensation: [
   {
     title: "Medical Expenses",
     description:
-      "Reimbursement for hospital visits, medications, and surgeries needed to treat Ozempic-related health complications.",
+      "Coverage for current and future medical bills related to your illness, including hospital care, treatments, medications, and ongoing therapy.",
   },
   {
     title: "Lost Wages",
     description:
-      "Compensation for time missed from work due to severe side effects and ongoing medical treatments.",
+      "Compensation for income lost due to inability to work during treatment, recovery, or long-term disability caused by the illness.",
   },
   {
     title: "Pain and Suffering",
     description:
-      "Financial awards for physical pain, emotional distress, and diminished quality of life.",
+      "Financial awards for physical pain, emotional distress, and reduced quality of life caused by the disease and its treatment.",
   },
   {
     title: "Punitive Damages",
     description:
-      "In cases where the manufacturer is found to have knowingly withheld information about the drug’s risks, additional punitive damages may be awarded.",
+      "Additional damages intended to punish the manufacturer for negligence or misconduct, awarded in certain cases where wrongdoing is proven.",
+  },
+  {
+    title: "Other Related Costs",
+    description:
+      "This may include travel expenses for treatment, rehabilitation, home care, and other ongoing care needs related to your condition.",
   },
 ],
+
 
 mdllitigationPoints: [
   {
-    title:"Grouped Cases:",
     description:
-      "The Ozempic lawsuits have been combined in a federal court case called MDL No. 3094 to handle similar claims in the Eastern District of Pennsylvania.",
+    "As of December 2025, over 90,000 talcum powder claims have been filed against manufacturers and sellers of talc-based products.",
   },
   {
-    title:"Current Status:",
     description:
-      "As of December 2025, there are 2,947 lawsuits pending, overseen by Judge Karen Spencer Marston, with timelines for case management being set.",
+    "As of December 2025, more than 67,600 talcum powder lawsuits have been brought against Johnson & Johnson (J&J) and grouped into a consolidated multidistrict litigation (MDL). ",
+
   },
   {
-    title:"Ongoing Filings:",
     description:
-      "People are continuing to file new Ozempic lawsuits every day, showing that more individuals are coming forward with claims.",
+    "In December 2025, a jury awarded $40 million to two women who developed ovarian cancer after long-term use of Johnson & Johnson talc products. ",
+
+  },
+  {
+    description:
+    "In October 2025, a court ordered the company to pay $966 million to the family of a California woman who had passed away. ",
+
+  },
+   {
+    description:
+    "Also, a Minnesota jury awarded $65.5 million to a 37-year-old woman. ",
+    
   },
 ],
 
+
   pageContent: {
-    mainTitle: "What is an Ozempic Lawsuit?",
+    mainTitle: "What is the Talcum Powder Lawsuit? ?",
     mainParagraphs: [
-      "Ozempic has gained widespread attention as a treatment for type 2 diabetes and for its off-label use in weight loss. However, growing reports of severe gastrointestinal injuries have led many patients to file Ozempic lawsuits against drug manufacturers. If you or a loved one has experienced serious side effects after using Ozempic, Wegovy, or Mounjaro, you may be eligible for compensation. We’re ready to help you take action.",
-      "Ozempic lawsuits allege that the companies failed to adequately warn patients and healthcare providers about the risk of serious and potentially irreversible gastrointestinal side effects of the drug. More than 2,000 multidistrict litigation (MDL) lawsuits have been filed against the manufacturers of Ozempic, including Novo Nordisk and Eli Lilly. As of 2025, Novo Nordisk faces multiple lawsuits for allegedly failing to warn consumers about the risks associated with Ozempic",
-      "What Is Ozempic?",
-      "Ozempic (semaglutide) is an FDA-approved prescription medication used to manage type 2 diabetes. It belongs to a class of drugs called GLP-1 receptor agonists, which help regulate blood sugar by slowing digestion and increasing insulin production. While Ozempic is not FDA-approved for weight loss, it has been widely prescribed off-label for that purpose. ",
+      "Thousands of individuals and families have filed a talcum powder lawsuit after developing serious cancers linked to long-term use of talcum powder and baby powder products. In recent years, asbestos-contaminated talcum powder has been linked to ovarian cancer in women who used it for daily feminine hygiene. Connect 2 Attorney helps you connect with experienced talcum powder lawyers ",
+      "to explore your legal options quickly and confidentially. The talcum powder lawsuit involves legal claims against manufacturers of talcum powder and baby powder products, including Johnson & Johnson. Plaintiffs allege that these companies knowingly sold talcum powder contaminated with asbestos and failed to provide adequate cancer warnings, putting millions of consumers at risk",
+      "About Talcum Powder ",
+      "Talcum powder is made from talc, a naturally occurring mineral used for its moisture-absorbing properties. For decades, talcum powder and baby powder were marketed as safe for daily hygiene use, including feminine hygiene and infant care. However, talc is often found near asbestos deposits, increasing the risk of contamination during mining.",
+
     ],
 
     allegationsTitle: "Who is Eligible to File a Claim? ",
     allegationsParagraph:
-      "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
+      "Many individuals have come forward claiming that long-term use of talcum powder led to ovarian cancer or other health complications. You may qualify to file a talcum powder lawsuit if you or a loved one: ",
+    allegationsSubtitle: "You may qualify if:  ",
 
-    healthRisksTitle: "What are the Ozempic Side Effects? ",
+    healthRisksTitle: "Talcum Powder, Baby Powder & Cancer Risk Explained ? ",
     healthRisksParagraph:
-      "While mild nausea and digestive discomfort were disclosed, many patients reported far more serious complications that were not clearly warned about. ",
+      "Beyond its link to ovarian cancer, talcum powder exposure has been associated with several other serious health conditions. These risks arise primarily from inhaling talc particles or exposure to asbestos-contaminated products. Other health risks include:  ",
     healthRisksSubtitle: "Health Risks Linked to Ozempic Use ",
     healthRisksSubtitle2:
       "Reported health risks associated with Ozempic include: ",
@@ -182,22 +187,22 @@ mdllitigationPoints: [
       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
     whoQualifiesSubtitle: "An experienced Ozempic lawyer can help you: ",
 mdllitigationTitle:
-  "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
+  "Talcum Powder Lawsuit Updates: Latest Court Decisions & Case Status ?",
 
 mdllitigationParagraph:
-  "Individuals are filing Ozempic lawsuits against Novo Nordisk due to gastroparesis and other serious gastrointestinal injuries. These cases have been consolidated into a federal multidistrict litigation (MDL) to streamline proceedings.",
+  "Thousands of claims remain active as courts evaluate liability, scientific evidence, and corporate conduct. Several verdicts have resulted in multi-million-dollar awards for victims, while appeals and settlement negotiations continue. ",
 
-    compensationTitle: "What Compensation Can You Seek?",
+    compensationTitle: "Talcum Powder Settlements & Compensation: What You Can Expect ",
     compensationParagraph:
-      "Patients harmed by Ozempic and similar drugs are pursuing compensation for the physical, emotional, and financial toll caused by undisclosed side effects. Novo Nordisk is already facing lawsuits worth over $2 billion, with potential settlements ranging from $300,000 to $700,000, depending on the severity of each case.",
+      "Victims of talcum powder exposure often face heavy medical costs, emotional distress, and loss of income due to long-term illness. Settlements can range from $100,000 to $1 million or more, based on the severity of harm and evidence presented.  ",
     compensationSubtitle:
-      "If eligible, you may be able to recover damages such as:",
+      "Types of compensation include:  ",
 
     realStoriesTitle: "Real Stories Behind Lawsuit",
 
-    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    stepsTitle: "How to File a Roundup Cancer Lawsuit with Connect2Attorney? ",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+      "Connect2Attorney guides you through the process of filing a Roundup cancer lawsuit against the responsible party, in just three simple steps: ",
   },
 
   ctaContent: {
@@ -230,18 +235,15 @@ mdllitigationParagraph:
   
 };
 const OZEMPIC_TOC = [
-   { label: "What is an Ozempic Lawsuit?", id: "main-title" },
-    { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
-    { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
-    { label: "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?", id: "mdl-litigation-title" },
-    { label: "How Can an Ozempic Lawyer Help You Recover Compensation?", id: "who-qualifies-title" },
-    { label: "What Compensation Can You Seek?", id: "compensation-title" },
-    { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
-    { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
-    { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
-    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
-    { label: "FAQs", id: "faq-section" },
+  { label: "What is the Talcum Powder Lawsuit?", id: "main-title" },
+  { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+  { label: "Talcum Powder, Baby Powder & Cancer Risk Explained", id: "health-risks-title" },
+  { label: "Talcum Powder Lawsuit Updates", id: "mdl-litigation-title" },
+  { label: "Talcum Powder Settlements & Compensation", id: "compensation-title" },
+  { label: "Real Stories Behind Lawsuit", id: "real-stories-title" },
+  { label: "How to File a Talcum Powder Lawsuit", id: "steps-title" },
 ];
+
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
@@ -319,7 +321,7 @@ const LawsuitsLegalPage = () => {
             >
               {content.pageContent.mainTitle}
             </h1>
-            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1 capitalize">
               <p>{content.pageContent.mainParagraphs[0]}</p>
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
@@ -332,38 +334,59 @@ const LawsuitsLegalPage = () => {
             </div>
 
             {/* <Ozempicfreecasecard /> */}
-            <h2
-              id={content.sectionIds.allegationsTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-            >
-              {content.pageContent.allegationsTitle}
-            </h2>
 
-            <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
-              {content.pageContent.allegationsSubtitle}
-            </p>
-
-            <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
-              {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  {/* Custom bullet */}
-                  <span className="mt-[7px] shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                    >
-                      <circle cx="7" cy="7" r="7" fill="#162766" />
-                    </svg>
-                  </span>
-
-                  {/* Text */}
-                  <span>{item.description}</span>
-                </li>
-              ))}
-            </ul>
+                 {/* <Ozempicfreecasecard /> */}
+                        <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
+                          <h2
+                            id={content.sectionIds.allegationsTitle}
+                            className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+                          >
+                            <span className="text-[#FCCB48]">
+                              {content.pageContent.allegationsTitle.split(" ")[0]}{" "}
+                              {content.pageContent.allegationsTitle.split(" ")[1]}{" "}
+                              {content.pageContent.allegationsTitle.split(" ")[2]}
+                            </span>{" "}
+                            {content.pageContent.allegationsTitle
+                              .split(" ")
+                              .slice(3)
+                              .join(" ")}
+                          </h2>
+                          <p className="mb-4 font-urbanist   text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                            {content.pageContent.allegationsParagraph}
+                          </p>
+                             <p className="mb-4 font-urbanist font-bold   text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                            {content.pageContent.allegationsSubtitle}
+                          </p>
+                          <ul className="space-y-5 mb-2">
+                            {content.whoQualifies.map((item, index) => (
+                              <li key={index} className="flex items-start gap-3">
+                                {/* Yellow Bullet */}
+                                <span className="mt-[6px] flex-shrink-0">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 14 14"
+                                    fill="none"
+                                  >
+                                    <ellipse
+                                      cx="6.83621"
+                                      cy="6.9697"
+                                      rx="6.83621"
+                                      ry="6.9697"
+                                      fill="#F2C438"
+                                    />
+                                  </svg>
+                                </span>
+                                {/* Text */}
+                                <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                                  {item.description}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+         
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
@@ -378,12 +401,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.healthRisksParagraph}
               </p>
 
-              <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.healthRisksSubtitle}
-              </p>
-              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
-                {content.pageContent.healthRisksSubtitle2}
-              </p>
+         
               <div className="space-y-4 w-full mb-16">
                 {content.healthRisks.map((item, index) => (
                   <div
@@ -415,90 +433,27 @@ const LawsuitsLegalPage = () => {
   {content.pageContent.mdllitigationParagraph}
 </p>
 
-<ul className="space-y-3 mb-8 whitespace-pre-line">
+<div className="space-y-4 w-full mb-16">
   {content.mdllitigationPoints.map((item, index) => (
-    <li key={index} className="flex items-start gap-3">
-      {/* Custom bullet */}
-      <span className="mt-[7px] shrink-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-        >
-          <circle cx="7" cy="7" r="7" fill="#162766" />
-        </svg>
-      </span>
+    <div
+      key={index}
+      className="bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5"
+    >
+    
 
-      {/* Text */}
-      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-        <span className="font-bold">
-          {item.title}
-        </span>{" "}
-        <span className="font-normal">
-          {item.description}
-        </span>
-      </span>
-    </li>
+      {/* Description */}
+      <p className="font-urbanist font-bold text-[#425777] text-[16px] sm:text-[18px]  leading-[24px] sm:leading-[27px]">
+        {item.description}
+      </p>
+    </div>
   ))}
-</ul>
+</div>
 
 
 
 
 
-              <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-                <h2
-                  id={content.sectionIds.whoQualifiesTitle}
-                  className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-                >
-                  <span className="">
-                    {content.pageContent.whoQualifiesTitle.split(" ")[0]}{" "}
-                    {content.pageContent.whoQualifiesTitle.split(" ")[1]}
-                  </span>{" "}
-                  {content.pageContent.whoQualifiesTitle
-                    .split(" ")
-                    .slice(2)
-                    .join(" ")}
-                </h2>
 
-         
-
-                <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
-                  {content.pageContent.whoQualifiesSubtitle}
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {content.whoQualifies.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Yellow Bullet */}
-                      <span className="mt-[6px] flex-shrink-0">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                        >
-                          <ellipse
-                            cx="6.83621"
-                            cy="6.9697"
-                            rx="6.83621"
-                            ry="6.9697"
-                            fill="#F2C438"
-                          />
-                        </svg>
-                      </span>
-
-                      {/* Text */}
-                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                        {item.description}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
               <h2
                 id={content.sectionIds.compensationTitle}
@@ -515,28 +470,54 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.compensationSubtitle}
               </p>
 
-              <ul className="rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full mb-16 bg-[#F0F2F4]">
-                {content.compensation.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    {/* Blue Bullet */}
-                    <span className="mt-[6px] text-[#162766] text-[16px] sm:text-[18px]">
-                      •
-                    </span>
-
-                    <div>
-                      {/* Title */}
-                      <h4 className="font-noto-serif text-[#162766] text-[18px] sm:text-[20px] font-medium leading-normal mb-1">
-                        {item.title}:
-                      </h4>
-
-                      {/* Description */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        {item.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                <div className="space-y-4 sm:space-y-5 w-full mb-16">
+                            {content.compensation.map((item, index) => (
+                              <div
+                                key={index}
+                                className="
+                                  flex
+                                  flex-col
+                                  items-start
+                                  gap-[10px]
+                                  self-stretch
+                                  p-[20px]
+                                  rounded-[10px]
+                                  bg-[#F0F2F4]
+                                "
+                              >
+                                {/* Title */}
+                                <h4
+                                  className="
+                                    text-[#162766]
+                                    font-noto-serif
+                                    text-[20px]
+                                    sm:text-[22px]
+                                    lg:text-[24px]
+                                    font-bold
+                                    leading-normal
+                                  "
+                                >
+                                  {item.title}
+                                </h4>
+                          
+                                {/* Description */}
+                                <p
+                                  className="
+                                    text-[#425777]
+                                    font-urbanist
+                                    text-[16px]
+                                    sm:text-[17px]
+                                    lg:text-[18px]
+                                    font-bold
+                                    leading-[27px]
+                                  "
+                                >
+                                  {item.description}
+                                </p>
+                              </div>
+                            ))}
+                          
+                          </div>
 
               <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
                 {/* Section Title */}

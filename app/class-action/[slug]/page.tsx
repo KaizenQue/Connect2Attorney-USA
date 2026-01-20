@@ -7,11 +7,11 @@ import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage"
 import { teslaTimelineData } from "@/app/components/timelines/teslaTimelineData";
 import { TimelineData } from "@/app/components/timelineTypes";
 import MaclarenLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MaclarenLawsuitsLegalPage";
+import { maclarenHallTimelineData } from "@/app/components/timelines/maclarenTimelineData";
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -99,6 +99,10 @@ export default function MassTortPage() {
       "tesla-autopilot-recall-lawsuit": {
         title: "Tesla Autopilot Timeline",
         data: teslaTimelineData,
+      },
+      "maclaren-hall-sex-abuse-lawsuit": {
+        title: "Maclaren Hall Lawsuit Timeline",
+        data: maclarenHallTimelineData,
       },
     };
 

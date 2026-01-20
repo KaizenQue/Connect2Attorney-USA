@@ -5,13 +5,12 @@ import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
-import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPage";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";
 import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MesoLawsuitsLegalPage";
 import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage"
-
+import { teslaTimelineData } from "@/app/components/timelines/teslaTimelineData";
+import { TimelineData } from "@/app/components/timelineTypes";
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -23,31 +22,31 @@ const HERO_TITLES: Record<string, string> = {
 };
 /* ================= FAQ DATA ================= */
 const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
-  "ozempic-lawsuit": [
+  "tesla-autopilot-recall-lawsuit": [
     {
-      question: "What is the Ozempic lawsuit about?",
+      question: "What is the Tesla Autopilot recall lawsuit about?",
       answer:
-        "The Ozempic lawsuit involves claims that the drug caused serious gastrointestinal injuries, such as gastroparesis, and that the manufacturer failed to provide adequate warnings.",
+        "The lawsuit alleges that Tesla misled consumers about the safety and capabilities of its Autopilot and Full Self-Driving systems and failed to adequately prevent crashes linked to defective or insufficient driver-assistance controls.",
     },
     {
-      question: "Who can file an Ozempic lawsuit?",
+      question: "What safety risks are associated with Tesla Autopilot?",
       answer:
-        "Individuals who used Ozempic and experienced severe digestive issues, required medical treatment, or suffered long-term health problems may be eligible to file a claim.",
+        "Reported risks include lane-keeping failures, sudden or unexpected braking, collisions with stationary objects or emergency vehicles, and driver over-reliance allegedly encouraged by misleading marketing.",
     },
     {
-      question: "What are the problems caused by Ozempic?",
+      question: "Is Tesla being forced to remove Autopilot from vehicles?",
       answer:
-        "Reported problems include gastroparesis (stomach paralysis), nausea, vomiting, intestinal blockage, and other painful stomach conditions.",
+        "No. Tesla has issued recalls and software updates to address regulatory concerns, but Autopilot remains available and has not been removed from vehicles.",
     },
     {
-      question: "What kind of compensation can I recover?",
+      question: "How much compensation can I receive from a Tesla Autopilot lawsuit?",
       answer:
-        "Eligible plaintiffs may recover compensation for medical bills, lost income, pain and suffering, and other damages caused by Ozempic-related injuries.",
+        "Compensation varies depending on the severity of injuries, property damage, and other losses. Cases involving serious injury or wrongful death may result in substantial settlements or verdicts.",
     },
     {
-      question: "How do I start an Ozempic claim?",
+      question: "Do I need to pay an attorney upfront to file a Tesla Autopilot lawsuit?",
       answer:
-        "You can start by contacting an experienced Ozempic lawyer for a free case review. They can evaluate your eligibility, gather medical records, and guide you through the lawsuit process.",
+        "No. Most Tesla Autopilot attorneys work on a contingency fee basis, meaning you only pay legal fees if your case is successful.",
     },
   ],
 };
@@ -62,6 +61,16 @@ export default function MassTortPage() {
       Lawsuits
     </>
   );
+
+    const TIMELINE_BY_SLUG: Record<
+      string,
+      { title: string; data: TimelineData }
+    > = {
+      "tesla-autopilot-recall-lawsuit": {
+        title: "Tesla Autopilot Timeline",
+        data: teslaTimelineData,
+      },
+    };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
     {
@@ -78,11 +87,23 @@ export default function MassTortPage() {
     "maclaren-hall-sex-abuse-lawsuit": <MesoLawsuitsLegalPage />,
   };
 
+    const timelineConfig = TIMELINE_BY_SLUG[slug];
   return (
     <main className="min-h-screen">
       <LawsuitsHeroCard heroTitle={heroTitle} />
       {LEGAL_PAGE_BY_SLUG[slug]}
-      {/* <TimeLineCard /> */}
+     <div id="timeline-section">
+        {timelineConfig && (
+          <div id="timeline-section">
+            <TimeLineCard
+              title={timelineConfig.title}
+              timelineData={timelineConfig.data}
+              defaultYear="2025"
+            />
+          </div>
+        )}
+      </div>
+
       <OzempicInfo />
       <FaqSection faqData={faqData} />
       <ContactCard />

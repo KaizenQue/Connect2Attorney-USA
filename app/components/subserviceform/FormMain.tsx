@@ -3,10 +3,11 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-
-const CRM_API_URL: string | null = null; // "/api/crm" when ready
+import {sendWithEmailJS} from "./emailJsService";
+const CRM_API_URL =
+  "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
 const CLIENT_WEBHOOK_URL: string | null = null;
-const EMAILJS_ENABLED = false;
+const EMAILJS_ENABLED = true;
 
 /* ---------------- Config ---------------- */
 
@@ -63,6 +64,7 @@ const formatPhone = (value: string) => {
     10
   )}`;
 };
+
 // eslint-disable-next-line react/display-name
 const PencilIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -460,7 +462,7 @@ export default function Form() {
         setShowCaptcha(false);
         setRobotChecked(false);
         setCaptchaResetTrigger((p) => !p);
-      }, 1000); // ⏱️ 1 second
+      }, 3000); // ⏱️ 1 second
 
       return () => clearTimeout(t);
     }
@@ -896,8 +898,10 @@ const handleSubmit = async () => {
         email: form.email,
         phone: `+1${normalizePhone(form.phone)}`,
         zip: form.zip,
-        caseType,
-        description,
+        category: caseType,
+        caseHistory: description,
+        state: "",
+
         ipAddress: await getIPAddress(),
 
         trustedFormCertUrl: tfCertUrl,
@@ -905,57 +909,69 @@ const handleSubmit = async () => {
         trustedFormPingUrl: tfPingUrl,
 
         submissionDate: new Date().toISOString(),
+        pageSource: getSourceUrl(),
       },
     };
 
     console.log("🚀 FINAL API BODY:", apiBody);
 
     // =====================================================
-    // 1️⃣ CRM — ONLY IF DEFINED
+    // 1 CRM (AZURE) — MUST SUCCEED
     // =====================================================
-    if (CRM_API_URL) {
-      try {
-        const res = await fetch(CRM_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(apiBody),
-        });
+    try {
+      const res = await fetch(CRM_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apiBody),
+      });
 
-        if (!res.ok) throw new Error("CRM failed");
-      } catch (err) {
-        console.error("❌ CRM FAILED:", err);
-        alert("Submission failed. Please try again.");
-        return; // ⛔ stop everything
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error("CRM failed: " + text);
       }
+    } catch (err) {
+      console.error("❌ CRM FAILED:", err);
+      alert("Submission failed. Please try again.");
+      return;
     }
-
     // =====================================================
-    //  WEBHOOK — OPTIONAL
+    // 2 CLIENT WEBHOOK — CONDITIONAL HARD FAIL
     // =====================================================
     if (CLIENT_WEBHOOK_URL) {
       try {
-        await fetch(CLIENT_WEBHOOK_URL, {
+        const res = await fetch(CLIENT_WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(apiBody),
         });
+
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error("Webhook failed: " + text);
+        }
       } catch (err) {
-        console.warn("⚠️ Webhook failed:", err);
+        console.error("❌ WEBHOOK FAILED:", err);
+        alert("Submission failed. Please try again.");
+        return;
       }
     }
 
+    // =====================================================
+    // 3 EMAILJS — MUST SUCCEED
+    // =====================================================
+    try {
+      await sendWithEmailJS(apiBody);
+    } catch (err) {
+      console.error("❌ EMAILJS FAILED:", err);
+      alert("Submission failed. Please try again.");
+      return;
+    }
+
     
-    // 3️⃣ EMAILJS — OPTIONAL
-    // if (EMAILJS_ENABLED && typeof sendWithEmailJS === "function") {
-    //   try {
-    //     await sendWithEmailJS(apiBody);
-    //   } catch (err) {
-    //     console.warn("⚠️ EmailJS failed:", err);
-    //   }
-    // }
 
-
+    // =====================================================
     // SUCCESS
+    // =====================================================
     setDirection("next");
     setStep(4);
   } catch (e) {
@@ -965,6 +981,7 @@ const handleSubmit = async () => {
     setIsSubmitting(false);
   }
 };
+
 
 
   /* ---------------- UI ---------------- */

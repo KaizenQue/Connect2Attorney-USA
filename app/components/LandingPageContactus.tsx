@@ -13,6 +13,8 @@ const sendFormUser = async (data: Record<string, unknown>) => {
   console.debug("sendFormUser called (stub)", data);
   return Promise.resolve();
 };
+import { sendWithEmailJS } from "../emailjs";
+
 declare global {
   interface Window {
     TrustedForm?: {
@@ -2653,134 +2655,94 @@ const LandingPageContactus: React.FC<{
     };
   }, []);
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (!isFormValid || isSubmitting) return;
+ const handleSubmit = useCallback(
+  async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
 
-      setIsSubmitting(true);
-      setSubmitMessage(null);
+    setIsSubmitting(true);
+    setSubmitMessage(null);
 
-      try {
-        const rawPhone = formData.phone?.replace(/\D/g, "") || "";
+    try {
+      const rawPhone = formData.phone?.replace(/\D/g, "") || "";
 
-        const submitData = {
-          ...formData,
-          phone: rawPhone,
-          certId: certId || "",
-          tokenUrl: tokenUrl || "",
-          pingUrl: pingUrl || "",
-        };
-        try {
-          await Promise.all([
-            sendFormAdmin(submitData),
-            sendFormUser(submitData),
-          ]);
-          await fetch(
-            "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                countryName: "USA",
-                brandName: "C2A",
-                websiteName: "Connect 2 Attorney",
-                formname: "Contact Us Form",
-                data: {
-                  name: submitData.name,
-                  email: submitData.email,
-                  phone: `+1${submitData.phone}`,
-                  category: submitData.category,
-                  state: submitData.state,
-                  caseHistory: submitData.caseHistory,
-                  needHelp: submitData.needHelp || false,
-                  ipAddress: await getIPAddress(),
-                  trustedFormCertUrl: submitData.certId,
-                  trustedFormToken: submitData.tokenUrl,
-                  trustedFormPingUrl: submitData.pingUrl,
-                  submissionDate: new Date().toISOString(),
-                  pageSource: getSourceUrl(),
-                },
-              }),
-            }
-          );
-          setFormData(initialData);
-          setSuccessDialogOpen(true);
-          setShowCaptcha(false);
-          setCaptchaValid(false);
-          setResetTrigger((t) => !t);
-          setPhoneError("");
-          setEmailError("");
-          setNameError("");
-          setSubmitMessage({
-            type: "success",
-            text: "Form submitted successfully! You should receive a confirmation email shortly.",
-          });
-        } catch (err) {
-          console.error("Email sending error:", err);
-          try {
-            await sendFormAdmin(submitData);
-            await fetch(
-              "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  countryName: "USA",
-                  brandName: "C2A",
-                  websiteName: "Connect 2 Attorney",
-                  formname: "Enquiry Form",
-                  data: {
-                    name: submitData.name,
-                    email: submitData.email,
-                    phone: `+1${submitData.phone}`,
-                    category: submitData.category,
-                    state: submitData.state,
-                    caseHistory: submitData.caseHistory,
-                    needHelp: submitData.needHelp || false,
-                    ipAddress: await getIPAddress(),
-                    trustedFormCertUrl: submitData.certId,
-                    trustedFormToken: submitData.tokenUrl,
-                    trustedFormPingUrl: submitData.pingUrl,
-                    submissionDate: new Date().toISOString(),
-                    pageSource: getSourceUrl(),
-                  },
-                }),
-              }
-            );
-            setSubmitMessage({
-              type: "success",
-              text: "Form submitted successfully! Confirmation email failed, but we have received your inquiry.",
-            });
-            setSuccessDialogOpen(true);
-          } catch (adminErr) {
-            console.error("Admin email error:", adminErr);
-            setSubmitMessage({
-              type: "error",
-              text: "There was an error submitting your form. Please try again or contact us directly.",
-            });
-          }
+      const apiBody = {
+        countryName: "USA",
+        brandName: "C2A",
+        websiteName: "Connect 2 Attorney",
+        formname: "Contact Us Form",
+        sourceUrl: getSourceUrl(),
+        data: {
+          name: formData.name,
+          email: formData.email,
+          phone: `+1${rawPhone}`,
+          zip: formData.zip || "",
+          caseType: formData.category,
+          description: formData.caseHistory,
+          state: formData.state || "",
+          ipAddress: await getIPAddress(),
+          trustedFormCertUrl: certId || "",
+          trustedFormToken: tokenUrl || "",
+          trustedFormPingUrl: pingUrl || "",
+          submissionDate: new Date().toISOString(),
+          pageSource: getSourceUrl(),
+        },
+      };
+
+      // 1️⃣ CRM — MUST SUCCEED
+      const crmRes = await fetch(
+        "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(apiBody),
         }
-      } catch (error) {
-        console.error("Form submission error:", error);
-        setSubmitMessage({
-          type: "error",
-          text: "There was an error submitting your form. Please try again or contact us directly.",
-        });
-      } finally {
-        setIsSubmitting(false);
+      );
+
+      if (!crmRes.ok) {
+        const text = await crmRes.text();
+        throw new Error("CRM failed: " + text);
       }
-    },
-    [
-      isFormValid,
-      isSubmitting,
-      formData,
-      certId,
-      tokenUrl,
-      pingUrl,
-      initialData,
-    ]
-  );
+
+      // 2️⃣ EMAILJS — MUST SUCCEED
+      await sendWithEmailJS(apiBody);
+
+      // ✅ SUCCESS
+      setFormData(initialData);
+      setSuccessDialogOpen(true);
+      setShowCaptcha(false);
+      setCaptchaValid(false);
+      setResetTrigger((t) => !t);
+      setPhoneError("");
+      setEmailError("");
+      setNameError("");
+
+      setSubmitMessage({
+        type: "success",
+        text: "Form submitted successfully! You will receive a confirmation email shortly.",
+      });
+    } catch (error) {
+      console.error("❌ Submission error:", error);
+
+      setSubmitMessage({
+        type: "error",
+        text: "There was an error submitting your form. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  },
+  [
+    isFormValid,
+    isSubmitting,
+    formData,
+    certId,
+    tokenUrl,
+    pingUrl,
+    initialData,
+  ]
+);
+
 
   return (
     <>

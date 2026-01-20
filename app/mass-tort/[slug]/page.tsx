@@ -214,10 +214,8 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
 
 };
 
-
 export default function MassTortPage() {
   const { slug } = useParams<{ slug: string }>();
-  // const content: LawsuitContent | undefined = CONTENT_BY_SLUG[slug];
   const heroTitle: ReactNode = HERO_TITLES[slug] ?? (
     <>
       Mass Tort
@@ -233,11 +231,10 @@ export default function MassTortPage() {
       title: "Ozempic Lawsuit Timeline",
       data: ozempicTimelineData,
     },
-    // content not given for mesothelioma timeline
-    // "mesothelioma-lawsuit": {
-    //   title: "Mesothelioma Lawsuit Timeline",
-    //   data: mesotheliomaTimelineData,
-    // },
+    "mesothelioma-lawsuit": {
+      title: "Mesothelioma Lawsuit Timeline",
+      data: mesotheliomaTimelineData,
+    },
     "depo-provera-lawsuit": {
       title: "Depo Provera Lawsuit Timeline",
       data: depoTimelineData,
@@ -261,9 +258,6 @@ export default function MassTortPage() {
     },
   ];
 
-  // if (!slug || !content) {
-  //   return null; // or a loader, or notFound()
-  // }
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
     "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,

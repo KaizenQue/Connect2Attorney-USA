@@ -987,346 +987,270 @@ const handleSubmit = async () => {
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="w-full  flex justify-center items-center p-3 sm:p-4">
-      <Toaster position="top-right" />
- <div
-  ref={containerRef}
-  className="
-    flex flex-col
-    w-full
-    max-w-[447px]
-
-    h-[596px]
-    max-h-[calc(100vh-24px)]
-
-    sm:h-[596px]
-    sm:max-h-[90vh]
-
-    bg-white
-    rounded-xl
-    shadow-xl
-    overflow-hidden
-  "
->
-
-
-        {/* ---------------- STEP 1 ---------------- */}
-        <Step active={step === 1} direction={direction}>
+  <div className="w-full flex justify-center items-center p-3 sm:p-4">
+  <Toaster position="top-right" />
+  <div
+    ref={containerRef}
+    className="
+      flex flex-col
+      w-full
+      max-w-[447px]
+      min-h-[450px]  /* Reduced from 596px */
+      max-h-[calc(100vh-24px)]
+      bg-white
+      rounded-xl
+      shadow-xl
+      overflow-hidden
+    "
+  >
+    {/* ---------------- STEP 1 ---------------- */}
+    <Step active={step === 1} direction={direction}>
+      <div className="flex flex-col h-full">
         <form
-  className="flex flex-col h-full p-4"
-  onSubmit={(e) => {
-    e.preventDefault();
-    next();
-  }}
->
-  {/* TrustedForm hidden fields */}
-  <input type="hidden" name="xxTrustedFormCertUrl" />
-  <input type="hidden" name="xxTrustedFormCertToken" />
-  <input type="hidden" name="xxTrustedFormPingUrl" />
-
-  {/* ================= CONTENT ================= */}
-  <div className="flex-1">
-    {/* Header */}
-    <div className="mb-4">
-      <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-        It&apos;s easy to get started
-      </h2>
-      <p className="text-[#6E6E6E] font-urbanist text-[14px] font-medium mt-1">
-        Provide a few details about your case and our team will take it from here.
-      </p>
-    </div>
-
-    {/* Inputs */}
-    <div className="flex flex-col gap-3">
-      <Input
-        label="First name"
-        value={form.firstName}
-        error={firstError || errors.firstName}
-        onChange={handleFirstNameChange}
-      />
-      <Input
-        label="Last name"
-        value={form.lastName}
-        error={lastError || errors.lastName}
-        onChange={handleLastNameChange}
-      />
-      <Input
-        label="Phone number"
-        value={form.phone}
-        error={phoneError || errors.phone}
-        onChange={handlePhoneChange}
-      />
-      <Input
-        label="Email"
-        value={form.email}
-        error={emailError || errors.email}
-        onChange={handleEmailChange}
-      />
-      <Input
-        label="Zip code"
-        value={form.zip}
-        error={zipError || errors.zip}
-        onChange={handleZipChange}
-      />
-    </div>
-  </div>
-
-  {/* ================= BOTTOM BAR ================= */}
-  <div className="-mx-5 mt-4">
-    <ProgressBar step={step} />
-  </div>
-
-  <div className="mt-3">
-    <button
-      type="submit"
-      className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg"
-    >
-      Next
-    </button>
-  </div>
-</form>
-
-        </Step>
-
-        {/* ---------------- STEP 2 ---------------- */}
-   <Step active={step === 2} direction={direction}>
-  <div className="flex flex-col h-full p-4" ref={dropdownRef}>
-    {/* ================= CONTENT ================= */}
-    <div className="flex-1 flex flex-col justify-between">
-      {/* -------- TOP GROUP -------- */}
-      <div className="space-y-3">
-        <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-          Select Your Case
-        </h2>
-
-        <p className="font-urbanist font-medium text-[#6E6E6E] text-[14px] leading-normal">
-          Tell us about your situation, and we&apos;ll connect you with the right legal support.
-        </p>
-
-        {/* Custom dropdown */}
-        <button
-          type="button"
-          onClick={() => setDropdownOpen((v) => !v)}
-          className="w-full h-[50px] px-4 rounded-[10px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[16px] font-medium text-[#303030]"
+          className="flex flex-col h-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            next();
+          }}
         >
-          <span className="truncate">
-            {caseType || "Choose from the list"}
-          </span>
-          {dropdownOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-        </button>
+          {/* Hidden fields */}
+          <input type="hidden" name="xxTrustedFormCertUrl" />
+          <input type="hidden" name="xxTrustedFormCertToken" />
+          <input type="hidden" name="xxTrustedFormPingUrl" />
 
-        {dropdownOpen && (
-          <div className="mt-1 w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[176px] overflow-y-auto">
-            {CASES.map((item) => {
-              const isSelected = caseType === item;
-              return (
-                <div
-                  key={item}
-                  onClick={() => {
-                    setCaseType(item);
-                    setDropdownOpen(false);
-                    setErrors({});
-                  }}
-                  className={`group h-[44px] px-3 flex items-center justify-between cursor-pointer transition-colors ${
-                    isSelected
-                      ? "bg-[#162766] text-white"
-                      : "text-[#162766] hover:bg-[#162766] hover:text-white"
-                  }`}
-                >
-                  <span className="truncate">{item}</span>
-                  <span
-                    className={`text-[#F2C438] ${
-                      isSelected
-                        ? "opacity-100"
-                        : "opacity-0 group-hover:opacity-100"
-                    }`}
-                  >
-                    ✓
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {errors.caseType && (
-          <p className="text-xs text-red-500">{errors.caseType}</p>
-        )}
-      </div>
-
-      {/* -------- BOTTOM GROUP -------- */}
-      <div>
-        <textarea
-          placeholder="Please describe what happened"
-          className="w-full border border-[#E2E4EA] rounded-[10px] p-3 min-h-[100px]"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-    </div>
-
-    {/* ================= BOTTOM BAR ================= */}
-    <div className="-mx-5 mt-4">
-      <ProgressBar step={step} />
-    </div>
-
-    <div className="mt-3">
-      <button
-        onClick={next}
-        className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg"
-      >
-        Next
-      </button>
-    </div>
-  </div>
-</Step>
-
-
-        {/* ---------------- STEP 3 ---------------- */}
-        <Step active={step === 3} direction={direction}>
-          <div className="flex flex-col h-full">
-            {/* ================= CONTENT ================= */}
-<div className="flex-1 p-4 space-y-4 overflow-y-auto">
-              <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-                Confirm your Personal Details
-              </h2>
-
-              {/* Details Card */}
-              <div className="border border-[#E6E8F0] rounded-xl p-4 space-y-2 text-sm">
-                <div className="flex items-center">
-                  <Row label="First name" value={form.firstName} />
-
-                  <button
-                    onClick={() => {
-                      setDirection("back");
-                      setStep(1);
-                    }}
-                    className="ml-auto text-[#162766]"
-                    aria-label="Edit"
-                  >
-                    <PencilIcon className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <Row label="Last name" value={form.lastName} />
-                <Row label="Phone number" value={formatPhone(form.phone)} />
-                <Row label="Email" value={form.email} />
-                <Row label="Zip code" value={form.zip} />
-                <Row label="Case Type" value={caseType} />
-              </div>
-
-              {/* ================= CONSENT + CAPTCHA ================= */}
-              <div className="pt-2 space-y-3">
-                {/* Checkbox + Text */}
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={robotChecked}
-                    disabled={isSubmitting}
-                    onChange={(e) => {
-                      const checked = e.target.checked;
-                      setRobotChecked(checked);
-
-                      if (checked) {
-                        setShowCaptcha(true);
-                      } else {
-                        setShowCaptcha(false);
-                        setCaptchaVerified(false);
-                        setCaptchaResetTrigger((p) => !p);
-                      }
-                    }}
-                    className="mt-[3px] w-[16px] h-[16px]"
-                  />
-
-                  <span className="font-urbanist text-[12px] font-normal tracking-[0.24px] leading-[16px] text-[#425777]">
-                    I hereby expressly consent to receive automated
-                    communications including calls, texts, emails, and/or
-                    prerecorded messages.
-                    <br />
-                    <br />
-                    By submitting this form, you agree to our{" "}
-                    <span className="underline cursor-pointer">Terms</span> &
-                    acknowledge our{" "}
-                    <span className="underline cursor-pointer">
-                      Privacy Policy
-                    </span>
-                    .
-                  </span>
-                </label>
-
-                {/* CAPTCHA */}
-                {showCaptcha && (
-                  <div className="pt-2">
-                    <CustomCaptcha
-                      onCaptchaChange={(valid) => {
-                        setCaptchaVerified(valid);
-                        if (valid) setRobotChecked(true);
-                      }}
-                      resetTrigger={captchaResetTrigger}
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* ================= BOTTOM BAR ================= */}
-            {/* Full-width progress bar */}
-            <div className="-mx-4">
-              <ProgressBar step={step} />
-            </div>
-
-            {/* Button stays padded */}
+          {/* CONTENT AREA - Takes available space */}
+          <div className="flex-1 overflow-y-auto">
             <div className="p-4">
-              <button
-                disabled={isSubmitting || !captchaVerified}
-                className={`w-full h-[48px] rounded-lg font-semibold transition-all ${
-                  isSubmitting || !captchaVerified
-                    ? "bg-gray-300 cursor-not-allowed text-gray-600"
-                    : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
-                }`}
-                onClick={handleSubmit}
-              >
-                {isSubmitting ? "Submitting..." : "Submit"}
-              </button>
-            </div>
-          </div>
-        </Step>
-
-        {/* ---------------- STEP 4 ---------------- */}
-        <Step active={step === 4} direction={direction}>
-          {/* This wrapper fills the available step area */}
-          <div className="relative w-full min-h-[450px]">
-            {/* Background */}
-            <img
-              src="/bgshape.svg"
-              alt=""
-              className="absolute top-0 left-0 w-full pointer-events-none"
-            />
-
-            {/* Absolute center container */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative z-10 flex flex-col items-center text-center px-4">
-                <img
-                  src="/success_check.svg"
-                  alt="Submission successful"
-                  className="w-24 h-24 mb-4"
-                />
-
-                <h2 className="font-urbanist text-[#162766] font-medium text-xl sm:text-2xl md:text-3xl leading-tight mb-2">
-                  Thank You!
+              <div className="mb-4">
+                <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">  
+                  It&apos;s easy to get started
                 </h2>
-
-                <p className="font-urbanist text-[#6E6E6E] font-medium text-[16px] leading-normal text-center max-w-[260px]">
-                  We&apos;ve received your request and will begin processing it
-                  shortly.
+                <p className="text-[#6E6E6E] font-urbanist text-[13px] font-medium mt-1">  
+                  Provide a few details about your case and our team will take it from here.
                 </p>
               </div>
+
+              <div className="flex flex-col gap-2">  
+                <Input label="First name" value={form.firstName} error={firstError || errors.firstName} onChange={handleFirstNameChange} />
+                <Input label="Last name" value={form.lastName} error={lastError || errors.lastName} onChange={handleLastNameChange} />
+                <Input label="Phone number" value={form.phone} error={phoneError || errors.phone} onChange={handlePhoneChange} />
+                <Input label="Email" value={form.email} error={emailError || errors.email} onChange={handleEmailChange} />
+                <Input label="Zip code" value={form.zip} error={zipError || errors.zip} onChange={handleZipChange} />
+              </div>
             </div>
           </div>
-        </Step>
+
+          {/* FOOTER - Fixed at bottom */}
+          <div className="p-3 space-y-2   border-gray-100 bg-white">  
+            <ProgressBar step={step} />
+            <button type="submit" className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg">  
+              Next
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
+    </Step>
+
+    {/* ---------------- STEP 2 ---------------- */}
+    <Step active={step === 2} direction={direction}>
+      <div className="flex flex-col h-full" ref={dropdownRef}>
+        {/* CONTENT AREA - Takes available space */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-4 space-y-3"> 
+            <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
+              Select Your Case
+            </h2>
+
+            <p className="font-urbanist font-medium text-[#6E6E6E] text-[13px] leading-normal">
+              Tell us about your situation, and we&apos;ll connect you with the right legal support.
+            </p>
+
+            {/* Dropdown */}
+            <button
+              type="button"
+              onClick={() => setDropdownOpen((v) => !v)}
+              className="w-full h-[45px] px-3 rounded-[8px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[15px] font-medium text-[#303030]"
+            >
+              <span className="truncate">{caseType || "Choose from the list"}</span>
+              {dropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            </button>
+
+            {dropdownOpen && (
+              <div className="w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[160px] overflow-y-auto">
+                {CASES.map((item) => (
+                  <div
+                    key={item}
+                    onClick={() => {
+                      setCaseType(item);
+                      setDropdownOpen(false);
+                      setErrors({});
+                    }}
+                    className={`h-[40px] px-3 flex items-center cursor-pointer text-[14px] ${
+                      caseType === item ? "bg-[#162766] text-white" : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <textarea
+              placeholder="Please describe what happened"
+              className="w-full border border-[#E2E4EA] rounded-[8px] p-3 min-h-[100px] resize-y text-[14px]"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* FOOTER - Fixed at bottom */}
+        <div className="p-3 space-y-2   border-gray-100 bg-white">
+          <ProgressBar step={step} />
+          <button onClick={next} className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg">
+            Next
+          </button>
+        </div>
+      </div>
+    </Step>
+
+    {/* ---------------- STEP 3 ---------------- */}
+    <Step active={step === 3} direction={direction}>
+      <div className="flex flex-col h-full">
+        {/* CONTENT AREA - Takes available space */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-4 space-y-3">
+            <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
+              Confirm your Personal Details
+            </h2>
+
+            {/* Details Card */}
+            <div className="border border-[#E6E8F0] rounded-xl p-3 space-y-1.5 text-[13px]">
+              <div className="flex items-center">
+                <Row label="First name" value={form.firstName} />
+                <button
+                  onClick={() => {
+                    setDirection("back");
+                    setStep(1);
+                  }}
+                  className="ml-auto text-[#162766]"
+                  aria-label="Edit"
+                >
+                  <PencilIcon className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              <Row label="Last name" value={form.lastName} />
+              <Row label="Phone number" value={formatPhone(form.phone)} />
+              <Row label="Email" value={form.email} />
+              <Row label="Zip code" value={form.zip} />
+              <Row label="Case Type" value={caseType} />
+            </div>
+
+            {/* CONSENT + CAPTCHA */}
+            <div className="pt-2 space-y-2">
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={robotChecked}
+                  disabled={isSubmitting}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setRobotChecked(checked);
+
+                    if (checked) {
+                      setShowCaptcha(true);
+                    } else {
+                      setShowCaptcha(false);
+                      setCaptchaVerified(false);
+                      setCaptchaResetTrigger((p) => !p);
+                    }
+                  }}
+                  className="mt-[2px] w-[14px] h-[14px]"
+                />
+
+                <span className="font-urbanist text-[11px] font-normal tracking-[0.2px] leading-[14px] text-[#425777]">
+                  I hereby expressly consent to receive automated
+                  communications including calls, texts, emails, and/or
+                  prerecorded messages.
+                  <br />
+                  <br />
+                  By submitting this form, you agree to our{" "}
+                  <span className="underline cursor-pointer">Terms</span> &
+                  acknowledge our{" "}
+                  <span className="underline cursor-pointer">
+                    Privacy Policy
+                  </span>
+                  .
+                </span>
+              </label>
+
+              {/* CAPTCHA */}
+              {showCaptcha && (
+                <div className="pt-1">
+                  <CustomCaptcha
+                    onCaptchaChange={(valid) => {
+                      setCaptchaVerified(valid);
+                      if (valid) setRobotChecked(true);
+                    }}
+                    resetTrigger={captchaResetTrigger}
+                    disabled={isSubmitting}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* FOOTER - Fixed at bottom */}
+        <div className="p-3 space-y-2   border-gray-100 bg-white">
+          <ProgressBar step={step} />
+          <button
+            disabled={isSubmitting || !captchaVerified}
+            className={`w-full h-[42px] rounded-lg font-semibold transition-all text-sm ${
+              isSubmitting || !captchaVerified
+                ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
+            }`}
+            onClick={handleSubmit}
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </button>
+        </div>
+      </div>
+    </Step>
+
+    {/* ---------------- STEP 4 ---------------- */}
+    <Step active={step === 4} direction={direction}>
+      <div className="relative w-full h-full flex items-center justify-center p-4">
+        {/* Background */}
+        <img
+          src="/bgshape.svg"
+          alt=""
+          className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+        />
+
+        {/* Content centered */}
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <img
+            src="/success_check.svg"
+            alt="Submission successful"
+            className="w-20 h-20 mb-3"  
+          />
+
+          <h2 className="font-urbanist text-[#162766] font-medium text-lg sm:text-xl md:text-2xl leading-tight mb-2">
+            Thank You!
+          </h2>
+
+          <p className="font-urbanist text-[#6E6E6E] font-medium text-[14px] leading-normal text-center max-w-[240px]">
+            We&apos;ve received your request and will begin processing it
+            shortly.
+          </p>
+        </div>
+      </div>
+    </Step>
+  </div>
+</div>
   );
 }
 
@@ -1378,22 +1302,19 @@ function Input({
       <input
         className={`
           w-full
-          h-[50px]
-          px-[14px]
-          rounded-[8px]
+          h-[42px]  /* Reduced from 50px */
+          px-3      /* Reduced from 14px */
+          rounded-[6px]
           border
           ${error ? "border-red-400" : "border-[#E2E4EA]"}
           bg-white
-
           font-poppins
-          text-[15px]
+          text-[14px]  /* Reduced from 15px */
           font-medium
-          leading-[18px]
+          leading-[16px]
           text-[#303030]
-
           placeholder:text-[#303030]
           placeholder:opacity-70
-
           focus:outline-none
           focus:border-[#162766]
           transition
@@ -1403,10 +1324,10 @@ function Input({
         onChange={(e) => onChange(e.target.value)}
       />
 
-      {/* Always reserve space for error */}
-      <div className="min-h-[10px] mt-1 pl-1">
+      {/* Error message */}
+      <div className="min-h-[8px] mt-0.5 pl-1">
         {error && (
-          <p className="text-[10px] text-red-500 leading-tight">
+          <p className="text-[9px] text-red-500 leading-tight">
             {error}
           </p>
         )}

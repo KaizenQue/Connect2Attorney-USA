@@ -5,7 +5,6 @@ import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
-import LawsuitsLegalPage from "../../components/subservice_pages/LawsuitsLegalPage";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
 import OzempicLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/OzempicLawsuitsLegalPage";

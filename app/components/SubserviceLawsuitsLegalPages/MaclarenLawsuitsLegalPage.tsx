@@ -11,7 +11,8 @@ export const content = {
     mainTitle: "main-title",
     eligibleTitle: "allegations-title",
     healthRisksTitle: "health-risks-title",
-    allegationsTitle: "allegations-title",
+    allegationsTitle1: "allegations-title",
+    harmsExpiriencedTitle: "harms-experienced-title",
     whoQualifiesTitle: "who-qualifies-title",
     compensationTitle: "compensation-title",
     settlementImpactTitle: "settlement-impact-title",
@@ -188,10 +189,21 @@ allegationPoints: [
   },
 ],
 
+harmPoints: [
+  {
+    item: "Survivors generally have until age 40 to file a civil sexual abuse lawsuit, or ",
+  },
+  {
+    item: "Five years from the date they discovered (or reasonably should have discovered) the psychological harm caused by the abuse ",
+  },
+  {
+    item: "The law included a three-year lookback window, enabling survivors with previously time-barred sexual abuse claims to pursue legal action. ",
+  },
+],
 
 
   pageContent: {
-    mainTitle: "MacLaren Hall Sex Abuse Lawsuit",
+    mainTitle: "What is the MacLaren Hall Sex Abuse Lawsuit? ",
     mainParagraphs: [
       "The MacLaren Hall sex abuse lawsuit gives survivors of abuse at the former Los Angeles County juvenile facility a legal path to seek justice, accountability, and compensation. Survivors who suffered sexual abuse, physical abuse, or neglect while housed at MacLaren Hall may now have expanded rights under California law to file a sex abuse lawsuit, even decades after the abuse occurred. ",
 "Connect 2 Attorney helps survivors understand their legal options and connect with experienced attorneys who handle institutional sex abuse lawsuits with compassion and confidentiality. If you or someone you love was abused at MacLaren Hall, you are eligible for justice and compensation. ",
@@ -204,7 +216,11 @@ allegationPoints: [
     eligibleParagraph:
       "You may be eligible to file a MacLaren Hall sex abuse lawsuit if: ",
     allegationsSubtitle: "You may be eligible to file a MacLaren Hall lawsuit if:",
-allegationsTitle:"Allegations of Abuse at MacLaren Hall: What Survivors Report?  ",
+allegationsTitle1:"Allegations of Abuse at MacLaren Hall:",
+allegationsTitle2:"What Survivors Report?  ",
+harmsExpiriencedTitle:"What Are the Harms Experienced by Survivors?",
+harmsExpiriencedParagraph:"Under California’s Child Victims Act (Assembly Bill 218), the law significantly expanded the rights of survivors of childhood sexual abuse. As it stands today:",
+harmsExpiriencedFooter:"If you experienced abuse at MacLaren Hall, a qualified lawyer can help you understand how compensation is calculated, whether you qualify for current or future settlements, and how to protect your right to pursue a sex abuse lawsuit.",
 allegationsParagraph:"Survivors describe an environment of rampant cruelty, neglect, and terror. Over the years, survivors have reported:",
     healthRisksTitle: "Settlements & Compensation in MacLaren Hall Sex Abuse Cases  ",
     healthRisksParagraph:
@@ -276,6 +292,27 @@ settlementImpactFooter:
   ],
 };
 
+const MACLAREN_TOC = [
+  { label: "What is the MacLaren Hall Sex Abuse Lawsuit?", id: "main-title" },
+
+  { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+
+  { label: "Allegations of Abuse at MacLaren Hall", id: "allegations-title" },
+
+  { label: "Harms Experienced by Survivors", id: "harms-experienced-title" },
+
+  { label: "MacLaren Hall Lawsuit Update", id: "lawsuit-update-title" },
+
+  { label: "Settlements & Compensation", id: "health-risks-title" },
+
+  { label: "Impact of the $4 Billion Settlement", id: "settlement-impact-title" },
+
+  { label: "Real Stories", id: "real-stories-title" },
+
+  { label: "How a MacLaren Hall Lawyer Can Help", id: "compensation-title" },
+
+  { label: "How to File a Lawsuit", id: "steps-title" },
+];
 
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -342,7 +379,7 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents />
+          <TableOfContents items={MACLAREN_TOC} />
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -415,7 +452,7 @@ const LawsuitsLegalPage = () => {
                                </span>
          
                                {/* Text */}
-                               <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                               <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-normal leading-[24px] sm:leading-[27px]">
                                  {item.description}
                                </p>
                              </li>
@@ -425,12 +462,17 @@ const LawsuitsLegalPage = () => {
 
 <div>
    <h2
-                  id={content.sectionIds.allegationsTitle}
+                  id={content.sectionIds.allegationsTitle1}
+                  className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize "
+                >
+                  {content.pageContent.allegationsTitle1}
+                </h2>
+    <h2
+                  id={content.sectionIds.allegationsTitle1}
                   className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
                 >
-                  {content.pageContent.allegationsTitle}
+                  {content.pageContent.allegationsTitle2}
                 </h2>
-  
                 <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[30px] capitalize">
                   {content.pageContent.allegationsParagraph}
                 </p>
@@ -462,6 +504,48 @@ const LawsuitsLegalPage = () => {
 </div>
 
 
+<div>
+   <h2
+                  id={content.sectionIds.harmsExpiriencedTitle}
+                  className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize "
+                >
+                  {content.pageContent.harmsExpiriencedTitle}
+                </h2>
+ 
+                <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[30px] capitalize">
+                  {content.pageContent.harmsExpiriencedParagraph}
+                </p>
+             
+                <ul className="space-y-5 mb-8 whitespace-pre-line">
+                  {content.harmPoints.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Custom bullet */}
+                      <span className="mt-[7px] shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <circle cx="7" cy="7" r="7" fill="#162766" />
+                        </svg>
+                      </span>
+                      {/* Text */}
+                      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+                        <span className="font-bold">
+                          {item.item}
+                        </span>{" "}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                                <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[30px] capitalize">
+                  {content.pageContent.harmsExpiriencedFooter}
+                </p>
+</div>
+<br/>
+<br/>
 
          {/* ==================== LAWSUIT UPDATE SECTION ==================== */}
 <div className="mb-16">
@@ -727,7 +811,7 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents />
+                <TableOfContents items={MACLAREN_TOC} />
               </div>
             </div>
           </aside>
@@ -761,7 +845,7 @@ const StepsComponent = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
       {steps.map((item) => (
         <div
           key={item.step}
@@ -776,26 +860,33 @@ const StepsComponent = () => {
         >
           {/* TOP ROW: BADGE + TITLE */}
           <div className="flex items-start gap-4">
-            {/* STEP BADGE */}
+            
+            {/* STEP BADGE (Figma Perfect) */}
             <div
               className="
-                shrink-0
-                w-[34px] xl:w-[44px] h-[44px]
-                flex flex-col
-                items-center justify-center
+                inline-flex
+                aspect-square
+                h-[63.058px]
+                px-[11.741px]
+                pt-[9px]
+                pb-[8.058px]
+                justify-center
+                items-center
                 rounded-[10px]
-                border border-white
+                border
+                border-white
                 bg-[#162766]
-                text-white
                 shadow-[0_7.564px_11.346px_-2.269px_rgba(0,0,0,0.10)]
               "
             >
-              <span className="font-urbanist font-semibold uppercase text-[10px] leading-[12px]">
-                Step
-              </span>
-              <span className="font-urbanist font-bold text-[20px] leading-[24px]">
-                {item.step}
-              </span>
+              <div className="flex flex-col items-center justify-center leading-none">
+                <span className="text-white font-urbanist text-[18px] font-semibold leading-[20px]">
+                  Step
+                </span>
+                <span className="text-white font-urbanist text-[20px] font-bold leading-[24px]">
+                  {item.step}
+                </span>
+              </div>
             </div>
 
             {/* TITLE */}
@@ -806,7 +897,7 @@ const StepsComponent = () => {
                 text-[#162766]
                 text-[18px]
                 leading-[24px]
-                mt-[2px]
+                mt-[4px]
               "
             >
               {item.title}

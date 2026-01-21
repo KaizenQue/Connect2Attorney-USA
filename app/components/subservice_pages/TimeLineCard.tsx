@@ -45,30 +45,105 @@ const glassBtn =
           {title}
         </h2>
 
-<div
-  className={`inline-flex items-center gap-2 sm:gap-[10px] h-[50px] px-2 py-2 rounded-[90px]
-              ${glassBtn}`}
->
-          {years.map((year) => (
-            <button
-              key={year}
-              onClick={() => setActiveYear(year)}
-              className={`
-                px-4 sm:px-6 py-2 text-[16px] sm:text-[18px]
-                font-urbanist font-semibold
-                transition-all duration-300 ease-out
-                motion-safe:active:scale-95
-                ${
-                  activeYear === year
-                    ? "bg-[#F2C438] text-[#162766] rounded-[160px] shadow-lg"
-                    : "bg-[#162766] text-white rounded-[220px] border border-white/10 hover:brightness-110"
-                }
-              `}
-            >
-              {year}
-            </button>
-          ))}
-        </div>
+<div className="relative inline-flex rounded-full border border-white/20 lg:mb-8 lg:mt-2">
+  {/* OUTER GLASS STROKE */}
+  <div
+    className="absolute inset-0 rounded-full pointer-events-none"
+    style={{
+      padding: "0.7px",
+      background:
+        "linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 65%, rgba(255,255,255,0) 82%)",
+      WebkitMask:
+        "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+      WebkitMaskComposite: "xor",
+      maskComposite: "exclude",
+      boxShadow: "0 7.564px 11.346px -2.269px rgba(0,0,0,0.10)",
+    }}
+  />
+
+  {/* SOFT INNER GLOW */}
+  <div
+    className="
+      pointer-events-none
+      absolute inset-[1px]
+      rounded-full
+      bg-gradient-to-br
+      from-white/20
+      via-transparent
+      to-transparent
+      opacity-40
+    "
+  />
+
+  {/* MAIN SHELL */}
+  <div
+    className="
+      relative
+      rounded-full
+      w-full
+      bg-gradient-to-b from-white/5 to-white/0
+      shadow-[inset_0_0_0.5px_rgba(255,255,255,0.35)]
+      flex items-center justify-center
+      p-[3px] sm:p-[4px]
+    "
+  >
+    {/* INNER GLASS PILL */}
+    <div
+      className="
+        relative
+        inline-flex
+        items-center
+        gap-1
+        p-1 sm:p-1.5
+        rounded-full
+        bg-white/10
+        backdrop-blur-md
+        shadow-[inset_0_0_0.5px_rgba(255,255,255,0.35)]
+        flex-wrap sm:flex-nowrap
+      "
+    >
+      {/* INNER HIGHLIGHT */}
+      <div
+        className="
+          pointer-events-none
+          absolute inset-[1px]
+          rounded-full
+          bg-gradient-to-br
+          from-white/60
+          via-transparent
+          to-transparent
+          opacity-40
+        "
+      />
+
+      {years.map((year) => (
+        <button
+          key={year}
+          onClick={() => setActiveYear(year)}
+          className={`
+            relative z-10
+            px-3 sm:px-5 md:px-6
+            py-1.5 sm:py-2 md:py-2.5
+            text-[13px] sm:text-[15px] md:text-[18px]
+            font-urbanist font-semibold
+            transition-all duration-300 ease-out
+            motion-safe:active:scale-95
+            rounded-full
+            whitespace-nowrap
+            ${
+              activeYear === year
+                ? "bg-[#F2C438] text-[#162766] shadow-lg"
+                : "bg-[#162766] text-white hover:brightness-110"
+            }
+          `}
+        >
+          {year}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
       </div>
 
       {/* ================= FIRST HALF ================= */}

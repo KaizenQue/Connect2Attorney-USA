@@ -2676,7 +2676,6 @@ const LandingPageContactus: React.FC<{
           name: formData.name,
           email: formData.email,
           phone: `+1${rawPhone}`,
-          zip: formData.zip || "",
           caseType: formData.category,
           description: formData.caseHistory,
           state: formData.state || "",

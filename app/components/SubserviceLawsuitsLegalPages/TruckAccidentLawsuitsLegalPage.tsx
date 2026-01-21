@@ -700,7 +700,7 @@ const StepsComponent = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
       {steps.map((item) => (
         <div
           key={item.step}
@@ -715,26 +715,33 @@ const StepsComponent = () => {
         >
           {/* TOP ROW: BADGE + TITLE */}
           <div className="flex items-start gap-4">
-            {/* STEP BADGE */}
+            
+            {/* STEP BADGE (Figma Perfect) */}
             <div
               className="
-                shrink-0
-                w-[34px] xl:w-[44px] h-[44px]
-                flex flex-col
-                items-center justify-center
+                inline-flex
+                aspect-square
+                h-[63.058px]
+                px-[11.741px]
+                pt-[9px]
+                pb-[8.058px]
+                justify-center
+                items-center
                 rounded-[10px]
-                border border-white
+                border
+                border-white
                 bg-[#162766]
-                text-white
                 shadow-[0_7.564px_11.346px_-2.269px_rgba(0,0,0,0.10)]
               "
             >
-              <span className="font-urbanist font-semibold uppercase text-[10px] leading-[12px]">
-                Step
-              </span>
-              <span className="font-urbanist font-bold text-[20px] leading-[24px]">
-                {item.step}
-              </span>
+              <div className="flex flex-col items-center justify-center leading-none">
+                <span className="text-white font-urbanist text-[18px] font-semibold leading-[20px]">
+                  Step
+                </span>
+                <span className="text-white font-urbanist text-[20px] font-bold leading-[24px]">
+                  {item.step}
+                </span>
+              </div>
             </div>
 
             {/* TITLE */}
@@ -745,7 +752,7 @@ const StepsComponent = () => {
                 text-[#162766]
                 text-[18px]
                 leading-[24px]
-                mt-[2px]
+                mt-[4px]
               "
             >
               {item.title}

@@ -57,7 +57,7 @@ export const CaseCardCompact: React.FC<CaseCardProps> = ({
         />
 
         {/* Notch */}
-        <div className="absolute top-3 right-0 z-20">
+        <div className="absolute top-3 right-0 z-20 lg:w-[48px]">
           <Image
             src="/CardNotch.png"
             alt="Arrow"

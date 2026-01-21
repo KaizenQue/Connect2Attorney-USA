@@ -295,7 +295,7 @@ const CasesSectionCompact: React.FC = () => {
     >
       <div
         className="
-    w-full lg:w-[95%] relative lg:h-[428px] xl:h-[556px] 2xl:h-[650px]
+    w-full lg:w-[95%] relative lg:h-[500px] xl:h-[556px] 2xl:h-[650px]
  
     bg-[#162766]                
 

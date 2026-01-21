@@ -256,7 +256,7 @@ export const content = {
 
     limitationsSubtitle:
       "Understanding the deadlines is crucial when filing a slip and fall injury lawsuit. Key points include: ",
-   
+
     compensationTitle:
       "Slip and Fall Injury Lawsuit Settlements & Compensation ",
     compensationParagraph:
@@ -265,15 +265,15 @@ export const content = {
     helpsurvivorsTitle: "How a Slip and Fall Injury Lawyer Can Help You?",
 
     helpsurvivorsParagraph: "An experienced slip and fall injury lawyer can: ",
-    stepsTitle: "How to File a Sexual Abuse Lawsuit with Connect2Attorney?",
+    helpsurvivorsSubTitle:"Through Connect 2 Attorney, injured victims can quickly connect with qualified personal injury lawyers who understand slip and fall injury lawsuits and fight to secure the maximum compensation you deserve. ",
+    stepsTitle: "How to File a Slip and Fall Injury Lawsuit with Connect2Attorney?",
     stepsParagraph:
       "Connect2Attorney guides you through the process of filing a sexual abuse lawsuit against the responsible party, in just three simple steps:",
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
-    description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+    title: "Were You Affected? ",
+    description: "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -393,10 +393,7 @@ const LawsuitsLegalPage = () => {
 
             {/* ==================== Eligibility SECTION ==================== */}
             <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-              <h2
-            
-                className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-              >
+              <h2 className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4">
                 <span className="text-[#F2C438]">
                   {content.pageContent.eligibleTitle.split(" ")[0]}{" "}
                   {content.pageContent.eligibleTitle.split(" ")[1]}
@@ -407,15 +404,11 @@ const LawsuitsLegalPage = () => {
                   .join(" ")}
               </h2>
 
-              <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
-                {content.pageContent.eligibleParagraph}
-              </p>
-
               <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
                 {content.pageContent.eligibleSubtitle}
               </p>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-4">
                 {content.eligibilityPoints.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Yellow Bullet */}
@@ -444,6 +437,10 @@ const LawsuitsLegalPage = () => {
                   </li>
                 ))}
               </ul>
+
+              <p className="mb-4 font-urbanist font-normal text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px]">
+                {content.pageContent.eligibleParagraph}
+              </p>
             </div>
 
             {/* ==================== Cause SECTION ==================== */}
@@ -638,6 +635,10 @@ const LawsuitsLegalPage = () => {
                 </li>
               ))}
             </ul>
+
+            <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.helpsurvivorsSubTitle}
+            </p>
           </div>
 
           {/* Right Sidebar - CTA Card and Content Table */}
@@ -665,11 +666,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

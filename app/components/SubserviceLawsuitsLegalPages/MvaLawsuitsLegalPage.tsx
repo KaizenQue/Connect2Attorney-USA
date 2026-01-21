@@ -306,9 +306,9 @@ export const content = {
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "Were You Affected? ",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+      "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -416,9 +416,9 @@ const LawsuitsLegalPage = () => {
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
               <br />
-              <br />
+              
 
-              <p className="font-bold">
+              <p>
                 {content.pageContent.mainParagraphs[2]}
               </p>
             </div>
@@ -443,7 +443,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.eligibleSubtitle}
               </p>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3">
                 {content.eligibilityPoints.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Yellow Bullet */}
@@ -505,7 +505,7 @@ const LawsuitsLegalPage = () => {
                     </svg>
                   </span>
 
-                  <span className="text-[#425777]"> {item.description}</span>
+                  <span className="text-[#425777] font-bold"> {item.description}</span>
                 </li>
               ))}
             </ul>
@@ -554,16 +554,27 @@ const LawsuitsLegalPage = () => {
             <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
               {content.pageContent.limitationsParagraph}
             </p>
-            <br />
+            
 
             <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-bold leading-[24px] sm:leading-[27px]">
               {content.pageContent.limitationsSub1}
             </p>
             <br />
 
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
+            <ul className="list-none list-outside space-y-3 mb-8  marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
               {content.limitationsPoints1.map((item, index) => (
                 <li key={index} className="">
+                    <span className="inline-block mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <circle cx="7" cy="7" r="7" fill="#162766" />
+                    </svg>
+                  </span>
                   <span className="text-[#425777] font-bold">
                     {" "}
                     {item.description}
@@ -577,9 +588,20 @@ const LawsuitsLegalPage = () => {
             </p>
             <br />
 
-            <ul className="list-disc list-outside ml-5 space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
+            <ul className="list-none list-outside space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
               {content.limitationsPoints2.map((item, index) => (
                 <li key={index} className="">
+                    <span className="inline-block mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <circle cx="7" cy="7" r="7" fill="#162766" />
+                    </svg>
+                  </span>
                   <span className="font-bold text-[#425777] ">
                     {" "}
                     {item.title}{" "}
@@ -732,11 +754,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

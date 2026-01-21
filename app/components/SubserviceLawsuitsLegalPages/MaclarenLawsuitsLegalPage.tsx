@@ -264,9 +264,9 @@ settlementImpactFooter:
   },
 
   ctaContent: {
-    title: "You Are Not Alone",
+    title: "Were You Affected?",
     description:
-      "If you or someone you love was abused at MacLaren Hall, you deserve justice. Get a free and confidential case review today.",
+    "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -429,7 +429,7 @@ const LawsuitsLegalPage = () => {
                            {content.pageContent.eligibleParagraph}
                          </p>
          
-                         <ul className="space-y-3 mb-8">
+                         <ul className="space-y-3">
                            {content.eligibilityPoints.map((item, index) => (
                              <li key={index} className="flex items-start gap-3">
                                {/* Yellow Bullet */}
@@ -796,11 +796,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

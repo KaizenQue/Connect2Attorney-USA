@@ -248,8 +248,6 @@ export const content = {
     eligibleTitle: "Who is Eligible to File a Claim?",
     eligibleParagraph:
       "Eligibility depends on proving that negligence by the truck driver, trucking company, or another liable party caused the accident. You may be eligible to file an 18-wheeler accident lawsuit if you are: ",
-    eligibleSubtitle:
-      "You may be eligible to file a slip and fall injury lawsuit if: ",
     typesTitle: "Types Of Sexual Abuse Cases",
 
     legalRightsTitle: "Property Owner Liability in Slip and Fall Injury Cases",
@@ -277,15 +275,16 @@ export const content = {
 
     helpsurvivorsParagraph:
       "An experienced 18-wheeler accident lawyer plays a critical role by:",
+      helpsurvivorsSubTitle:"Through Connect 2 Attorney, injured victims can quickly connect with qualified personal injury lawyers who understand slip and fall injury lawsuits and fight to secure the maximum compensation you deserve. ",
     stepsTitle: "How to File a Sexual Abuse Lawsuit with Connect2Attorney?",
     stepsParagraph:
       "Connect2Attorney guides you through the process of filing a sexual abuse lawsuit against the responsible party, in just three simple steps:",
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "Were You Affected? ",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+      "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -421,11 +420,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.eligibleParagraph}
               </p>
 
-              <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
-                {content.pageContent.eligibleSubtitle}
-              </p>
-
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3">
                 {content.eligibilityPoints.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Yellow Bullet */}
@@ -624,6 +619,11 @@ const LawsuitsLegalPage = () => {
                 </li>
               ))}
             </ul>
+
+             <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+              {content.pageContent.helpsurvivorsSubTitle}
+            </p>
+
           </div>
 
           {/* Right Sidebar - CTA Card and Content Table */}
@@ -651,11 +651,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

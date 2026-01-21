@@ -197,7 +197,7 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
           md:text-[15px]
           lg:text-[16px]
           leading-[22px]
-          max-w-xl
+          max-w-3xl
           mb-4
         "
       >

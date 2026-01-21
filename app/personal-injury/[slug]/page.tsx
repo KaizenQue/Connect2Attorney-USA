@@ -17,19 +17,36 @@ import { TimelineData } from "@/app/components/timelineTypes";
 import SupportCard from "../../components/subservice_pages/SupportCard";
 
 /* ================= PAGE TITLES ================= */
-const HERO_TITLES: Record<string, string> = {
-  "sexual-abuse-lawsuit":
-    "Sexual Abuse Lawsuit: Survivor Rights, Legal Options & Compensation",
+const HERO_CONFIG: Record<
+  string,
+  { title: React.ReactNode; bg: string }
+> = {
+  "sexual-abuse-lawsuit": {
+    title:
+      "Sexual Abuse Lawsuit: Survivor Rights, Legal Options & Compensation",
+    bg: "/sexualabuseimg.png",
+  },
 
-  "motor-vehicle-accident-lawsuit":
-    "Motor Vehicle Accident Lawsuit: Injury Claims, Legal Rights & Compensation",
+  "motor-vehicle-accident-lawsuit": {
+    title:
+      "Motor Vehicle Accident Lawsuit: Injury Claims, Legal Rights & Compensation",
+    bg: "/motorbgimg.png",
+  },
 
-  "slip-and-fall-injury-lawsuit":
-    "Slip and Fall Injury Lawsuit: Liability, Legal Rights & Compensation",
+  "slip-and-fall-injury-lawsuit": {
+    title:
+      "Slip and Fall Injury Lawsuit: Liability, Legal Rights & Compensation",
+    bg: "/slipnfallimg.png",
+  },
 
-  "18-wheeler-lawsuit":
-    "18-Wheeler Accident Lawsuit Settlements and Compensation",
+  "18-wheeler-lawsuit": {
+    title:
+      "18-Wheeler Accident Lawsuit Settlements and Compensation",
+    bg: "/truckbgimg.png",
+  },
 };
+
+
 /* ================= FAQ DATA ================= */
 const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
   "sexual-abuse-lawsuit": [
@@ -148,23 +165,11 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
   ],
 };
 
-// export const CONTENT_BY_SLUG: Record<string, LawsuitContent> = {
-//   "sexual-abuse-lawsuit": sexualabuselawsuitContent,
-//   "motor-vehicle-accident-lawsuit": mvaContent,
-//   "slip-and-fall-injury-lawsuit": slipnfallContent,
-//   "18-wheeler-lawsuit": trucklawsuitContent,
-// };
-
 export default function MassTortPage() {
   const { slug } = useParams<{ slug: string }>();
   //   const content: LawsuitContent | undefined = CONTENT_BY_SLUG[slug];
-  const heroTitle: ReactNode = HERO_TITLES[slug] ?? (
-    <>
-      Personal Injury
-      <br />
-      Lawsuits
-    </>
-  );
+const heroConfig = HERO_CONFIG[slug];
+
   const TIMELINE_BY_SLUG: Record<
     string,
     { title: string; data: TimelineData }

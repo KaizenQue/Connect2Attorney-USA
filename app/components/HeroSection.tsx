@@ -1192,7 +1192,7 @@ const DesktopLandingHeroCompact = ({
   };
 
   return (
-    <div className="hidden lg:flex h-[490px] font-sans flex-col justify-center items-center mx-10">
+    <div className="hidden lg:flex h-[490px] font-sans flex-col justify-center items-center mx-10 lg:mt-10">
       <div className="relative w-full h-[650px] mt-2 overflow-hidden max-w-[1560px]">
         {/* ================= VIDEO BACKGROUND ================= */}
         {/* < 1168 */}
@@ -1548,7 +1548,7 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
   const selectedLawsuit = lawsuits[selectedIndex];
 
   return (
-    <div className="hidden lg:flex justify-center font-sans px-4 xl:px-8 2xl:px-10 mt-4">
+    <div className="hidden lg:flex justify-center font-sans px-4 xl:px-8 2xl:px-10 mt-10">
       <div
         className="
           relative overflow-hidden rounded-2xl

@@ -21,14 +21,14 @@ export const content = {
 
   realStories: [
   {
-    name: "John Barnes",
+    name: "Mae Moore",
     story:
-      "In 2021, he filed a lawsuit against Monsanto after being diagnosed with non-Hodgkin’s lymphoma, which he linked to long-term Roundup exposure. A Georgia jury later ordered Bayer to pay approximately $2.1 billion in damages for his injuries.",
+      "The family of Mae Moore sued Johnson & Johnson following her death from mesothelioma. The jury awarded $966 million to the family as compensation for their loss. ",
   },
   {
-    name: "John McKivison",
+    name: "Darlene Coker",
     story:
-      "He accused Bayer of causing his non-Hodgkin’s lymphoma after using Roundup on his property for more than two decades. A Philadelphia jury ordered the company to pay $2.25 billion in damages for his suffering and losses.",
+      "Coker was diagnosed with mesothelioma, which she alleged was caused by her long-term use of Johnson & Johnson’s talcum powder. .",
   },
 ],
 
@@ -61,25 +61,25 @@ export const content = {
     number: "01",
     title: "Breathing Problems",
     description:
-      "Inhalation of talc particles can cause coughing, wheezing, or shortness of breath, particularly in infants and individuals with pre-existing respiratory conditions.",
+    "Inhalation of talc particles can cause coughing, wheezing, or shortness of breath, particularly in infants and those with respiratory conditions. ",
   },
   {
     number: "02",
     title: "Talc Pneumoconiosis",
     description:
-      "Prolonged exposure to talc dust, especially in industrial or occupational settings, can lead to lung inflammation and scarring, a condition known as talc pneumoconiosis.",
+    "Prolonged exposure to talc dust, often in industrial settings, can lead to lung inflammation and scarring. ",
   },
   {
     number: "03",
     title: "Skin Irritation",
     description:
-      "Frequent or long-term use of talc-based products may cause skin irritation, rashes, or allergic reactions in people with sensitive skin.",
+    "Frequent use may cause rashes or allergic reactions in people with sensitive skin. ",
   },
   {
     number: "04",
     title: "Lung Cancer",
     description:
-      "Workers exposed to asbestos-contaminated talc may face a significantly higher risk of serious diseases such as mesothelioma or lung cancer.",
+    "Workers exposed to asbestos-contaminated talc may face a higher risk of mesothelioma or lung cancer. ",
   },
 ],
 
@@ -108,27 +108,27 @@ compensation: [
   {
     title: "Medical Expenses",
     description:
-      "Coverage for current and future medical bills related to your illness, including hospital care, treatments, medications, and ongoing therapy.",
+      "Covers hospital bills, treatments, medications, and ongoing care costs. ",
   },
   {
     title: "Lost Wages",
     description:
-      "Compensation for income lost due to inability to work during treatment, recovery, or long-term disability caused by the illness.",
+      "Compensation for income lost due to illness or time away from work. ",
   },
   {
     title: "Pain and Suffering",
     description:
-      "Financial awards for physical pain, emotional distress, and reduced quality of life caused by the disease and its treatment.",
+      "For physical pain, mental anguish, and reduced quality of life.",
   },
   {
     title: "Punitive Damages",
     description:
-      "Additional damages intended to punish the manufacturer for negligence or misconduct, awarded in certain cases where wrongdoing is proven.",
+      "Support for spouses or family members affected by the victim’s condition. ",
   },
   {
     title: "Other Related Costs",
     description:
-      "This may include travel expenses for treatment, rehabilitation, home care, and other ongoing care needs related to your condition.",
+      "For families who lost a loved one due to talcum powder–related cancer. ",
   },
 ],
 
@@ -162,7 +162,7 @@ mdllitigationPoints: [
 
 
   pageContent: {
-    mainTitle: "What is the Talcum Powder Lawsuit? ?",
+    mainTitle: "What is the Talcum Powder Lawsuit? ",
     mainParagraphs: [
       "Thousands of individuals and families have filed a talcum powder lawsuit after developing serious cancers linked to long-term use of talcum powder and baby powder products. In recent years, asbestos-contaminated talcum powder has been linked to ovarian cancer in women who used it for daily feminine hygiene. Connect 2 Attorney helps you connect with experienced talcum powder lawyers ",
       "to explore your legal options quickly and confidentially. The talcum powder lawsuit involves legal claims against manufacturers of talcum powder and baby powder products, including Johnson & Johnson. Plaintiffs allege that these companies knowingly sold talcum powder contaminated with asbestos and failed to provide adequate cancer warnings, putting millions of consumers at risk",
@@ -176,7 +176,7 @@ mdllitigationPoints: [
       "Many individuals have come forward claiming that long-term use of talcum powder led to ovarian cancer or other health complications. You may qualify to file a talcum powder lawsuit if you or a loved one: ",
     allegationsSubtitle: "You may qualify if:  ",
 
-    healthRisksTitle: "Talcum Powder, Baby Powder & Cancer Risk Explained ? ",
+    healthRisksTitle: "Talcum Powder, Baby Powder & Cancer Risk Explained",
     healthRisksParagraph:
       "Beyond its link to ovarian cancer, talcum powder exposure has been associated with several other serious health conditions. These risks arise primarily from inhaling talc particles or exposure to asbestos-contaminated products. Other health risks include:  ",
     healthRisksSubtitle: "Health Risks Linked to Ozempic Use ",
@@ -187,7 +187,7 @@ mdllitigationPoints: [
       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
     whoQualifiesSubtitle: "An experienced Ozempic lawyer can help you: ",
 mdllitigationTitle:
-  "Talcum Powder Lawsuit Updates: Latest Court Decisions & Case Status ?",
+  "Talcum Powder Lawsuit Updates: Latest Court Decisions & Case Status ",
 
 mdllitigationParagraph:
   "Thousands of claims remain active as courts evaluate liability, scientific evidence, and corporate conduct. Several verdicts have resulted in multi-million-dollar awards for victims, while appeals and settlement negotiations continue. ",
@@ -200,9 +200,9 @@ mdllitigationParagraph:
 
     realStoriesTitle: "Real Stories Behind Lawsuit",
 
-    stepsTitle: "How to File a Roundup Cancer Lawsuit with Connect2Attorney? ",
+    stepsTitle: "How to File a Talcum Powder Lawsuit with Connect2Attorney? ",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing a Roundup cancer lawsuit against the responsible party, in just three simple steps: ",
+      "Connect2Attorney guides you through the process of filing a Talcum Powder lawsuit against the responsible party, in just three simple steps: ",
   },
 
   ctaContent: {
@@ -234,15 +234,16 @@ mdllitigationParagraph:
   ],
   
 };
-const OZEMPIC_TOC = [
+const TALCUM_TOC = [
   { label: "What is the Talcum Powder Lawsuit?", id: "main-title" },
   { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
   { label: "Talcum Powder, Baby Powder & Cancer Risk Explained", id: "health-risks-title" },
-  { label: "Talcum Powder Lawsuit Updates", id: "mdl-litigation-title" },
+  { label: "Talcum Powder Lawsuit Updates & MDL Status", id: "mdl-litigation-title" },
   { label: "Talcum Powder Settlements & Compensation", id: "compensation-title" },
-  { label: "Real Stories Behind Lawsuit", id: "real-stories-title" },
+  { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
   { label: "How to File a Talcum Powder Lawsuit", id: "steps-title" },
 ];
+
 
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -309,7 +310,7 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents items={OZEMPIC_TOC} />
+          <TableOfContents items={TALCUM_TOC} />
 
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
@@ -406,7 +407,7 @@ const LawsuitsLegalPage = () => {
                 {content.healthRisks.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5"
+                    className=" bg-[#F4F6F8] rounded-lg px-4 sm:px-6 py-5"
                   >
                     {/* Title + Number */}
                     <h4 className="font-noto-serif text-[#162766] text-[20px] sm:text-[24px] font-medium leading-normal mb-2">
@@ -414,7 +415,7 @@ const LawsuitsLegalPage = () => {
                     </h4>
 
                     {/* Description */}
-                    <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                    <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px] capitalize">
                       {item.description}
                     </p>
                   </div>
@@ -493,7 +494,7 @@ const LawsuitsLegalPage = () => {
                                     text-[20px]
                                     sm:text-[22px]
                                     lg:text-[24px]
-                                    font-bold
+                                    font-medium
                                     leading-normal
                                   "
                                 >
@@ -508,8 +509,9 @@ const LawsuitsLegalPage = () => {
                                     text-[16px]
                                     sm:text-[17px]
                                     lg:text-[18px]
-                                    font-bold
+                                    font-medium
                                     leading-[27px]
+                                    capitalize
                                   "
                                 >
                                   {item.description}
@@ -607,7 +609,7 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents items={OZEMPIC_TOC} />
+                <TableOfContents items={TALCUM_TOC} />
 
               </div>
             </div>

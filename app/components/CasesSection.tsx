@@ -90,7 +90,7 @@ const CasesSection: React.FC = () => {
 
   return (
     <div
-      className="flex justify-end bg-white font-sans md:my-10"
+      className="flex justify-end bg-white font-sans md:my-10 mb-20"
       id="next-section"
     >
       <div

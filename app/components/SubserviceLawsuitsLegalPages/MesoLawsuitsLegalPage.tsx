@@ -15,7 +15,6 @@ export const content = {
     whoQualifiesTitle: "who-qualifies-title",
     compensationTitle: "compensation-title",
     mdllitigationTitle: "mdl-litigation-title",
-    realStoriesTitle: "real-stories-title",
     stepsTitle: "steps-title",
   },
 
@@ -396,7 +395,7 @@ const LawsuitsLegalPage = () => {
                   {content.pageContent.whoQualifiesSubtitle}
                 </p>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-4 mb-8">
                   {content.whoQualifies.map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       {/* Yellow Bullet */}
@@ -425,6 +424,22 @@ const LawsuitsLegalPage = () => {
                     </li>
                   ))}
                 </ul>
+                  <p
+  className="
+    mt-[20px]
+    text-[#fff]
+    font-urbanist
+    text-[16px]
+    font-semibold
+    underline
+    underline-offset-auto
+  "
+>
+  Here’s an article on Mesothelioma Lawsuit.{" "}
+  <a href="#" className="underline font-urbanist font-semibold">
+    Click here to read.
+  </a>
+</p>
               </div>
             {/* <Ozempicfreecasecard /> */}
             {/* <h2
@@ -552,7 +567,7 @@ const LawsuitsLegalPage = () => {
           text-[20px]
           sm:text-[22px]
           lg:text-[24px]
-          font-bold
+          font-medium
           leading-normal
         "
       >
@@ -581,35 +596,7 @@ const LawsuitsLegalPage = () => {
 </div>
  
 
-              <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
-                {/* Section Title */}
-                <h3
-                  id={content.sectionIds.realStoriesTitle}
-                  className="font-noto-serif text-[#162766] text-[20px] sm:text-[22px] font-medium mb-4"
-                >
-                  {content.pageContent.realStoriesTitle}
-                </h3>
-
-                {/* Stories */}
-                <ul className="space-y-4">
-                  {content.realStories.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      {/* Bullet */}
-                      <span className="mt-[6px] text-[#162766] text-[16px]">
-                        •
-                      </span>
-
-                      {/* Text */}
-                      <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
-                        <strong className="font-semibold text-[#162766]">
-                          {item.name}:
-                        </strong>{" "}
-                        {item.story}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}

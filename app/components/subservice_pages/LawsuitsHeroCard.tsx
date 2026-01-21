@@ -4,77 +4,62 @@ import Image from "next/image";
 
 type LawsuitsHeroCardProps = {
   heroTitle: React.ReactNode;
+  heroImage: string;
+  imageAlt?: string;
+  imageClassName?: string;
 };
 
-const LawsuitsHeroCard = ({ heroTitle }: LawsuitsHeroCardProps) => {
+const LawsuitsHeroCard = ({
+  heroTitle,
+  heroImage,
+  imageAlt = "Lawsuit hero background",
+  imageClassName = "object-cover scale-[1.1] md:scale-[1.12] md:translate-y-[-20px]",
+}: LawsuitsHeroCardProps) => {
   return (
-    <div
+    <section
       className="
         relative w-full
-        lg:min-h-[540px]
-        xl:min-h-[580px]
-        2xl:min-h-[620px]
-        h-[800px]
-        overflow-hidden
         bg-[#162766]
-        flex
-        items-center
-        justify-center
+        overflow-hidden
       "
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/ozempic_bg_dark.png"
-          alt="Mass tort hero background"
+          src={heroImage}
+          alt={imageAlt}
           fill
-          className="
-            w-full h-full
-            object-cover
-            scale-[1.12]
-            translate-y-[-20px]
-          "
+          priority
+          className={`w-full h-full ${imageClassName}`}
         />
       </div>
 
-      {/* Content Row */}
+      {/* Content */}
       <div
         className="
           relative z-20
-          w-full h-full
-          flex
-          flex-col
-          lg:flex-row
-          items-center justify-center
-          lg:justify-evenly
+          mx-auto
+          max-w-[1280px]
+          px-4 sm:px-6 lg:px-8
+          py-10 sm:py-14 lg:py-20
+          flex flex-col lg:flex-row
+          items-center
+          gap-10 lg:gap-16
         "
       >
         {/* Left Text */}
-        <div
-          className="
-            w-full lg:w-auto
-            text-center 
-            lg:text-left
-            px-4
-            sm:px-6
-            lg:px-0
-            lg:ml-[5%]
-            
-            max-w-xl
-          "
-        >
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1
             className="
-              font-noto-serif text-left
+              font-noto-serif
               font-normal
               capitalize
-              mb-4 mt-6
               text-[#F2C438]
-              text-[34px]
-              sm:text-[42px]
-              md:text-[38px]
-              lg:text-[45px]
-              xl:text-[55px]
+              text-[32px]
+              sm:text-[38px]
+              md:text-[42px]
+              lg:text-[48px]
+              xl:text-[56px]
               leading-tight
               lg:leading-[64px]
             "
@@ -83,26 +68,14 @@ const LawsuitsHeroCard = ({ heroTitle }: LawsuitsHeroCardProps) => {
           </h1>
         </div>
 
-        {/* Right Form — TRUE PERFECT CENTER */}
-        <div
-          className="
-            w-full lg:w-auto
-            h-full
-            flex
-            items-center
-            justify-center
-            px-4
-            sm:px-6
-            lg:px-12
-            xl:px-20
-          "
-        >
-          <div className="w-full max-w-[420px]">
+        {/* Right Form */}
+        <div className="w-full lg:w-1/2 flex justify-center">
+          <div className="w-full max-w-[460px]">
             <Form />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

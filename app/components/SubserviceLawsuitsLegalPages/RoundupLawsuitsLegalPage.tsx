@@ -14,7 +14,7 @@ export const content = {
     whoQualifiesTitle: "who-qualifies-title",
     mdllitigationTitle: "mdl-litigation-title",
     compensationTitle: "compensation-title",
-    healthRisksTitle : "mdl-litigation-title",
+healthRisksTitle: "health-risks-title",
     realStoriesTitle: "real-stories-title",
     stepsTitle: "steps-title",
   },
@@ -88,33 +88,34 @@ export const content = {
     },
   ],
 
-  compensation: [
-    {
-      title: "Medical Expenses",
-      description:
-        "Coverage for current and future treatment costs related to cancer.",
-    },
-    {
-      title: "Lost Wages",
-      description:
-        "Compensation for income lost due to illness or treatment.",
-    },
-    {
-      title: "Pain and Suffering",
-      description:
-        "Damages for physical pain, emotional distress, and reduced quality of life.",
-    },
-    {
-      title: "Punitive Damages",
-      description:
-        "Additional damages in cases of extreme corporate misconduct.",
-    },
-    {
-      title: "Other Costs",
-      description:
-        "Travel for treatment, rehabilitation, and long-term care expenses.",
-    },
-  ],
+ compensation: [
+  {
+    title: "Medical Expenses",
+    description:
+      "Coverage for current and future medical bills related to your illness.",
+  },
+  {
+    title: "Lost Wages",
+    description:
+      "Compensation for income lost due to inability to work during treatment or recovery.",
+  },
+  {
+    title: "Pain and Suffering",
+    description:
+      "Financial awards for physical pain, emotional distress, and reduced quality of life.",
+  },
+  {
+    title: "Punitive Damages",
+    description:
+      "Additional damages intended to punish the manufacturer for negligence or misconduct (granted in certain cases).",
+  },
+  {
+    title: "Other Related Costs",
+    description:
+      "This can include travel expenses for treatment, rehabilitation, and ongoing care needs.",
+  },
+],
+
   riskPoints: [
     {
       title: "Glyphosate exposure damages cells and DNA",
@@ -255,18 +256,15 @@ mdllitigationsubheading2:"Settlements & Payouts",
   ],
 };
 
-const OZEMPIC_TOC = [
-  { label: "What is an Ozempic Lawsuit?", id: "main-title" },
-  { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
-  { label: "What are the Side Effects of Ozempic?", id: "risks-title" },
-  { label: "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?", id: "mdl-litigation-title" },
-  { label: "How Can an Ozempic Lawyer Help You Recover Compensation?", id: "who-qualifies-title" },
+const ROUNDUP_TOC = [
+  { label: "What is the Roundup Cancer Lawsuit?", id: "main-title" },
+  { label: "Who is Eligible to File a Claim?", id: "who-qualifies-title" },
+  { label: "Roundup Weed Killer Risks", id: "risks-title" },
+  { label: "Other Health Risks of Roundup", id: "health-risks-title" },
+  { label: "Roundup Cancer Lawsuit & MDL Litigation", id: "mdl-litigation-title" },
   { label: "What Compensation Can You Seek?", id: "compensation-title" },
-  { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
-  { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
-  { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
-  { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
-  { label: "FAQs", id: "faq-section" },
+  { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
+  { label: "How to File a Roundup Cancer Lawsuit", id: "steps-title" },
 ];
 
 const LawsuitsLegalPage = () => {
@@ -334,7 +332,7 @@ const LawsuitsLegalPage = () => {
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents items={OZEMPIC_TOC} />
+          <TableOfContents items={ROUNDUP_TOC} />
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -616,7 +614,7 @@ const LawsuitsLegalPage = () => {
                         text-[20px]
                         sm:text-[22px]
                         lg:text-[24px]
-                        font-bold
+                        font-medium
                         leading-normal
                       "
                     >
@@ -750,7 +748,7 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents items={OZEMPIC_TOC} />
+                <TableOfContents items={ROUNDUP_TOC} />
               </div>
             </div>
           </aside>

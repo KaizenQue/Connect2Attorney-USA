@@ -1,6 +1,6 @@
 "use client";
 import LawsuitsHeroCard from "../../components/subservice_pages/LawsuitsHeroCard";
-import OzempicInfo from "../../components/subservice_pages/OzempicInfo";
+import OzempicInfo from "../../components/subservice_pages/SupportCard";
 import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
@@ -20,6 +20,7 @@ import { roundupTimelineData } from "../../components/timelines/roundupTimelineD
 import { talcumTimelineData } from "../../components/timelines/talcumTimelineData";
 
 import { TimelineData } from "@/app/components/timelineTypes";
+import SupportCard from "../../components/subservice_pages/SupportCard";
 // const faqData = [
 //   {
 //     question: "How much does it cost to start a case?",
@@ -231,10 +232,10 @@ export default function MassTortPage() {
       title: "Ozempic Lawsuit Timeline",
       data: ozempicTimelineData,
     },
-    "mesothelioma-lawsuit": {
-      title: "Mesothelioma Lawsuit Timeline",
-      data: mesotheliomaTimelineData,
-    },
+    // "mesothelioma-lawsuit": {
+    //   title: "Mesothelioma Lawsuit Timeline",
+    //   data: mesotheliomaTimelineData,
+    // },
     "depo-provera-lawsuit": {
       title: "Depo Provera Lawsuit Timeline",
       data: depoTimelineData,
@@ -257,6 +258,14 @@ export default function MassTortPage() {
       answer: "We work on a contingency basis. You pay nothing unless we win.",
     },
   ];
+/* ================= HERO IMAGES ================= */
+const HERO_IMAGE_BY_SLUG: Record<string, string> = {
+  "ozempic-lawsuit": "/ozempic_bg_dark_new.png",
+  "mesothelioma-lawsuit": "/meso_bg_dark.png",
+  "depo-provera-lawsuit": "/depo_bg_dark.png",
+  "roundup-lawsuit": "/roundup_bg_dark.png",
+  "talcum-lawsuit": "/talc_bg_dark.png",
+};
 
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
@@ -266,10 +275,51 @@ export default function MassTortPage() {
     "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
   };
 const timelineConfig = TIMELINE_BY_SLUG[slug];
+const heroImage =
+  HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
+
+
+ const SUPPORT_BY_SLUG: Record<string, { title: string; description: string }> = {
+  "ozempic-lawsuit": {
+    title: "Get Legal Support from Connect2Attorney",
+    description:
+      "You don’t have to fight this battle alone. If Ozempic caused serious harm to your health, Connect2Attorney can help you:",
+  },
+
+  "mesothelioma-lawsuit": {
+    title: "Get Legal Support from Connect2Attorney",
+    description:
+      "You don’t have to face a mesothelioma challenge. If asbestos exposure caused your illness, Connect2Attorney can help you:",
+  },
+
+  "depo-provera-lawsuit": {
+    title: "Get Legal Support from Connect2Attorney",
+    description:
+      "You don’t have to face this challenge alone. If Depo-Provera caused serious harm to your health, Connect2Attorney is here to help you:",
+  },
+
+  "roundup-lawsuit": {
+    title: "Get Legal Support from Connect2Attorney",
+    description:
+      "You don’t have to fight this battle alone. If Roundup has caused you cancer or any other health problem, Connect2Attorney can help you:",
+  },
+
+  "talcum-lawsuit": {
+    title: "Get Legal Support from Connect2Attorney",
+    description:
+      "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
+  },
+};
+
+
+const supportData = SUPPORT_BY_SLUG[slug];
 
   return (
     <main className="min-h-screen">
-      <LawsuitsHeroCard heroTitle={heroTitle} />
+<LawsuitsHeroCard
+  heroTitle={heroTitle}
+  heroImage={heroImage}
+/>
       {LEGAL_PAGE_BY_SLUG[slug]}
    {timelineConfig && (
   <div id="timeline-section">
@@ -283,7 +333,12 @@ const timelineConfig = TIMELINE_BY_SLUG[slug];
 
 
       <div id="get-legal-support" >
-      <OzempicInfo />
+{supportData && (
+  <SupportCard
+    title={supportData.title}
+    description={supportData.description}
+  />
+)}
       </div>
       <div id="faq-section">
         <FaqSection faqData={faqData} />

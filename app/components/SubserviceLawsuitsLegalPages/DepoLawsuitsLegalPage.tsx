@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-// import Ozempicfreecasecard from "./Ozempicfreecasecard";
+// import Depo Provera freecasecard from "./Depo Provera freecasecard";
 import TableOfContents from "../subservice_pages/TableOfContents";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +15,7 @@ export const content = {
     whoQualifiesTitle: "who-qualifies-title",
     compensationTitle: "compensation-title",
     mdllitigationTitle: "mdl-litigation-title",
+    tumorRisksTitle: "tumor-risks-title",
     realStoriesTitle: "real-stories-title",
     stepsTitle: "steps-title",
   },
@@ -167,23 +168,28 @@ mdllitigationPoints: [
       "Women who relied on Depo-Provera for birth control allege they were not fully informed of the potential long-term neurological dangers, leading to delayed diagnosis and severe medical consequences. Depo-Provera is an injectable hormonal contraceptive administered once every three months. It contains medroxyprogesterone acetate, a synthetic form of progesterone designed to prevent ovulation and pregnancy. ",
       "While effective, Depo Provera has been associated with several side effects, and recent studies have raised concerns about a possible link between prolonged use and brain tumor development, leading to an increase in depo lawsuit filings. "
     ],
+    tumorRisksTitle: "Depo Provera and Brain Tumor Risk",
+    tumorRisksParagraph:
+      "Medical research has increasingly examined the connection between Depo Provera and brain tumors, especially hormone-sensitive tumors like meningiomas. These tumors can press against the brain or spinal cord, causing serious neurological symptoms",
+    tumorRisksParagraph2:
+    "Many lawsuits allege that the hormonal composition of Depo-Provera may promote tumor growth when used over extended periods.",
 
     allegationsTitle: "Who is Eligible to File a Claim? ",
     allegationsParagraph:
       "Patients allege that Novo Nordisk failed to warn about gastroparesis, a condition that delays stomach emptying. They also claim the company downplayed serious side effects in its marketing while ignoring early signs of harm.",
-    allegationsSubtitle: "You may be eligible to file an Ozempic lawsuit if: ",
+    allegationsSubtitle: "You may be eligible to file an Depo Provera  lawsuit if: ",
 
     healthRisksTitle: "What are the Side Effects of Depo Provera? ",
     healthRisksParagraph:
       "A French study found that women who used Depo Provera for over a year had a 5.6 times higher risk of developing meningioma, a type of brain tumor. In addition to this serious concern, the shot has been linked to fertility issues and more common side effects like nausea and headaches.   ",
     healthRisksSubtitle: "Here are some of the commonly reported health effects of Depo Provera:   ",
     healthRisksSubtitle2:
-      "Reported health risks associated with Ozempic include: ",
+      "Reported health risks associated with Depo Provera  include: ",
     
     whoQualifiesTitle: "Depo Provera Legal Claims  ",
     whoQualifiesParagraphTitle:"The Depo Provera lawsuit and individual claims typically allege:",
     whoQualifiesParagraph:
-      "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
+      "Many users of Depo Provera  or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
     whoQualifiesSubtitle: "If you’ve suffered harm, you may qualify to file a lawsuit under the following conditions:  ",
 mdllitigationTitle:
   "Depo Provera Legal News: MDL Updates & Litigation Status ",
@@ -199,9 +205,9 @@ mdllitigationParagraph:
 
     realStoriesTitle: "Real Stories Behind Lawsuit",
 
-    stepsTitle: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    stepsTitle: "How to File an Depo Provera  Lawsuit with Connect2Attorney?",
     stepsParagraph:
-      "Connect2Attorney guides you through the process of filing an Ozempic lawsuit against the responsible party, in just three simple steps:",
+      "Connect2Attorney guides you through the process of filing an Depo Provera  lawsuit against the responsible party, in just three simple steps:",
   },
 
   ctaContent: {
@@ -233,19 +239,18 @@ mdllitigationParagraph:
   ],
   
 };
-const OZEMPIC_TOC = [
-   { label: "What is a Depo-Provera Lawsuit?", id: "main-title" },
-    { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
-    { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
-    { label: "Depo Provera Legal News: MDL Updates & Litigation Status ", id: "mdl-litigation-title" },
-    { label: "Depo Provera Legal Claims ", id: "who-qualifies-title" },
-    { label: "What Compensation Can You Get? ", id: "compensation-title" },
-    { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
-    { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
-    { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
-    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
-    { label: "FAQs", id: "faq-section" },
+const DepoProvera_TOC = [
+  { label: "What is a Depo-Provera Lawsuit?", id: "main-title" },
+  { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+  { label: "Depo Provera and Brain Tumor Risk", id: "tumor-risks-title" },
+  { label: "What are the Side Effects of Depo Provera?", id: "health-risks-title" },
+  { label: "Depo Provera Legal Claims", id: "who-qualifies-title" },
+  { label: "Depo Provera Legal News: MDL Updates & Litigation Status", id: "mdl-litigation-title" },
+  { label: "What Compensation Can You Get?", id: "compensation-title" },
+  { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
+  { label: "How to File a Depo Provera Lawsuit with Connect2Attorney?", id: "steps-title" },
 ];
+
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
@@ -309,9 +314,9 @@ const LawsuitsLegalPage = () => {
       `}</style>
       {/* Page Container */}
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
-        {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
+        {/* ==================== SECTION 1: Depo Provera  Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
-          <TableOfContents items={OZEMPIC_TOC} />
+          <TableOfContents items={DepoProvera_TOC} />
 
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
@@ -335,7 +340,7 @@ const LawsuitsLegalPage = () => {
               <p>{content.pageContent.mainParagraphs[3]}</p>
             </div>
 
-            {/* <Ozempicfreecasecard /> */}
+            {/* <Depo Provera freecasecard /> */}
             <h2
               id={content.sectionIds.allegationsTitle}
               className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
@@ -369,39 +374,19 @@ const LawsuitsLegalPage = () => {
               ))}
             </ul>
 
-                     <h2
-              id={content.sectionIds.allegationsTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-            >
-              {content.pageContent.allegationsTitle}
-            </h2>
+                <h2
+                id={content.sectionIds.tumorRisksTitle}
+                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+              >
+                {content.pageContent.tumorRisksTitle}
+              </h2>
 
-            <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
-              {content.pageContent.allegationsSubtitle}
-            </p>
-
-            <ul className="space-y-3 mb-8 font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px] whitespace-pre-line">
-              {content.eligibilityPoints.map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  {/* Custom bullet */}
-                  <span className="mt-[7px] shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                    >
-                      <circle cx="7" cy="7" r="7" fill="#162766" />
-                    </svg>
-                  </span>
-
-                  {/* Text */}
-                  <span>{item.description}</span>
-                </li>
-              ))}
-            </ul>
-            
+              <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                {content.pageContent.tumorRisksParagraph}
+              </p>
+               <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                {content.pageContent.tumorRisksParagraph2}
+              </p>
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
               <h2
@@ -570,7 +555,7 @@ const LawsuitsLegalPage = () => {
           text-[20px]
           sm:text-[22px]
           lg:text-[24px]
-          font-bold
+          font-medium
           leading-normal
         "
       >
@@ -685,7 +670,7 @@ const LawsuitsLegalPage = () => {
                 </div>
               </div>
               <div className="mb-8">
-                <TableOfContents items={OZEMPIC_TOC} />
+                <TableOfContents items={DepoProvera_TOC} />
 
               </div>
             </div>

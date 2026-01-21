@@ -989,179 +989,198 @@ const handleSubmit = async () => {
   return (
     <div className="w-full  flex justify-center items-center p-3 sm:p-4">
       <Toaster position="top-right" />
-      <div
-        ref={containerRef}
-        className="
-    flex
-    flex-col
+ <div
+  ref={containerRef}
+  className="
+    flex flex-col
     w-full
     max-w-[447px]
+
+    h-[596px]
+    max-h-[calc(100vh-24px)]
+
+    sm:h-[596px]
+    sm:max-h-[90vh]
+
     bg-white
     rounded-xl
     shadow-xl
     overflow-hidden
   "
-      >
+>
+
+
         {/* ---------------- STEP 1 ---------------- */}
         <Step active={step === 1} direction={direction}>
-          <form
-            className="flex flex-col h-full p-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              next();
-            }}
-          >
-            {/* TrustedForm hidden fields */}
-            <input type="hidden" name="xxTrustedFormCertUrl" />
-            <input type="hidden" name="xxTrustedFormCertToken" />
-            <input type="hidden" name="xxTrustedFormPingUrl" />
+        <form
+  className="flex flex-col h-full p-4"
+  onSubmit={(e) => {
+    e.preventDefault();
+    next();
+  }}
+>
+  {/* TrustedForm hidden fields */}
+  <input type="hidden" name="xxTrustedFormCertUrl" />
+  <input type="hidden" name="xxTrustedFormCertToken" />
+  <input type="hidden" name="xxTrustedFormPingUrl" />
 
-            {/* Content Section - Takes available space */}
-            <div className="flex-1 space-y-2">
-              {" "}
-              {/* Reduced from space-y-3 */}
-              <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-                It&apos;s easy to get started
-              </h2>
-              <p className="text-[#6E6E6E] font-urbanist text-[14px] font-medium mb-2">
-                {" "}
-                {/* Added mb-2 */}
-                Provide a few details and our team will take it from here.
-              </p>
-              <Input
-                label="First name"
-                value={form.firstName}
-                error={firstError || errors.firstName}
-                onChange={handleFirstNameChange}
-              />
-              <Input
-                label="Last name"
-                value={form.lastName}
-                error={lastError || errors.lastName}
-                onChange={handleLastNameChange}
-              />
-              <Input
-                label="Phone number"
-                value={form.phone}
-                error={phoneError || errors.phone}
-                onChange={handlePhoneChange}
-              />
-              <Input
-                label="Email"
-                value={form.email}
-                error={emailError || errors.email}
-                onChange={handleEmailChange}
-              />
-              <Input
-                label="Zip code"
-                value={form.zip}
-                error={zipError || errors.zip}
-                onChange={handleZipChange}
-              />
-            </div>
+  {/* ================= CONTENT ================= */}
+  <div className="flex-1">
+    {/* Header */}
+    <div className="mb-4">
+      <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
+        It&apos;s easy to get started
+      </h2>
+      <p className="text-[#6E6E6E] font-urbanist text-[14px] font-medium mt-1">
+        Provide a few details about your case and our team will take it from here.
+      </p>
+    </div>
 
-            {/* Progress Bar & Button Section - Always at bottom */}
-            <div className="mt-4 pt-4 -mx-5">
-              <ProgressBar step={step} />
-            </div>
+    {/* Inputs */}
+    <div className="flex flex-col gap-3">
+      <Input
+        label="First name"
+        value={form.firstName}
+        error={firstError || errors.firstName}
+        onChange={handleFirstNameChange}
+      />
+      <Input
+        label="Last name"
+        value={form.lastName}
+        error={lastError || errors.lastName}
+        onChange={handleLastNameChange}
+      />
+      <Input
+        label="Phone number"
+        value={form.phone}
+        error={phoneError || errors.phone}
+        onChange={handlePhoneChange}
+      />
+      <Input
+        label="Email"
+        value={form.email}
+        error={emailError || errors.email}
+        onChange={handleEmailChange}
+      />
+      <Input
+        label="Zip code"
+        value={form.zip}
+        error={zipError || errors.zip}
+        onChange={handleZipChange}
+      />
+    </div>
+  </div>
 
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
-              >
-                Next
-              </button>
-            </div>
-          </form>
+  {/* ================= BOTTOM BAR ================= */}
+  <div className="-mx-5 mt-4">
+    <ProgressBar step={step} />
+  </div>
+
+  <div className="mt-3">
+    <button
+      type="submit"
+      className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg"
+    >
+      Next
+    </button>
+  </div>
+</form>
+
         </Step>
 
         {/* ---------------- STEP 2 ---------------- */}
-        <Step active={step === 2} direction={direction}>
-          <div className="flex flex-col h-full p-4" ref={dropdownRef}>
-            {/* Content Section - Takes available space */}
-            <div className="flex-1 space-y-3">
-              <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
-                Select Your Case
-              </h2>
+   <Step active={step === 2} direction={direction}>
+  <div className="flex flex-col h-full p-4" ref={dropdownRef}>
+    {/* ================= CONTENT ================= */}
+    <div className="flex-1 flex flex-col justify-between">
+      {/* -------- TOP GROUP -------- */}
+      <div className="space-y-3">
+        <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
+          Select Your Case
+        </h2>
 
-              {/* Custom dropdown */}
-              <button
-                type="button"
-                onClick={() => setDropdownOpen((v) => !v)}
-                className="w-full h-[50px] px-4 rounded-[10px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[16px] font-medium text-[#303030]"
-              >
-                <span className="truncate">
-                  {caseType || "Choose from the list"}
-                </span>
-                {dropdownOpen ? (
-                  <ChevronUp size={18} />
-                ) : (
-                  <ChevronDown size={18} />
-                )}
-              </button>
+        <p className="font-urbanist font-medium text-[#6E6E6E] text-[14px] leading-normal">
+          Tell us about your situation, and we&apos;ll connect you with the right legal support.
+        </p>
 
-              {dropdownOpen && (
-                <div className="mt-1 w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[176px] overflow-y-auto">
-                  {CASES.map((item) => {
-                    const isSelected = caseType === item;
-                    return (
-                      <div
-                        key={item}
-                        onClick={() => {
-                          setCaseType(item);
-                          setDropdownOpen(false);
-                          setErrors({});
-                        }}
-                        className={`group h-[44px] px-3 flex items-center justify-between cursor-pointer transition-colors ${
-                          isSelected
-                            ? "bg-[#162766] text-white"
-                            : "text-[#162766] hover:bg-[#162766] hover:text-white"
-                        }`}
-                      >
-                        <span className="truncate">{item}</span>
-                        <span
-                          className={`text-[#F2C438] ${
-                            isSelected
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-100"
-                          }`}
-                        >
-                          ✓
-                        </span>
-                      </div>
-                    );
-                  })}
+        {/* Custom dropdown */}
+        <button
+          type="button"
+          onClick={() => setDropdownOpen((v) => !v)}
+          className="w-full h-[50px] px-4 rounded-[10px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[16px] font-medium text-[#303030]"
+        >
+          <span className="truncate">
+            {caseType || "Choose from the list"}
+          </span>
+          {dropdownOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
+
+        {dropdownOpen && (
+          <div className="mt-1 w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[176px] overflow-y-auto">
+            {CASES.map((item) => {
+              const isSelected = caseType === item;
+              return (
+                <div
+                  key={item}
+                  onClick={() => {
+                    setCaseType(item);
+                    setDropdownOpen(false);
+                    setErrors({});
+                  }}
+                  className={`group h-[44px] px-3 flex items-center justify-between cursor-pointer transition-colors ${
+                    isSelected
+                      ? "bg-[#162766] text-white"
+                      : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                  }`}
+                >
+                  <span className="truncate">{item}</span>
+                  <span
+                    className={`text-[#F2C438] ${
+                      isSelected
+                        ? "opacity-100"
+                        : "opacity-0 group-hover:opacity-100"
+                    }`}
+                  >
+                    ✓
+                  </span>
                 </div>
-              )}
-
-              {errors.caseType && (
-                <p className="text-xs text-red-500">{errors.caseType}</p>
-              )}
-
-              <input
-                placeholder="Please describe what happened"
-                className="w-full border border-[#E2E4EA] rounded-[10px] p-3 min-h-[100px]"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-
-            {/* Progress Bar & Button Section - Always at bottom */}
-            <div className="mt-4 pt-4 -mx-5">
-              <ProgressBar step={step} />
-            </div>
-
-            <div>
-              <button
-                onClick={next}
-                className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg mt-3"
-              >
-                Next
-              </button>
-            </div>
+              );
+            })}
           </div>
-        </Step>
+        )}
+
+        {errors.caseType && (
+          <p className="text-xs text-red-500">{errors.caseType}</p>
+        )}
+      </div>
+
+      {/* -------- BOTTOM GROUP -------- */}
+      <div>
+        <textarea
+          placeholder="Please describe what happened"
+          className="w-full border border-[#E2E4EA] rounded-[10px] p-3 min-h-[100px]"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+    </div>
+
+    {/* ================= BOTTOM BAR ================= */}
+    <div className="-mx-5 mt-4">
+      <ProgressBar step={step} />
+    </div>
+
+    <div className="mt-3">
+      <button
+        onClick={next}
+        className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-3 rounded-lg"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</Step>
+
 
         {/* ---------------- STEP 3 ---------------- */}
         <Step active={step === 3} direction={direction}>
@@ -1323,18 +1342,25 @@ function Step({
   children: React.ReactNode;
 }) {
   if (!active) return null;
+
   return (
     <div
-      className={`transition-all duration-300 ease-out ${
-        direction === "next"
-          ? "animate-in slide-in-from-right"
-          : "animate-in slide-in-from-left"
-      }`}
+      className={`
+        w-full h-full
+        flex flex-col
+        transition-all duration-300 ease-out
+        ${
+          direction === "next"
+            ? "animate-in slide-in-from-right"
+            : "animate-in slide-in-from-left"
+        }
+      `}
     >
       {children}
     </div>
   );
 }
+
 
 function Input({
   label,
@@ -1348,13 +1374,11 @@ function Input({
   error?: string;
 }) {
   return (
-    <div className="mb-4">
-      {/* Increased vertical spacing between inputs */}
-
+    <div>
       <input
         className={`
           w-full
-          h-[42px]            
+          h-[50px]
           px-[14px]
           rounded-[8px]
           border
@@ -1369,10 +1393,6 @@ function Input({
 
           placeholder:text-[#303030]
           placeholder:opacity-70
-          placeholder:font-poppins
-          placeholder:text-[15px]
-          placeholder:font-medium
-          placeholder:leading-[18px]
 
           focus:outline-none
           focus:border-[#162766]
@@ -1383,14 +1403,18 @@ function Input({
         onChange={(e) => onChange(e.target.value)}
       />
 
-      {error && (
-        <p className="text-[10px] text-red-500 mt-1 pl-1">
-          {error}
-        </p>
-      )}
+      {/* Always reserve space for error */}
+      <div className="min-h-[14px] mt-1 pl-1">
+        {error && (
+          <p className="text-[10px] text-red-500 leading-tight">
+            {error}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
+
 
 
 function Row({ label, value }: { label: string; value: string }) {

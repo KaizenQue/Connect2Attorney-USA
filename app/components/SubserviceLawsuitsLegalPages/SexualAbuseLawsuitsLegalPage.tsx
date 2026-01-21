@@ -244,7 +244,7 @@ export const content = {
       "When survivors pursue a sexual abuse lawsuit, financial compensation can play a vital role in recovery. Settlements and verdicts provide monetary relief for trauma, medical care, therapy, lost income, and long-term emotional harm. Compensation also holds individuals and institutions accountable for abuse and negligence. Institutions and individuals have paid over $13 billion in publicly reported sexual abuse settlements and verdicts to survivors since 2003.",
 
     helpsurvivorsTitle:
-      "How to File a Sexual Abuse Lawsuit with Connect2Attorney?",
+    "How a Sexual Abuse Lawyer Can Help Survivors? ",
 
     helpsurvivorsParagraph:
       "A sexual abuse lawyer can guide survivors through every step of a lawsuit, including:",
@@ -580,7 +580,7 @@ const LawsuitsLegalPage = () => {
 
             {/* ==================== Current Legal devs SECTION ==================== */}
 
-            <div className="mb-16">
+            <div className="mb-16 mt-10">
               <h2
                 id={content.sectionIds.currentLegalTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"

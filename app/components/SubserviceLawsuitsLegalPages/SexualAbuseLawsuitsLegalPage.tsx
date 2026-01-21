@@ -428,11 +428,12 @@ const LawsuitsLegalPage = () => {
               >
                 <span className="text-[#F2C438]">
                   {content.pageContent.eligibleTitle.split(" ")[0]}{" "}
-                  {content.pageContent.eligibleTitle.split(" ")[1]}
+                  {content.pageContent.eligibleTitle.split(" ")[1]}{" "}
+                   {content.pageContent.eligibleTitle.split(" ")[2]}
                 </span>{" "}
                 {content.pageContent.eligibleTitle
                   .split(" ")
-                  .slice(2)
+                  .slice(3)
                   .join(" ")}
               </h2>
 

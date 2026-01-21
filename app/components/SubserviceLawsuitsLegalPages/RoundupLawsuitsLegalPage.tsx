@@ -224,7 +224,7 @@ mdllitigationsubheading2:"Settlements & Payouts",
 
     stepsTitle: "How to File a Roundup Cancer Lawsuit with Connect2Attorney?",
     stepsParagraph:
-      "Connect2Attorney guides you through the process in just three simple steps:",
+      "Connect2Attorney guides you through the process of filing a Roundup cancer lawsuit against the responsible party, in just three simple steps: ",
   },
 
   ctaContent: {

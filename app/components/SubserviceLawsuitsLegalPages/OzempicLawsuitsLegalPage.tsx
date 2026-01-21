@@ -323,6 +323,7 @@ const LawsuitsLegalPage = () => {
               <p>{content.pageContent.mainParagraphs[0]}</p>
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
+              <br/>
 
               <h3 className=" font-bold">
                 {content.pageContent.mainParagraphs[2]}
@@ -364,6 +365,8 @@ const LawsuitsLegalPage = () => {
                 </li>
               ))}
             </ul>
+              <br/>
+              <br/>
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">

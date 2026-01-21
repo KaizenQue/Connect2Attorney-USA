@@ -1,6 +1,6 @@
 "use client";
 import LawsuitsHeroCard from "../../components/subservice_pages/LawsuitsHeroCard";
-import OzempicInfo from "../../components/subservice_pages/OzempicInfo";
+import OzempicInfo from "../../components/subservice_pages/SupportCard";
 import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
@@ -14,6 +14,7 @@ import { sexualAbuseTimelineData } from "@/app/components/timelines/sexualabusel
 import SlipnFallLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/SlipnFallLawsuitsLegalPage";
 import TruckAccidentLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TruckAccidentLawsuitsLegalPage"
 import { TimelineData } from "@/app/components/timelineTypes";
+import SupportCard from "../../components/subservice_pages/SupportCard";
 
 /* ================= PAGE TITLES ================= */
 const HERO_CONFIG: Record<
@@ -195,37 +196,65 @@ const heroConfig = HERO_CONFIG[slug];
     "slip-and-fall-injury-lawsuit": <SlipnFallLawsuitsLegalPage />,
     "18-wheeler-lawsuit": <TruckAccidentLawsuitsLegalPage />,
   };
-  const timelineConfig = TIMELINE_BY_SLUG[slug];
+    const SUPPORT_BY_SLUG: Record<
+    string,
+    { title: string; description: string }
+  > = {
+    "sexual-abuse-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+      "You don’t have to fight this battle alone. If sexual abuse in an institution or workplace has harmed you physically or mentally, Connect2Attorney can help you: ",
+    },
 
+    "motor-vehicle-accident-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+      "You don’t have to fight this battle alone. If a motor vehicle accident has caused you injury or property damage, Connect2Attorney can help you: ",
+    },
+      "slip-and-fall-injury-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+      "You don’t have to fight this battle alone. If slip and fall has caused you injury, Connect2Attorney can help you: ",
+    },
+      "18-wheeler-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+      "You don't have to handle this issue alone. If an 18-wheeler accident has caused you personal injury or property damage, Connect2Attorney can help you: ",
+    },
+  };
+  const HERO_IMAGE_BY_SLUG: Record<string, string> = {
+    "sexual-abuse-lawsuit": "/sexual-abuse-lawsuit.png",
+    "motor-vehicle-accident-lawsuit": "/motor-vehicle-accident-lawsuit.png",
+    "slip-and-fall-injury-lawsuit": "/slip-and-fall-injury-lawsuit.png",
+    "18-wheeler-lawsuit": "/18-wheeler-lawsuit.png",
+  };
+
+  const timelineConfig = TIMELINE_BY_SLUG[slug];
+  const supportData = SUPPORT_BY_SLUG[slug];
+  const heroImage = HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
+  const heroTitle = heroConfig?.title ?? "Lawsuit Information";
   return (
     <main className="min-h-screen">
-    <LawsuitsHeroCard
-  heroTitle={
-    heroConfig?.title ?? (
-      <>
-        Personal Injury
-        <br />
-        Lawsuits
-      </>
-    )
-  }
-  bgImage={heroConfig?.bg}
-/>
-
-      {LEGAL_PAGE_BY_SLUG[slug]}
+<LawsuitsHeroCard
+  heroTitle={heroTitle}
+  heroImage={heroImage}
+/>       {LEGAL_PAGE_BY_SLUG[slug]}
       <div id="timeline-section">
         {timelineConfig && (
           <div id="timeline-section">
             <TimeLineCard
               title={timelineConfig.title}
               timelineData={timelineConfig.data}
-              defaultYear="2025"
             />
           </div>
         )}
       </div>
-      <OzempicInfo />
-      <FaqSection faqData={faqData} />
+{supportData && (
+  <SupportCard
+    title={supportData.title}
+    description={supportData.description}
+  />
+)}          <FaqSection faqData={faqData} />
       <ContactCard />
       <Footer />
     </main>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo,useRef } from "react";
 import Image from "next/image";
+import { sendWithEmailJS } from "../emailjs";
 
 // Utility functions (matching your previous form's validation)
 const validateName = (value: string) => {
@@ -328,35 +329,44 @@ const [showFullConsent, setShowFullConsent] = useState(false);
 
   // Handle form submission (similar to your previous form)
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isFormValid || submitting) return;
+  e.preventDefault();
+  if (!isFormValid || submitting) return;
 
-    // Validate all fields before submission
-    const newErrors = {
-      firstName: validateName(form.firstName),
-      lastName: validateName(form.lastName),
-      email: validateEmail(form.email),
-      phone: validatePhone(form.phone),
-      message: validateMessage(form.message),
-    };
+  // Final validation pass
+  const newErrors = {
+    firstName: validateName(form.firstName),
+    lastName: validateName(form.lastName),
+    email: validateEmail(form.email),
+    phone: validatePhone(form.phone),
+    message: validateMessage(form.message),
+  };
 
-    setErrors(newErrors);
+  setErrors(newErrors);
 
-    if (Object.values(newErrors).some(error => error !== "")) {
-      return;
-    }
+  if (Object.values(newErrors).some((err) => err !== "")) {
+    return;
+  }
 
-    setSubmitting(true);
+  setSubmitting(true);
 
-    try {
-      const rawPhone = form.phone.replace(/\D/g, "");
-      const phoneWithCountryCode = rawPhone.startsWith("1") && rawPhone.length === 11 
-        ? `+${rawPhone}` 
-        : `+1${rawPhone.slice(-10)}`;
+  try {
+    // =========================
+    // FORMAT DATA
+    // =========================
+    const rawPhone = form.phone.replace(/\D/g, "");
+    const phoneWithCountryCode = rawPhone.length === 11 && rawPhone.startsWith("1")
+      ? `+${rawPhone}`
+      : `+1${rawPhone.slice(-10)}`;
 
-      const fullName = `${form.firstName} ${form.lastName}`.trim();
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
 
-      const submitData = {
+    const apiBody = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Contact Section Form",
+      sourceUrl: typeof window !== "undefined" ? window.location.href : "Unknown",
+      data: {
         name: fullName,
         firstName: form.firstName,
         lastName: form.lastName,
@@ -364,87 +374,73 @@ const [showFullConsent, setShowFullConsent] = useState(false);
         phone: phoneWithCountryCode,
         message: form.message,
         needHelp: form.needHelp,
-        certId: trustedFormData.certId,
-        tokenUrl: trustedFormData.tokenUrl,
-        pingUrl: trustedFormData.pingUrl,
-      };
 
-      // Send emails (similar to your previous form)
-      try {
-        await Promise.all([
-          sendFormAdmin(submitData),
-          sendFormUser(submitData),
-        ]);
-      } catch (emailError) {
-        console.error("Email sending error:", emailError);
-        // Continue with CRM submission even if emails fail
+        ipAddress: await getIPAddress(),
+
+        trustedFormCertUrl: trustedFormData.certId || "",
+        trustedFormToken: trustedFormData.tokenUrl || "",
+        trustedFormPingUrl: trustedFormData.pingUrl || "",
+
+        submissionDate: new Date().toISOString(),
+        pageSource:
+          typeof window !== "undefined" ? window.location.href : "Unknown",
+      },
+    };
+
+    console.log("🚀 CONTACT FORM PAYLOAD:", apiBody);
+
+    // ================================
+    // 1️⃣ CRM — MUST SUCCEED
+    // ================================
+    const crmRes = await fetch(
+      "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apiBody),
       }
+    );
 
-      // Submit to CRM
-      const ip = await getIPAddress();
-      
-      const payload = {
-        countryName: "USA",
-        brandName: "C2A",
-        websiteName: "Connect 2 Attorney",
-        formname: "Contact Section Form",
-        data: {
-          name: fullName,
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
-          phone: phoneWithCountryCode,
-          message: form.message,
-          needHelp: form.needHelp,
-          ipAddress: ip,
-          trustedFormCertUrl: trustedFormData.certId,
-          trustedFormToken: trustedFormData.tokenUrl,
-          trustedFormPingUrl: trustedFormData.pingUrl,
-          submissionDate: new Date().toISOString(),
-          pageSource: typeof window !== 'undefined' ? window.location.href : "Unknown",
-        },
-      };
-
-      console.debug("ContactSection CRM payload:", payload);
-
-      const response = await fetch(
-        "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (response.ok) {
-        setSuccess(true);
-        // Reset form
-        setForm({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          message: "",
-          consent: false,
-          needHelp: false,
-        });
-        setShowCaptcha(false);
-        setCaptchaValid(false);
-        setResetTrigger((t) => !t);
-        setErrors({});
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => setSuccess(false), 5000);
-      } else {
-        throw new Error("CRM submission failed");
-      }
-    } catch (err) {
-      console.error("Form submission failed", err);
-      // You could add error state handling here
-    } finally {
-      setSubmitting(false);
+    if (!crmRes.ok) {
+      const text = await crmRes.text();
+      throw new Error("CRM failed: " + text);
     }
-  };
+
+    // ================================
+    // 2️⃣ EMAILJS — MUST SUCCEED
+    // ================================
+    await sendWithEmailJS(apiBody);
+
+    // ================================
+    // ✅ SUCCESS
+    // ================================
+    setSuccess(true);
+
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false,
+      needHelp: false,
+    });
+
+    setShowCaptcha(false);
+    setCaptchaValid(false);
+    setResetTrigger((t) => !t);
+    setErrors({});
+
+    // Auto-hide success toast after 5s
+    setTimeout(() => setSuccess(false), 5000);
+  } catch (err) {
+    console.error("❌ CONTACT FORM SUBMIT FAILED:", err);
+    alert("There was an error submitting the form. Please try again.");
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
 
 type CustomCaptchaProps = {

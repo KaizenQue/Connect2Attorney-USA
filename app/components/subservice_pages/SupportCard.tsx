@@ -63,8 +63,12 @@ const MoneyBagIcon = React.memo(() => (
     </defs>
   </svg>
 ));
+interface SupportCardProps {
+  title: string;
+  description: string;
+}
 
-const OzempicInfo = () => {
+const SupportCard = ({ title, description }: SupportCardProps) => {
   return (
     <>
       {/*================= MOBILE VERSION ===================== */}
@@ -95,7 +99,7 @@ const OzempicInfo = () => {
         pt-[4px]
       "
     >
-      Get Legal Support from Connect2Attorney
+      {title}
     </h1>
 
     {/* Paragraph */}
@@ -110,8 +114,7 @@ const OzempicInfo = () => {
         pr-[20px]
       "
     >
-      You don&apos;t have to fight this battle alone. If Roundup has caused you
-      cancer or any other health problem, Connect2Attorney can help you.
+  {description}
     </p>
 
     {/* Button text – locked to yellow background */}
@@ -181,7 +184,7 @@ const OzempicInfo = () => {
     whitespace-nowrap
   "
 >
-  Get Legal Support from Connect2Attorney
+  {title}
 </h1>
 
       <p
@@ -198,9 +201,8 @@ const OzempicInfo = () => {
           mb-4
         "
       >
-        You don&apos;t have to fight this battle alone. If Roundup has caused
-        you cancer or any other health problem, Connect2Attorney can help
-        you.
+          {description}
+
       </p>
 
       <div className="flex flex-nowrap items-center gap-4 lg:gap-5 mb-4">
@@ -259,4 +261,4 @@ const OzempicInfo = () => {
   );
 };
 
-export default OzempicInfo;
+export default SupportCard;

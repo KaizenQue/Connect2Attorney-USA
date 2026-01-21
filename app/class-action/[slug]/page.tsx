@@ -1,17 +1,18 @@
 "use client";
 import LawsuitsHeroCard from "../../components/subservice_pages/LawsuitsHeroCard";
-import OzempicInfo from "../../components/subservice_pages/OzempicInfo";
+import OzempicInfo from "../../components/subservice_pages/SupportCard";
 import TimeLineCard from "../../components/subservice_pages/TimeLineCard";
 import FaqSection from "../../components/FaqSection";
 import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
-import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage"
+import TeslaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TeslaLawsuitsLegalPage";
 import { teslaTimelineData } from "@/app/components/timelines/teslaTimelineData";
 import { TimelineData } from "@/app/components/timelineTypes";
 import MaclarenLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MaclarenLawsuitsLegalPage";
 import { maclarenHallTimelineData } from "@/app/components/timelines/maclarenTimelineData";
+import SupportCard from "../../components/subservice_pages/SupportCard";
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -80,8 +81,6 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
   ],
 };
 
-
-
 export default function MassTortPage() {
   const { slug } = useParams<{ slug: string }>();
   const heroTitle: ReactNode = HERO_TITLES[slug] ?? (
@@ -92,19 +91,19 @@ export default function MassTortPage() {
     </>
   );
 
-    const TIMELINE_BY_SLUG: Record<
-      string,
-      { title: string; data: TimelineData }
-    > = {
-      "tesla-autopilot-recall-lawsuit": {
-        title: "Tesla Autopilot Timeline",
-        data: teslaTimelineData,
-      },
-      "maclaren-hall-sex-abuse-lawsuit": {
-        title: "Maclaren Hall Lawsuit Timeline",
-        data: maclarenHallTimelineData,
-      },
-    };
+  const TIMELINE_BY_SLUG: Record<
+    string,
+    { title: string; data: TimelineData }
+  > = {
+    "tesla-autopilot-recall-lawsuit": {
+      title: "Tesla Autopilot Timeline",
+      data: teslaTimelineData,
+    },
+    "maclaren-hall-sex-abuse-lawsuit": {
+      title: "Maclaren Hall Lawsuit Timeline",
+      data: maclarenHallTimelineData,
+    },
+  };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
     {
@@ -120,29 +119,54 @@ export default function MassTortPage() {
     "tesla-autopilot-recall-lawsuit": <TeslaLawsuitsLegalPage />,
     "maclaren-hall-sex-abuse-lawsuit": <MaclarenLawsuitsLegalPage />,
   };
+  const SUPPORT_BY_SLUG: Record<
+    string,
+    { title: string; description: string }
+  > = {
+    "tesla-autopilot-recall-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "If Autopilot caused a crash involving you or a loved one, you shouldn’t face the consequences alone. Connect2Attorney helps victims pursue justice. ",
+    },
 
-    const timelineConfig = TIMELINE_BY_SLUG[slug];
+    "maclaren-hall-sex-abuse-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "If you or someone you love was harmed at MacLaren Hall, reach out today for a free and confidential case review. ",
+    },
+  };
+  const HERO_IMAGE_BY_SLUG: Record<string, string> = {
+    "tesla-autopilot-recall-lawsuit": "/tesla-autopilot-recall.png",
+    "maclaren-hall-sex-abuse-lawsuit": "/maclaren-hall-sex-abuse.png",
+  };
+  const supportData = SUPPORT_BY_SLUG[slug];
+  const heroImage = HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
+
+  const timelineConfig = TIMELINE_BY_SLUG[slug];
   return (
     <main className="min-h-screen">
-      <LawsuitsHeroCard heroTitle={heroTitle} />
+      <LawsuitsHeroCard heroTitle={heroTitle} heroImage={heroImage} />
       {LEGAL_PAGE_BY_SLUG[slug]}
-     <div id="timeline-section">
+      <div id="timeline-section">
         {timelineConfig && (
           <div id="timeline-section">
             <TimeLineCard
               title={timelineConfig.title}
               timelineData={timelineConfig.data}
-              defaultYear="2025"
             />
           </div>
         )}
       </div>
 
-      <OzempicInfo />
+      {supportData && (
+        <SupportCard
+          title={supportData.title}
+          description={supportData.description}
+        />
+      )}
       <FaqSection faqData={faqData} />
       <ContactCard />
       <Footer />
     </main>
   );
 }
-

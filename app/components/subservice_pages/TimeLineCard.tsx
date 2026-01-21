@@ -13,9 +13,15 @@ interface TimeLineCardProps {
 const TimeLineCard = ({ title, timelineData, defaultYear }: TimeLineCardProps) => {
 const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
 
-  const [activeYear, setActiveYear] = useState<string>(
-    defaultYear && timelineData[defaultYear] ? defaultYear : years[0]
-  );
+  const latestYear = years[0];
+
+const [activeYear, setActiveYear] = useState<string>(() => {
+  if (defaultYear && timelineData[defaultYear]) {
+    return defaultYear;
+  }
+  return latestYear;
+});
+
 
   const [isFirstHalfOpen, setIsFirstHalfOpen] = useState(true);
   const [isSecondHalfOpen, setIsSecondHalfOpen] = useState(false);
@@ -28,6 +34,8 @@ const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
   const data = timelineData[activeYear];
 
   if (!data) return null;
+const glassBtn =
+  "backdrop-blur-md bg-white/10 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/15 hover:border-white/40 transition-all duration-300";
 
   return (
     <section className="w-full bg-[#0E1B4D] text-white overflow-hidden">
@@ -37,7 +45,10 @@ const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
           {title}
         </h2>
 
-        <div className="inline-flex items-center gap-2 sm:gap-[10px] h-[50px] px-2 py-2 rounded-[90px] bg-white/10 shadow">
+<div
+  className={`inline-flex items-center gap-2 sm:gap-[10px] h-[50px] px-2 py-2 rounded-[90px]
+              ${glassBtn}`}
+>
           {years.map((year) => (
             <button
               key={year}
@@ -77,14 +88,14 @@ const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
                 e.stopPropagation();
                 setIsFirstHalfOpen(false);
               }}
-              className="w-10 h-10 flex items-center justify-center rounded-[10px]
-                         bg-white/10 shadow transition-transform duration-300
-                         motion-safe:hover:scale-105 motion-safe:active:scale-95"
+className={`w-10 h-10 flex items-center justify-center rounded-[10px]
+           ${glassBtn}
+           motion-safe:hover:scale-105 motion-safe:active:scale-95`}
             >
               <X size={16} className="text-[#F2C438]" />
             </button>
           ) : (
-            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow">
+            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow border border-[#FFF]" >
               <ChevronDown size={18} stroke="#162766" strokeWidth={3} />
             </div>
           )}
@@ -131,14 +142,14 @@ const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
                 e.stopPropagation();
                 setIsSecondHalfOpen(false);
               }}
-              className="w-10 h-10 flex items-center justify-center rounded-[10px]
-                         bg-white/10 shadow transition-transform duration-300
-                         motion-safe:hover:scale-105 motion-safe:active:scale-95"
+className={`w-10 h-10 flex items-center justify-center rounded-[10px]
+           ${glassBtn}
+           motion-safe:hover:scale-105 motion-safe:active:scale-95`}
             >
               <X size={16} className="text-[#F2C438]" />
             </button>
           ) : (
-            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow">
+            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow border border-[#FFF]">
               <ChevronDown size={18} stroke="#162766" strokeWidth={3} />
             </div>
           )}

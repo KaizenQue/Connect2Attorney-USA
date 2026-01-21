@@ -1186,7 +1186,7 @@ const handleSubmit = async () => {
         <Step active={step === 3} direction={direction}>
           <div className="flex flex-col h-full">
             {/* ================= CONTENT ================= */}
-            <div className="flex-1 p-4 space-y-4">
+<div className="flex-1 p-4 space-y-4 overflow-y-auto">
               <h2 className="text-[#162766] font-urbanist text-[22px] font-semibold leading-[28px]">
                 Confirm your Personal Details
               </h2>
@@ -1404,7 +1404,7 @@ function Input({
       />
 
       {/* Always reserve space for error */}
-      <div className="min-h-[14px] mt-1 pl-1">
+      <div className="min-h-[10px] mt-1 pl-1">
         {error && (
           <p className="text-[10px] text-red-500 leading-tight">
             {error}

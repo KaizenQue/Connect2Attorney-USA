@@ -326,7 +326,6 @@ const supportData = SUPPORT_BY_SLUG[slug];
     <TimeLineCard
       title={timelineConfig.title}
       timelineData={timelineConfig.data}
-      defaultYear="2025"
     />
   </div>
 )}

@@ -16,6 +16,7 @@ export const content = {
     compensationTitle: "compensation-title",
     mdllitigationTitle: "mdl-litigation-title",
     stepsTitle: "steps-title",
+    realStoriesTitle: "real-stories-title",
   },
 
   realStories: [
@@ -272,6 +273,9 @@ const MESOTHELIOMA_TOC = [
     label: "How to File a Mesothelioma Lawsuit with Connect2Attorney?",
     id: content.sectionIds.stepsTitle,
   },
+      { label: "Mesothelioma Lawsuit Timeline", id: "timeline-section" },
+    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
+    { label: "FAQs", id: "faq-section" },
 ];
 
 

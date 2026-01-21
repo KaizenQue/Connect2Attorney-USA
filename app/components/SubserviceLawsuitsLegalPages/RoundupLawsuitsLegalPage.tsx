@@ -265,6 +265,9 @@ const ROUNDUP_TOC = [
   { label: "What Compensation Can You Seek?", id: "compensation-title" },
   { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
   { label: "How to File a Roundup Cancer Lawsuit", id: "steps-title" },
+  { label: "Get Legal Support from Connect2Attorney", id: "get-legal-support" },
+  { label: " Roundup Lawsuit Timeline", id: "timeline-section" },
+  { label: "FAQs", id: "faq-section" },
 ];
 
 const LawsuitsLegalPage = () => {

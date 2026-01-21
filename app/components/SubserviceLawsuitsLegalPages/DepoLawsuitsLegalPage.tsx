@@ -249,6 +249,9 @@ const DepoProvera_TOC = [
   { label: "What Compensation Can You Get?", id: "compensation-title" },
   { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
   { label: "How to File a Depo Provera Lawsuit with Connect2Attorney?", id: "steps-title" },
+      { label: "Depo Provera Lawsuit Timeline", id: "timeline-section" },
+    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
+    { label: "FAQs", id: "faq-section" },
 ];
 
 const LawsuitsLegalPage = () => {

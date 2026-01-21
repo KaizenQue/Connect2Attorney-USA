@@ -239,7 +239,6 @@ export default function MassTortPage() {
             <TimeLineCard
               title={timelineConfig.title}
               timelineData={timelineConfig.data}
-              defaultYear="2025"
             />
           </div>
         )}

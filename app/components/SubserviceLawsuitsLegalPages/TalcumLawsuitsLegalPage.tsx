@@ -242,6 +242,9 @@ const TALCUM_TOC = [
   { label: "Talcum Powder Settlements & Compensation", id: "compensation-title" },
   { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
   { label: "How to File a Talcum Powder Lawsuit", id: "steps-title" },
+   { label: "Get Legal Support from Connect2Attorney", id: "get-legal-support" },
+  { label: " Talcum Lawsuit Timeline", id: "timeline-section" },
+  { label: "FAQs", id: "faq-section" },
 ];
 
 

@@ -4,9 +4,14 @@ import Image from "next/image";
 
 type LawsuitsHeroCardProps = {
   heroTitle: React.ReactNode;
+  bgImage?: string;
 };
 
-const LawsuitsHeroCard = ({ heroTitle }: LawsuitsHeroCardProps) => {
+
+const LawsuitsHeroCard = ({
+  heroTitle,
+  bgImage = "/ozempic_bg_dark.png",
+}: LawsuitsHeroCardProps) => {
   return (
     <div
       className="
@@ -19,20 +24,18 @@ const LawsuitsHeroCard = ({ heroTitle }: LawsuitsHeroCardProps) => {
         bg-[#162766]
         flex
         items-center
-        justify-center
+        justify-center 
       "
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/ozempic_bg_dark.png"
+          src={bgImage}
           alt="Mass tort hero background"
           fill
           className="
             w-full h-full
-            object-cover
-            scale-[1.12]
-            translate-y-[-20px]
+            object-cover 
           "
         />
       </div>

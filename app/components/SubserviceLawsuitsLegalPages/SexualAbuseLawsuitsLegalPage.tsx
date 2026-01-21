@@ -389,6 +389,10 @@ const LawsuitsLegalPage = () => {
               {content.pageContent.allegationsTitle}
             </h2>
 
+            <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+              {content.pageContent.allegationsParagraph}
+            </p>
+
             <p className="mb-4 font-poppins font-bold text-[#425777] text-[18px] leading-[27px]">
               {content.pageContent.allegationsSubtitle}
             </p>
@@ -440,7 +444,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.eligibleSubtitle}
               </p>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3">
                 {content.eligibilityPoints.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     {/* Yellow Bullet */}
@@ -464,6 +468,7 @@ const LawsuitsLegalPage = () => {
 
                     {/* Text */}
                     <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                      <span className="font-bold">{item.title}</span>{" "}
                       {item.description}
                     </p>
                   </li>
@@ -526,7 +531,7 @@ const LawsuitsLegalPage = () => {
                     </h4>
 
                     {/* Description */}
-                    <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                    <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-normal leading-[24px] sm:leading-[27px]">
                       {item.description}
                     </p>
                   </div>

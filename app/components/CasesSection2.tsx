@@ -1,7 +1,10 @@
 "use client";
 
 import React from 'react';
-import CaseCard from './CaseCard';
+import {
+  CaseCardCompact,
+  CaseCardExpanded,
+} from "./CaseCard";
 import MobileCaseCard from './MobileCaseCard';
 // Define the data interface
 interface CaseItem {
@@ -379,7 +382,7 @@ const CasesSection2: React.FC = () => {
           {/* Desktop / Tablet Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {casesData.map((item) => (
-              <CaseCard
+              <CaseCardCompact
                 key={item.id}
                 id={item.id}
                 title={item.title}

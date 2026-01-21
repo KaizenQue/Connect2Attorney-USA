@@ -11,52 +11,41 @@ interface CaseCardProps {
   url: string;
 }
 
-const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
+export const CaseCardCompact: React.FC<CaseCardProps> = ({
+  title,
+  image,
+  url,
+}) => {
   return (
-    <Link
-      href={url}
-      className="
-        relative
-        block
-        group
-        cursor-pointer
-      "
-    >
+    <Link href={url} className="relative block group cursor-pointer">
       <div
         className="
-          relative 
+          relative
+          h-[300px]
+          md:h-[280px]
+          lg:h-[260px]
+          xl:h-[300px]
+          2xl:h-[340px]
 
-      
-          h-[360px]
-        
-          md:h-[350px]
-          lg:h-[320px]
-          xl:h-[380px]
-          2xl:h-[420px]
-         
-          
+          w-[260px]
+          sm:w-[300px]
+          md:w-[270px]
+          lg:w-[220px]
+          xl:w-[260px]
+          2xl:w-[300px]
 
-          /* WIDTH */
-          w-[280px]
-          sm:w-[320px]
-          md:w-[290px]
-          lg:w-[230px]
-          xl:w-[280px]
-          2xl:w-[320px]
-
-          min-w-[280px]
-          md:min-w-[260px]
-          lg:min-w-[230px]
-          xl:min-w-[280px]
-          2xl:min-w-[320px]
+          min-w-[260px]
+          md:min-w-[250px]
+          lg:min-w-[220px]
+          xl:min-w-[260px]
+          2xl:min-w-[300px]
 
           flex-shrink-0
           rounded-[18px]
-          overflow-hidden 
-          mx-2 lg:mx-3 xl:mx-4
+          overflow-hidden
+          mx-2 lg:mx-3
           transition-transform duration-300
           lg:hover:-translate-y-2
-          xl:hover:-translate-y-3
         "
       >
         {/* Image */}
@@ -64,55 +53,30 @@ const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
           src={image}
           alt={title}
           fill
-          className="object-contain -translate-y-9"
+          className="object-contain lg:-translate-y-4  md:-translate-y-1 -translate-y-3"
         />
 
-        {/* Arrow / Notch */}
-        <div
-          className="
-            absolute top-3 right-0
-            md:top-0 md:right-0
-            lg:top-5 lg:right-1
-            xl:top-5 xl:right-0
-            2xl:top-3 2xl:right-0
-            z-20
-          "
-        >
+        {/* Notch */}
+        <div className="absolute top-3 right-0 z-20">
           <Image
             src="/CardNotch.png"
             alt="Arrow"
-            width={59}
-            height={59}
-            className="
-              object-contain
-              md:w-[59px] md:h-[59px]
-              lg:w-[52px] lg:h-[52px]
-              xl:w-[59px] xl:h-[59px]
-              2xl:w-[68px] 2xl:h-[78px]
-            "
+            width={56}
+            height={56}
+            className="object-contain"
           />
         </div>
 
         {/* Title */}
-        <div
-          className="
-            absolute bottom-30 left-4
-            md:bottom-24 md:left-7
-            lg:bottom-25 lg:left-6
-            xl:bottom-28 xl:left-6
-            z-20
-            max-w-[80%]
-          "
-        >
+        <div className="absolute bottom-20 left-4 z-20 max-w-[85%]">
           <h2
             className="
               font-noto-serif font-semibold text-white
               whitespace-pre-line
-              text-[20px] leading-[28px]
-              md:text-[16px] md:leading-[22px]
-              lg:text-[18px] lg:leading-[26px]
-              xl:text-[22px] xl:leading-[30px]
-              2xl:text-[24px] 2xl:leading-[34px]
+              text-[18px] leading-[26px]
+              md:text-[16px]
+              lg:text-[17px]
+              xl:text-[20px]
             "
           >
             {title}
@@ -123,4 +87,82 @@ const CaseCard: React.FC<CaseCardProps> = ({ title, image, url }) => {
   );
 };
 
-export default CaseCard;
+export const CaseCardExpanded: React.FC<CaseCardProps> = ({
+  title,
+  image,
+  url,
+}) => {
+  return (
+    <Link href={url} className="relative block group cursor-pointer">
+      <div
+        className="
+          relative
+
+          /* HEIGHT */
+          h-[360px]
+          md:h-[360px]
+          lg:h-[250px]
+          xl:h-[420px]
+          2xl:h-[440px]
+
+          /* WIDTH */
+          w-full
+          sm:w-[320px]
+          md:w-[300px]
+          lg:w-[220px]
+          xl:w-[300px]
+          2xl:w-[340px]
+
+          /* GRID SAFETY */
+          min-w-0
+
+          rounded-[20px]
+          overflow-hidden
+          mx-auto
+          transition-transform duration-300
+          lg:hover:-translate-y-3
+        "
+      >
+        {/* Background Image */}
+        <Image
+          src={image}
+          alt={title}
+          fill
+          priority={false}
+          className="
+            object-contain
+            object-center xl:translate-y-0  xl:translate-x-0 lg:translate-y-2
+          "
+        />
+
+        {/* Notch */}
+        <div className="absolute top-0 right-5 z-20 lg:w-[40px] xl:w-[60px]">
+          <Image
+            src="/CardNotch.png"
+            alt="Arrow"
+            width={64}
+            height={64}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Title */}
+        <div className="absolute bottom-6 left-6 z-20 max-w-[80%]">
+          <h2
+            className="
+              font-noto-serif font-semibold text-white
+              whitespace-pre-line
+              text-[18px] leading-[26px]
+              md:text-[18px]
+              lg:text-[18px] lg:pl-4
+              xl:text-[22px]
+              2xl:text-[24px]
+            "
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+    </Link>
+  );
+};

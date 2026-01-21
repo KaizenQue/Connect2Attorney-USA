@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CaseCard from "./CaseCard";
+import { CaseCardCompact, CaseCardExpanded } from "./CaseCard";
 import MobileCaseCard from "./MobileCaseCard";
 
 /* ---------------- Types ---------------- */
@@ -26,7 +26,7 @@ const casesData: CaseItem[] = [
     image: "/motorimg.svg",
     url: "/personal-injury/motor-vehicle-accident-lawsuit",
   },
-    {
+  {
     id: 3,
     title: "Slip and Fall Injury Lawsuit",
     image: "/slipimg.svg",
@@ -54,7 +54,7 @@ const mobileCasesData: CaseItem[] = [
     image: "/motorimgmobile.svg",
     url: "/personal-injury/motor-vehicle-accident-lawsuit",
   },
-    {
+  {
     id: 3,
     title: "Slip and Fall Injury Lawsuit",
     image: "/slipimgmobile.svg",
@@ -68,22 +68,23 @@ const mobileCasesData: CaseItem[] = [
   },
 ];
 
-const  CasesSection2: React.FC = () => {
+const CasesSection2: React.FC = () => {
   const totalCases = casesData.length;
 
   return (
-    <section className="font-sans  
+    <section
+      className="font-sans  
     md:bg-[url('/bgfolderstruturenew.svg')]
     md:bg-no-repeat
     md:bg-cover
-    md:bg-left-top ">
+    md:bg-left-top "
+    >
       {/* ================= MOBILE VERSION ================= */}
       <div className="md:hidden bg-[#fff] px-4 py-10">
         {/* Header */}
         <div className="mb-8 text-left">
           <h1 className="font-noto-serif font-normal text-[#162766] text-[28px] leading-[36px]">
-            Together in 
-            Personal Injury Lawsuits to Demand Accountability.
+            Together in Personal Injury Lawsuits to Demand Accountability.
           </h1>
         </div>
 
@@ -115,15 +116,14 @@ const  CasesSection2: React.FC = () => {
                 lineHeight: "clamp(44px, 6vw, 70px)",
               }}
             >
-Together in 
-            Personal Injury Lawsuits to Demand Accountability.
+              Together in Personal Injury Lawsuits to Demand Accountability.
             </h1>
           </div>
 
           {/* Desktop Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 ">
             {casesData.map((item) => (
-              <CaseCard
+              <CaseCardCompact
                 key={item.id}
                 id={item.id}
                 title={item.title}

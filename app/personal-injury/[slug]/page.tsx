@@ -224,14 +224,15 @@ const heroConfig = HERO_CONFIG[slug];
   };
   const HERO_IMAGE_BY_SLUG: Record<string, string> = {
     "sexual-abuse-lawsuit": "/sexual-abuse-lawsuit.png",
-    "motor-vehicle-accident-lawsuit": "/motor-vehicle-accident.png",
+    "motor-vehicle-accident-lawsuit": "/motor-vehicle-accident-lawsuit.png",
     "slip-and-fall-injury-lawsuit": "/slip-and-fall-injury-lawsuit.png",
     "18-wheeler-lawsuit": "/18-wheeler-lawsuit.png",
   };
+
   const timelineConfig = TIMELINE_BY_SLUG[slug];
   const supportData = SUPPORT_BY_SLUG[slug];
   const heroImage = HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
-
+  const heroTitle = heroConfig?.title ?? "Lawsuit Information";
   return (
     <main className="min-h-screen">
 <LawsuitsHeroCard

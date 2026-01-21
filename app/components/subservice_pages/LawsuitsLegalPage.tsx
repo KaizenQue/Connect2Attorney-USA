@@ -162,9 +162,9 @@ import { LawsuitContent } from "../../mass-tort/_content/types";
 //   },
 
 //   ctaContent: {
-//     title: "Ready to Get Started?",
+//     title: "Were You Affected? ",
 //     description:
-//       "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+//       "You may be entitled to compensation. ",
 //     buttonText: "Get a Free Case Review",
 //   },
 

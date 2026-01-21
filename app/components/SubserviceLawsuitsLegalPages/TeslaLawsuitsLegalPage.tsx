@@ -10,9 +10,9 @@ export const content = {
     mainTitle: "title",
     risksTitle: "risks",
     defectsTitle: "defects",
-    currenDevsTitle:"defects",
+    currenDevsTitle: "defects",
     compensationTitle: "compensation",
-    helpTitle:"help",
+    helpTitle: "help",
     realStoriesTitle: "stories",
     stepsTitle: "help-section",
   },
@@ -149,7 +149,7 @@ export const content = {
     {
       name: "California Family (Autopilot Highway Collision) :",
       story:
-        "California Family (Autopilot Highway Collision) : A family survived a highway crash after Autopilot drifted into a concrete divider. They sustained severe injuries and suffered long-term trauma. ",
+        "A family survived a highway crash after Autopilot drifted into a concrete divider. They sustained severe injuries and suffered long-term trauma. ",
     },
     {
       name: "“Phantom Braking” Victims  : ",
@@ -170,6 +170,7 @@ export const content = {
 
     allegationsTitle: "Who is Eligible to File a Claim? ",
     allegationsSubtitle: "You may be eligible to file a Tesla lawsuit if: ",
+    allegationsParagraph: "Common qualifying scenarios:  ",
 
     risksTitle: "Tesla Autopilot Safety Issues: Crash Defects & Injury Risks",
 
@@ -218,9 +219,8 @@ export const content = {
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
-    description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+    title: "Were You Affected? ",
+    description: "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -312,7 +312,7 @@ const LawsuitsLegalPage = () => {
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
           <TableOfContents />
-          </div>
+        </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
@@ -337,10 +337,7 @@ const LawsuitsLegalPage = () => {
             </div>
 
             <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-              <h2
-                
-                className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
-              >
+              <h2 className="font-noto-serif font-normal capitalize text-[#FFF] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4">
                 {content.pageContent.allegationsTitle}
               </h2>
 
@@ -350,39 +347,50 @@ const LawsuitsLegalPage = () => {
 
               <ul className="space-y-3 mb-8">
                 {content.eligibilityPoints.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    {/* Yellow Bullet */}
-                    <span className="mt-[6px] flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                      >
-                        <ellipse
-                          cx="6.83621"
-                          cy="6.9697"
-                          rx="6.83621"
-                          ry="6.9697"
-                          fill="#F2C438"
-                        />
-                      </svg>
-                    </span>
+                  <React.Fragment key={index}>
+                    <li className="flex items-start gap-3">
+                      {/* Yellow Bullet */}
+                      <span className="mt-[6px] flex-shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <ellipse
+                            cx="6.83621"
+                            cy="6.9697"
+                            rx="6.83621"
+                            ry="6.9697"
+                            fill="#F2C438"
+                          />
+                        </svg>
+                      </span>
 
-                    {/* Text */}
-                    <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
-                      {item.description}
-                    </p>
-                  </li>
+                      {/* Text */}
+                      <p className="font-urbanist text-[#F9F9F9] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
+                        {item.description}
+                      </p>
+                    </li>
+
+                    {/* 👇 Paragraph after 4th point */}
+                    {index === 3 && (
+                      <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
+                        {content.pageContent.allegationsParagraph}
+                      </p>
+                    )}
+                  </React.Fragment>
                 ))}
               </ul>
             </div>
 
             {/* ==================== RISKS SECTION ==================== */}
             <div className="mb-16">
-              <h2 id={content.sectionIds.risksTitle}
-              className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4">
+              <h2
+                id={content.sectionIds.risksTitle}
+                className="font-noto-serif font-normal text-[#162766] text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[44px] lg:leading-[50px] capitalize mb-4"
+              >
                 {content.pageContent.risksTitle}
               </h2>
 
@@ -503,22 +511,22 @@ const LawsuitsLegalPage = () => {
                 <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[0]}
                 </p>
-                <br />
-                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                
+                <p className="font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[1]}
                 </p>
                 <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[2]}
                 </p>
                 <br />
-                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                <p className="font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[3]}
                 </p>
                 <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[4]}
                 </p>
                 <br />
-                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
+                <p className="font-urbanist font-bold text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                   {content.pageContent.settlementParagraph[5]}
                 </p>
                 <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
@@ -584,7 +592,7 @@ const LawsuitsLegalPage = () => {
                     {/* Text */}
                     <p className="font-urbanist text-[#425777] text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px]">
                       <strong className="font-semibold text-[#162766]">
-                        {item.name}:
+                        {item.name}
                       </strong>{" "}
                       {item.story}
                     </p>
@@ -633,12 +641,12 @@ const LawsuitsLegalPage = () => {
                   />
                 </div>
 
-                <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                <div className="p-2 text-white">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">
@@ -650,7 +658,7 @@ const LawsuitsLegalPage = () => {
               </div>
               <div className="mb-8">
                 <TableOfContents />
-                </div>
+              </div>
             </div>
           </aside>
           {/* Content Table */}

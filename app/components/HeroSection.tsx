@@ -1192,7 +1192,7 @@ const DesktopLandingHeroCompact = ({
   };
 
   return (
-    <div className="hidden lg:flex h-[490px] font-sans flex-col justify-center items-center mx-10 lg:mt-10">
+    <div className="hidden lg:flex h-[490px] font-sans flex-col justify-center items-center mx-10">
       <div className="relative w-full h-[650px] mt-2 overflow-hidden max-w-[1560px]">
         {/* ================= VIDEO BACKGROUND ================= */}
         {/* < 1168 */}
@@ -1231,7 +1231,7 @@ const DesktopLandingHeroCompact = ({
           <source src="/1920x860.mp4" type="video/mp4" />
         </video>
 
-        <div className="relative top-0 z-10 xl:left-30 2xl:left-50 px-12 xl:px-20 flex flex-col justify-start h-full pt-14">
+        <div className="relative top-0 z-10 xl:left-30 2xl:left-50 px-20 xl:px-20 flex flex-col justify-start h-full pt-14">
           <h1 className="lg:text-[55px] leading-none mb-4">
             <span className="font-[noto-serif] text-[#F2C438] block mb-2">
               Justice
@@ -1493,8 +1493,8 @@ const DesktopLandingHeroCompact = ({
   lg:right-[5px] lg:bottom-[30px]
 
   /* 1168–1279 */
-  [@media(min-width:1168px)_and_(max-width:1279px)]:right-[-70px]
-  [@media(min-width:1168px)_and_(max-width:1279px)]:bottom-[20px]
+  [@media(min-width:1168px)_and_(max-width:1279px)]:right-[40px]
+  [@media(min-width:1168px)_and_(max-width:1279px)]:bottom-[0px]
 
   /* 1280–1399 */
   [@media(min-width:1280px)_and_(max-width:1399px)]:right-[40px]

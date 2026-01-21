@@ -92,11 +92,6 @@ export const content = {
         "Schools have a duty to maintain a safe environment. Sexual abuse lawsuits against schools may involve teachers, staff, or administrators who abused students or ignored complaints, creating long-term harm.",
     },
     {
-      title: "Family Members",
-      description:
-        "In some cases, family members may file claims for emotional distress or loss of support resulting from the abuse.",
-    },
-    {
       title: "Workplace",
       description:
         "Workplace sexual abuse cases include harassment or assault by supervisors, coworkers, or other staff. Survivors may seek compensation for emotional distress, lost income, and career setbacks through a sexual abuse lawsuit.",
@@ -117,6 +112,11 @@ export const content = {
       title: "Right to Hold Institutions Accountable",
       description:
         "Survivors can also file claims against schools, religious organizations, employers, or other institutions that failed to prevent abuse or cover it up. These lawsuits can lead to both financial compensation and systemic changes to prevent future abuse.",
+    },
+        {
+      title: "Protection Against Statute of Limitations",
+      description:
+      "Many states have extended or even eliminated the statute of limitations for sexual abuse claims. This means that even if abuse occurred years ago, survivors may still have the legal right to pursue a claim. "
     },
     {
       title: "Right to Privacy and Support",
@@ -254,9 +254,9 @@ export const content = {
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "Were You Affected?",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+    "You may be entitled to compensation.",
     buttonText: "Get a Free Case Review",
   },
 
@@ -655,7 +655,7 @@ const LawsuitsLegalPage = () => {
                       <circle cx="7" cy="7" r="7" fill="#162766" />
                     </svg>
                   </span>
-                  <span className="text-[#425777]"> {item.description}</span>
+                  <span className="text-[#425777] font-bold"> {item.description}</span>
                 </li>
               ))}
             </ul>
@@ -702,11 +702,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

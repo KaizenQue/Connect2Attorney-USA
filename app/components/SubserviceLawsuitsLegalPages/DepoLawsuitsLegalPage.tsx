@@ -211,9 +211,9 @@ mdllitigationParagraph:
   },
 
   ctaContent: {
-    title: "Ready to Get Started?",
+    title: "Were You Affected? ",
     description:
-      "Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.",
+      "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -658,11 +658,11 @@ const LawsuitsLegalPage = () => {
                 </div>
 
                 <div className="p-6 text-white">
-                  <h3 className="font-noto-serif font-medium text-white text-[26px] leading-normal capitalize mb-3">
+                  <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
                     {content.ctaContent.title}
                   </h3>
 
-                  <p className="text-[#F9F9F9] font-urbanist font-medium text-[16px] leading-normal mb-6">
+                  <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
                   <Link href="/contact-us">

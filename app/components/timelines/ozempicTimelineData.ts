@@ -1,56 +1,61 @@
 import { TimelineData } from "../timelineTypes";
 
-
 export const ozempicTimelineData: TimelineData = {
   "2025": {
     firstHalf: [
-      { date: "June 21", text: "A lawsuit filed in New Jersey Superior Court alleges that Wegovy caused a man to develop NAION (non-arteritic anterior ischemic optic neuropathy), resulting in permanent vision loss." },
-      { date: "June 17", text: "Twenty-one plaintiffs in New Jersey seek to consolidate NAION-related vision loss cases into multicounty litigation, citing the severe and irreversible nature of the injuries." },
-      { date: "June 12", text: "The GLP-1 MDL (MDL No. 3094) in the Eastern District of Pennsylvania now includes 1,882 active gastrointestinal injury cases, though NAION-related vision claims are not part of the MDL." },
-      { date: "June 10", text: "Doctors and advocacy groups urge the FDA to issue a black box warning on semaglutide drugs due to mounting evidence of vision loss risks such as NAION." },
-      { date: "May 19", text: "Patients begin filing lawsuits alleging Ozempic caused NAION and that Novo Nordisk failed to warn of vision risks despite accumulating scientific evidence." },
-      { date: "May 2", text: "More than 500 new cases were added to the GLP-1 MDL in April alone, bringing the total to 1,685 and reflecting growing awareness of stomach paralysis claims." },
-      { date: "April 24", text: "A woman from North Carolina files suit against Novo Nordisk after suffering permanent vision loss from NAION allegedly caused by Ozempic." },
-      { date: "April 22", text: "Oral arguments are held on motions to dismiss, with plaintiffs asserting their GI injury claims are well-supported and defendants arguing they are overly vague." },
-      { date: "April 21", text: "A CDC-backed study reports nearly 25,000 semaglutide-related emergency room visits during 2022–2023, many involving hospitalization for GI or hypoglycemic events." },
-      { date: "April 1", text: "The GLP-1 MDL adds 164 new cases in March as parties prepare for a Rule 702 hearing that may determine which expert testimony is admissible." },
-      { date: "March 26", text: "A new direct-filed Illinois case alleges Ozempic caused gastroparesis requiring hospitalization and claims Novo Nordisk failed to warn users of the risk." },
-      { date: "March 17", text: "Eli Lilly requests that only gastroparesis claims supported by objective diagnostic testing be permitted, challenging broader clinical evaluations." },
-      { date: "February 26", text: "A JAMA Ophthalmology study suggests semaglutide users may face an increased risk of NAION, raising concerns doctors should weigh before prescribing." },
-      { date: "February 25", text: "Eli Lilly announces price reductions for Zepbound amid slower-than-expected sales, with costs lowered to between $349 and $499 depending on dosage." },
-      { date: "February 6", text: "January filings surge to 110 new cases, a sharp rise from December 2024, bringing the GLP-1 MDL to 1,443 active cases." },
-      { date: "February 1", text: "A Michigan woman files suit against Novo Nordisk alleging severe gastrointestinal injuries from Ozempic, including vomiting, ileus, and dehydration requiring hospitalization." },
-      { date: "January 22", text: "A 2025 study finds Ozempic may increase risks of pancreatitis, kidney stones, arthritis, and fainting, complicating its perceived benefits." },
-      { date: "January 9", text: "The court schedules a Rule 702 hearing for May 14, 2025, to evaluate the admissibility of causation expert testimony across all GLP-1 lawsuits." }
+      { date: "January 3", text: "The overall number of Ozempic lawsuit cases in the GLP-1 MDL increased to 1,331." },
+      { date: "January 30", text: "A small study on nine patients using semaglutide or tirzepatide found that seven developed NAION, one experienced a retinal stroke, and one developed swelling in both optic nerves." },
+      { date: "February 2", text: "A JAMA Network Open study reports that about 65% of people using GLP-1 drugs for weight loss stop within a year, mainly due to high costs, with side effects also playing a role." },
+      { date: "February 4", text: "The total number of Ozempic lawsuit cases in the GLP-1 MDL increased to 1,443." },
+      { date: "February 20", text: "An analysis of 37.1 million adults with type 2 diabetes across 14 databases found additional evidence linking semaglutide to NAION." },
+      { date: "February 21", text: "Ozempic was removed from the FDA Drug Shortages List, effectively revoking permission for compounding pharmacies to produce semaglutide." },
+      { date: "March 3", text: "The number of pending cases in the Ozempic MDL rose to 1,521." },
+      { date: "March 6", text: "A study found a higher incidence of hair loss among patients taking semaglutide compared to another weight loss drug." },
+      { date: "April 2", text: "The number of pending actions in the Ozempic MDL grew to 1,685." },
+      { date: "April 7", text: "A BMC Medicine study found patients using semaglutide had a higher risk of vision impairment compared to other GLP-1 drugs." },
+      { date: "April 16", text: "A North Carolina woman alleged Ozempic caused permanent vision loss due to NAION in a lawsuit filed in the MDL." },
+      { date: "April 24", text: "A federal judge ruled that compounding pharmacies can no longer manufacture or sell their own versions of semaglutide." },
+      { date: "April 25", text: "A 62-year-old Maryland man filed a lawsuit after developing NAION and losing vision in both eyes after taking Ozempic." },
+      { date: "May 2", text: "The Ozempic MDL increased to 1,809 pending actions." },
+      { date: "June 3", text: "The number of pending actions in the Ozempic MDL increased to 1,882." },
+      { date: "June 17", text: "Twenty-one New Jersey plaintiffs filed lawsuits claiming permanent vision loss from GLP-1 drugs and requested multicounty litigation." }
     ],
     secondHalf: [
-      { date: "December 12", text: "The court issues pretrial scheduling orders outlining discovery deadlines and bellwether selection criteria for the GLP-1 MDL." },
-      { date: "October 18", text: "Plaintiffs submit expert reports linking semaglutide to delayed gastric emptying and long-term gastrointestinal injury." },
-      { date: "August 6", text: "Defense motions seek summary judgment on failure-to-warn claims, arguing federal labeling compliance." }
+      { date: "July 2", text: "There were 1,997 pending actions in the Ozempic MDL." },
+      { date: "August 1", text: "The MDL reached 2,190 active GLP-1 lawsuits, including Ozempic claims." },
+      { date: "September 2", text: "The Ozempic MDL grew to 2,676 pending actions." },
+      { date: "October 2", text: "The federal GLP-1 mass tort reached 2,809 pending actions." },
+      { date: "November 3", text: "Over 100 new plaintiffs joined the MDL, raising the total to 2,914 cases." },
+      { date: "December 3", text: "The total pending actions increased to 2,947." },
+      { date: "December 17", text: "The JPML approved consolidation of vision loss lawsuits involving Ozempic and other GLP-1 drugs due to NAION." }
     ]
   },
 
   "2024": {
     firstHalf: [
-      { date: "June 14", text: "The Judicial Panel on Multidistrict Litigation centralizes federal GLP-1 gastrointestinal injury cases in the Eastern District of Pennsylvania." },
-      { date: "April 30", text: "Early lawsuits allege Ozempic and Wegovy caused severe gastroparesis, nausea, and vomiting requiring hospitalization." },
-      { date: "February 12", text: "Medical literature begins highlighting delayed gastric emptying associated with GLP-1 receptor agonists." }
+      { date: "January 14", text: "Attorneys sought to consolidate Ozempic and Mounjaro lawsuits into a federal MDL." },
+      { date: "February 4", text: "The Ozempic lawsuit was consolidated as MDL 3094 in the Eastern District of Pennsylvania under Judge Gene E. K. Pratter." },
+      { date: "February 15", text: "Lawsuits alleged failure to warn about stomach paralysis and bowel obstruction, while gallbladder claims were excluded." },
+      { date: "February 16", text: "The first status conference in the Ozempic MDL was scheduled for March 14, 2024." },
+      { date: "February 24", text: "Novo Nordisk filed multiple lawsuits against pharmacies and sellers of knockoff semaglutide." },
+      { date: "March 10", text: "Judge Pratter appointed leadership counsel, set discovery schedules, and ruled on admissible evidence." },
+      { date: "March 21", text: "Many Ozempic lawsuits were expected to be filed in New Jersey state court in addition to federal court." },
+      { date: "April 1", text: "Novo Nordisk sued pharmacies selling knockoff Ozempic as the FDA warned against compounded versions." },
+      { date: "May 17", text: "Judge Pratter passed away, raising concerns about delays in the MDL." },
+      { date: "June 6", text: "The Ozempic MDL was reassigned to Judge Karen S. Marston." }
     ],
     secondHalf: [
-      { date: "November 19", text: "The MDL surpasses 900 active cases as consumer awareness grows through national media coverage." },
-      { date: "September 7", text: "Initial case management conferences set discovery protocols and preservation obligations for defendants." },
-      { date: "July 22", text: "Plaintiffs move for coordinated discovery on internal safety data and adverse event reporting." }
+      { date: "July 1", text: "A JAMA Ophthalmology study linked semaglutide to NAION, increasing attention on vision loss lawsuits." }
     ]
   },
 
   "2023": {
-    firstHalf: [
-      { date: "May 8", text: "Physicians report increased patient complaints of persistent nausea and abdominal pain linked to GLP-1 medications." },
-      { date: "March 3", text: "FDA adverse event data reflects rising reports of gastrointestinal complications tied to semaglutide use." }
-    ],
     secondHalf: [
-      { date: "December 1", text: "The first product liability lawsuits are filed alleging manufacturers failed to adequately warn of severe GI risks." },
-      { date: "October 11", text: "Consumer advocacy groups call for stronger post-market surveillance of GLP-1 weight loss drugs." }
+      { date: "August 1", text: "A 44-year-old woman filed one of the first Ozempic lawsuits alleging gastroparesis." },
+      { date: "September 1", text: "Ozempic’s warning label was updated to include ileus and intestinal blockages." },
+      { date: "November 1", text: "Novo Nordisk filed a motion to dismiss the Bjorklund lawsuit." },
+      { date: "December 1", text: "A judge denied Novo Nordisk’s motion to dismiss, allowing failure-to-warn claims to proceed." },
+      { date: "December 31", text: "A total of 6,487 cases and 89 deaths were reported." }
     ]
   }
 };

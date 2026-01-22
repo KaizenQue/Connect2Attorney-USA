@@ -1,5 +1,11 @@
-import React, {useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import Image from 'next/image';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
+import Image from "next/image";
 import "./EnquiryForm2.css";
 // Import required icons and components
 const ChevronDownIcon = ({ className }: { className?: string }) => (
@@ -10,7 +16,12 @@ const ChevronDownIcon = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     stroke="currentColor"
   >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M19 9l-7 7-7-7"
+    />
   </svg>
 );
 
@@ -33,15 +44,16 @@ const GreyUnderlineSVG = () => (
 
 // Utility functions (add these or import from your existing files)
 const formatUSAMobile = (phone: string): string => {
-  const cleaned = phone.replace(/\D/g, '');
-  if (cleaned.length === 0) return '';
+  const cleaned = phone.replace(/\D/g, "");
+  if (cleaned.length === 0) return "";
   if (cleaned.length <= 3) return `(${cleaned}`;
-  if (cleaned.length <= 6) return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+  if (cleaned.length <= 6)
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
   return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
 };
 
 const validateUSAMobile = (phone: string): boolean => {
-  const cleaned = phone.replace(/\D/g, '');
+  const cleaned = phone.replace(/\D/g, "");
   return cleaned.length === 10;
 };
 
@@ -56,32 +68,31 @@ const validateEmail = (email: string): { isValid: boolean } => {
 
 const getIPAddress = async (): Promise<string> => {
   try {
-    const response = await fetch('https://api.ipify.org?format=json');
+    const response = await fetch("https://api.ipify.org?format=json");
     const data = await response.json();
     return data.ip;
   } catch {
-    return 'Unknown';
+    return "Unknown";
   }
 };
 
 const getSourceUrl = (): string => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     return window.location.href;
   }
-  return 'Unknown';
+  return "Unknown";
 };
 
 // Mock email sending functions - replace with actual implementations
 const sendFormAdmin = async (data: any): Promise<void> => {
-  console.log('Sending admin email:', data);
+  // console.log("Sending admin email:", data);
   // Implement your email sending logic here
 };
 
 const sendFormUser = async (data: any): Promise<void> => {
-  console.log('Sending user email:', data);
+  // console.log("Sending user email:", data);
   // Implement your email sending logic here
 };
-
 
 const checkboxClass = `
   appearance-none
@@ -105,7 +116,6 @@ const checkboxClass = `
   checked:after:scale-100
 `;
 
-
 type CustomCaptchaProps = {
   onCaptchaChange?: (value: boolean) => void;
   resetTrigger?: boolean;
@@ -123,7 +133,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [charOffsets, setCharOffsets] = useState<number[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  
+
   // Use refs to track current state for cleanup
   const isSpeakingRef = useRef(false);
   const speechSynthRef = useRef<SpeechSynthesis | null>(null);
@@ -135,17 +145,18 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       isSpeakingRef.current = false;
     }
 
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     const offsets: number[] = [];
-    
+
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
       // Generate offsets between -5 and 5
       offsets.push(parseFloat((Math.random() * 10 - 5).toFixed(2)));
     }
-    
+
     setCaptchaText(result);
     setCharOffsets(offsets);
     setUserInput("");
@@ -157,7 +168,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   useEffect(() => {
     generateCaptcha();
     speechSynthRef.current = window.speechSynthesis;
-    
+
     // Cleanup function
     return () => {
       if (speechSynthRef.current && isSpeakingRef.current) {
@@ -202,13 +213,16 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     // Try to find a male US voice
     if (voices.length > 0) {
-      selectedVoice = voices.find(
-        (voice) =>
-          voice.lang === "en-US" && 
-          voice.name.toLowerCase().includes("male") || 
-          voice.name.toLowerCase().includes("david") ||
-          voice.name.toLowerCase().includes("microsoft david")
-      ) || voices.find((voice) => voice.lang === "en-US") || voices[0];
+      selectedVoice =
+        voices.find(
+          (voice) =>
+            (voice.lang === "en-US" &&
+              voice.name.toLowerCase().includes("male")) ||
+            voice.name.toLowerCase().includes("david") ||
+            voice.name.toLowerCase().includes("microsoft david"),
+        ) ||
+        voices.find((voice) => voice.lang === "en-US") ||
+        voices[0];
     }
 
     let currentIndex = 0;
@@ -216,13 +230,13 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       if (currentIndex < captchaText.length && isSpeakingRef.current) {
         const char = captchaText[currentIndex];
         const utterance = new SpeechSynthesisUtterance(char);
-        
+
         // Configure speech properties
         utterance.rate = 0.5;
         utterance.pitch = 0.9;
         utterance.volume = 1.0;
         utterance.lang = "en-US";
-        
+
         if (selectedVoice) {
           utterance.voice = selectedVoice;
         }
@@ -257,7 +271,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUserInput(value);
-    
+
     // Case-insensitive comparison for better UX
     const valid = value.toLowerCase() === captchaText.toLowerCase();
     setIsValid(valid);
@@ -266,7 +280,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
   const handleAudioToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAudioEnabled(e.target.checked);
-    
+
     // Cancel speech when disabling audio
     if (!e.target.checked && isSpeakingRef.current) {
       window.speechSynthesis.cancel();
@@ -288,7 +302,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
               backgroundPosition: "0 50%",
             }}
           />
-          
+
           {/* CAPTCHA text with offsets */}
           <div className="relative z-10 flex justify-center">
             {captchaText.split("").map((char, index) => (
@@ -306,7 +320,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             ))}
           </div>
         </div>
-        
+
         {/* Control buttons */}
         <div className="flex gap-2 items-center justify-start sm:justify-start">
           <button
@@ -314,24 +328,22 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             onClick={generateCaptcha}
             disabled={disabled}
             className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-              disabled 
-                ? "opacity-50 cursor-not-allowed" 
-                : "hover:bg-gray-50"
+              disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
             }`}
             title="Refresh CAPTCHA"
             aria-label="Refresh CAPTCHA"
           >
             ↻
           </button>
-          
+
           {audioEnabled && (
             <button
               type="button"
               onClick={speakCaptcha}
               disabled={disabled || isSpeaking}
               className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-                disabled || isSpeaking 
-                  ? "opacity-50 cursor-not-allowed" 
+                disabled || isSpeaking
+                  ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"
               }`}
               title={isSpeaking ? "Speaking..." : "Listen to CAPTCHA"}
@@ -353,9 +365,10 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
           disabled={disabled}
           className="mr-2"
         />
-        <label htmlFor="enableAudio" className={`text-sm ${
-          disabled ? "text-gray-400" : "text-gray-700"
-        }`}>
+        <label
+          htmlFor="enableAudio"
+          className={`text-sm ${disabled ? "text-gray-400" : "text-gray-700"}`}
+        >
           Enable Audio
         </label>
       </div>
@@ -372,25 +385,27 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             disabled
               ? "bg-gray-100 cursor-not-allowed border-gray-300"
               : userInput !== "" && !isValid
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-blue-500"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
           }`}
-          aria-describedby={userInput !== "" && !isValid ? "captcha-error" : undefined}
+          aria-describedby={
+            userInput !== "" && !isValid ? "captcha-error" : undefined
+          }
         />
-        
+
         {/* Validation messages */}
         {userInput !== "" && !isValid && !disabled && (
           <p id="captcha-error" className="text-red-500 text-sm mt-1">
             CAPTCHA does not match. Please try again.
           </p>
         )}
-        
+
         {isValid && !disabled && (
           <p className="text-green-500 text-sm mt-1">
             ✓ CAPTCHA verified successfully
           </p>
         )}
-        
+
         {disabled && (
           <p className="text-gray-500 text-sm mt-1">
             CAPTCHA verification is disabled
@@ -400,8 +415,6 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
     </div>
   );
 };
-
-
 
 const MobileLanding: React.FC<DesktopLandingProps> = ({
   formData,
@@ -424,36 +437,48 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
 }) => {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [showFullConsent, setShowFullConsent] = useState(false);
- 
-  
- const categories = [
- 
-  "Ozempic Lawsuit",
-  "Mesothelioma Lawsuit",
-  "Depo-Provera Lawsuit",
-  "Roundup Cancer Lawsuit",
-  "Talcum Powder Lawsuit",
-  "Tesla Autopilot Recall Lawsuit",
-  "MacLaren Sexual Abuse Lawsuit",
-  "Sexual Abuse Lawsuit",
-  "Motor Vehicle Accident Lawsuit",
-  "Slip and Fall Injury Lawsuit",
-  "18-Wheeler Accident Lawsuit",
 
+  const categories = [
+    "Ozempic Lawsuit",
+    "Mesothelioma Lawsuit",
+    "Depo-Provera Lawsuit",
+    "Roundup Cancer Lawsuit",
+    "Talcum Powder Lawsuit",
+    "Tesla Autopilot Recall Lawsuit",
+    "MacLaren Sexual Abuse Lawsuit",
+    "Sexual Abuse Lawsuit",
+    "Motor Vehicle Accident Lawsuit",
+    "Slip and Fall Injury Lawsuit",
+    "18-Wheeler Accident Lawsuit",
+  ];
+  const inputClass =
+    "w-full h-[48px] rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#808080] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844] disabled:opacity-50";
 
-];
-  const inputClass = "w-full h-[48px] rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#808080] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844] disabled:opacity-50";
- 
   return (
     <div className="block lg:hidden w-full bg-white font-sans">
       {/* Form content - takes full screen height */}
       <div className="w-full px-4 py-6 h-[100svh] md:h-auto ">
-        <form className="w-full max-w-[420px] md:max-w-[680px] mx-auto" onSubmit={handleSubmit}>
+        <form
+          className="w-full max-w-[420px] md:max-w-[680px] mx-auto"
+          onSubmit={handleSubmit}
+        >
           {/* Hidden TrustedForm Fields */}
-          <input type="hidden" name="xxTrustedFormCertUrl" value={certId || ""} />
-          <input type="hidden" name="xxTrustedFormCertToken" value={tokenUrl || ""} />
-          <input type="hidden" name="xxTrustedFormPingUrl" value={pingUrl || ""} />
- 
+          <input
+            type="hidden"
+            name="xxTrustedFormCertUrl"
+            value={certId || ""}
+          />
+          <input
+            type="hidden"
+            name="xxTrustedFormCertToken"
+            value={tokenUrl || ""}
+          />
+          <input
+            type="hidden"
+            name="xxTrustedFormPingUrl"
+            value={pingUrl || ""}
+          />
+
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center justify-between font-noto-serif text-[24px] md:text-[30px] font-semibold leading-[36px] md:leading-[48px]">
@@ -461,18 +486,17 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                 <span className="text-[#162766]">Take the</span>
                 <span className="text-[#F2C438]">First Step</span>
               </div>
-          <button
-  type="button"
-  onClick={() => setOpen?.(false)}
-  className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-  aria-label="Close form"
->
-  <span className="absolute w-[18px] h-[2px] bg-[#162766] rotate-45 rounded-full" />
-  <span className="absolute w-[18px] h-[2px] bg-[#162766] -rotate-45 rounded-full" />
-</button>
- 
+              <button
+                type="button"
+                onClick={() => setOpen?.(false)}
+                className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Close form"
+              >
+                <span className="absolute w-[18px] h-[2px] bg-[#162766] rotate-45 rounded-full" />
+                <span className="absolute w-[18px] h-[2px] bg-[#162766] -rotate-45 rounded-full" />
+              </button>
             </div>
- 
+
             <div className="flex items-end mt-3 w-full gap-3">
               <div className="h-[3px] w-[80px] md:w-[120px] bg-[#F2C438] rounded-full" />
               <div className="flex-1">
@@ -480,7 +504,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
               </div>
             </div>
           </div>
- 
+
           {/* Fields grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3 mb-4">
             {/* Name */}
@@ -507,7 +531,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                 </p>
               )}
             </div>
- 
+
             {/* Phone */}
             <div className="space-y-1">
               <input
@@ -532,7 +556,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                 </p>
               )}
             </div>
- 
+
             {/* Email */}
             <div className="space-y-1 md:col-span-2">
               <input
@@ -557,7 +581,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                 </p>
               )}
             </div>
- 
+
             {/* Custom Select */}
             <div className="relative w-full md:col-span-2">
               <button
@@ -581,7 +605,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                   />
                 </span>
               </button>
- 
+
               {categoryOpen && (
                 <div className="absolute z-20 mt-1 w-full rounded-[8px] border border-[#E8E9F0] bg-white shadow-lg overflow-hidden">
                   {categories.map((item) => {
@@ -619,7 +643,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
               )}
             </div>
           </div>
- 
+
           {/* Case field */}
           <div className="mb-4">
             <input
@@ -632,77 +656,77 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
               className={inputClass}
             />
           </div>
- 
+
           {/* Checkboxes */}
           <div className="space-y-3 mb-4">
-       {/* Privacy Policy checkbox */}
-<label className="flex items-start gap-2">
-  <input
-    type="checkbox"
-    name="consent"
-    checked={formData.consent || false}
-    onChange={handleChange}
-    disabled={isSubmitting}
-    required
-    className={`mt-[2px] ${checkboxClass}`}
-  />
- 
-  <div className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] leading-relaxed">
-    {/* Always visible short text */}
-    <span>
-      I agree to the{" "}
-      <span className="text-[#162766] font-semibold underline">
-        Privacy Policy &amp; Disclaimer
-      </span>{" "}
-      and give my express written consent
-    </span>
- 
-    {/* Read more */}
-    {!showFullConsent && (
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation(); // 🚫 prevent checkbox toggle
-          setShowFullConsent(true);
-        }}
-        className="ml-1 text-[#162766] font-semibold underline"
-      >
-        Read more
-      </button>
-    )}
- 
-    {/* Expanded text */}
-    {showFullConsent && (
-      <>
-        <span>
-          {" "}
-          to affiliates and/or attorneys to contact me at the number provided
-          above, even if this number is a wireless number or if I am presently
-          listed on a Do Not Call list. I understand that I may be contacted by
-          telephone, email, text message, or mail regarding case options and that
-          I may be called using automatic dialing equipment. Message and data
-          rates may apply. My consent does not require purchase. This is legal
-          advertising.
-        </span>
- 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation(); // 🚫 prevent checkbox toggle
-            setShowFullConsent(false);
-          }}
-          className="ml-1 text-[#162766] font-semibold underline"
-        >
-          Show less
-        </button>
-      </>
-    )}
-  </div>
-</label>
- 
- 
+            {/* Privacy Policy checkbox */}
+            <label className="flex items-start gap-2">
+              <input
+                type="checkbox"
+                name="consent"
+                checked={formData.consent || false}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                required
+                className={`mt-[2px] ${checkboxClass}`}
+              />
+
+              <div className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] leading-relaxed">
+                {/* Always visible short text */}
+                <span>
+                  I agree to the{" "}
+                  <span className="text-[#162766] font-semibold underline">
+                    Privacy Policy &amp; Disclaimer
+                  </span>{" "}
+                  and give my express written consent
+                </span>
+
+                {/* Read more */}
+                {!showFullConsent && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation(); // 🚫 prevent checkbox toggle
+                      setShowFullConsent(true);
+                    }}
+                    className="ml-1 text-[#162766] font-semibold underline"
+                  >
+                    Read more
+                  </button>
+                )}
+
+                {/* Expanded text */}
+                {showFullConsent && (
+                  <>
+                    <span>
+                      {" "}
+                      to affiliates and/or attorneys to contact me at the number
+                      provided above, even if this number is a wireless number
+                      or if I am presently listed on a Do Not Call list. I
+                      understand that I may be contacted by telephone, email,
+                      text message, or mail regarding case options and that I
+                      may be called using automatic dialing equipment. Message
+                      and data rates may apply. My consent does not require
+                      purchase. This is legal advertising.
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation(); // 🚫 prevent checkbox toggle
+                        setShowFullConsent(false);
+                      }}
+                      className="ml-1 text-[#162766] font-semibold underline"
+                    >
+                      Show less
+                    </button>
+                  </>
+                )}
+              </div>
+            </label>
+
             {/* Captcha checkbox */}
             <div className="space-y-2">
               <label className="flex items-start gap-2">
@@ -713,13 +737,14 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                   checked={showCaptcha || false}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                   className={`mt-[2px] ${checkboxClass}`}
+                  className={`mt-[2px] ${checkboxClass}`}
                 />
                 <span className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px]">
-                  Please check this box so we know you&apos;re a person and not a computer
+                  Please check this box so we know you&apos;re a person and not
+                  a computer
                 </span>
               </label>
- 
+
               {showCaptcha && (
                 <div className="pl-6">
                   <CustomCaptcha
@@ -730,7 +755,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                 </div>
               )}
             </div>
- 
+
             {/* Claim help checkbox */}
             {/* <label className="flex items-start gap-2">
               <input
@@ -746,7 +771,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
               </span>
             </label> */}
           </div>
- 
+
           {/* Submit button */}
           <button
             type="submit"
@@ -784,7 +809,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
             )}
           </button>
         </form>
-       
+
         {/* Success Dialog */}
         {successDialogOpen && (
           <div
@@ -822,8 +847,6 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
     </div>
   );
 };
- 
- 
 
 // Type definitions
 type DesktopLandingProps = {
@@ -841,7 +864,7 @@ type DesktopLandingProps = {
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => void;
   showCaptcha: boolean;
   onCaptchaChange: (value: boolean) => void;
@@ -892,48 +915,45 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
   }, []);
 
   const [categoryOpen, setCategoryOpen] = useState(false);
-const categories = [
- 
-  "Ozempic Lawsuit",
-  "Mesothelioma Lawsuit",
-  "Depo-Provera Lawsuit",
-  "Roundup Cancer Lawsuit",
-  "Talcum Powder Lawsuit",
-  "Tesla Autopilot Recall Lawsuit",
-  "MacLaren Sexual Abuse Lawsuit",
-  "Sexual Abuse Lawsuit",
-  "Motor Vehicle Accident Lawsuit",
-  "Slip and Fall Injury Lawsuit",
-  "18-Wheeler Accident Lawsuit",
-
-
-];
+  const categories = [
+    "Ozempic Lawsuit",
+    "Mesothelioma Lawsuit",
+    "Depo-Provera Lawsuit",
+    "Roundup Cancer Lawsuit",
+    "Talcum Powder Lawsuit",
+    "Tesla Autopilot Recall Lawsuit",
+    "MacLaren Sexual Abuse Lawsuit",
+    "Sexual Abuse Lawsuit",
+    "Motor Vehicle Accident Lawsuit",
+    "Slip and Fall Injury Lawsuit",
+    "18-Wheeler Accident Lawsuit",
+  ];
 
   const inputClass =
     "h-[36px] w-full rounded-[8px] border border-[#D0D5DD] bg-white px-[12px] text-[15px] font-urbanist text-[#162766] placeholder:text-[#9aa1b2] shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] focus:outline-none focus:ring-2 focus:ring-[#F5C844]";
-const [showFullConsent, setShowFullConsent] = useState(false);
+  const [showFullConsent, setShowFullConsent] = useState(false);
 
- return (
-<div className="hidden lg:flex w-full justify-center font-sans  overflow-x-clip">
-<div className="w-full max-w-[1800px] px-6 xl:px-16 2xl:px-24 flex justify-end relative overflow-x-clip">
-      <div className="w-full lg:w-[520px] xl:w-[560px] 2xl:w-[620px] flex items-center justify-center">
-        <div className="w-full flex items-center justify-center">
-          {successDialogOpen ? (
-            /* ================= SUCCESS STATE ================= */
-            <div className="w-full flex items-center justify-center">
-              <Image
-                src="/thankyoucardfull.svg"
-                alt="Thank you"
-                width={700}
-                height={700}
-                className="w-full h-auto max-w-[620px]"
-                priority
-              />
-            </div>
-          ) : (
-            /* ================= FORM STATE ================= */
-            <form
-              className="    w-full
+  return (
+    <div className="hidden lg:flex w-full justify-center font-sans  overflow-x-clip">
+      <div className="w-full max-w-[1800px] px-6 xl:px-16 2xl:px-24 flex justify-end relative overflow-x-clip">
+        <div className="w-full lg:w-[520px] xl:w-[560px] 2xl:w-[620px] flex items-center justify-center">
+          <div className="w-full flex items-center justify-center">
+            {successDialogOpen ? (
+              /* ================= SUCCESS STATE ================= */
+              <div className="w-full flex items-center justify-center">
+                <Image
+                  src="/thankyoucardfull.svg"
+                  alt="Thank you"
+                  width={700}
+                  height={700}
+                  className="w-full h-auto max-w-[620px]"
+                  priority
+                />
+              </div>
+            ) : (
+              /* ================= FORM STATE ================= */
+              <form
+                className="    w-full
     bg-white
     rounded-[20px]
     shadow-2xl
@@ -946,311 +966,335 @@ const [showFullConsent, setShowFullConsent] = useState(false);
     overflow-y-auto
     modern-scroll
 "
-              onSubmit={handleSubmit}
-            >
-              {/* Hidden TrustedForm Fields */}
-              <input
-                type="hidden"
-                name="xxTrustedFormCertUrl"
-                value={certId || ""}
-              />
-              <input
-                type="hidden"
-                name="xxTrustedFormCertToken"
-                value={tokenUrl || ""}
-              />
-              <input
-                type="hidden"
-                name="xxTrustedFormPingUrl"
-                value={pingUrl || ""}
-              />
+                onSubmit={handleSubmit}
+              >
+                {/* Hidden TrustedForm Fields */}
+                <input
+                  type="hidden"
+                  name="xxTrustedFormCertUrl"
+                  value={certId || ""}
+                />
+                <input
+                  type="hidden"
+                  name="xxTrustedFormCertToken"
+                  value={tokenUrl || ""}
+                />
+                <input
+                  type="hidden"
+                  name="xxTrustedFormPingUrl"
+                  value={pingUrl || ""}
+                />
 
-              {/* ================= YOUR FORM CONTENT BELOW (UNCHANGED) ================= */}
-              {/* Header */}
-              <div className="mb-2">
-                <p className="font-noto-serif text-[30px] font-semibold leading-[48px]">
-                  <span className="text-[#162766]">Take the </span>
-                  <span className="text-[#F2C438]">First Step</span>
-                </p>
+                {/* ================= YOUR FORM CONTENT BELOW (UNCHANGED) ================= */}
+                {/* Header */}
+                <div className="mb-2">
+                  {/* HEADING + BUTTON ROW */}
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <p className="font-noto-serif text-[30px] font-semibold leading-[48px] flex items-center">
+                      <span className="text-[#162766]">Take the </span>
+                      <span className="ml-1 text-[#F2C438]">First Step</span>
+                    </p>
 
-                <div className="flex items-end mt-[10px] w-full gap-[10px]">
-                  <div className="h-[3px] w-[120px] bg-[#F2C438] rounded-full" />
-                  <div className="flex-1">
-                    <GreyUnderlineSVG />
+                    {/* CTA BUTTON */}
+                    <button
+                      type="button"
+                      onClick={() => setOpen?.(false)}
+                      className="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label="Close form"
+                    >
+                      <span className="absolute w-[18px] h-[2px] bg-[#162766] rotate-45 rounded-full" />
+                      <span className="absolute w-[18px] h-[2px] bg-[#162766] -rotate-45 rounded-full" />
+                    </button>
+                  </div>
+
+                  {/* UNDERLINE */}
+                  <div className="flex items-end mt-[10px] w-full gap-[10px]">
+                    <div className="h-[3px] w-[120px] bg-[#F2C438] rounded-full" />
+                    <div className="flex-1">
+                      <GreyUnderlineSVG />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-
-              {/* Fields grid */}
-              <div className="grid grid-cols-2 gap-x-2 gap-y-3 mb-[10px]">
-                <div className="space-y-1">
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Full Name"
-                    value={(formData.name as string) || ""}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className={inputClass}
-                    aria-invalid={nameError ? "true" : "false"}
-                  />
-                  {nameError && (
-                    <p className="text-red-500 text-[10px] font-urbanist" role="alert">
-                      {nameError}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-1">
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone Number"
-                    value={(formData.phone as string) || ""}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className={inputClass}
-                    aria-invalid={phoneError ? "true" : "false"}
-                  />
-                  {phoneError && (
-                    <p className="text-red-500 text-[12px] font-urbanist" role="alert">
-                      {phoneError}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-1 col-span-2">
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Email Address"
-                    value={(formData.email as string) || ""}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className={inputClass}
-                    aria-invalid={emailError ? "true" : "false"}
-                  />
-                  {emailError && (
-                    <p className="text-red-500 text-[12px] font-urbanist" role="alert">
-                      {emailError}
-                    </p>
-                  )}
-                </div>
-
-                {/* Custom Select */}
-                <div className="relative w-full col-span-2">
-                  <button
-                    type="button"
-                    onClick={() => setCategoryOpen((v) => !v)}
-                    className={`${inputClass} flex items-center justify-between text-left`}
-                    disabled={isSubmitting}
-                  >
-                    <span
-                      className={`${
-                        formData.category ? "text-[#162766]" : "text-[#808080]"
-                      }`}
-                    >
-                      {formData.category || "Select Your Concern"}
-                    </span>
-                    <span className="flex items-center justify-center w-[28px] h-[28px] rounded-[6px] bg-[#F5C844] shrink-0">
-                      <ChevronDownIcon
-                        className={`w-4 h-4 text-black transition-transform ${
-                          categoryOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </span>
-                  </button>
-
-                  {categoryOpen && (
-                    <div className="absolute z-20 mt-1 w-full rounded-[8px] border border-[#E8E9F0] bg-white shadow-lg overflow-hidden">
-                      {categories.map((item) => {
-                        const isSelected = formData.category === item;
-                        return (
-                          <button
-                            type="button"
-                            key={item}
-                            onClick={() => {
-                              handleChange({
-                                target: { name: "category", value: item },
-                              } as React.ChangeEvent<HTMLInputElement>);
-                              setCategoryOpen(false);
-                            }}
-                            className={`group w-full h-[44px] px-3 flex items-center justify-between cursor-pointer text-[14px] transition-colors ${
-                              isSelected
-                                ? "bg-[#162766] text-white"
-                                : "text-[#162766] hover:bg-[#162766] hover:text-white"
-                            }`}
-                          >
-                            <span className="truncate">{item}</span>
-                            <span
-                              className={`text-[#F2C438] transition-opacity duration-150 ${
-                                isSelected
-                                  ? "opacity-100"
-                                  : "opacity-0 group-hover:opacity-100"
-                              }`}
-                            >
-                              ✓
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Case field */}
-              <input
-                type="text"
-                name="caseHistory"
-                value={formData.caseHistory || ""}
-                onChange={handleChange}
-                placeholder="How Can We Help?"
-                disabled={isSubmitting}
-                className={`${inputClass} mb-[16px]`}
-              />
-
-              {/* Checkboxes */}
-              <div className="grid grid-cols-2 gap-x-[18px] gap-y-[12px] mb-[18px]">
-           <label className="flex items-start gap-[8px]">
-  <input
-    type="checkbox"
-    name="consent"
-    checked={formData.consent || false}
-    onChange={handleChange}
-    disabled={isSubmitting}
-    className={`mt-[2px] ${checkboxClass}`}
-  />
-
-  <div className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] leading-relaxed">
-    {/* Always visible short text */}
-    <span>
-      I agree to the{" "}
-      <span className="text-[#162766] font-semibold underline">
-        Privacy Policy & Disclaimer
-      </span>{" "}
-      and give my express written consent
-    </span>
-
-    {/* Read more */}
-    {!showFullConsent && (
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation(); // 🚫 prevent checkbox toggle
-          setShowFullConsent(true);
-        }}
-        className="ml-1 text-[#162766] font-semibold underline"
-      >
-        Read more
-      </button>
-    )}
-
-    {/* Expanded legal text */}
-    {showFullConsent && (
-      <>
-        <span>
-          {" "}
-          to affiliates and/or attorneys to contact me at the number provided
-          above, even if this number is a wireless number or if I am presently
-          listed on a Do Not Call list. I understand that I may be contacted by
-          telephone, email, text message, or mail regarding case options and that
-          I may be called using automatic dialing equipment. Message and data
-          rates may apply. My consent does not require purchase. This is legal
-          advertising.
-        </span>
-
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation(); // 🚫 prevent checkbox toggle
-            setShowFullConsent(false);
-          }}
-          className="ml-1 text-[#162766] font-semibold underline"
-        >
-          Show less
-        </button>
-      </>
-    )}
-  </div>
-</label>
-
-
-                <div className="flex flex-col gap-[8px]">
-                  <label className="flex items-start gap-[8px]">
+                {/* Fields grid */}
+                <div className="grid grid-cols-2 gap-x-2 gap-y-3 mb-[10px]">
+                  <div className="space-y-1">
                     <input
-                      id="captchabox-check"
-                      name="captchaCheck"
-                      type="checkbox"
-                      checked={showCaptcha || false}
+                      name="name"
+                      type="text"
+                      placeholder="Full Name"
+                      value={(formData.name as string) || ""}
                       onChange={handleChange}
                       disabled={isSubmitting}
-                       className={`mt-[2px] ${checkboxClass}`}
+                      className={inputClass}
+                      aria-invalid={nameError ? "true" : "false"}
                     />
-                    <span className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] capitalize">
-                      Please check this box so we know you&apos;re a person & not a computer
-                    </span>
-                  </label>
+                    {nameError && (
+                      <p
+                        className="text-red-500 text-[10px] font-urbanist"
+                        role="alert"
+                      >
+                        {nameError}
+                      </p>
+                    )}
+                  </div>
 
-                  {showCaptcha && (
-                    <div className="pl-[22px]">
-                      <CustomCaptcha
-                        onCaptchaChange={onCaptchaChange}
-                        resetTrigger={resetTrigger}
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  )}
+                  <div className="space-y-1">
+                    <input
+                      name="phone"
+                      type="tel"
+                      placeholder="Phone Number"
+                      value={(formData.phone as string) || ""}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className={inputClass}
+                      aria-invalid={phoneError ? "true" : "false"}
+                    />
+                    {phoneError && (
+                      <p
+                        className="text-red-500 text-[12px] font-urbanist"
+                        role="alert"
+                      >
+                        {phoneError}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1 col-span-2">
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="Email Address"
+                      value={(formData.email as string) || ""}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className={inputClass}
+                      aria-invalid={emailError ? "true" : "false"}
+                    />
+                    {emailError && (
+                      <p
+                        className="text-red-500 text-[12px] font-urbanist"
+                        role="alert"
+                      >
+                        {emailError}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Custom Select */}
+                  <div className="relative w-full col-span-2">
+                    <button
+                      type="button"
+                      onClick={() => setCategoryOpen((v) => !v)}
+                      className={`${inputClass} flex items-center justify-between text-left`}
+                      disabled={isSubmitting}
+                    >
+                      <span
+                        className={`${
+                          formData.category
+                            ? "text-[#162766]"
+                            : "text-[#808080]"
+                        }`}
+                      >
+                        {formData.category || "Select Your Concern"}
+                      </span>
+                      <span className="flex items-center justify-center w-[28px] h-[28px] rounded-[6px] bg-[#F5C844] shrink-0">
+                        <ChevronDownIcon
+                          className={`w-4 h-4 text-black transition-transform ${
+                            categoryOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </span>
+                    </button>
+
+                    {categoryOpen && (
+                      <div className="absolute z-20 mt-1 w-full rounded-[8px] border border-[#E8E9F0] bg-white shadow-lg overflow-hidden">
+                        {categories.map((item) => {
+                          const isSelected = formData.category === item;
+                          return (
+                            <button
+                              type="button"
+                              key={item}
+                              onClick={() => {
+                                handleChange({
+                                  target: { name: "category", value: item },
+                                } as React.ChangeEvent<HTMLInputElement>);
+                                setCategoryOpen(false);
+                              }}
+                              className={`group w-full h-[44px] px-3 flex items-center justify-between cursor-pointer text-[14px] transition-colors ${
+                                isSelected
+                                  ? "bg-[#162766] text-white"
+                                  : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                              }`}
+                            >
+                              <span className="truncate">{item}</span>
+                              <span
+                                className={`text-[#F2C438] transition-opacity duration-150 ${
+                                  isSelected
+                                    ? "opacity-100"
+                                    : "opacity-0 group-hover:opacity-100"
+                                }`}
+                              >
+                                ✓
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                
-              </div>
-              
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={!isFormValid || isSubmitting}
-                className="w-full h-[54px] mt-[8px] bg-[#162766] text-white font-semibold rounded-full text-[16px] hover:opacity-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
+                {/* Case field */}
+                <input
+                  type="text"
+                  name="caseHistory"
+                  value={formData.caseHistory || ""}
+                  onChange={handleChange}
+                  placeholder="How Can We Help?"
+                  disabled={isSubmitting}
+                  className={`${inputClass} mb-[16px]`}
+                />
+
+                {/* Checkboxes */}
+                <div className="grid grid-cols-2 gap-x-[18px] gap-y-[12px] mb-[18px]">
+                  <label className="flex items-start gap-[8px]">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent || false}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className={`mt-[2px] ${checkboxClass}`}
+                    />
+
+                    <div className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] leading-relaxed">
+                      {/* Always visible short text */}
+                      <span>
+                        I agree to the{" "}
+                        <span className="text-[#162766] font-semibold underline">
+                          Privacy Policy & Disclaimer
+                        </span>{" "}
+                        and give my express written consent
+                      </span>
+
+                      {/* Read more */}
+                      {!showFullConsent && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation(); // 🚫 prevent checkbox toggle
+                            setShowFullConsent(true);
+                          }}
+                          className="ml-1 text-[#162766] font-semibold underline"
+                        >
+                          Read more
+                        </button>
+                      )}
+
+                      {/* Expanded legal text */}
+                      {showFullConsent && (
+                        <>
+                          <span>
+                            {" "}
+                            to affiliates and/or attorneys to contact me at the
+                            number provided above, even if this number is a
+                            wireless number or if I am presently listed on a Do
+                            Not Call list. I understand that I may be contacted
+                            by telephone, email, text message, or mail regarding
+                            case options and that I may be called using
+                            automatic dialing equipment. Message and data rates
+                            may apply. My consent does not require purchase.
+                            This is legal advertising.
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation(); // 🚫 prevent checkbox toggle
+                              setShowFullConsent(false);
+                            }}
+                            className="ml-1 text-[#162766] font-semibold underline"
+                          >
+                            Show less
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </label>
+
+                  <div className="flex flex-col gap-[8px]">
+                    <label className="flex items-start gap-[8px]">
+                      <input
+                        id="captchabox-check"
+                        name="captchaCheck"
+                        type="checkbox"
+                        checked={showCaptcha || false}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
+                        className={`mt-[2px] ${checkboxClass}`}
                       />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      />
-                    </svg>
-                    Submitting...
-                  </span>
-                ) : (
-                  "Get started"
-                )}
-              </button>
-            </form>
-          )}
+                      <span className="text-[#808080] font-urbanist text-[10px] tracking-[-0.2px] capitalize">
+                        Please check this box so we know you&apos;re a person &
+                        not a computer
+                      </span>
+                    </label>
+
+                    {showCaptcha && (
+                      <div className="pl-[22px]">
+                        <CustomCaptcha
+                          onCaptchaChange={onCaptchaChange}
+                          resetTrigger={resetTrigger}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={!isFormValid || isSubmitting}
+                  className="w-full h-[54px] mt-[8px] bg-[#162766] text-white font-semibold rounded-full text-[16px] hover:opacity-95 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Submitting...
+                    </span>
+                  ) : (
+                    "Get started"
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 const LandingPageContactus: React.FC<{
@@ -1278,7 +1322,7 @@ const LandingPageContactus: React.FC<{
       consent: false,
       needHelp: false,
     }),
-    []
+    [],
   );
 
   const [formData, setFormData] = useState<FormDataType>(initialData);
@@ -1308,7 +1352,7 @@ const LandingPageContactus: React.FC<{
       }
 
       setPhoneError((prev) =>
-        prev === nextPhoneError ? prev : nextPhoneError
+        prev === nextPhoneError ? prev : nextPhoneError,
       );
 
       setFormData((prev) => {
@@ -1333,7 +1377,7 @@ const LandingPageContactus: React.FC<{
       }
 
       setEmailError((prev) =>
-        prev === nextEmailError ? prev : nextEmailError
+        prev === nextEmailError ? prev : nextEmailError,
       );
 
       setFormData((prev) => {
@@ -1368,7 +1412,7 @@ const LandingPageContactus: React.FC<{
       setNameError((prev) => (prev === nextNameError ? prev : nextNameError));
 
       setFormData((prev) =>
-        prev.name === cleaned ? prev : { ...prev, name: cleaned }
+        prev.name === cleaned ? prev : { ...prev, name: cleaned },
       );
     } catch (error) {
       console.error("Error handling name change:", error);
@@ -1380,7 +1424,7 @@ const LandingPageContactus: React.FC<{
     (
       e: React.ChangeEvent<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
+      >,
     ) => {
       try {
         const target = e.target as
@@ -1425,7 +1469,7 @@ const LandingPageContactus: React.FC<{
         console.error("Error handling form change:", error);
       }
     },
-    [handleNameChange, handlePhoneChange, handleEmailChange, submitMessage]
+    [handleNameChange, handlePhoneChange, handleEmailChange, submitMessage],
   );
 
   const onCaptchaChange = useCallback((valid: boolean) => {
@@ -1523,7 +1567,7 @@ const LandingPageContactus: React.FC<{
         const startObserving = () => {
           try {
             const trustedFormFields = document.querySelectorAll(
-              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]'
+              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]',
             );
 
             trustedFormFields.forEach((field) => {
@@ -1613,7 +1657,7 @@ const LandingPageContactus: React.FC<{
                 countryName: "USA",
                 brandName: "C2A",
                 websiteName: "Connect 2 Attorney",
-                formname: "Contact Us Form",
+                formname: "Enquiry Form",
                 data: {
                   name: submitData.name,
                   email: submitData.email,
@@ -1630,7 +1674,7 @@ const LandingPageContactus: React.FC<{
                   pageSource: getSourceUrl(),
                 },
               }),
-            }
+            },
           );
           setFormData(initialData);
           setSuccessDialogOpen(true);
@@ -1674,7 +1718,7 @@ const LandingPageContactus: React.FC<{
                     pageSource: getSourceUrl(),
                   },
                 }),
-              }
+              },
             );
             setSubmitMessage({
               type: "success",
@@ -1707,7 +1751,7 @@ const LandingPageContactus: React.FC<{
       tokenUrl,
       pingUrl,
       initialData,
-    ]
+    ],
   );
 
   return (

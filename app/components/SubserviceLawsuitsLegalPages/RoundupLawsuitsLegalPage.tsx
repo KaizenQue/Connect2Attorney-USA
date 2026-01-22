@@ -332,7 +332,7 @@ const LawsuitsLegalPage = () => {
         }
       `}</style>
       {/* Page Container */}
-      <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
+      <div className="mx-auto px-4 sm:px-6 md:px-8 py-2 lg:py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
           <TableOfContents items={ROUNDUP_TOC} />
@@ -346,8 +346,9 @@ const LawsuitsLegalPage = () => {
             >
               {content.pageContent.mainTitle}
             </h1>
-            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1 capitalize">
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1 capitalize">
               <p>{content.pageContent.mainParagraphs[0]}</p>
+                <br  className="lg:hidden"/>
               <p>{content.pageContent.mainParagraphs[1]}</p>
               <br/>
               <h3 className=" font-bold">
@@ -404,7 +405,7 @@ const LawsuitsLegalPage = () => {
                   </li>
                 ))}
               </ul>
-              <p
+              {/* <p
                 className="
                   mt-[20px]
                   text-[#fff]
@@ -416,9 +417,9 @@ const LawsuitsLegalPage = () => {
                 "
               >
                 <a href="#" className="underline font-urbanist font-semibold">
-                  Here's a Monsanto Roundup Lawsuit Update 
+                  Here&apos;s a Monsanto Roundup Lawsuit Update 
                 </a>
-              </p>
+              </p> */}
             </div>
                       
             {/* ==================== HEALTH RISKS SECTION ==================== */}
@@ -473,7 +474,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.healthRisksTitle }
               </h2>
 
-              <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+              <p className="mb-4 font-poppins font-normal text-[#425777] text-[16px] leading-[27px]">
                 {content.pageContent.healthRisksParagraph}
               </p>
               
@@ -511,11 +512,11 @@ const LawsuitsLegalPage = () => {
 </h2>
 
              
-          <p className="mb-4 font-urbanist font-normal text-[#425777] text-[18px] leading-[27px]">
+          <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] leading-[27px]">
   {content.pageContent.mdllitigationParagraph}
 </p>
 
-               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[18px] leading-[27px]">
+               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] leading-[27px]">
   {content.pageContent.mdllitigationsubheading1}
 </p>
 
@@ -695,7 +696,7 @@ const LawsuitsLegalPage = () => {
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}
-            <div className="mb-24">
+            <div className="mb-15 md:mb-10 lg:mb-10">
               <h2
                 id={content.sectionIds.stepsTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4"
@@ -725,7 +726,7 @@ const LawsuitsLegalPage = () => {
                 }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
-                <div className="h-48">
+                {/* <div className="h-48">
                   <Image
                     src="/americanlawcourt.svg"
                     alt="Courthouse"
@@ -733,7 +734,7 @@ const LawsuitsLegalPage = () => {
                     width={400}
                     height={200}
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6 text-white">
                   <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">

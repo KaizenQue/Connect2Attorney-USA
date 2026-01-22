@@ -341,7 +341,7 @@ const LawsuitsLegalPage = () => {
         }
       `}</style>
       {/* Page Container */}
-      <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
+      <div className="mx-auto px-4 sm:px-6 md:px-8 py-2 lg:py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
           <TableOfContents items={MESOTHELIOMA_TOC } />
@@ -356,8 +356,9 @@ const LawsuitsLegalPage = () => {
             >
               {content.pageContent.mainTitle}
             </h1>
-            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1">
               <p>{content.pageContent.mainParagraphs[0]}</p>
+                <br  className="lg:hidden"/>
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
 
@@ -428,7 +429,7 @@ const LawsuitsLegalPage = () => {
                     </li>
                   ))}
                 </ul>
-                  <p
+                  {/* <p
   className="
     mt-[20px]
     text-[#fff]
@@ -443,7 +444,7 @@ const LawsuitsLegalPage = () => {
   <a href="#" className="underline font-urbanist font-semibold">
     Click here to read.
   </a>
-</p>
+</p> */}
               </div>
             {/* <Ozempicfreecasecard /> */}
             {/* <h2
@@ -521,13 +522,13 @@ const LawsuitsLegalPage = () => {
   {content.pageContent.mdllitigationTitle}
 </h2>
 
-<p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+<p className="mb-4 font-poppins font-normal text-[#425777] text-[16px] lg:text-[18px] leading-[27px]">
   {content.pageContent.mdllitigationParagraph}
 </p>
 
 <ul className="space-y-3  whitespace-pre-line list-disc pl-6">
   {content.mdllitigationPoints.map((item, index) => (
-    <li key={index} className="text-[#425777] text-[18px] leading-[27px] mb-6">
+    <li key={index} className="text-[#425777] text-[16px] lg:text-[18px] leading-[27px] mb-6">
       <span className="font-bold">{item.title}</span>{" "}
     </li>
   ))}
@@ -580,7 +581,7 @@ const LawsuitsLegalPage = () => {
       
     </div>
   ))}
-  <p
+  {/* <p
   className="
     mt-[20px]
     text-[#162766]
@@ -595,7 +596,7 @@ const LawsuitsLegalPage = () => {
   <a href="#" className="underline font-urbanist font-semibold">
     Click here to read.
   </a>
-</p>
+</p> */}
 
 </div>
  
@@ -604,7 +605,7 @@ const LawsuitsLegalPage = () => {
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}
-            <div className="mb-24">
+            <div className="mb-1 md:mb-10 lg:mb-10">
               <h2
                 id={content.sectionIds.stepsTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4"
@@ -634,7 +635,7 @@ const LawsuitsLegalPage = () => {
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
-                <div className="h-48">
+                {/* <div className="h-48">
                   <Image
                     src="/americanlawcourt.svg"
                     alt="Courthouse"
@@ -642,7 +643,7 @@ const LawsuitsLegalPage = () => {
                     width={400}
                     height={200}
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6 text-white">
                   <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">

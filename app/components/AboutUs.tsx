@@ -85,7 +85,7 @@ const AboutUs = () => {
   min-[360px]:min-w-[200px] min-[360px]:min-h-[50px]   min-[375px]:min-w-[210px] min-[375px]:min-h-[50px]
   min-w-[180px] h-[52px]
   md:min-w-[400px] md:h-[72px]
-  lg:min-w-[210px] lg:h-[90px]  xl:min-w-[310px]  xl:min-h-[90px]  
+  lg:min-w-[210px] lg:h-[90px]  xl:min-w-[270px]  xl:min-h-[90px]  
 "
       >
         <span className="lg:hidden">Know more</span>

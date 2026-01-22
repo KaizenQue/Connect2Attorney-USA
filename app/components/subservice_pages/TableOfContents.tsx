@@ -47,7 +47,7 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
                   scrollToSection(item.id);
                   setOpen(false);
                 }}
-                className="px-4 py-3.5  rounded-lg md:text-[#F2C338] text-[#162766] font-urbanist text-[15px] font-medium cursor-pointer hover:bg-[#eef1ff] transition"
+                className="px-4 py-3.5  rounded-lg md:text-[#162766] text-[#162766] font-urbanist text-[15px] font-medium cursor-pointer hover:bg-[#eef1ff] transition"
               >
                 {item.label}
               </div>

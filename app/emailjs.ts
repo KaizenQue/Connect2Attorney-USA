@@ -8,22 +8,22 @@ export const USER_TEMPLATE_ID = "template_iiks8gi";
 emailjs.init(PUBLIC_KEY);
 
 export const sendWithEmailJS = async (apiBody: any) => {
-  const data = apiBody.data;
+  const d = apiBody.data;
   const currentYear = new Date().getFullYear();
 
   const adminParams = {
-    full_name: data.name,
-    email: data.email,
-    phone: data.phone,
-    zip: data.zip,
-    case_type: data.caseType,
-    description: data.description,
-    ip_address: data.ipAddress,
+    full_name: d.name,
+    email: d.email,
+    phone: d.phone,
+    zip: d.zip || "N/A",
+    case_type: d.caseType || "N/A",
+    description: d.description || "N/A",
+    ip_address: d.ipAddress,
     source_url: apiBody.sourceUrl,
-    submission_date: data.submissionDate,
-    trusted_form_cert_url: data.trustedFormCertUrl,
-    trusted_form_ping_url: data.trustedFormPingUrl,
-    trusted_form_token: data.trustedFormToken,
+    submission_date: d.submissionDate,
+    trusted_form_cert_url: d.trustedFormCertUrl,
+    trusted_form_ping_url: d.trustedFormPingUrl,
+    trusted_form_token: d.trustedFormToken,
     country: apiBody.countryName,
     brand: apiBody.brandName,
     website: apiBody.websiteName,
@@ -31,21 +31,33 @@ export const sendWithEmailJS = async (apiBody: any) => {
     year: currentYear,
   };
 
+  // 1️ADMIN EMAIL — ALWAYS TRY
+  await emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, adminParams);
+
+  //  USER EMAIL — SAFE + OPTIONAL
   const userParams = {
-    full_name: data.name,
-    email: data.email,
-    phone: data.phone,
-    zip: data.zip,
-    case_type: data.caseType,
-    description: data.description,
-    submission_date: data.submissionDate,
+    full_name: d.name,
+    email: d.email,
+    phone: d.phone,
+    zip: d.zip || "N/A",
+    case_type: d.caseType || "N/A",
+    description: d.description || "N/A",
+    submission_date: d.submissionDate,
     year: currentYear,
   };
 
-  await Promise.all([
-    emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, adminParams),
-    emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, userParams),
-  ]);
+  if (isValidEmail(d.email)) {
+    try {
+      await emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, userParams);
+    } catch (err) {
+      console.warn("User confirmation email failed (non-blocking)", err);
+    }
+  } else {
+    console.warn("Invalid user email, skipping confirmation:", d.email);
+  }
 };
+
+const isValidEmail = (email?: string) =>
+  !!email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 

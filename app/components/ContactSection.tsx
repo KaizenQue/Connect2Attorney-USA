@@ -613,118 +613,172 @@ const ContactSection = () => {
   }, []);
 
   // Handle form submission (similar to your previous form)
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isFormValid || submitting) return;
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Final validation pass
-    const newErrors = {
-      firstName: validateName(form.firstName),
-      lastName: validateName(form.lastName),
-      email: validateEmail(form.email),
-      phone: validatePhone(form.phone),
-      message: validateMessage(form.message),
-    };
+  // console.group("CONTACT FORM SUBMIT FLOW");
 
-    setErrors(newErrors);
+  if (!isFormValid) {
+    // console.warn("Form invalid – blocking submit");
+    // console.groupEnd();
+    return;
+  }
 
-    if (Object.values(newErrors).some((err) => err !== "")) {
-      return;
-    }
+  if (submitting) {
+    // console.warn("Already submitting – blocking duplicate submit");
+    // console.groupEnd();
+    return;
+  }
 
-    setSubmitting(true);
+  // =========================
+  // FINAL VALIDATION
+  // =========================
+  // console.log(" Running final validation");
 
-    try {
-      // =========================
-      // FORMAT DATA
-      // =========================
-      const rawPhone = form.phone.replace(/\D/g, "");
-      const phoneWithCountryCode = rawPhone.length === 11 && rawPhone.startsWith("1")
+  const newErrors = {
+    firstName: validateName(form.firstName),
+    lastName: validateName(form.lastName),
+    email: validateEmail(form.email),
+    phone: validatePhone(form.phone),
+    message: validateMessage(form.message),
+  };
+
+  setErrors(newErrors);
+
+  if (Object.values(newErrors).some(Boolean)) {
+    console.warn("Validation failed:", newErrors);
+    console.groupEnd();
+    return;
+  }
+
+  setSubmitting(true);
+  // console.log("Validation passed");
+
+  try {
+    // =========================
+    // FORMAT DATA
+    // =========================
+    // console.log("Formatting form data");
+
+    const rawPhone = form.phone.replace(/\D/g, "");
+    const phoneWithCountryCode =
+      rawPhone.length === 11 && rawPhone.startsWith("1")
         ? `+${rawPhone}`
         : `+1${rawPhone.slice(-10)}`;
 
-      const fullName = `${form.firstName} ${form.lastName}`.trim();
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
 
-      const apiBody = {
-        countryName: "USA",
-        brandName: "C2A",
-        websiteName: "Connect 2 Attorney",
-        formname: "Contact Section Form",
-        sourceUrl: typeof window !== "undefined" ? window.location.href : "Unknown",
-        data: {
-          name: fullName,
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
-          phone: phoneWithCountryCode,
-          message: form.message,
-          needHelp: form.needHelp,
+    // =========================
+    // IP ADDRESS (NON-BLOCKING)
+    // =========================
+    // console.log("Fetching IP address");
 
-          ipAddress: await getIPAddress(),
-
-          trustedFormCertUrl: trustedFormData.certId || "",
-          trustedFormToken: trustedFormData.tokenUrl || "",
-          trustedFormPingUrl: trustedFormData.pingUrl || "",
-
-          submissionDate: new Date().toISOString(),
-          pageSource:
-            typeof window !== "undefined" ? window.location.href : "Unknown",
-        },
-      };
-
-      console.log("🚀 CONTACT FORM PAYLOAD:", apiBody);
-
-      // ================================
-      // 1️⃣ CRM — MUST SUCCEED
-      // ================================
-      const crmRes = await fetch(
-        "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(apiBody),
-        }
-      );
-
-      if (!crmRes.ok) {
-        const text = await crmRes.text();
-        throw new Error("CRM failed: " + text);
-      }
-
-      // ================================
-      // 2️⃣ EMAILJS — MUST SUCCEED
-      // ================================
-      await sendWithEmailJS(apiBody);
-
-      // ================================
-      // ✅ SUCCESS
-      // ================================
-      setSuccess(true);
-
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
-        consent: false,
-        needHelp: false,
-      });
-
-      setShowCaptcha(false);
-      setCaptchaValid(false);
-      setResetTrigger((t) => !t);
-      setErrors({});
-
-      // Auto-hide success toast after 5s
-      setTimeout(() => setSuccess(false), 5000);
-    } catch (err) {
-      console.error("❌ CONTACT FORM SUBMIT FAILED:", err);
-      alert("There was an error submitting the form. Please try again.");
-    } finally {
-      setSubmitting(false);
+    let ipAddress = "Unknown";
+    try {
+      ipAddress = await getIPAddress();
+      // console.log("IP address:", ipAddress);
+    } catch (ipErr) {
+      console.warn("IP fetch failed (continuing)", ipErr);
     }
-  };
+
+    const apiBody = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Contact Section Form",
+      sourceUrl:
+        typeof window !== "undefined" ? window.location.href : "Unknown",
+      data: {
+        name: fullName,
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        phone: phoneWithCountryCode,
+        message: form.message,
+        needHelp: form.needHelp,
+
+        ipAddress,
+
+        trustedFormCertUrl: trustedFormData?.certId ?? "",
+        trustedFormToken: trustedFormData?.tokenUrl ?? "",
+        trustedFormPingUrl: trustedFormData?.pingUrl ?? "",
+
+        submissionDate: new Date().toISOString(),
+        pageSource:
+          typeof window !== "undefined" ? window.location.href : "Unknown",
+      },
+    };
+
+    console.log(" FINAL PAYLOAD", apiBody);
+
+    // ================================
+    // 1️⃣ CRM SUBMISSION (MUST SUCCEED)
+    // ================================
+    console.log("📤 Submitting to CRM");
+
+    const crmRes = await fetch(
+      "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apiBody),
+      }
+    );
+
+    console.log("📥 CRM response status:", crmRes.status);
+
+    if (!crmRes.ok) {
+      const text = await crmRes.text();
+      console.error("❌ CRM error response:", text);
+      throw new Error(`CRM failed (${crmRes.status}): ${text}`);
+    }
+
+    console.log("✅ CRM submission successful");
+
+    // ================================
+    // 2️⃣ EMAILJS (BEST EFFORT)
+    // ================================
+    console.log("📧 Sending EmailJS");
+
+    try {
+      await sendWithEmailJS(apiBody);
+      console.log("✅ EmailJS sent successfully");
+    } catch (emailErr) {
+      console.warn(" EmailJS failed (CRM succeeded)", emailErr);
+    }
+
+    // ================================
+    // ✅ SUCCESS
+    // ================================
+    console.log("🎉 FORM SUBMISSION COMPLETE");
+
+    setSuccess(true);
+
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false,
+      needHelp: false,
+    });
+
+    setShowCaptcha(false);
+    setCaptchaValid(false);
+    setResetTrigger((t) => !t);
+    setErrors({});
+
+    setTimeout(() => setSuccess(false), 5000);
+  } catch (err: any) {
+    console.error(" FORM SUBMIT FAILED", err);
+    alert(err?.message || "Unknown error occurred. Check console.");
+  } finally {
+    setSubmitting(false);
+    console.groupEnd();
+  }
+};
+
 
   const fields: { name: keyof ContactFormData; label: string }[] = [
     { name: "firstName", label: "First Name" },

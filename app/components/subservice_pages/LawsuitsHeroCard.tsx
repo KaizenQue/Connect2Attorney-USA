@@ -41,7 +41,7 @@ const LawsuitsHeroCard = ({
           mx-auto
           max-w-[1280px]
           px-4 sm:px-6 lg:px-8
-          py-10 sm:py-14 lg:py-20
+          py-10 sm:py-14 lg:py-2
           flex flex-col lg:flex-row
           items-center
           gap-10 lg:gap-16
@@ -59,7 +59,7 @@ const LawsuitsHeroCard = ({
               sm:text-[38px]
               md:text-[42px]
               lg:text-[48px]
-              xl:text-[56px]
+              xl:text-[50px]
               leading-tight
               lg:leading-[64px]
             "

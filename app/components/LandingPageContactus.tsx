@@ -1,8 +1,16 @@
 /* eslint-disable react/display-name */
 "use client";
-import React, { useState, useCallback, useEffect, useMemo,useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import Image from "next/image";
 import PartnerStatsCard from "./PartnerStatsCard";
+import { useRouter } from "next/navigation";
+
 // import { sendFormAdmin, sendFormUser } from "./emailJsService";
 // Fallback stubs - replace these with real implementations from your email service
 const sendFormAdmin = async (data: Record<string, unknown>) => {
@@ -60,7 +68,7 @@ const formatUSAMobile = (input: string): string => {
     formatted = `${digits.slice(0, 3)} ${digits.slice(3)}`;
   } else {
     formatted = `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(
-      6
+      6,
     )}`;
   }
 
@@ -192,7 +200,6 @@ const validateEmail = (input: string) => {
   return { isValid: true, reason: null };
 };
 
-
 type CustomCaptchaProps = {
   onCaptchaChange?: (value: boolean) => void;
   resetTrigger?: boolean;
@@ -210,7 +217,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [charOffsets, setCharOffsets] = useState<number[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  
+
   // Use refs to track current state for cleanup
   const isSpeakingRef = useRef(false);
   const speechSynthRef = useRef<SpeechSynthesis | null>(null);
@@ -222,17 +229,18 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       isSpeakingRef.current = false;
     }
 
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     const offsets: number[] = [];
-    
+
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
       // Generate offsets between -5 and 5
       offsets.push(parseFloat((Math.random() * 10 - 5).toFixed(2)));
     }
-    
+
     setCaptchaText(result);
     setCharOffsets(offsets);
     setUserInput("");
@@ -244,7 +252,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   useEffect(() => {
     generateCaptcha();
     speechSynthRef.current = window.speechSynthesis;
-    
+
     // Cleanup function
     return () => {
       if (speechSynthRef.current && isSpeakingRef.current) {
@@ -289,13 +297,16 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     // Try to find a male US voice
     if (voices.length > 0) {
-      selectedVoice = voices.find(
-        (voice) =>
-          voice.lang === "en-US" && 
-          voice.name.toLowerCase().includes("male") || 
-          voice.name.toLowerCase().includes("david") ||
-          voice.name.toLowerCase().includes("microsoft david")
-      ) || voices.find((voice) => voice.lang === "en-US") || voices[0];
+      selectedVoice =
+        voices.find(
+          (voice) =>
+            (voice.lang === "en-US" &&
+              voice.name.toLowerCase().includes("male")) ||
+            voice.name.toLowerCase().includes("david") ||
+            voice.name.toLowerCase().includes("microsoft david"),
+        ) ||
+        voices.find((voice) => voice.lang === "en-US") ||
+        voices[0];
     }
 
     let currentIndex = 0;
@@ -303,13 +314,13 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       if (currentIndex < captchaText.length && isSpeakingRef.current) {
         const char = captchaText[currentIndex];
         const utterance = new SpeechSynthesisUtterance(char);
-        
+
         // Configure speech properties
         utterance.rate = 0.5;
         utterance.pitch = 0.9;
         utterance.volume = 1.0;
         utterance.lang = "en-US";
-        
+
         if (selectedVoice) {
           utterance.voice = selectedVoice;
         }
@@ -344,7 +355,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUserInput(value);
-    
+
     // Case-insensitive comparison for better UX
     const valid = value.toLowerCase() === captchaText.toLowerCase();
     setIsValid(valid);
@@ -353,7 +364,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
   const handleAudioToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAudioEnabled(e.target.checked);
-    
+
     // Cancel speech when disabling audio
     if (!e.target.checked && isSpeakingRef.current) {
       window.speechSynthesis.cancel();
@@ -375,7 +386,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
               backgroundPosition: "0 50%",
             }}
           />
-          
+
           {/* CAPTCHA text with offsets */}
           <div className="relative z-10 flex justify-center">
             {captchaText.split("").map((char, index) => (
@@ -393,7 +404,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             ))}
           </div>
         </div>
-        
+
         {/* Control buttons */}
         <div className="flex gap-2 items-center justify-start sm:justify-start">
           <button
@@ -401,24 +412,22 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             onClick={generateCaptcha}
             disabled={disabled}
             className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-              disabled 
-                ? "opacity-50 cursor-not-allowed" 
-                : "hover:bg-gray-50"
+              disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
             }`}
             title="Refresh CAPTCHA"
             aria-label="Refresh CAPTCHA"
           >
             ↻
           </button>
-          
+
           {audioEnabled && (
             <button
               type="button"
               onClick={speakCaptcha}
               disabled={disabled || isSpeaking}
               className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-                disabled || isSpeaking 
-                  ? "opacity-50 cursor-not-allowed" 
+                disabled || isSpeaking
+                  ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"
               }`}
               title={isSpeaking ? "Speaking..." : "Listen to CAPTCHA"}
@@ -440,9 +449,10 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
           disabled={disabled}
           className="mr-2"
         />
-        <label htmlFor="enableAudio" className={`text-sm ${
-          disabled ? "text-gray-400" : "text-gray-700"
-        }`}>
+        <label
+          htmlFor="enableAudio"
+          className={`text-sm ${disabled ? "text-gray-400" : "text-gray-700"}`}
+        >
           Enable Audio
         </label>
       </div>
@@ -459,25 +469,27 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             disabled
               ? "bg-gray-100 cursor-not-allowed border-gray-300"
               : userInput !== "" && !isValid
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-blue-500"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
           }`}
-          aria-describedby={userInput !== "" && !isValid ? "captcha-error" : undefined}
+          aria-describedby={
+            userInput !== "" && !isValid ? "captcha-error" : undefined
+          }
         />
-        
+
         {/* Validation messages */}
         {userInput !== "" && !isValid && !disabled && (
           <p id="captcha-error" className="text-red-500 text-sm mt-1">
             CAPTCHA does not match. Please try again.
           </p>
         )}
-        
+
         {isValid && !disabled && (
           <p className="text-green-500 text-sm mt-1">
             ✓ CAPTCHA verified successfully
           </p>
         )}
-        
+
         {disabled && (
           <p className="text-gray-500 text-sm mt-1">
             CAPTCHA verification is disabled
@@ -487,8 +499,6 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
     </div>
   );
 };
-
-
 
 // Function to get the initial landing URL
 let initialLandingUrl: string | null = null;
@@ -713,7 +723,6 @@ const checkboxClass = `
 `;
 
 const categories = [
- 
   "Ozempic Lawsuit",
   "Mesothelioma Lawsuit",
   "Depo-Provera Lawsuit",
@@ -725,8 +734,6 @@ const categories = [
   "Motor Vehicle Accident Lawsuit",
   "Slip and Fall Injury Lawsuit",
   "18-Wheeler Accident Lawsuit",
-
-
 ];
 // Add this stepper component near the top of your file, after the existing components
 const StepperForm: React.FC<DesktopLandingProps> = ({
@@ -750,41 +757,46 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
   const [currentStep, setCurrentStep] = useState(1);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [showFullConsent, setShowFullConsent] = useState(false);
-  const [localErrors, setLocalErrors] = useState<{[key: string]: string}>({});
+  const [localErrors, setLocalErrors] = useState<{ [key: string]: string }>({});
 
   // Steps configuration
   const steps = [
-    { number: 1, title: 'Contact Info' },
-    { number: 2, title: 'Case Details' },
-    { number: 3, title: 'Consent' }
+    { number: 1, title: "Contact Info" },
+    { number: 2, title: "Case Details" },
+    { number: 3, title: "Consent" },
   ];
 
   // Validation for each step
   const validateStep = (step: number): boolean => {
-    const errors: {[key: string]: string} = {};
-    
+    const errors: { [key: string]: string } = {};
+
     if (step === 1) {
       if (!formData.name?.trim()) {
-        errors.name = 'Name is required';
-      } else if (formData.name.trim().split(' ').filter(w => w.length > 0).length < 2) {
-        errors.name = 'Please enter your full name';
+        errors.name = "Name is required";
+      } else if (
+        formData.name
+          .trim()
+          .split(" ")
+          .filter((w) => w.length > 0).length < 2
+      ) {
+        errors.name = "Please enter your full name";
       }
-      
+
       if (!formData.email?.trim()) {
-        errors.email = 'Email is required';
+        errors.email = "Email is required";
       } else if (!validateEmail(formData.email).isValid) {
-        errors.email = 'Please enter a valid email';
+        errors.email = "Please enter a valid email";
       }
     }
-    
+
     if (step === 2 && !formData.category) {
-      errors.category = 'Please select a concern';
+      errors.category = "Please select a concern";
     }
-    
+
     if (step === 3 && !formData.consent) {
       // Consent validation handled by the checkbox required attribute
     }
-    
+
     setLocalErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -819,7 +831,7 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
     // Clear error for this field if user starts typing
     const { name } = e.target;
     if (localErrors[name]) {
-      setLocalErrors(prev => ({ ...prev, [name]: '' }));
+      setLocalErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -846,7 +858,7 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
         name="xxTrustedFormPingUrl"
         value={pingUrl || ""}
       />
-      
+
       {/* Header with Stepper */}
       <div className="mb-2">
         <p
@@ -860,15 +872,17 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
           <span style={{ color: "#162766" }}>Take the </span>
           <span style={{ color: "#F2C438" }}>First Step</span>
         </p>
-        
+
         {/* Stepper Progress */}
         <div className="flex items-center justify-between mb-4">
           {steps.map((step, index) => (
             <div key={step.number} className="flex items-center flex-1">
               <div className="flex flex-col items-center relative">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center 
-                  ${currentStep >= step.number ? 'bg-[#162766] text-white' : 'bg-gray-200 text-gray-500'}
-                  ${currentStep === step.number ? 'ring-2 ring-[#F2C438] ring-offset-2' : ''}`}>
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center 
+                  ${currentStep >= step.number ? "bg-[#162766] text-white" : "bg-gray-200 text-gray-500"}
+                  ${currentStep === step.number ? "ring-2 ring-[#F2C438] ring-offset-2" : ""}`}
+                >
                   {step.number}
                 </div>
                 <span className="text-xs mt-1 text-gray-600 hidden md:block">
@@ -876,12 +890,14 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                 </span>
               </div>
               {index < steps.length - 1 && (
-                <div className={`flex-1 h-1 mx-2 ${currentStep > step.number ? 'bg-[#162766]' : 'bg-gray-200'}`} />
+                <div
+                  className={`flex-1 h-1 mx-2 ${currentStep > step.number ? "bg-[#162766]" : "bg-gray-200"}`}
+                />
               )}
             </div>
           ))}
         </div>
-        
+
         {/* Divider Line */}
         <div className="w-full">
           <div className="flex items-end w-full">
@@ -890,33 +906,35 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
           </div>
         </div>
       </div>
-      
+
       {/* Step Content */}
       <div className="min-h-[180px]">
         {currentStep === 1 && (
           <div className="space-y-2 animate-fadeIn">
-            <p className="text-sm text-gray-600 mb-2">Please provide your contact information</p>
+            <p className="text-sm text-gray-600 mb-2">
+              Please provide your contact information
+            </p>
             {[
               {
                 name: "name",
                 type: "text",
                 placeholder: "Full Name",
                 required: true,
-                error: nameError || localErrors.name
+                error: nameError || localErrors.name,
               },
               {
                 name: "email",
                 type: "email",
                 placeholder: "Email Address",
                 required: true,
-                error: emailError || localErrors.email
+                error: emailError || localErrors.email,
               },
               {
                 name: "phone",
                 type: "tel",
                 placeholder: "Phone Number",
                 required: true,
-                error: phoneError
+                error: phoneError,
               },
             ].map(({ name, type, placeholder, required, error }) => (
               <div key={name} className="mb-1">
@@ -948,8 +966,10 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
 
         {currentStep === 2 && (
           <div className="space-y-2 animate-fadeIn">
-            <p className="text-sm text-gray-600 mb-2">Tell us about your case</p>
-            
+            <p className="text-sm text-gray-600 mb-2">
+              Tell us about your case
+            </p>
+
             {/* Category Dropdown */}
             <div className="relative mb-1">
               <button
@@ -957,7 +977,11 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                 onClick={() => setCategoryOpen((v) => !v)}
                 className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 flex items-center justify-between text-sm font-urbanist text-[#808080] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438]"
               >
-                <span className={formData.category ? "text-[#162766]" : "text-[#808080]"}>
+                <span
+                  className={
+                    formData.category ? "text-[#162766]" : "text-[#808080]"
+                  }
+                >
                   {formData.category || "Select Your Concern"}
                 </span>
                 <span className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#F5C844] shrink-0">
@@ -968,7 +992,7 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                   />
                 </span>
               </button>
-              
+
               {localErrors.category && (
                 <p className="text-red-500 text-xs mt-0.5" role="alert">
                   {localErrors.category}
@@ -989,7 +1013,10 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                           } as React.ChangeEvent<HTMLInputElement>);
                           setCategoryOpen(false);
                           if (localErrors.category) {
-                            setLocalErrors(prev => ({ ...prev, category: '' }));
+                            setLocalErrors((prev) => ({
+                              ...prev,
+                              category: "",
+                            }));
                           }
                         }}
                         className={`group w-full h-[36px] px-3 flex items-center justify-between cursor-pointer text-xs transition-colors ${
@@ -1024,14 +1051,13 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
               disabled={isSubmitting}
               className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 text-sm font-urbanist text-[#162766] placeholder:text-[#9aa1b2] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438] disabled:opacity-50"
             />
- 
           </div>
         )}
 
         {currentStep === 3 && (
           <div className="space-y-2 animate-fadeIn">
             <p className="text-sm text-gray-600 mb-2">Review and consent</p>
-            
+
             {/* Consent Checkbox */}
             <div className="text-xs text-[#5a627e] bg-gray-50 p-3 rounded-lg">
               <label className="flex items-start gap-2">
@@ -1068,25 +1094,26 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                     <>
                       <span className="block mt-1">
                         {" "}
-                        to affiliates and/or attorneys to contact me at the number provided
-                        above, even if this number is a wireless number or if I am presently
-                        listed on a Do Not Call list. I understand that I may be contacted by
-                        telephone, email, text message, or mail regarding case options and that
-                        I may be called using automatic dialing equipment. Message and data
-                        rates may apply. My consent does not require purchase. This is legal
-                        advertising.   <button
-                        type="button"
-                        className="text-[#162766] font-bold px-1"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setShowFullConsent(false);
-                        }}
-                      >
-                        Show less
-                      </button>
+                        to affiliates and/or attorneys to contact me at the
+                        number provided above, even if this number is a wireless
+                        number or if I am presently listed on a Do Not Call
+                        list. I understand that I may be contacted by telephone,
+                        email, text message, or mail regarding case options and
+                        that I may be called using automatic dialing equipment.
+                        Message and data rates may apply. My consent does not
+                        require purchase. This is legal advertising.{" "}
+                        <button
+                          type="button"
+                          className="text-[#162766] font-bold px-1"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setShowFullConsent(false);
+                          }}
+                        >
+                          Show less
+                        </button>
                       </span>
-                    
                     </>
                   )}
                 </div>
@@ -1109,10 +1136,11 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                   htmlFor="captchabox-check"
                   className={isSubmitting ? "opacity-50" : ""}
                 >
-                  Please check this box so we know you&apos;re a person and not a computer
+                  Please check this box so we know you&apos;re a person and not
+                  a computer
                 </label>
               </div>
-              
+
               {showCaptcha && (
                 <div className="mt-2">
                   <CustomCaptcha
@@ -1126,7 +1154,7 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
           </div>
         )}
       </div>
-      
+
       {/* Navigation Buttons */}
       <div className="flex gap-2 mt-4">
         {currentStep > 1 && (
@@ -1139,15 +1167,15 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
             Back
           </button>
         )}
-        
+
         <button
           type={currentStep === 3 ? "submit" : "button"}
           onClick={currentStep === 3 ? undefined : handleNext}
           disabled={isSubmitting || (currentStep === 3 && !isFormValid)}
           className={`px-4 py-2.5 text-sm font-semibold rounded-full transition-all flex-1 ${
             currentStep === 3 && !isFormValid
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-[#162766] text-white hover:bg-[#0e1a44] disabled:opacity-50 disabled:cursor-not-allowed'
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-[#162766] text-white hover:bg-[#0e1a44] disabled:opacity-50 disabled:cursor-not-allowed"
           }`}
         >
           {currentStep === 3 ? (
@@ -1177,10 +1205,10 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                 Submitting...
               </span>
             ) : (
-              'Submit Form'
+              "Submit Form"
             )
           ) : (
-            'Continue'
+            "Continue"
           )}
         </button>
       </div>
@@ -1213,7 +1241,7 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
   setOpen,
 }) => {
   const [categoryOpen, setCategoryOpen] = useState(false);
-const [showFullConsent, setShowFullConsent] = useState(false);
+  const [showFullConsent, setShowFullConsent] = useState(false);
 
   return (
     <div className="block lg:hidden w-full bg-white font-sans px-4 py-6">
@@ -1422,10 +1450,10 @@ const [showFullConsent, setShowFullConsent] = useState(false);
                       name === "name" && nameError
                         ? `${name}-error-mobile`
                         : name === "phone" && phoneError
-                        ? `${name}-error-mobile`
-                        : name === "email" && emailError
-                        ? `${name}-error-mobile`
-                        : undefined
+                          ? `${name}-error-mobile`
+                          : name === "email" && emailError
+                            ? `${name}-error-mobile`
+                            : undefined
                     }
                     className="w-full border-2 py-3 bg-transparent transition-colors duration-300
            font-urbanist text-[16px] font-semibold text-[#808080] leading-normal p-3
@@ -1576,71 +1604,72 @@ const [showFullConsent, setShowFullConsent] = useState(false);
               />
 
               <div className="space-y-2 text-[10px] text-[#5a627e]">
-
                 <label className="flex items-start gap-2">
-  <input
-    type="checkbox"
-    name="consent"
-    checked={formData.consent}
-    onChange={handleChange}
-    required
-    className={checkboxClass}
-  />
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    checked={formData.consent}
+                    onChange={handleChange}
+                    required
+                    className={checkboxClass}
+                  />
 
-  <div className="text-[#5a627e] text-[10px] leading-relaxed">
-    {/* Always visible short text */}
-    <span>
-      I agree to the{" "}
-      <span className="text-[#162766] font-bold underline cursor-pointer">
-        Privacy Policy &amp; Disclaimer
-      </span>{" "}
-      and give my express written consent
-    </span>
+                  <div className="text-[#5a627e] text-[10px] leading-relaxed">
+                    {/* Always visible short text */}
+                    <span>
+                      I agree to the{" "}
+                      <span className="text-[#162766] font-bold underline cursor-pointer">
+                        Privacy Policy &amp; Disclaimer
+                      </span>{" "}
+                      and give my express written consent
+                    </span>
 
-    {/* Read more */}
-    {!showFullConsent && (
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setShowFullConsent(true);
-        }}
-        className="ml-1 text-[#162766] font-bold underline"
-      >
-        Read more
-      </button>
-    )}
+                    {/* Read more */}
+                    {!showFullConsent && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setShowFullConsent(true);
+                        }}
+                        className="ml-1 text-[#162766] font-bold underline"
+                      >
+                        Read more
+                      </button>
+                    )}
 
-    {/* Expanded text */}
-    {showFullConsent && (
-      <>
-        <span>
-          {" "}
-          to affiliates and/or attorneys to contact me at the number provided
-          above, even if this number is a wireless number or if I am presently
-          listed on a Do Not Call list. I understand that I may be contacted by
-          telephone, email, text message, or mail regarding case options and that
-          I may be called using automatic dialing equipment. Message and data
-          rates may apply. My consent does not require purchase. This is legal
-          advertising.
-        </span>
+                    {/* Expanded text */}
+                    {showFullConsent && (
+                      <>
+                        <span>
+                          {" "}
+                          to affiliates and/or attorneys to contact me at the
+                          number provided above, even if this number is a
+                          wireless number or if I am presently listed on a Do
+                          Not Call list. I understand that I may be contacted by
+                          telephone, email, text message, or mail regarding case
+                          options and that I may be called using automatic
+                          dialing equipment. Message and data rates may apply.
+                          My consent does not require purchase. This is legal
+                          advertising.
+                        </span>
 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setShowFullConsent(false);
-          }}
-          className="ml-1 text-[#162766] font-bold underline"
-        >
-          Show less
-        </button>
-      </>
-    )}
-  </div>
-</label>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setShowFullConsent(false);
+                          }}
+                          className="ml-1 text-[#162766] font-bold underline"
+                        >
+                          Show less
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </label>
 
                 <div className="flex items-start gap-2 font-opensans text-[12px] font-normal text-[#023437] leading-normal flex-shrink-0">
                   <input
@@ -1762,7 +1791,7 @@ type DesktopLandingProps = {
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => void;
 
   showCaptcha: boolean;
@@ -1821,6 +1850,7 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <div className="hidden lg:flex w-full justify-center bg-white font-sans lg:py-1  lg:px-5 xl:px-10">
       <div
@@ -1843,10 +1873,8 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
       >
         {/* ================= CONTENT GRID ================= */}
         <div className="relative z-10 w-full h-full grid grid-cols-2">
-
           {/* ================= LEFT SIDE ================= */}
           <div className="relative">
-
             {/* ======= Get Your Free Case Review Today BLOCK (POSITIONABLE) ======= */}
             <div
               className="
@@ -1869,52 +1897,54 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
                   mb-8
                 "
               >
-                Get Your Free <span className="text-[#F2C438]">Case Review</span>  Today
+                Get Your Free{" "}
+                <span className="text-[#F2C438]">Case Review</span> Today
               </h1>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <MagnifyingGlassIcon />
                   <p className="text-blue-100 text-[18px] leading-[24px]">
-                    <span className="text-[#F2C438]">Free,</span> Confidential Case Reviews.
+                    <span className="text-[#F2C438]">Free,</span> Confidential
+                    Case Reviews.
                   </p>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <DocumentIcon />
                   <p className="text-blue-100 text-[18px] leading-[24px]">
-                    Serving All <span className="text-[#F2C438]">50 States.</span>
+                    Serving All{" "}
+                    <span className="text-[#F2C438]">50 States.</span>
                   </p>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <MoneyBagIcon />
                   <p className="text-blue-100 text-[18px] leading-[24px]">
-                    <span className="text-[#F2C438]">No Fees</span> Unless You Win.
+                    <span className="text-[#F2C438]">No Fees</span> Unless You
+                    Win.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* ======= STATS CARD (INDEPENDENT) ======= */}
-          <div
-  className="
+            <div
+              className="
     absolute
 
     lg:left-[20%] lg:bottom-[10%] lg:scale-[0.85]
     xl:left-[40%] xl:bottom-[10%] xl:scale-[0.95]
     2xl:left-[38%] 2xl:bottom-[12%] 2xl:scale-[1]
   "
->
-  <PartnerStatsCard />
-</div>
-
-
+            >
+              <PartnerStatsCard />
+            </div>
           </div>
 
           {/* ================= RIGHT SIDE ================= */}
-<div
-  className="
+          <div
+            className="
     relative
     h-full
 
@@ -1929,9 +1959,9 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
 
     2xl:pl-[40%] 2xl:pr-[2%] 2xl:pt-[12%]
   "
->
-<form
-  className="
+          >
+            <form
+              className="
     w-full
     max-w-[460px]
     xl:max-w-[500px]
@@ -1953,374 +1983,377 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
     overflow-y-auto
     modern-scroll
   "
-  onSubmit={handleSubmit}
->
+              onSubmit={handleSubmit}
+            >
+              <input
+                type="hidden"
+                id="xxTrustedFormCertUrl_desktop"
+                name="xxTrustedFormCertUrl"
+                value={certId || ""}
+              />
+              <input
+                type="hidden"
+                id="xxTrustedFormCertToken_desktop"
+                name="xxTrustedFormCertToken"
+                value={tokenUrl || ""}
+              />
+              <input
+                type="hidden"
+                id="xxTrustedFormPingUrl_desktop"
+                name="xxTrustedFormPingUrl"
+                value={pingUrl || ""}
+              />
 
-  <input
-    type="hidden"
-    id="xxTrustedFormCertUrl_desktop"
-    name="xxTrustedFormCertUrl"
-    value={certId || ""}
-  />
-  <input
-    type="hidden"
-    id="xxTrustedFormCertToken_desktop"
-    name="xxTrustedFormCertToken"
-    value={tokenUrl || ""}
-  />
-  <input
-    type="hidden"
-    id="xxTrustedFormPingUrl_desktop"
-    name="xxTrustedFormPingUrl"
-    value={pingUrl || ""}
-  />
-  
-  {/* Header */}
-  <div className="mb-2">
-    <p
-      className="font-semibold text-base md:text-[16px]"
-      style={{
-        fontFamily: '"Noto Serif"',
-        fontWeight: 600,
-        lineHeight: "140%",
-      }}
-    >
-      <span style={{ color: "#162766" }}>Take the </span>
-      <span style={{ color: "#F2C438" }}>First Step</span>
-    </p>
-    
-    {/* Divider Line - Simplified */}
-    <div className="w-full mt-2">
-      <div className="flex items-end w-full">
-        <div className="w-[60px] h-[2px] bg-[#F2C438] flex-shrink-0"></div>
-        <div className="w-full h-[2px] bg-[#DDE6FF] flex-grow"></div>
-      </div>
-    </div>
-  </div>
-  
-  {/* Form Fields */}
-  <div className="space-y-2">
-    {[
-      {
-        name: "name",
-        type: "text",
-        placeholder: "Full Name",
-        required: true,
-      },
-      {
-        name: "phone",
-        type: "tel",
-        placeholder: "Phone Number",
-        required: true,
-      },
-      {
-        name: "email",
-        type: "email",
-        placeholder: "Email Address",
-        required: true,
-      },
-    ].map(({ name, type, placeholder, required }) => (
-      <div key={name} className="mb-1">
-        <input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          value={(formData[name] as string) || ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-          required={required}
-          aria-invalid={
-            (name === "name" && nameError) ||
-            (name === "phone" && phoneError) ||
-            (name === "email" && emailError)
-              ? "true"
-              : "false"
-          }
-          aria-describedby={
-            name === "name" && nameError
-              ? `${name}-error`
-              : name === "phone" && phoneError
-              ? `${name}-error`
-              : name === "email" && emailError
-              ? `${name}-error`
-              : undefined
-          }
-          className="w-full border py-2.5 bg-transparent transition-colors duration-200 
+              {/* Header */}
+              <div className="mb-2">
+                <p
+                  className="font-semibold text-base md:text-[16px]"
+                  style={{
+                    fontFamily: '"Noto Serif"',
+                    fontWeight: 600,
+                    lineHeight: "140%",
+                  }}
+                >
+                  <span style={{ color: "#162766" }}>Take the </span>
+                  <span style={{ color: "#F2C438" }}>First Step</span>
+                </p>
+
+                {/* Divider Line - Simplified */}
+                <div className="w-full mt-2">
+                  <div className="flex items-end w-full">
+                    <div className="w-[60px] h-[2px] bg-[#F2C438] flex-shrink-0"></div>
+                    <div className="w-full h-[2px] bg-[#DDE6FF] flex-grow"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Form Fields */}
+              <div className="space-y-2">
+                {[
+                  {
+                    name: "name",
+                    type: "text",
+                    placeholder: "Full Name",
+                    required: true,
+                  },
+                  {
+                    name: "phone",
+                    type: "tel",
+                    placeholder: "Phone Number",
+                    required: true,
+                  },
+                  {
+                    name: "email",
+                    type: "email",
+                    placeholder: "Email Address",
+                    required: true,
+                  },
+                ].map(({ name, type, placeholder, required }) => (
+                  <div key={name} className="mb-1">
+                    <input
+                      name={name}
+                      type={type}
+                      placeholder={placeholder}
+                      value={(formData[name] as string) || ""}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      required={required}
+                      aria-invalid={
+                        (name === "name" && nameError) ||
+                        (name === "phone" && phoneError) ||
+                        (name === "email" && emailError)
+                          ? "true"
+                          : "false"
+                      }
+                      aria-describedby={
+                        name === "name" && nameError
+                          ? `${name}-error`
+                          : name === "phone" && phoneError
+                            ? `${name}-error`
+                            : name === "email" && emailError
+                              ? `${name}-error`
+                              : undefined
+                      }
+                      className="w-full border py-2.5 bg-transparent transition-colors duration-200 
             font-urbanist text-sm font-normal leading-normal px-3
             text-[#808080]
             placeholder:text-[#808080] placeholder:font-urbanist 
             placeholder:text-sm placeholder:font-normal placeholder:leading-normal
             border-[#D0D5DD] rounded-lg disabled:opacity-50
             focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438]"
-        />
-        {name === "name" && nameError && (
-          <p
-            id={`${name}-error`}
-            className="text-red-500 text-xs mt-0.5"
-            role="alert"
-          >
-            {nameError}
-          </p>
-        )}
-        {name === "phone" && phoneError && (
-          <p
-            id={`${name}-error`}
-            className="text-red-500 text-xs mt-0.5"
-            role="alert"
-          >
-            {phoneError}
-          </p>
-        )}
-        {name === "email" && emailError && (
-          <p
-            id={`${name}-error`}
-            className="text-red-500 text-xs mt-0.5"
-            role="alert"
-          >
-            {emailError}
-          </p>
-        )}
-      </div>
-    ))}
-    
-    {/* Category Dropdown */}
-    <div className="relative mb-1">
-      <button
-        type="button"
-        onClick={() => setCategoryOpen((v) => !v)}
-        className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 flex items-center justify-between text-sm font-urbanist text-[#808080] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438]"
-      >
-        <span className={formData.category ? "text-[#162766]" : "text-[#808080]"}>
-          {formData.category || "Select Your Concern"}
-        </span>
-        <span className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#F5C844] shrink-0">
-          <ChevronDownIcon
-            className={`w-3 h-3 text-black transition-transform ${
-              categoryOpen ? "rotate-180" : ""
-            }`}
-          />
-        </span>
-      </button>
+                    />
+                    {name === "name" && nameError && (
+                      <p
+                        id={`${name}-error`}
+                        className="text-red-500 text-xs mt-0.5"
+                        role="alert"
+                      >
+                        {nameError}
+                      </p>
+                    )}
+                    {name === "phone" && phoneError && (
+                      <p
+                        id={`${name}-error`}
+                        className="text-red-500 text-xs mt-0.5"
+                        role="alert"
+                      >
+                        {phoneError}
+                      </p>
+                    )}
+                    {name === "email" && emailError && (
+                      <p
+                        id={`${name}-error`}
+                        className="text-red-500 text-xs mt-0.5"
+                        role="alert"
+                      >
+                        {emailError}
+                      </p>
+                    )}
+                  </div>
+                ))}
 
-      {categoryOpen && (
-        <div className="absolute z-20 mt-1 w-full rounded-lg border border-[#E8E9F0] bg-white shadow-lg overflow-hidden">
-          {categories.map((item) => {
-            const isSelected = formData.category === item;
-            return (
-              <button
-                type="button"
-                key={item}
-                onClick={() => {
-                  handleChange({
-                    target: { name: "category", value: item },
-                  } as React.ChangeEvent<HTMLInputElement>);
-                  setCategoryOpen(false);
-                }}
-                className={`group w-full h-[36px] px-3 flex items-center justify-between cursor-pointer text-xs transition-colors ${
-                  isSelected
-                    ? "bg-[#162766] text-white"
-                    : "text-[#162766] hover:bg-[#162766] hover:text-white"
-                }`}
-              >
-                <span className="truncate">{item}</span>
-                <span
-                  className={`text-[#F2C438] transition-opacity duration-150 ${
-                    isSelected
-                      ? "opacity-100"
-                      : "opacity-0 group-hover:opacity-100"
-                  }`}
+                {/* Category Dropdown */}
+                <div className="relative mb-1">
+                  <button
+                    type="button"
+                    onClick={() => setCategoryOpen((v) => !v)}
+                    className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 flex items-center justify-between text-sm font-urbanist text-[#808080] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438]"
+                  >
+                    <span
+                      className={
+                        formData.category ? "text-[#162766]" : "text-[#808080]"
+                      }
+                    >
+                      {formData.category || "Select Your Concern"}
+                    </span>
+                    <span className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#F5C844] shrink-0">
+                      <ChevronDownIcon
+                        className={`w-3 h-3 text-black transition-transform ${
+                          categoryOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </span>
+                  </button>
+
+                  {categoryOpen && (
+                    <div className="absolute z-20 mt-1 w-full rounded-lg border border-[#E8E9F0] bg-white shadow-lg overflow-hidden">
+                      {categories.map((item) => {
+                        const isSelected = formData.category === item;
+                        return (
+                          <button
+                            type="button"
+                            key={item}
+                            onClick={() => {
+                              handleChange({
+                                target: { name: "category", value: item },
+                              } as React.ChangeEvent<HTMLInputElement>);
+                              setCategoryOpen(false);
+                            }}
+                            className={`group w-full h-[36px] px-3 flex items-center justify-between cursor-pointer text-xs transition-colors ${
+                              isSelected
+                                ? "bg-[#162766] text-white"
+                                : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                            }`}
+                          >
+                            <span className="truncate">{item}</span>
+                            <span
+                              className={`text-[#F2C438] transition-opacity duration-150 ${
+                                isSelected
+                                  ? "opacity-100"
+                                  : "opacity-0 group-hover:opacity-100"
+                              }`}
+                            >
+                              ✓
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* How Can We Help */}
+                <input
+                  name="caseHistory"
+                  value={(formData.caseHistory as string) || ""}
+                  onChange={handleChange}
+                  placeholder="How Can We Help?"
+                  disabled={isSubmitting}
+                  className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 text-sm font-urbanist text-[#162766] placeholder:text-[#9aa1b2] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438] disabled:opacity-50"
+                />
+              </div>
+
+              {/* Checkboxes - Two Columns Layout */}
+              <div className="mt-3 space-y-2">
+                {/* First Checkbox - Full Width */}
+
+                {/* Second Checkbox - Privacy Policy */}
+                <div className="text-xs text-[#5a627e]">
+                  <label className="flex items-start gap-2">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleChange}
+                      required
+                      className="mt-0.5 w-3.5 h-3.5 text-[#162766] border-[#D0D5DD] rounded focus:ring-[#F2C438]"
+                    />
+                    <div className="leading-tight">
+                      <span>
+                        I agree to the{" "}
+                        <span className="text-[#162766] font-bold underline cursor-pointer">
+                          Privacy Policy &amp; Disclaimer
+                        </span>{" "}
+                        and give my express written consent
+                      </span>
+                      {!showFullConsent && (
+                        <button
+                          type="button"
+                          className="text-[#162766] font-bold px-1"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setShowFullConsent(true);
+                          }}
+                        >
+                          Read more
+                        </button>
+                      )}
+                      {showFullConsent && (
+                        <>
+                          <span>
+                            {" "}
+                            to affiliates and/or attorneys to contact me at the
+                            number provided above, even if this number is a
+                            wireless number or if I am presently listed on a Do
+                            Not Call list. I understand that I may be contacted
+                            by telephone, email, text message, or mail regarding
+                            case options and that I may be called using
+                            automatic dialing equipment. Message and data rates
+                            may apply. My consent does not require purchase.
+                            This is legal advertising.
+                          </span>
+
+                          <button
+                            type="button"
+                            className="text-[#162766] font-bold px-1 inline"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setShowFullConsent(false);
+                            }}
+                          >
+                            Show less
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </label>
+                </div>
+
+                {/* Captcha Checkbox - Inline with text */}
+                <div className="flex items-center gap-2 text-xs text-[#5a627e]">
+                  <input
+                    id="captchabox-check"
+                    name="captchaCheck"
+                    type="checkbox"
+                    checked={showCaptcha || false}
+                    onChange={handleChange}
+                    disabled={isSubmitting}
+                    className="w-3.5 h-3.5 text-[#162766] border-[#D0D5DD] rounded focus:ring-[#F2C438] disabled:opacity-50"
+                  />
+                  <label
+                    htmlFor="captchabox-check"
+                    className={isSubmitting ? "opacity-50" : ""}
+                  >
+                    Please check this box so we know you&apos;re a person and
+                    not a computer
+                  </label>
+                </div>
+
+                {/* Captcha Component */}
+                {showCaptcha && (
+                  <div className="mt-2">
+                    <CustomCaptcha
+                      onCaptchaChange={onCaptchaChange}
+                      resetTrigger={resetTrigger}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={!isFormValid || isSubmitting}
+                  className="w-full bg-[#162766] text-white font-semibold py-2.5 rounded-full transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed mt-3"
                 >
-                  ✓
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        aria-label="Loading"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Submitting...
+                    </span>
+                  ) : (
+                    "Get Started"
+                  )}
+                </button>
+              </div>
 
-    {/* How Can We Help */}
-    <input
-      name="caseHistory"
-      value={(formData.caseHistory as string) || ""}
-      onChange={handleChange}
-      placeholder="How Can We Help?"
-      disabled={isSubmitting}
-      className="w-full h-[38px] border border-[#D0D5DD] rounded-lg bg-white px-3 text-sm font-urbanist text-[#162766] placeholder:text-[#9aa1b2] transition-colors focus:outline-none focus:ring-1 focus:ring-[#F2C438] focus:border-[#F2C438] disabled:opacity-50"
-    />
-  </div>
-
-  {/* Checkboxes - Two Columns Layout */}
-  <div className="mt-3 space-y-2">
-    {/* First Checkbox - Full Width */}
- 
-    
-    {/* Second Checkbox - Privacy Policy */}
-    <div className="text-xs text-[#5a627e]">
-      <label className="flex items-start gap-2">
-        <input
-          type="checkbox"
-          name="consent"
-          checked={formData.consent}
-          onChange={handleChange}
-          required
-          className="mt-0.5 w-3.5 h-3.5 text-[#162766] border-[#D0D5DD] rounded focus:ring-[#F2C438]"
-        />
-        <div className="leading-tight">
-          <span>
-            I agree to the{" "}
-            <span className="text-[#162766] font-bold underline cursor-pointer">
-              Privacy Policy &amp; Disclaimer
-            </span>{" "}
-            and give my express written consent
-          </span>
-          {!showFullConsent && (
-            <button
-              type="button"
-              className="text-[#162766] font-bold px-1"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setShowFullConsent(true);
-              }}
-            >
-              Read more
-            </button>
-          )}
-        {showFullConsent && (
-  <>
-    <span>
-      {" "}
-      to affiliates and/or attorneys to contact me at the number provided above,
-      even if this number is a wireless number or if I am presently listed on a
-      Do Not Call list. I understand that I may be contacted by telephone, email,
-      text message, or mail regarding case options and that I may be called using
-      automatic dialing equipment. Message and data rates may apply. My consent
-      does not require purchase. This is legal advertising.
-    </span>
-
-    <button
-      type="button"
-      className="text-[#162766] font-bold px-1 inline"
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setShowFullConsent(false);
-      }}
-    >
-      Show less
-    </button>
-  </>
-)}
-
-        </div>
-      </label>
-    </div>
-
-    {/* Captcha Checkbox - Inline with text */}
-    <div className="flex items-center gap-2 text-xs text-[#5a627e]">
-      <input
-        id="captchabox-check"
-        name="captchaCheck"
-        type="checkbox"
-        checked={showCaptcha || false}
-        onChange={handleChange}
-        disabled={isSubmitting}
-        className="w-3.5 h-3.5 text-[#162766] border-[#D0D5DD] rounded focus:ring-[#F2C438] disabled:opacity-50"
-      />
-      <label
-        htmlFor="captchabox-check"
-        className={isSubmitting ? "opacity-50" : ""}
-      >
-        Please check this box so we know you&apos;re a person and not a computer
-      </label>
-    </div>
-
-    {/* Captcha Component */}
-    {showCaptcha && (
-      <div className="mt-2">
-        <CustomCaptcha
-          onCaptchaChange={onCaptchaChange}
-          resetTrigger={resetTrigger}
-          disabled={isSubmitting}
-        />
-      </div>
-    )}
-
-    {/* Submit Button */}
-    <button
-      type="submit"
-      disabled={!isFormValid || isSubmitting}
-      className="w-full bg-[#162766] text-white font-semibold py-2.5 rounded-full transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed mt-3"
-    >
-      {isSubmitting ? (
-        <span className="flex items-center justify-center">
-          <svg
-            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            aria-label="Loading"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            ></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-          Submitting...
-        </span>
-      ) : (
-        "Get Started"
-      )}
-    </button>
-  </div>
-
-  {/* Success Dialog */}
-  {successDialogOpen && (
-    <div
-      className="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-[9999] p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Success message"
-    >
-      <button
-        type="button"
-        onClick={() => {
-          if (setSuccessDialogOpen) setSuccessDialogOpen(false);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            if (setSuccessDialogOpen) setSuccessDialogOpen(false);
-          }
-        }}
-        className="absolute inset-0 w-full h-full"
-        aria-label="Close success dialog"
-      ></button>
-      <div className="relative max-w-sm w-full">
-        <Image
-          src="/thankyoucard.png"
-          alt="Success"
-          width={600}
-          height={400}
-          className="w-full h-auto object-contain rounded-lg"
-        />
-      </div>
-    </div>
-  )}
-</form>
-</div>
-
-
+              {/* Success Dialog */}
+              {successDialogOpen && (
+                <div
+                  className="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-[9999] p-4"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Success message"
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (setSuccessDialogOpen) setSuccessDialogOpen(false);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (setSuccessDialogOpen) setSuccessDialogOpen(false);
+                      }
+                    }}
+                    className="absolute inset-0 w-full h-full"
+                    aria-label="Close success dialog"
+                  ></button>
+                  <div className="relative max-w-sm w-full">
+                    <Image
+                      src="/thankyoucard.png"
+                      alt="Success"
+                      width={600}
+                      height={400}
+                      className="w-full h-auto object-contain rounded-lg"
+                    />
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -2352,7 +2385,7 @@ const LandingPageContactus: React.FC<{
       consent: false,
       needHelp: true,
     }),
-    []
+    [],
   );
 
   const [formData, setFormData] = useState<FormDataType>(initialData);
@@ -2382,7 +2415,7 @@ const LandingPageContactus: React.FC<{
       }
 
       setPhoneError((prev) =>
-        prev === nextPhoneError ? prev : nextPhoneError
+        prev === nextPhoneError ? prev : nextPhoneError,
       );
 
       setFormData((prev) => {
@@ -2407,7 +2440,7 @@ const LandingPageContactus: React.FC<{
       }
 
       setEmailError((prev) =>
-        prev === nextEmailError ? prev : nextEmailError
+        prev === nextEmailError ? prev : nextEmailError,
       );
 
       setFormData((prev) => {
@@ -2442,7 +2475,7 @@ const LandingPageContactus: React.FC<{
       setNameError((prev) => (prev === nextNameError ? prev : nextNameError));
 
       setFormData((prev) =>
-        prev.name === cleaned ? prev : { ...prev, name: cleaned }
+        prev.name === cleaned ? prev : { ...prev, name: cleaned },
       );
     } catch (error) {
       console.error("Error handling name change:", error);
@@ -2454,7 +2487,7 @@ const LandingPageContactus: React.FC<{
     (
       e: React.ChangeEvent<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
+      >,
     ) => {
       try {
         const target = e.target as
@@ -2499,7 +2532,7 @@ const LandingPageContactus: React.FC<{
         console.error("Error handling form change:", error);
       }
     },
-    [handleNameChange, handlePhoneChange, handleEmailChange, submitMessage]
+    [handleNameChange, handlePhoneChange, handleEmailChange, submitMessage],
   );
 
   const onCaptchaChange = useCallback((valid: boolean) => {
@@ -2597,7 +2630,7 @@ const LandingPageContactus: React.FC<{
         const startObserving = () => {
           try {
             const trustedFormFields = document.querySelectorAll(
-              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]'
+              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]',
             );
 
             trustedFormFields.forEach((field) => {
@@ -2655,94 +2688,104 @@ const LandingPageContactus: React.FC<{
     };
   }, []);
 
- const handleSubmit = useCallback(
-  async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!isFormValid || isSubmitting) return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!isFormValid || isSubmitting) return;
 
-    setIsSubmitting(true);
-    setSubmitMessage(null);
+      setIsSubmitting(true);
+      setSubmitMessage(null);
 
-    try {
-      const rawPhone = formData.phone?.replace(/\D/g, "") || "";
+      try {
+        const rawPhone = formData.phone?.replace(/\D/g, "") || "";
 
-      const apiBody = {
-        countryName: "USA",
-        brandName: "C2A",
-        websiteName: "Connect 2 Attorney",
-        formname: "Contact Us Form",
-        sourceUrl: getSourceUrl(),
-        data: {
-          name: formData.name,
-          email: formData.email,
-          phone: `+1${rawPhone}`,
-          caseType: formData.category,
-          description: formData.caseHistory,
-          state: formData.state || "",
-          ipAddress: await getIPAddress(),
-          trustedFormCertUrl: certId || "",
-          trustedFormToken: tokenUrl || "",
-          trustedFormPingUrl: pingUrl || "",
-          submissionDate: new Date().toISOString(),
-          pageSource: getSourceUrl(),
-        },
-      };
+        const apiBody = {
+          countryName: "USA",
+          brandName: "C2A",
+          websiteName: "Connect 2 Attorney",
+          formname: "Contact Us Form",
+          sourceUrl: getSourceUrl(),
+          data: {
+            name: formData.name,
+            email: formData.email,
+            phone: `+1${rawPhone}`,
+            caseType: formData.category,
+            description: formData.caseHistory,
+            state: formData.state || "",
+            ipAddress: await getIPAddress(),
+            trustedFormCertUrl: certId || "",
+            trustedFormToken: tokenUrl || "",
+            trustedFormPingUrl: pingUrl || "",
+            submissionDate: new Date().toISOString(),
+            pageSource: getSourceUrl(),
+          },
+        };
 
-      // 1️⃣ CRM — MUST SUCCEED
-      const crmRes = await fetch(
-        "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(apiBody),
+        // 1️⃣ CRM — MUST SUCCEED
+        const crmRes = await fetch(
+          "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(apiBody),
+          },
+        );
+
+        if (!crmRes.ok) {
+          const text = await crmRes.text();
+          throw new Error("CRM failed: " + text);
         }
-      );
 
-      if (!crmRes.ok) {
-        const text = await crmRes.text();
-        throw new Error("CRM failed: " + text);
+        // 2️⃣ EMAILJS — MUST SUCCEED
+        await sendWithEmailJS(apiBody);
+
+        // ✅ SUCCESS
+        setFormData(initialData);
+        setSuccessDialogOpen(true);
+        setShowCaptcha(false);
+        setCaptchaValid(false);
+        setResetTrigger((t) => !t);
+        setPhoneError("");
+        setEmailError("");
+        setNameError("");
+
+        setSubmitMessage({
+          type: "success",
+          text: "Form submitted successfully! You will receive a confirmation email shortly.",
+        });
+      } catch (error) {
+        console.error("❌ Submission error:", error);
+
+        setSubmitMessage({
+          type: "error",
+          text: "There was an error submitting your form. Please try again.",
+        });
+      } finally {
+        setIsSubmitting(false);
       }
+    },
+    [
+      isFormValid,
+      isSubmitting,
+      formData,
+      certId,
+      tokenUrl,
+      pingUrl,
+      initialData,
+    ],
+  );
+const router = useRouter();
 
-      // 2️⃣ EMAILJS — MUST SUCCEED
-      await sendWithEmailJS(apiBody);
+useEffect(() => {
+  if (!successDialogOpen) return;
 
-      // ✅ SUCCESS
-      setFormData(initialData);
-      setSuccessDialogOpen(true);
-      setShowCaptcha(false);
-      setCaptchaValid(false);
-      setResetTrigger((t) => !t);
-      setPhoneError("");
-      setEmailError("");
-      setNameError("");
+  const timer = setTimeout(() => {
+    router.refresh(); // re-fetch server data
+    // or router.push("/")
+  }, 2000);
 
-      setSubmitMessage({
-        type: "success",
-        text: "Form submitted successfully! You will receive a confirmation email shortly.",
-      });
-    } catch (error) {
-      console.error("❌ Submission error:", error);
-
-      setSubmitMessage({
-        type: "error",
-        text: "There was an error submitting your form. Please try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  },
-  [
-    isFormValid,
-    isSubmitting,
-    formData,
-    certId,
-    tokenUrl,
-    pingUrl,
-    initialData,
-  ]
-);
-
-
+  return () => clearTimeout(timer);
+}, [successDialogOpen, router]);
   return (
     <>
       <MobileLanding

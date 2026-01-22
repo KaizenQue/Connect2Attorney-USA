@@ -680,7 +680,7 @@ const MobileLanding = () => {
             </button>
           </div>
 
-          <div className="mt-10  min-[360px]:mt-20 min-[375px]:mt-7 min-[390px]:mt-12 min-[400px]:mt-18 min-[425px]:mt-[90px] md:mt-[230px] ">
+          <div className="mt-10  min-[360px]:mt-20 min-[375px]:mt-8 min-[390px]:mt-12 min-[400px]:mt-18 min-[425px]:mt-[90px] md:mt-[230px] ">
             <div className="flex justify-end">
               <div className="flex justify-end relative">
                 <div
@@ -951,7 +951,7 @@ const TabletLanding = ({
   setOpen,
 }: TabletLandingProps) => {
   return (
-    <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-8">
+    <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-25 ">
       <div className="relative w-full h-[500px] rounded-4xl">
         {/* HPR BACKGROUND */}
         <Image

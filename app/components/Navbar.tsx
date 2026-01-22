@@ -252,7 +252,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                     dropdownRefs.current[link.label] = el;
                   }}
                   className="
-                    fixed left-0 right-0 top-[70px] 
+                    fixed left-0 right-0 top-[68px] 
                     bg-[#F5F6F8] text-[#162766]
                     p-4 sm:p-6 z-50 rounded-b-2xl
                   "

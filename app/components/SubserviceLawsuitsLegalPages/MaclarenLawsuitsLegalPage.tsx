@@ -376,7 +376,7 @@ const LawsuitsLegalPage = () => {
         }
       `}</style>
       {/* Page Container */}
-      <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
+      <div className="mx-auto px-4 sm:px-6 md:px-8 py-2 lg:py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-4">
           <TableOfContents items={MACLAREN_TOC} />
@@ -755,7 +755,7 @@ const LawsuitsLegalPage = () => {
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}
-            <div className="mb-24">
+            <div className="mb-15 md:mb-10 lg:mb-10">
               <h2
                 id={content.sectionIds.stepsTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4"
@@ -785,7 +785,7 @@ const LawsuitsLegalPage = () => {
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
-                <div className="h-48">
+                {/* <div className="h-48">
                   <Image
                     src="/americanlawcourt.svg"
                     alt="Courthouse"
@@ -793,7 +793,7 @@ const LawsuitsLegalPage = () => {
                     width={400}
                     height={200}
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6 text-white">
                   <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">

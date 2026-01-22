@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-
 export const content = {
   sectionIds: {
     mainTitle: "main-title",
@@ -93,69 +92,69 @@ export const content = {
     },
   ],
 
-whoQualifies: [
-  {
-    description:
-      "Review your medical history to determine your eligibility to file an Ozempic lawsuit claim.",
-  },
-  {
-    description:
-      "Gather medical records, prescriptions, and supporting evidence to build your case.",
-  },
-  {
-    description:
-      "File your lawsuit within all applicable legal deadlines and statute of limitations requirements.",
-  },
-  {
-    description:
-      "Pursue compensation for medical bills, lost income, pain and suffering, and other damages.",
-  },
-  {
-    description:
-      "Navigate the MDL process and participate in potential settlement negotiations or trial proceedings.",
-  },
-],
+  whoQualifies: [
+    {
+      description:
+        "Review your medical history to determine your eligibility to file an Ozempic lawsuit claim.",
+    },
+    {
+      description:
+        "Gather medical records, prescriptions, and supporting evidence to build your case.",
+    },
+    {
+      description:
+        "File your lawsuit within all applicable legal deadlines and statute of limitations requirements.",
+    },
+    {
+      description:
+        "Pursue compensation for medical bills, lost income, pain and suffering, and other damages.",
+    },
+    {
+      description:
+        "Navigate the MDL process and participate in potential settlement negotiations or trial proceedings.",
+    },
+  ],
 
- compensation: [
-  {
-    title: "Medical Expenses",
-    description:
-      "Reimbursement for hospital visits, medications, and surgeries needed to treat Ozempic-related health complications.",
-  },
-  {
-    title: "Lost Wages",
-    description:
-      "Compensation for time missed from work due to severe side effects and ongoing medical treatments.",
-  },
-  {
-    title: "Pain and Suffering",
-    description:
-      "Financial awards for physical pain, emotional distress, and diminished quality of life.",
-  },
-  {
-    title: "Punitive Damages",
-    description:
-      "In cases where the manufacturer is found to have knowingly withheld information about the drug’s risks, additional punitive damages may be awarded.",
-  },
-],
+  compensation: [
+    {
+      title: "Medical Expenses",
+      description:
+        "Reimbursement for hospital visits, medications, and surgeries needed to treat Ozempic-related health complications.",
+    },
+    {
+      title: "Lost Wages",
+      description:
+        "Compensation for time missed from work due to severe side effects and ongoing medical treatments.",
+    },
+    {
+      title: "Pain and Suffering",
+      description:
+        "Financial awards for physical pain, emotional distress, and diminished quality of life.",
+    },
+    {
+      title: "Punitive Damages",
+      description:
+        "In cases where the manufacturer is found to have knowingly withheld information about the drug’s risks, additional punitive damages may be awarded.",
+    },
+  ],
 
-mdllitigationPoints: [
-  {
-    title:"Grouped Cases:",
-    description:
-      "The Ozempic lawsuits have been combined in a federal court case called MDL No. 3094 to handle similar claims in the Eastern District of Pennsylvania.",
-  },
-  {
-    title:"Current Status:",
-    description:
-      "As of December 2025, there are 2,947 lawsuits pending, overseen by Judge Karen Spencer Marston, with timelines for case management being set.",
-  },
-  {
-    title:"Ongoing Filings:",
-    description:
-      "People are continuing to file new Ozempic lawsuits every day, showing that more individuals are coming forward with claims.",
-  },
-],
+  mdllitigationPoints: [
+    {
+      title: "Grouped Cases:",
+      description:
+        "The Ozempic lawsuits have been combined in a federal court case called MDL No. 3094 to handle similar claims in the Eastern District of Pennsylvania.",
+    },
+    {
+      title: "Current Status:",
+      description:
+        "As of December 2025, there are 2,947 lawsuits pending, overseen by Judge Karen Spencer Marston, with timelines for case management being set.",
+    },
+    {
+      title: "Ongoing Filings:",
+      description:
+        "People are continuing to file new Ozempic lawsuits every day, showing that more individuals are coming forward with claims.",
+    },
+  ],
 
   pageContent: {
     mainTitle: "What is an Ozempic Lawsuit?",
@@ -177,15 +176,16 @@ mdllitigationPoints: [
     healthRisksSubtitle: "Health Risks Linked to Ozempic Use ",
     healthRisksSubtitle2:
       "Reported health risks associated with Ozempic include: ",
-    whoQualifiesTitle: "How Can an Ozempic Lawyer Help You Recover Compensation? ",
+    whoQualifiesTitle:
+      "How Can an Ozempic Lawyer Help You Recover Compensation? ",
     whoQualifiesParagraph:
       "Many users of Ozempic or similar drugs have developed severe digestive issues like gastroparesis after using them for weight loss or diabetes. Lawsuits claim that manufacturers like Novo Nordisk and Eli Lilly failed to warn about these risks",
     whoQualifiesSubtitle: "An experienced Ozempic lawyer can help you: ",
-mdllitigationTitle:
-  "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
+    mdllitigationTitle:
+      "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
 
-mdllitigationParagraph:
-  "Individuals are filing Ozempic lawsuits against Novo Nordisk due to gastroparesis and other serious gastrointestinal injuries. These cases have been consolidated into a federal multidistrict litigation (MDL) to streamline proceedings.",
+    mdllitigationParagraph:
+      "Individuals are filing Ozempic lawsuits against Novo Nordisk due to gastroparesis and other serious gastrointestinal injuries. These cases have been consolidated into a federal multidistrict litigation (MDL) to streamline proceedings.",
 
     compensationTitle: "What Compensation Can You Seek?",
     compensationParagraph:
@@ -202,8 +202,7 @@ mdllitigationParagraph:
 
   ctaContent: {
     title: "Were You Affected? ",
-    description:
-      "You may be entitled to compensation. ",
+    description: "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -227,20 +226,32 @@ mdllitigationParagraph:
         "If eligible, sign a legal agreement. Your attorney will handle all legal formalities.",
     },
   ],
-  
 };
 const OZEMPIC_TOC = [
-   { label: "What is an Ozempic Lawsuit?", id: "main-title" },
-    { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
-    { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
-    { label: "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?", id: "mdl-litigation-title" },
-    { label: "How Can an Ozempic Lawyer Help You Recover Compensation?", id: "who-qualifies-title" },
-    { label: "What Compensation Can You Seek?", id: "compensation-title" },
-    { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
-    { label: "How to File an Ozempic Lawsuit with Connect2Attorney?", id: "steps-title" },
-    { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
-    { label: "Get Legal Support from Connect2Attorney ", id: "get-legal-support" },
-    { label: "FAQs", id: "faq-section" },
+  { label: "What is an Ozempic Lawsuit?", id: "main-title" },
+  { label: "Who is Eligible to File a Claim?", id: "allegations-title" },
+  { label: "What are the Side Effects of Ozempic?", id: "health-risks-title" },
+  {
+    label:
+      "What Is the Current Status of the Ozempic Lawsuit and MDL Litigation?",
+    id: "mdl-litigation-title",
+  },
+  {
+    label: "How Can an Ozempic Lawyer Help You Recover Compensation?",
+    id: "who-qualifies-title",
+  },
+  { label: "What Compensation Can You Seek?", id: "compensation-title" },
+  { label: "Real Stories Behind Ozempic Lawsuit", id: "real-stories-title" },
+  {
+    label: "How to File an Ozempic Lawsuit with Connect2Attorney?",
+    id: "steps-title",
+  },
+  { label: "Ozempic Lawsuit Timeline", id: "timeline-section" },
+  {
+    label: "Get Legal Support from Connect2Attorney ",
+    id: "get-legal-support",
+  },
+  { label: "FAQs", id: "faq-section" },
 ];
 const LawsuitsLegalPage = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -308,14 +319,13 @@ const LawsuitsLegalPage = () => {
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
         <div className="lg:hidden mb-10 shadow-md">
           <TableOfContents items={OZEMPIC_TOC} />
-
         </div>
         <div className="flex flex-col lg:flex-row gap-18">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
-           <h1
-  id={content.sectionIds.mainTitle}
-  className="
+            <h1
+              id={content.sectionIds.mainTitle}
+              className="
     font-noto-serif
     font-normal
     capitalize
@@ -332,15 +342,16 @@ const LawsuitsLegalPage = () => {
 
     mb-6
   "
->
-  {content.pageContent.mainTitle}
-</h1>
+            >
+              {content.pageContent.mainTitle}
+            </h1>
 
-            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1">
               <p>{content.pageContent.mainParagraphs[0]}</p>
+                <br  className="lg:hidden"/>
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
-              <br/>
+              <br />
 
               <h3 className=" font-bold">
                 {content.pageContent.mainParagraphs[2]}
@@ -382,8 +393,8 @@ const LawsuitsLegalPage = () => {
                 </li>
               ))}
             </ul>
-              <br/>
-              <br/>
+            <br />
+            <br />
 
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
@@ -422,51 +433,42 @@ const LawsuitsLegalPage = () => {
                   </div>
                 ))}
               </div>
-    
-    
-        <h2
-  id={content.sectionIds.mdllitigationTitle}
-  className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
->
-  {content.pageContent.mdllitigationTitle}
-</h2>
 
-<p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
-  {content.pageContent.mdllitigationParagraph}
-</p>
+              <h2
+                id={content.sectionIds.mdllitigationTitle}
+                className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
+              >
+                {content.pageContent.mdllitigationTitle}
+              </h2>
 
-<ul className="space-y-3 mb-8 whitespace-pre-line">
-  {content.mdllitigationPoints.map((item, index) => (
-    <li key={index} className="flex items-start gap-3">
-      {/* Custom bullet */}
-      <span className="mt-[7px] shrink-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-        >
-          <circle cx="7" cy="7" r="7" fill="#162766" />
-        </svg>
-      </span>
+              <p className="mb-4 font-poppins font-normal text-[#425777] text-[16px] lg:text-[18px] leading-[27px]">
+                {content.pageContent.mdllitigationParagraph}
+              </p>
 
-      {/* Text */}
-      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-        <span className="font-bold">
-          {item.title}
-        </span>{" "}
-        <span className="font-normal">
-          {item.description}
-        </span>
-      </span>
-    </li>
-  ))}
-</ul>
+              <ul className="space-y-3 mb-8 whitespace-pre-line">
+                {content.mdllitigationPoints.map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    {/* Custom bullet */}
+                    <span className="mt-[7px] shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <circle cx="7" cy="7" r="7" fill="#162766" />
+                      </svg>
+                    </span>
 
-
-
-
+                    {/* Text */}
+                    <span className="font-urbanist text-[#425777] text-[16px] lg:text-[18px] leading-[27px]">
+                      <span className="font-bold">{item.title}</span>{" "}
+                      <span className="font-normal">{item.description}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
               <div className="bg-[#162766] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
                 <h2
@@ -482,8 +484,6 @@ const LawsuitsLegalPage = () => {
                     .slice(2)
                     .join(" ")}
                 </h2>
-
-         
 
                 <p className="mb-4 font-urbanist font-bold text-[#F9F9F9] text-[16px] sm:text-[18px] leading-[24px] sm:leading-[27px]">
                   {content.pageContent.whoQualifiesSubtitle}
@@ -590,7 +590,7 @@ const LawsuitsLegalPage = () => {
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}
-            <div className="mb-24">
+            <div className="mb-15 md:mb-10 lg:mb-10">
               <h2
                 id={content.sectionIds.stepsTitle}
                 className="font-noto-serif font-normal text-[#162766] text-[30px] md:text-[40px] capitalize mb-4"
@@ -620,7 +620,7 @@ const LawsuitsLegalPage = () => {
               }`}
             >
               <div className="bg-[#162766] rounded-lg shadow-xl">
-                <div className="h-48">
+                {/* <div className="h-48">
                   <Image
                     src="/americanlawcourt.svg"
                     alt="Courthouse"
@@ -628,7 +628,7 @@ const LawsuitsLegalPage = () => {
                     width={400}
                     height={200}
                   />
-                </div>
+                </div> */}
 
                 <div className="p-6 text-white">
                   <h3 className="font-noto-serif font-medium text-white  text-center text-[26px] leading-normal capitalize mb-3">
@@ -647,7 +647,6 @@ const LawsuitsLegalPage = () => {
               </div>
               <div className="mb-8">
                 <TableOfContents items={OZEMPIC_TOC} />
-
               </div>
             </div>
           </aside>
@@ -696,7 +695,6 @@ const StepsComponent = () => {
         >
           {/* TOP ROW: BADGE + TITLE */}
           <div className="flex items-start gap-4">
-            
             {/* STEP BADGE (Figma Perfect) */}
             <div
               className="

@@ -50,6 +50,7 @@ export const ozempicTimelineData: TimelineData = {
   },
 
   "2023": {
+    firstHalf: [],
     secondHalf: [
       { date: "August 1", text: "A 44-year-old woman filed one of the first Ozempic lawsuits alleging gastroparesis." },
       { date: "September 1", text: "Ozempic’s warning label was updated to include ileus and intestinal blockages." },

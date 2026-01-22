@@ -913,7 +913,7 @@ const handleSubmit = async () => {
       },
     };
 
-    console.log("🚀 FINAL API BODY:", apiBody);
+    // console.log("FINAL API BODY:", apiBody);
 
     // =====================================================
     // 1 CRM (AZURE) — MUST SUCCEED
@@ -931,7 +931,7 @@ const handleSubmit = async () => {
       }
     } catch (err) {
       console.error("❌ CRM FAILED:", err);
-      alert("Submission failed. Please try again.");
+      // alert("Submission failed. Please try again.");
       return;
     }
     // =====================================================
@@ -951,7 +951,7 @@ const handleSubmit = async () => {
         }
       } catch (err) {
         console.error("❌ WEBHOOK FAILED:", err);
-        alert("Submission failed. Please try again.");
+        // alert("Submission failed. Please try again.");
         return;
       }
     }
@@ -963,7 +963,7 @@ const handleSubmit = async () => {
       await sendWithEmailJS(apiBody);
     } catch (err) {
       console.error("❌ EMAILJS FAILED:", err);
-      alert("Submission failed. Please try again.");
+      // alert("Submission failed. Please try again.");
       return;
     }
 
@@ -976,7 +976,7 @@ const handleSubmit = async () => {
     setStep(4);
   } catch (e) {
     console.error("❌ UNEXPECTED ERROR:", e);
-    alert("Something went wrong. Please try again.");
+    // alert("Something went wrong. Please try again.");
   } finally {
     setIsSubmitting(false);
   }

@@ -889,7 +889,7 @@ const TableOfContents = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lg:mt-6 w-full">
+      <div className="lg:mt-6 mt-4 w-full">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}

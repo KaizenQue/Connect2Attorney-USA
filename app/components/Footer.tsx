@@ -66,9 +66,8 @@ type BaseLink = {
 };
 
 const Footer = () => {
-  
   // Data for links to keep JSX clean
-  const quickLinks : BaseLink[] = [
+  const quickLinks: BaseLink[] = [
     { name: "Home", href: "#", active: true },
     { name: "About Us", href: "/about-us" },
     { name: "Contact Us", href: "/contact-us" },
@@ -78,42 +77,44 @@ const Footer = () => {
     { name: "Blog", href: "#" },
   ];
 
-const massTort: BaseLink[] = [
-  { name: "Ozempic  ", href: "/mass-tort/ozempic-lawsuit" },
-  { name: "Mesothelioma  ", href: "/mass-tort/mesothelioma-lawsuit" },
-  { name: "Depo-Provera  ", href: "/mass-tort/depo-provera-lawsuit" },
-  { name: "Roundup Cancer  ", href: "/mass-tort/roundup-lawsuit" },
-  { name: "Talcum Powder  ", href: "/mass-tort/talcum-lawsuit" },
-  { name: "See All", href: "/mass-tort", highlight: true },
+  const massTort: BaseLink[] = [
+    { name: "Ozempic  ", href: "/mass-tort/ozempic-lawsuit" },
+    { name: "Mesothelioma  ", href: "/mass-tort/mesothelioma-lawsuit" },
+    { name: "Depo-Provera  ", href: "/mass-tort/depo-provera-lawsuit" },
+    { name: "Roundup Cancer  ", href: "/mass-tort/roundup-lawsuit" },
+    { name: "Talcum Powder  ", href: "/mass-tort/talcum-lawsuit" },
+    { name: "See All", href: "/mass-tort", highlight: true },
   ];
 
-const classAction: BaseLink[] = [
- {
-    name: "Tesla Autopilot Recall  ",
-    href: "/class-action/tesla-autopilot-recall-lawsuit",
-  },
-  {
-    name: "MacLaren Sexual Abuse  ",
-    href: "/class-action/maclaren-hall-sex-abuse-lawsuit",
-  },  ];
+  const classAction: BaseLink[] = [
+    {
+      name: "Tesla Autopilot Recall  ",
+      href: "/class-action/tesla-autopilot-recall-lawsuit",
+    },
+    {
+      name: "MacLaren Sexual Abuse  ",
+      href: "/class-action/maclaren-hall-sex-abuse-lawsuit",
+    },
+  ];
 
-const personalInjury: BaseLink[] = [
-     {
-    name: "Sexual Abuse  ",
-    href: "/personal-injury/sexual-abuse-lawsuit",
-  },
-  {
-    name: "Motor Vehicle Accident  ",
-    href: "/personal-injury/motor-vehicle-accident-lawsuit",
-  },
-  {
-    name: "Slip and Fall Injury  ",
-    href: "/personal-injury/slip-and-fall-injury-lawsuit",
-  },
-  {
-    name: "18-Wheeler Accident  ",
-    href: "/personal-injury/18-wheeler-lawsuit",
-  },
+  const personalInjury: BaseLink[] = [
+    {
+      name: "Sexual Abuse  ",
+      href: "/personal-injury/sexual-abuse-lawsuit",
+    },
+    {
+      name: "Motor Vehicle Accident  ",
+      href: "/personal-injury/motor-vehicle-accident-lawsuit",
+    },
+    {
+      name: "Slip and Fall Injury  ",
+      href: "/personal-injury/slip-and-fall-injury-lawsuit",
+    },
+    {
+      name: "18-Wheeler Accident  ",
+      href: "/personal-injury/18-wheeler-lawsuit",
+    },
+    { name: "See All", href: "/personal-injury", highlight: true },
   ];
 
   return (
@@ -133,18 +134,15 @@ const personalInjury: BaseLink[] = [
               />
             </div>
 
-            <p
-              className="text-[#FFFFFF] font-urbanist font-normal mb-8 text-[14px] leading-normal md:text-base opacity-80 lg:text-[14px] lg:text-left md:text-left text-center"
-              
-            >
+            <p className="text-[#FFFFFF] font-urbanist font-normal mb-8 text-[14px] leading-normal md:text-base opacity-80 lg:text-[14px] lg:text-left md:text-left text-center">
               Connect2Attorney helps victims connect with trusted U.S. lawyers
               for mass torts, class actions, & personal injury cases to claim
               justice and compensation.
             </p>
 
             {/* Desktop/Tablet Social Icons (Hidden on Mobile) */}
-<div
-  className="
+            <div
+              className="
     hidden
     lg:grid
     grid-cols-4
@@ -152,67 +150,39 @@ const personalInjury: BaseLink[] = [
     w-full
     max-w-[270px]
   "
->
-
+            >
               <SocialIcon href="#">
-                  <Image 
+                <Image
                   src="/linkedin.svg"
                   alt="Bluesky"
                   width={44}
                   height={44}
-                  />
+                />
               </SocialIcon>
               <SocialIcon href="#">
-                  <Image 
-                  src="/tiktok.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
+                <Image src="/tiktok.svg" alt="Bluesky" width={44} height={44} />
               </SocialIcon>
               <SocialIcon href="#">
-                 <Image 
-                  src="/yt.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
+                <Image src="/yt.svg" alt="Bluesky" width={44} height={44} />
               </SocialIcon>
               <SocialIcon href="#">
-                 <Image 
-                  src="/blue.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
+                <Image src="/blue.svg" alt="Bluesky" width={44} height={44} />
               </SocialIcon>
-              
+
               <SocialIcon href="#">
-                 <Image 
+                <Image
                   src="/threads.svg"
                   alt="Bluesky"
                   width={44}
                   height={44}
-                  />
+                />
               </SocialIcon>
               <SocialIcon href="#">
-               <Image 
-                  src="/fb.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
+                <Image src="/fb.svg" alt="Bluesky" width={44} height={44} />
               </SocialIcon>
               <SocialIcon href="#">
-                 <Image 
-                  src="/istg.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
+                <Image src="/istg.svg" alt="Bluesky" width={44} height={44} />
               </SocialIcon>
-
-            
             </div>
           </div>
 
@@ -222,9 +192,9 @@ const personalInjury: BaseLink[] = [
             <NavSection title="QUICK LINKS">
               {quickLinks.map((link, idx) => (
                 <li key={idx}>
-               <a
-  href={link.href}
-  className={`
+                  <a
+                    href={link.href}
+                    className={`
     font-urbanist
     text-[14px]
     md:text-[16px]
@@ -232,16 +202,11 @@ const personalInjury: BaseLink[] = [
     leading-[18px]
     transition-colors
     hover:text-[#ffc845]
-    ${
-      link.active
-        ? "text-white opacity-100"
-        : "text-white opacity-80"
-    }
+    ${link.active ? "text-white opacity-100" : "text-white opacity-80"}
   `}
->
-  {link.name}
-</a>
-
+                  >
+                    {link.name}
+                  </a>
                 </li>
               ))}
             </NavSection>
@@ -298,13 +263,21 @@ const personalInjury: BaseLink[] = [
             {/* Personal Injury */}
             <NavSection title="PERSONAL INJURY">
               {personalInjury.map((link, idx) => (
-                <li key={idx}>
+ <li
+                  key={idx}
+                  className={`${link.mobileOnly ? "md:hidden" : ""}`}
+                >
                   <a
                     href={link.href}
-                    className="text-gray-300 font-urbanist font-normal transition-colors hover:text-[#ffc845] text-sm md:text-base"
+                    className={`font-urbanist transition-colors hover:text-[#ffc845] text-sm md:text-base ${
+                      link.highlight
+                        ? "text-[#ffc845] font-semibold"
+                        : "text-white opacity-80"
+                    } ${link.highlight ? "" : "font-normal"}`}
                     style={{
                       lineHeight: "24px",
                       letterSpacing: "0px",
+                      fontWeight: link.highlight ? "600" : "400",
                     }}
                   >
                     {link.name}
@@ -314,22 +287,20 @@ const personalInjury: BaseLink[] = [
             </NavSection>
 
             {/* Mobile Social Section (Hidden on Tablet/Desktop) */}
-           
           </div>
-           
         </div>
 
         <div className="md:block lg:hidden mt-2 max-w-[70%] md:max-w-[40%]">
-              <h3
-                className="font-noto-serif font-normal text-[#ffc845] mb-4 text-[20px] md:text-lg lg:text-lg"
-                style={{
-                  letterSpacing: "0px",
-                }}
-              >
-                SOCIAL
-              </h3>
-<div
-  className="
+          <h3
+            className="font-noto-serif font-normal text-[#ffc845] mb-4 text-[20px] md:text-lg lg:text-lg"
+            style={{
+              letterSpacing: "0px",
+            }}
+          >
+            SOCIAL
+          </h3>
+          <div
+            className="
     grid
     grid-cols-4
     sm:grid-cols-5
@@ -337,112 +308,70 @@ const personalInjury: BaseLink[] = [
     justify-items-start
     
   "
->
-                <SocialIcon href="#">
-                  <Image 
-                  src="/linkedin.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              <SocialIcon href="#">
-                  <Image 
-                  src="/tiktok.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              <SocialIcon href="#">
-                 <Image 
-                  src="/yt.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              <SocialIcon href="#">
-                 <Image 
-                  src="/blue.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              
+          >
+            <SocialIcon href="#">
+              <Image src="/linkedin.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/tiktok.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/yt.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/blue.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
 
-              
-              <SocialIcon href="#">
-                 <Image 
-                  src="/threads.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              <SocialIcon href="#">
-               <Image 
-                  src="/fb.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
-              <SocialIcon href="#">
-                 <Image 
-                  src="/istg.svg"
-                  alt="Bluesky"
-                  width={44}
-                  height={44}
-                  />
-              </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/threads.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/fb.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon href="#">
+              <Image src="/istg.svg" alt="Bluesky" width={44} height={44} />
+            </SocialIcon>
+          </div>
+        </div>
 
-               
-              </div>
+        {/* MOBILE FOOTER BOTTOM */}
+        <div className="md:hidden">
+          <hr className="my-4 h-px bg-[#F0F2F4] opacity-50 border-0" />
+
+          <div className="flex flex-col items-center gap-5">
+            <div className="flex w-full justify-between px-2">
+              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+                Privacy Policy
+              </a>
+              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+                Disclaimer
+              </a>
+              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+                Sitemap
+              </a>
+            </div>
+          </div>
+
+          <hr className="my-4 h-px bg-[#F0F2F4] opacity-50 border-0" />
+
+          <div className="text-center font-urbanist text-white text-[12px] font-normal leading-[18px] tracking-[0.6px]">
+            © 2025 Connect2Attorney.{" "}
+            <span className="text-white/50">All Rights Reserved.</span>
+          </div>
+        </div>
+        {/* DESKTOP FOOTER BOTTOM */}
+        <div className="hidden md:block">
+          <hr className="border-white/10 my-6" />
+
+          <div className="flex justify-between items-center gap-5">
+            <div className="text-left font-urbanist text-white text-[15px] font-normal leading-[18px] tracking-[0.75px]">
+              © 2025 Connect2Attorney.{" "}
+              <span className="text-white/50">All Rights Reserved.</span>
             </div>
 
-      {/* MOBILE FOOTER BOTTOM */}
-<div className="md:hidden">
-  <hr className="my-4 h-px bg-[#F0F2F4] opacity-50 border-0" />
-
-  <div className="flex flex-col items-center gap-5">
-    <div className="flex w-full justify-between px-2">
-      <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
-        Privacy Policy
-      </a>
-      <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
-        Disclaimer
-      </a>
-      <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
-        Sitemap
-      </a>
-    </div>
-  </div>
-
-  <hr className="my-4 h-px bg-[#F0F2F4] opacity-50 border-0" />
-
-  <div className="text-center font-urbanist text-white text-[12px] font-normal leading-[18px] tracking-[0.6px]">
-    © 2025 Connect2Attorney.{" "}
-    <span className="text-white/50">All Rights Reserved.</span>
-  </div>
-</div>
-{/* DESKTOP FOOTER BOTTOM */}
-<div className="hidden md:block">
-  <hr className="border-white/10 my-6" />
-
-  <div className="flex justify-between items-center gap-5">
- <div className="text-left font-urbanist text-white text-[15px] font-normal leading-[18px] tracking-[0.75px]">
-  © 2025 Connect2Attorney.{" "}
-  <span className="text-white/50">
-    All Rights Reserved.
-  </span>
-</div>
-
-
-    <div className="flex gap-8">
-    <a
-  className="
+            <div className="flex gap-8">
+              <a
+                className="
     font-urbanist
     text-white
     text-[15px]
@@ -451,12 +380,12 @@ const personalInjury: BaseLink[] = [
     tracking-[0.75px]
     text-right
   "
->
-  Sitemap
-</a>
+              >
+                Sitemap
+              </a>
 
-      <a
-  className="
+              <a
+                className="
     font-urbanist
     text-white
     text-[15px]
@@ -465,12 +394,12 @@ const personalInjury: BaseLink[] = [
     tracking-[0.75px]
     text-right
   "
->
-  Privacy Policy
-</a>
+              >
+                Privacy Policy
+              </a>
 
-      <a
-  className="
+              <a
+                className="
     font-urbanist
     text-white
     text-[15px]
@@ -479,15 +408,12 @@ const personalInjury: BaseLink[] = [
     tracking-[0.75px]
     text-right
   "
->
-  Disclaimer
-</a>
-
-    </div>
-  </div>
-</div>
-
-        
+              >
+                Disclaimer
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
@@ -503,8 +429,8 @@ const NavSection = ({
   children: React.ReactNode;
 }) => (
   <div>
-  <h3
-  className="
+    <h3
+      className="
     font-noto-serif
     text-[#F2C438]
     text-[20px]
@@ -514,9 +440,9 @@ const NavSection = ({
     uppercase
     mb-4
   "
->
-  {title}
-</h3>
+    >
+      {title}
+    </h3>
 
     <ul className="flex flex-col md:flex-row md:flex-wrap gap-3 md:gap-x-6 lg:gap-x-8 md:gap-y-3 list-none">
       {children}

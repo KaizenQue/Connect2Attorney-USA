@@ -460,7 +460,7 @@ const LawsuitsLegalPage = () => {
               {content.pageContent.causeTitle}
             </h2>
 
-            <p className="mb-4 font-poppins font-normal text-[#425777] text-[18px] leading-[27px]">
+            <p className="mb-4 font-poppins font-normal text-[#425777] text-[16px] lg:text-[18px] leading-[27px]">
               {content.pageContent.causeParagraph}
             </p>
 
@@ -822,7 +822,7 @@ const TableOfContents = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lg:mt-6 w-full">
+    <div className="lg:mt-6 mt-4 w-full">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+
 const MASS_TORT_LAWSUIT_TYPES = [
   { name: "Ozempic Lawsuit", href: "/mass-tort/ozempic-lawsuit" },
   { name: "Mesothelioma Lawsuit", href: "/mass-tort/mesothelioma-lawsuit" },
@@ -42,35 +43,41 @@ const PERSONAL_INJURY_LAWSUIT_TYPES = [
   },
 ];
 
-
 interface DesktopNavbarProps {
   scrolled: boolean;
 }
+
 interface MobileNavbarProps {
   scrolled: boolean;
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: (value: boolean) => void;
 }
 
+
+
+
 const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  // Close dropdown when route changes
+  const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Close dropdown on route change
   useEffect(() => {
     setOpenDropdown(null);
+    setIsHoveringDropdown(false);
   }, [pathname]);
 
-  // Close dropdown when clicking outside
+  // Clean up timeout on unmount
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (openDropdown && !(e.target as Element).closest(".dropdown-parent")) {
-        setOpenDropdown(null);
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [openDropdown]);
+  }, []);
 
   const isActive = (path: string) => {
     if (path === "/" && pathname === "/") return true;
@@ -96,11 +103,55 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
     return [] as { name: string; href: string }[];
   };
 
+  const handleMouseEnterMenu = (label: string) => {
+    // Clear any pending close timeout
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    // Only close if not hovering over dropdown
+    if (!isHoveringDropdown) {
+      closeTimeoutRef.current = setTimeout(() => {
+        setOpenDropdown(null);
+      }, 200); // 200ms delay to reach dropdown
+    }
+  };
+
+  const handleMouseEnterDropdown = (label: string) => {
+    // Clear any pending close timeout
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsHoveringDropdown(true);
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeaveDropdown = () => {
+    setIsHoveringDropdown(false);
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 200); // 200ms delay to return to menu
+  };
+
+  const handleLinkClick = () => {
+    setOpenDropdown(null);
+    setIsHoveringDropdown(false);
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
   return (
     <nav
       className={`
         hidden lg:flex
-        fixed z-50 bg-white  px-4 sm:px-6 py-4
+        fixed z-50 bg-white px-4 sm:px-6 py-4
         shadow-[0_0_24px_rgba(0,0,0,0.10)]
         items-center justify-between transition-colors
         w-full max-w-[calc(100%-2rem)] left-1/2 -translate-x-1/2
@@ -110,7 +161,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
     >
       {/* Left: Logo */}
       <div className="flex-shrink-0">
-        <Link href="/">
+        <Link href="/" onClick={handleLinkClick}>
           <Image
             src="/logotitle.svg"
             alt="Connect2Attorney Logo"
@@ -138,6 +189,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                   ? "text-[#182C5B] font-bold lg:text-[16px]"
                   : "hover:text-[#182C5B] text-[16px]"
               }`}
+              onClick={handleLinkClick}
             >
               {link.label}
             </Link>
@@ -153,6 +205,8 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
             <li
               key={link.href}
               className="relative text-[16px] flex items-center gap-2 dropdown-parent"
+              onMouseEnter={() => handleMouseEnterMenu(link.label)}
+              onMouseLeave={handleMouseLeaveMenu}
             >
               <Link
                 href={link.href}
@@ -161,20 +215,13 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                     ? "text-[#021032] font-bold"
                     : "hover:text-[#182C5B]"
                 }`}
+                onClick={handleLinkClick}
               >
                 {link.label}
               </Link>
 
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setOpenDropdown(isOpen ? null : link.label);
-                }}
-                aria-haspopup="menu"
-                aria-expanded={isOpen}
-                className="flex items-center justify-center"
-              >
+              {/* Arrow (visual only) */}
+              <span className="flex items-center justify-center pointer-events-none">
                 <span
                   className={`w-5 h-5 flex items-center justify-center rounded shadow-md transition-all duration-200
                     ${isOpen ? "bg-[#142A66]" : "bg-[#F2C438]"}
@@ -196,17 +243,21 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </span>
-              </button>
+              </span>
 
-              {/* Full-width Mega Dropdown */}
+              {/* Mega Dropdown */}
               {items.length > 0 && isOpen && (
                 <div
+                  ref={(el) => {
+                    dropdownRefs.current[link.label] = el;
+                  }}
                   className="
                     fixed left-0 right-0 top-[70px] 
                     bg-[#F5F6F8] text-[#162766]
                     p-4 sm:p-6 z-50 rounded-b-2xl
                   "
-                  onClick={(e) => e.stopPropagation()}
+                  onMouseEnter={() => handleMouseEnterDropdown(link.label)}
+                  onMouseLeave={handleMouseLeaveDropdown}
                 >
                   <ul
                     className="
@@ -228,6 +279,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                             transition
                             truncate
                           "
+                          onClick={handleLinkClick}
                         >
                           {item.name}
                         </Link>
@@ -244,10 +296,12 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
           <Link
             href="#"
             className="hover:text-[#182C5B] transition-colors lg:text-[16px]"
+            onClick={handleLinkClick}
           >
             Blogs
           </Link>
         </li>
+
         <li>
           <Link
             href="/contact-us"
@@ -256,6 +310,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
                 ? "text-[#182C5B] font-bold lg:text-[16px]"
                 : "hover:text-[#182C5B] text-[16px]"
             }`}
+            onClick={handleLinkClick}
           >
             Contact Us
           </Link>
@@ -286,8 +341,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
   );
 };
 
-
-
+// Keep the MobileNavbar component exactly the same as before
 const MobileNavbar: React.FC<MobileNavbarProps> = ({
   scrolled,
   isMobileMenuOpen,
@@ -671,7 +725,6 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
   );
 };
 
-
 const Navbar = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -692,7 +745,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="relative w-full  p-4 mb-12 flex flex-col items-center justify-start gap-3 font-['Urbanist'] ">
+    <div className="relative w-full p-4 mb-12 flex flex-col items-center justify-start gap-3 font-['Urbanist'] ">
       <DesktopNavbar scrolled={scrolled} />
       <MobileNavbar 
         scrolled={scrolled}

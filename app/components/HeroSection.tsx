@@ -588,8 +588,9 @@ const MobileLanding = () => {
   const selectedLawsuit = lawsuits[selectedIndex];
   const selectedChartConfig = CHART_CONFIGS[selectedIndex];
   return (
-    <div className="block lg:hidden  w-full bg-white flex flex-col items-stretch justify-center p-0 font-sans">
-      <div className="relative w-full bg-white flex flex-col mt-2">
+<div className="block lg:hidden w-full bg-white font-sans">
+  {/* ================= HERO ================= */}
+  <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[600px]">
         <div
           className="absolute top-0 inset-x-0 mx-[15px] lg:hidden  aspect-357/358 md:aspect-357/260"
           style={{
@@ -615,30 +616,32 @@ const MobileLanding = () => {
           <div className="absolute inset-0 bg-[#162766]/60" />
         </div>
 
-        <div
-          className="absolute top-0 inset-x-0 mx-[15px] lg:hidden hidden md:block  aspect-357/358 md:aspect-357/260"
-          style={{
-            WebkitMaskImage: "url(/tabtophero.png)",
-            WebkitMaskRepeat: "no-repeat",
-            WebkitMaskSize: "100% 100%",
-            maskImage: "url(/tabtophero.png)",
-            maskRepeat: "no-repeat",
-            maskSize: "100% 100%",
-          }}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/herovideo.mp4" type="video/mp4" />
-          </video>
+       {/* Masked video background */}
+<div
+  className="absolute inset-x-0 top-0 mx-[15px] aspect-[357/358] sm:aspect-[357/260]"
+  style={{
+    WebkitMaskImage: "url(/HPL.png)",
+    WebkitMaskRepeat: "no-repeat",
+    WebkitMaskSize: "100% 100%",
+    maskImage: "url(/HPL.png)",
+    maskRepeat: "no-repeat",
+    maskSize: "100% 100%",
+  }}
+>
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="metadata"
+    className="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/herovideo.mp4" type="video/mp4" />
+  </video>
 
-          <div className="absolute inset-0 bg-[#162766]/60" />
-        </div>
+  <div className="absolute inset-0 bg-[#162766]/60" />
+</div>
+
 
         <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-10 min-[360px]:bottom-52 min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
           <Image
@@ -934,7 +937,7 @@ const MobileLanding = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

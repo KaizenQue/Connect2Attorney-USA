@@ -304,21 +304,38 @@ const LawsuitsLegalPage = () => {
         }
       `}</style>
       {/* Page Container */}
-      <div className="mx-auto px-4 sm:px-6 md:px-8 py-12">
+      <div className="mx-auto px-2 sm:px-2 md:px-8 py-1 md:py-8">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
-        <div className="lg:hidden mb-4">
+        <div className="lg:hidden mb-10 shadow-md">
           <TableOfContents items={OZEMPIC_TOC} />
 
         </div>
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-18">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
-            <h1
-              id={content.sectionIds.mainTitle}
-              className="font-noto-serif font-normal capitalize text-[#162766] text-[30px] md:text-[40px] leading-[36px] mb-6"
-            >
-              {content.pageContent.mainTitle}
-            </h1>
+           <h1
+  id={content.sectionIds.mainTitle}
+  className="
+    font-noto-serif
+    font-normal
+    capitalize
+    text-[#162766]
+
+    text-[24px]
+    leading-[30px]
+
+    md:text-[32px]
+    md:leading-[38px]
+
+    lg:text-[40px]
+    lg:leading-[48px]
+
+    mb-6
+  "
+>
+  {content.pageContent.mainTitle}
+</h1>
+
             <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
               <p>{content.pageContent.mainParagraphs[0]}</p>
 

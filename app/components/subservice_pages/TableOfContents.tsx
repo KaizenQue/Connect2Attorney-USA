@@ -26,13 +26,13 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
     <div className="mt-6 w-full">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full h-[60px] flex items-center justify-between px-4 rounded-xl border border-[#d9e0ff] bg-white"
+        className="w-full h-[60px] flex items-center justify-between px-4 rounded-xl border border-[#d9e0ff] bg-tranparent "
       >
         <span className="text-[#162766] font-urbanist text-[20px] font-bold">
           Table of Contents
         </span>
 
-        <span className="w-8 h-8 rounded-lg bg-[#162766] text-white flex items-center justify-center">
+        <span className="w-8 h-8 rounded-lg md:bg-[#162766] bg-[#F2C338] md:text-white text-bg-[#162766]  flex items-center justify-center">
           {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </span>
       </button>
@@ -47,7 +47,7 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
                   scrollToSection(item.id);
                   setOpen(false);
                 }}
-                className="px-4 py-3.5 bg-white rounded-lg text-[#162766] font-urbanist text-[15px] font-medium cursor-pointer hover:bg-[#eef1ff] transition"
+                className="px-4 py-3.5  rounded-lg md:text-[#F2C338] text-[#162766] font-urbanist text-[15px] font-medium cursor-pointer hover:bg-[#eef1ff] transition"
               >
                 {item.label}
               </div>

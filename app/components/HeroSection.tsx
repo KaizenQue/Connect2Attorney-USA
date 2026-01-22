@@ -1234,7 +1234,7 @@ const DesktopLandingHeroCompact = ({
     min-[1280px]:left-[5.25rem]
     min-[1440px]:left-[9.5rem]
     2xl:left-[12.5rem]
-    px-20 lg:px-10
+    px-20 lg:px-20
     flex flex-col justify-start
     h-full pt-14
   "

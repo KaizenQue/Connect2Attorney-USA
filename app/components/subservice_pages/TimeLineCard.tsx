@@ -10,18 +10,21 @@ interface TimeLineCardProps {
   defaultYear?: string;
 }
 
-const TimeLineCard = ({ title, timelineData, defaultYear }: TimeLineCardProps) => {
-const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
+const TimeLineCard = ({
+  title,
+  timelineData,
+  defaultYear,
+}: TimeLineCardProps) => {
+  const years = Object.keys(timelineData).sort((a, b) => Number(b) - Number(a));
 
   const latestYear = years[0];
 
-const [activeYear, setActiveYear] = useState<string>(() => {
-  if (defaultYear && timelineData[defaultYear]) {
-    return defaultYear;
-  }
-  return latestYear;
-});
-
+  const [activeYear, setActiveYear] = useState<string>(() => {
+    if (defaultYear && timelineData[defaultYear]) {
+      return defaultYear;
+    }
+    return latestYear;
+  });
 
   const [isFirstHalfOpen, setIsFirstHalfOpen] = useState(true);
   const [isSecondHalfOpen, setIsSecondHalfOpen] = useState(false);
@@ -34,8 +37,8 @@ const [activeYear, setActiveYear] = useState<string>(() => {
   const data = timelineData[activeYear];
 
   if (!data) return null;
-const glassBtn =
-  "backdrop-blur-md bg-white/10 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/15 hover:border-white/40 transition-all duration-300";
+  const glassBtn =
+    "backdrop-blur-md bg-white/10 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] hover:bg-white/15 hover:border-white/40 transition-all duration-300";
 
   return (
     <section className="w-full bg-[#0E1B4D] text-white overflow-hidden">
@@ -45,25 +48,25 @@ const glassBtn =
           {title}
         </h2>
 
-<div className="relative inline-flex rounded-full border border-white/20 lg:mb-8 lg:mt-2">
-  {/* OUTER GLASS STROKE */}
-  <div
-    className="absolute inset-0 rounded-full pointer-events-none"
-    style={{
-      padding: "0.7px",
-      background:
-        "linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 65%, rgba(255,255,255,0) 82%)",
-      WebkitMask:
-        "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-      WebkitMaskComposite: "xor",
-      maskComposite: "exclude",
-      boxShadow: "0 7.564px 11.346px -2.269px rgba(0,0,0,0.10)",
-    }}
-  />
+        <div className="relative inline-flex rounded-full border border-white/20 lg:mb-8 lg:mt-2">
+          {/* OUTER GLASS STROKE */}
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              padding: "0.7px",
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 65%, rgba(255,255,255,0) 82%)",
+              WebkitMask:
+                "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+              boxShadow: "0 7.564px 11.346px -2.269px rgba(0,0,0,0.10)",
+            }}
+          />
 
-  {/* SOFT INNER GLOW */}
-  <div
-    className="
+          {/* SOFT INNER GLOW */}
+          <div
+            className="
       pointer-events-none
       absolute inset-[1px]
       rounded-full
@@ -73,11 +76,11 @@ const glassBtn =
       to-transparent
       opacity-40
     "
-  />
+          />
 
-  {/* MAIN SHELL */}
-  <div
-    className="
+          {/* MAIN SHELL */}
+          <div
+            className="
       relative
       rounded-full
       w-full
@@ -86,10 +89,10 @@ const glassBtn =
       flex items-center justify-center
       p-[3px] sm:p-[4px]
     "
-  >
-    {/* INNER GLASS PILL */}
-    <div
-      className="
+          >
+            {/* INNER GLASS PILL */}
+            <div
+              className="
         relative
         inline-flex
         items-center
@@ -101,10 +104,10 @@ const glassBtn =
         shadow-[inset_0_0_0.5px_rgba(255,255,255,0.35)]
         flex-wrap sm:flex-nowrap
       "
-    >
-      {/* INNER HIGHLIGHT */}
-      <div
-        className="
+            >
+              {/* INNER HIGHLIGHT */}
+              <div
+                className="
           pointer-events-none
           absolute inset-[1px]
           rounded-full
@@ -114,13 +117,13 @@ const glassBtn =
           to-transparent
           opacity-40
         "
-      />
+              />
 
-      {years.map((year) => (
-        <button
-          key={year}
-          onClick={() => setActiveYear(year)}
-          className={`
+              {years.map((year) => (
+                <button
+                  key={year}
+                  onClick={() => setActiveYear(year)}
+                  className={`
             relative z-10
             px-3 sm:px-5 md:px-6
             py-1.5 sm:py-2 md:py-2.5
@@ -136,14 +139,13 @@ const glassBtn =
                 : "bg-[#162766] text-white hover:brightness-110"
             }
           `}
-        >
-          {year}
-        </button>
-      ))}
-    </div>
-  </div>
-</div>
-
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ================= FIRST HALF ================= */}
@@ -163,14 +165,14 @@ const glassBtn =
                 e.stopPropagation();
                 setIsFirstHalfOpen(false);
               }}
-className={`w-10 h-10 flex items-center justify-center rounded-[10px]
+              className={`w-10 h-10 flex items-center justify-center rounded-[10px]
            ${glassBtn}
            motion-safe:hover:scale-105 motion-safe:active:scale-95`}
             >
               <X size={16} className="text-[#F2C438]" />
             </button>
           ) : (
-            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow border border-[#FFF]" >
+            <div className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F2C338] shadow border border-[#FFF]">
               <ChevronDown size={18} stroke="#162766" strokeWidth={3} />
             </div>
           )}
@@ -178,7 +180,9 @@ className={`w-10 h-10 flex items-center justify-center rounded-[10px]
 
         <div
           className={`grid transition-all duration-500 ease-in-out ${
-            isFirstHalfOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            isFirstHalfOpen
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
           }`}
         >
           <div className="overflow-hidden px-4 sm:px-6 py-6 bg-[#162766]">
@@ -188,9 +192,11 @@ className={`w-10 h-10 flex items-center justify-center rounded-[10px]
               }`}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-                {data.firstHalf.map((item, i) => (
+                {data.firstHalf?.map((item, i) => (
                   <div key={i}>
-                    <p className="text-[#F2C438] font-semibold mb-1">{item.date}</p>
+                    <p className="text-[#F2C438] font-semibold mb-1">
+                      {item.date}
+                    </p>
                     <p className="text-white/80">{item.text}</p>
                   </div>
                 ))}
@@ -217,7 +223,7 @@ className={`w-10 h-10 flex items-center justify-center rounded-[10px]
                 e.stopPropagation();
                 setIsSecondHalfOpen(false);
               }}
-className={`w-10 h-10 flex items-center justify-center rounded-[10px]
+              className={`w-10 h-10 flex items-center justify-center rounded-[10px]
            ${glassBtn}
            motion-safe:hover:scale-105 motion-safe:active:scale-95`}
             >
@@ -232,7 +238,9 @@ className={`w-10 h-10 flex items-center justify-center rounded-[10px]
 
         <div
           className={`grid transition-all duration-500 ease-in-out ${
-            isSecondHalfOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            isSecondHalfOpen
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
           }`}
         >
           <div className="overflow-hidden px-4 sm:px-6 py-6 bg-[#162766]">
@@ -242,9 +250,11 @@ className={`w-10 h-10 flex items-center justify-center rounded-[10px]
               }`}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-                {data.secondHalf.map((item, i) => (
+                {data.secondHalf?.map((item, i) => (
                   <div key={i}>
-                    <p className="text-[#F2C438] font-semibold mb-1">{item.date}</p>
+                    <p className="text-[#F2C438] font-semibold mb-1">
+                      {item.date}
+                    </p>
                     <p className="text-white/80">{item.text}</p>
                   </div>
                 ))}

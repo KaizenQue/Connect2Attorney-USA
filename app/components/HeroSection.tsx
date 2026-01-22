@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -27,8 +27,7 @@ import {
   BlueShapeSVG,
   LightShapeSVG,
   LightShapeSVGExpanded,
-
-} from "./homecomponents/svg"
+} from "./homecomponents/svg";
 
 /* ================= TYPES ================= */
 type ChartConfig = {
@@ -66,7 +65,6 @@ type GridItem = {
   label: string;
   value: string;
 };
-
 
 /* ================= SUBCOMPONENTS ================= */
 const GlassCard = ({
@@ -186,12 +184,14 @@ const DataGridCompactExtend = ({
   grid: { label: string; value: string }[];
 }) => (
   <div className="w-full lg:mt-1 xl:mt-2">
-    <p className="
+    <p
+      className="
       text-[#162766] font-urbanist font-semibold mb-1 lg:mb-1.5 xl:mb-2 pl-1
       lg:text-[13px]
       xl:text-[14px]
       2xl:text-[15px]
-    ">
+    "
+    >
       Case Summary
     </p>
 
@@ -218,21 +218,25 @@ const DataGridCompactExtend = ({
             2xl:w-[95px] 2xl:min-h-[78px] 2xl:gap-3
           "
         >
-          <p className="
+          <p
+            className="
             text-[#808080] font-urbanist font-medium leading-none
             lg:text-[9px]
             xl:text-[11px]
             2xl:text-[12px]
-          ">
+          "
+          >
             {item.label}
           </p>
 
-          <p className="
+          <p
+            className="
             text-[#162766] font-urbanist font-semibold leading-none
             lg:text-[11px]
             xl:text-[13px]
             2xl:text-[14px]
-          ">
+          "
+          >
             {item.value}
           </p>
         </div>
@@ -469,8 +473,6 @@ const GlassCardCompactLG = ({
   );
 };
 
-
-
 const DataGridCompactLG = ({ grid }: { grid: GridItem[] }) => (
   <div className="w-full">
     <div className="grid grid-cols-3 gap-x-[6px] gap-y-[6px]">
@@ -501,9 +503,6 @@ const DataGridCompactLG = ({ grid }: { grid: GridItem[] }) => (
   </div>
 );
 
-
-
-
 const scrollToNextSection = () => {
   const el = document.getElementById("next-section");
   if (!el) return;
@@ -513,9 +512,6 @@ const scrollToNextSection = () => {
 
   window.scrollTo({ top: y, behavior: "smooth" });
 };
-
-
-
 
 /* ================= MOBILE ================= */
 const MobileLanding = () => {
@@ -574,11 +570,11 @@ const MobileLanding = () => {
 
   const nextSlide = () =>
     setCurrentSlide((prev: number) =>
-      prev === slides.length - 1 ? 0 : prev + 1
+      prev === slides.length - 1 ? 0 : prev + 1,
     );
   const prevSlide = () =>
     setCurrentSlide((prev: number) =>
-      prev === 0 ? slides.length - 1 : prev - 1
+      prev === 0 ? slides.length - 1 : prev - 1,
     );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -640,7 +636,7 @@ const MobileLanding = () => {
           <div className="absolute inset-0 bg-[#162766]/60" />
         </div>
 
-        <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-10 min-[360px]:bottom-52 min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
+        <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-10 min-[360px]:bottom-12 min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
           <Image
             src="/HPR.png"
             alt="Hero bottom background"
@@ -681,7 +677,7 @@ const MobileLanding = () => {
             </button>
           </div>
 
-          <div className="mt-10 min-[375px]:mt-7 min-[425px]:mt-[90px]  min-[360px]:mt-20 md:mt-[230px] ">
+          <div className="mt-10  min-[360px]:mt-20 min-[375px]:mt-7 min-[390px]:mt-12 min-[400px]:mt-18 min-[425px]:mt-[90px] md:mt-[230px] ">
             <div className="flex justify-end">
               <div className="flex justify-end relative">
                 <div
@@ -939,8 +935,6 @@ const MobileLanding = () => {
   );
 };
 
-
-
 /* ================= TABLET ================= */
 
 const TabletLanding = ({
@@ -954,7 +948,7 @@ const TabletLanding = ({
   setOpen,
 }: TabletLandingProps) => {
   return (
-    <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-15">
+    <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-8">
       <div className="relative w-full h-[500px] rounded-4xl">
         {/* HPR BACKGROUND */}
         <Image
@@ -1231,7 +1225,17 @@ const DesktopLandingHeroCompact = ({
           <source src="/1920x860.mp4" type="video/mp4" />
         </video>
 
-        <div className="relative top-0 z-10 xl:left-30 2xl:left-50 px-20 xl:px-20 flex flex-col justify-start h-full pt-14">
+        <div
+          className="
+    relative top-0 z-10
+    min-[1280px]:left-[5.25rem]
+    min-[1440px]:left-[9.5rem]
+    2xl:left-[12.5rem]
+    px-20 lg:px-10
+    flex flex-col justify-start
+    h-full pt-14
+  "
+        >
           <h1 className="lg:text-[55px] leading-none mb-4">
             <span className="font-[noto-serif] text-[#F2C438] block mb-2">
               Justice
@@ -1257,25 +1261,29 @@ const DesktopLandingHeroCompact = ({
             </button>
           </div>
         </div>
-        
+
         {/* ================= RIGHT SIDE CONTENT CONTAINER ================= */}
         <div className="absolute inset-y-0 -right-1 top-5 z-10 w-[280px]">
           {/* Adjust the left positioning based on your parent container logic */}
-          <div className="
+          <div
+            className="
             -ml-[140px] 
             [@media(min-width:1168px)]:-ml-[120px]
             [@media(min-width:1280px)]:-ml-[100px]
             transition-all duration-300
-          ">
+          "
+          >
             {/* Dropdown Menu */}
-            <div className="absolute top-5 right-4     
+            <div
+              className="absolute top-5 right-4     
             [@media(min-width:1024px)_and_(max-width:1167px)]:right-[18px]
             [@media(min-width:1168px)_and_(max-width:1279px)]:right-[60px]
             [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px]
             [@media(min-width:1440px)_and_(max-width:1535px)]:right-[163px]
             [@media(min-width:1536px)_and_(max-width:1919px)]:right-[225px]
             [@media(min-width:1920px)_and_(max-width:2559px)]:right-[200px]
-            [@media(min-width:2560px)]:right-[280px] w-[280px]">
+            [@media(min-width:2560px)]:right-[280px] w-[280px]"
+            >
               <div
                 className="flex items-center justify-between bg-white rounded-xl shadow-md p-2 pl-4 w-full h-[45px] cursor-pointer"
                 onClick={() => setOpen(!open)}
@@ -1352,14 +1360,16 @@ const DesktopLandingHeroCompact = ({
             </div>
 
             {/* Statistics Card */}
-            <div className="absolute top-18 right-4    
+            <div
+              className="absolute top-18 right-4    
            [@media(min-width:1024px)_and_(max-width:1167px)]:right-[18px]
             [@media(min-width:1168px)_and_(max-width:1279px)]:right-[60px]
             [@media(min-width:1280px)_and_(max-width:1399px)]:right-[100px]
             [@media(min-width:1440px)_and_(max-width:1535px)]:right-[163px]
             [@media(min-width:1536px)_and_(max-width:1919px)]:right-[225px]
             [@media(min-width:1920px)_and_(max-width:2559px)]:right-[200px]
-            [@media(min-width:2560px)]:right-[280px] w-[280px]">
+            [@media(min-width:2560px)]:right-[280px] w-[280px]"
+            >
               <StatisticsCard
                 stats={selectedLawsuit.stats}
                 chartConfig={selectedChartConfig}
@@ -1367,8 +1377,8 @@ const DesktopLandingHeroCompact = ({
             </div>
 
             {/* ================= MINI INFO SLIDER ================= */}
-     <div
-  className="
+            <div
+              className="
   absolute
   w-[280px]
   group
@@ -1397,9 +1407,7 @@ const DesktopLandingHeroCompact = ({
   [@media(min-width:1920px)]:top-80
   [@media(min-width:1920px)]:right-115
 "
-
->
-
+            >
               {/* ===== Header Row ===== */}
               <div className="flex items-center justify-between mb-0 px-1">
                 <p className="text-[#162766] font-urbanist text-[14px] xl:text-[15px] ml-5 font-semibold transition-all duration-300">
@@ -1417,7 +1425,14 @@ const DesktopLandingHeroCompact = ({
                       transition-all
                     "
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#162766" strokeWidth="3">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#162766"
+                      strokeWidth="3"
+                    >
                       <polyline points="15 18 9 12 15 6" />
                     </svg>
                   </button>
@@ -1432,7 +1447,14 @@ const DesktopLandingHeroCompact = ({
                       transition-all
                     "
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#162766" strokeWidth="3">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#162766"
+                      strokeWidth="3"
+                    >
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
                   </button>
@@ -1458,20 +1480,59 @@ const DesktopLandingHeroCompact = ({
                     <div className="w-full flex justify-between gap-[6px]">
                       <div className="transition-all duration-500 delay-[0ms]">
                         <GlassCardCompactLG
-                          icon={<Image src="/handshakeicon.svg" alt="" width={40} height={40} />}
-                          title={<>Free case<br />Review</>}
+                          icon={
+                            <Image
+                              src="/handshakeicon.svg"
+                              alt=""
+                              width={40}
+                              height={40}
+                            />
+                          }
+                          title={
+                            <>
+                              Free case
+                              <br />
+                              Review
+                            </>
+                          }
                         />
                       </div>
                       <div className="transition-all duration-500 delay-[120ms]">
                         <GlassCardCompactLG
-                          icon={<Image src="/scaleicon.svg" alt="" width={40} height={40} />}
-                          title={<>Serving<br />Nationwide</>}
+                          icon={
+                            <Image
+                              src="/scaleicon.svg"
+                              alt=""
+                              width={40}
+                              height={40}
+                            />
+                          }
+                          title={
+                            <>
+                              Serving
+                              <br />
+                              Nationwide
+                            </>
+                          }
                         />
                       </div>
                       <div className="transition-all duration-500 delay-[240ms]">
                         <GlassCardCompactLG
-                          icon={<Image src="/gavelicon.svg" alt="" width={40} height={40} />}
-                          title={<>No Win<br />No Fee</>}
+                          icon={
+                            <Image
+                              src="/gavelicon.svg"
+                              alt=""
+                              width={40}
+                              height={40}
+                            />
+                          }
+                          title={
+                            <>
+                              No Win
+                              <br />
+                              No Fee
+                            </>
+                          }
                         />
                       </div>
                     </div>
@@ -1480,8 +1541,8 @@ const DesktopLandingHeroCompact = ({
               </div>
             </div>
             {/* Scroll Down Button */}
-            <div 
-      className="
+            <div
+              className="
   absolute
   z-50
   scale-90
@@ -1512,8 +1573,6 @@ const DesktopLandingHeroCompact = ({
   [@media(min-width:1920px)]:right-[240px]
   [@media(min-width:1920px)]:bottom-[0px]
 "
-
-
             >
               <button
                 className="lg:w-[190px] h-[87px] text-white px-4 py-3 flex items-center gap-2 hover:scale-[1.08] transition-transform duration-200"
@@ -1619,35 +1678,41 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
           {/* ================= LEFT COLUMN ================= */}
           <div className="flex flex-col justify-center max-w-[720px]">
             <h1 className="leading-none">
-              <span className="
+              <span
+                className="
                 block font-[noto-serif] text-[#F2C438]
                 /* LG adjustments for better fit */
                 lg:text-[48px] lg:mb-[-5px]
                 xl:text-[60px] xl:mb-0
                 2xl:text-[68px]
                 [@media(min-width:1600px)]:text-[76px]
-              ">
+              "
+              >
                 Justice
               </span>
-              <span className="
+              <span
+                className="
                 block font-[noto-serif] text-white
                 /* LG adjustments for better fit */
                 lg:text-[48px]
                 xl:text-[60px]
                 2xl:text-[72px]
                 [@media(min-width:1600px)]:text-[80px]
-              ">
+              "
+              >
                 Starts Here
               </span>
             </h1>
 
-            <p className="
+            <p
+              className="
               text-blue-100 font-light leading-relaxed mt-4
               /* LG text adjustments */
               lg:text-[14px] lg:mt-3 lg:max-w-[360px]
               xl:text-[16px] xl:mt-6 xl:max-w-md
               2xl:text-[17px]
-            ">
+            "
+            >
               Free, confidential case reviews. Serving all 50 states. No fees
               unless you win.
             </p>
@@ -1696,7 +1761,8 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
 
           {/* ================= RIGHT COLUMN ================= */}
           <div className="relative h-full flex items-center justify-end">
-            <div className="
+            <div
+              className="
               relative h-full flex flex-col justify-center
               /* LG width for better fit */
               lg:w-[260px]
@@ -1708,7 +1774,8 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
               lg:right-[-5px]
               xl:right-[-10px]
               2xl:right-[-20px]
-            ">
+            "
+            >
               {/* ===== DROPDOWN ===== */}
               <div className="relative z-30">
                 <div
@@ -1729,11 +1796,13 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                   "
                   onClick={() => setOpen(!open)}
                 >
-                  <span className="
+                  <span
+                    className="
                     text-[#162766] font-bold truncate
                     lg:text-[13px]
                     xl:text-[14px]
-                  ">
+                  "
+                  >
                     {selectedLawsuit.title}
                   </span>
 
@@ -1771,14 +1840,16 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                 </div>
 
                 {open && (
-                  <div className="
+                  <div
+                    className="
                     absolute
                     lg:top-[42px]
                     xl:top-[52px]
                     
                     left-0 bg-white rounded-xl shadow-lg border border-gray-200
                     w-full overflow-hidden z-40
-                  ">
+                  "
+                  >
                     {lawsuits.map((lawsuit, idx) => (
                       <div
                         key={idx}
@@ -1802,14 +1873,16 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
               </div>
 
               {/* ===== CONTENT ===== */}
-              <div className="
+              <div
+                className="
                 flex-1 flex flex-col
                 lg:gap-3
                 xl:gap-4
                 /* Ensure content fills available space */
                 lg:h-[calc(100%-50px)]
                 xl:h-[calc(100%-60px)]
-              ">
+              "
+              >
                 <StatisticsCard
                   stats={selectedLawsuit.stats}
                   chartConfig={selectedChartConfig}
@@ -1842,24 +1915,64 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
           "
         >
           <GlassCardExtend
-            icon={<Image src="/handshakeicon.svg" alt="" width={40} height={40} 
-              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
-            title={<>Free case<br />Review</>}
+            icon={
+              <Image
+                src="/handshakeicon.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="lg:w-8 lg:h-8 xl:w-10 xl:h-10"
+              />
+            }
+            title={
+              <>
+                Free case
+                <br />
+                Review
+              </>
+            }
           />
           <GlassCardExtend
-            icon={<Image src="/scaleicon.svg" alt="" width={40} height={40} 
-              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
-            title={<>Serving<br />Nationwide</>}
+            icon={
+              <Image
+                src="/scaleicon.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="lg:w-8 lg:h-8 xl:w-10 xl:h-10"
+              />
+            }
+            title={
+              <>
+                Serving
+                <br />
+                Nationwide
+              </>
+            }
           />
           <GlassCardExtend
-            icon={<Image src="/gavelicon.svg" alt="" width={40} height={40} 
-              className="lg:w-8 lg:h-8 xl:w-10 xl:h-10" />}
-            title={<>No Win,<br />No Fee</>}
+            icon={
+              <Image
+                src="/gavelicon.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="lg:w-8 lg:h-8 xl:w-10 xl:h-10"
+              />
+            }
+            title={
+              <>
+                No Win,
+                <br />
+                No Fee
+              </>
+            }
           />
         </div>
 
         {/* ================= SCROLL BUTTON ================= */}
-        <div className="
+        <div
+          className="
           absolute bottom-6 right-6 z-30
           
           /* Scale adjustments */
@@ -1869,7 +1982,8 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
           
           origin-bottom-right
           transition-all duration-300
-        ">
+        "
+        >
           <button
             className="
               lg:w-[130px] lg:h-[58px]
@@ -1880,10 +1994,10 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
             "
             onClick={scrollToNextSection}
           >
-            <Image 
-              src="/scrolldown.png" 
-              alt="scroll" 
-              width={180} 
+            <Image
+              src="/scrolldown.png"
+              alt="scroll"
+              width={180}
               height={80}
               className="w-full h-full"
             />
@@ -1894,8 +2008,6 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
   );
 };
 
-
-
 /* ================= LANDING PAGE  ================= */
 const LandingPage = () => {
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
@@ -1904,13 +2016,14 @@ const LandingPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const selectedLawsuit = lawsuits[selectedIndex];
-  const selectedChartConfig = CHART_CONFIGS[selectedIndex];  const [open, setOpen] = useState(false);
+  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const updateDesktop = () => {
       const desktop = window.innerWidth >= 1024;
       setIsDesktop(desktop);
-      
+
       // Update height logic immediately when checking desktop
       if (desktop) {
         setIsTallScreen(window.innerHeight >= 850);
@@ -1977,4 +2090,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-

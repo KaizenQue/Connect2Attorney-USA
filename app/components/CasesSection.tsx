@@ -288,6 +288,8 @@ const CasesSectionCompact: React.FC = () => {
   const activeCases =
     tabCasesCompact[activeTab] ?? tabCasesCompact["Mass Tort"];
 
+  const activeTabIndex = tabs.indexOf(activeTab);
+
   return (
     <div
       className="flex justify-end bg-white font-sans md:my-20"
@@ -413,7 +415,7 @@ const CasesSectionCompact: React.FC = () => {
           className="
     flex md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 
     gap-6 sm:gap-5 lg:gap-10 h-[325px] md:h-auto
-    w-full lg:pl-2 lg:pr-2  lg:pb-0
+    w-full lg:pl-2 lg:pr-2  lg:pb-0 overflow-x-auto scrollbar-hide md:overflow-visible 
    
   "
         >
@@ -430,11 +432,13 @@ const CasesSectionCompact: React.FC = () => {
 
         {/* Mobile dots */}
         <div className="flex md:hidden justify-center gap-2">
-          {activeCases.map((_, idx) => (
+          {tabs.map((_, idx) => (
             <div
               key={idx}
-              className={`rounded-full ${
-                idx === 0 ? "w-8 h-2 bg-[#fcc030]" : "w-2 h-2 bg-white/30"
+              className={`rounded-full transition-all duration-300 ${
+                idx === activeTabIndex
+                  ? "w-8 h-2 bg-[#fcc030]"
+                  : "w-2 h-2 bg-white/40"
               }`}
             />
           ))}
@@ -574,12 +578,22 @@ const CasesSectionExpanded: React.FC = () => {
         {/* Cards */}
         <div
           className="
-    flex
-    md:grid md:grid-cols-2
-    lg:grid lg:grid-cols-4
-    gap-6 sm:gap-5 lg:gap-10
-    w-full lg:pl-2
-    xl:pl-8
+     flex
+    gap-4
+    overflow-x-auto
+    scroll-smooth
+    snap-x snap-mandatory
+    pb-4
+
+    md:grid
+    md:grid-cols-2
+    md:gap-6
+    md:overflow-visible
+    md:snap-none
+
+    lg:grid
+    lg:grid-cols-4
+    lg:gap-10
   "
         >
           {activeCases.map((item) => (

@@ -82,7 +82,7 @@ const Footer = () => {
     { name: "Mesothelioma  ", href: "/mass-tort/mesothelioma-lawsuit" },
     { name: "Depo-Provera  ", href: "/mass-tort/depo-provera-lawsuit" },
     { name: "Roundup Cancer  ", href: "/mass-tort/roundup-lawsuit" },
-    { name: "Talcum Powder  ", href: "/mass-tort/talcum-lawsuit" },
+    { name: "Talcum Powder  ", href: "/mass-tort/talcum-powder-lawsuit" },
     { name: "See All", href: "/mass-tort", highlight: true },
   ];
 
@@ -104,15 +104,15 @@ const Footer = () => {
     },
     {
       name: "Motor Vehicle Accident  ",
-      href: "/personal-injury/motor-vehicle-accident-lawsuit",
+      href: "/personal-injury/motor-vehicle-accident",
     },
     {
       name: "Slip and Fall Injury  ",
-      href: "/personal-injury/slip-and-fall-injury-lawsuit",
+      href: "/personal-injury/slip-and-fall",
     },
     {
       name: "18-Wheeler Accident  ",
-      href: "/personal-injury/18-wheeler-lawsuit",
+      href: "/personal-injury/18-wheeler-accident",
     },
     { name: "See All", href: "/personal-injury", highlight: true },
   ];
@@ -151,37 +151,66 @@ const Footer = () => {
     max-w-[270px]
   "
             >
-              <SocialIcon href="#">
+              <SocialIcon
+                href="https://www.linkedin.com/company/connect2attorney"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src="/linkedin.svg"
-                  alt="Bluesky"
+                  alt="Linkedin"
                   width={44}
                   height={44}
                 />
               </SocialIcon>
-              <SocialIcon href="#">
-                <Image src="/tiktok.svg" alt="Bluesky" width={44} height={44} />
+              <SocialIcon
+                href="https://www.tiktok.com/@connect2attorney?_r=1&_t=ZP-91jqBQ39fbT"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/tiktok.svg" alt="Tiktok" width={44} height={44} />
               </SocialIcon>
-              <SocialIcon href="#">
-                <Image src="/yt.svg" alt="Bluesky" width={44} height={44} />
+              <SocialIcon
+                href="https://www.youtube.com/@connect2attorney-usa"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/yt.svg" alt="Youtube" width={44} height={44} />
               </SocialIcon>
-              <SocialIcon href="#">
-                <Image src="/blue.svg" alt="Bluesky" width={44} height={44} />
-              </SocialIcon>
-
               <SocialIcon href="#">
                 <Image
-                  src="/threads.svg"
-                  alt="Bluesky"
+                  src="/threads.png"
+                  alt="Threads"
                   width={44}
                   height={44}
                 />
               </SocialIcon>
-              <SocialIcon href="#">
-                <Image src="/fb.svg" alt="Bluesky" width={44} height={44} />
+
+              <SocialIcon
+                href="https://x.com/connect2attorn1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/twitter.svg"
+                  alt="twitter"
+                  width={44}
+                  height={44}
+                />
               </SocialIcon>
-              <SocialIcon href="#">
-                <Image src="/istg.svg" alt="Bluesky" width={44} height={44} />
+              <SocialIcon
+                href="https://www.facebook.com/connect2attorney"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/fb.svg" alt="Facebook" width={44} height={44} />
+              </SocialIcon>
+              <SocialIcon
+                href="https://www.instagram.com/connect2attorney/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src="/istg.svg" alt="Instagram" width={44} height={44} />
               </SocialIcon>
             </div>
           </div>
@@ -263,7 +292,7 @@ const Footer = () => {
             {/* Personal Injury */}
             <NavSection title="PERSONAL INJURY">
               {personalInjury.map((link, idx) => (
- <li
+                <li
                   key={idx}
                   className={`${link.mobileOnly ? "md:hidden" : ""}`}
                 >
@@ -309,27 +338,56 @@ const Footer = () => {
     
   "
           >
-            <SocialIcon href="#">
-              <Image src="/linkedin.svg" alt="Bluesky" width={44} height={44} />
+            <SocialIcon
+              href="https://www.linkedin.com/company/connect2attorney"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="/linkedin.svg"
+                alt="Linkedin"
+                width={44}
+                height={44}
+              />
+            </SocialIcon>
+            <SocialIcon
+              href="https://www.tiktok.com/@connect2attorney?_r=1&_t=ZP-91jqBQ39fbT"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/tiktok.svg" alt="Tiktok" width={44} height={44} />
+            </SocialIcon>
+            <SocialIcon
+              href="https://www.youtube.com/@connect2attorney-usa"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/yt.svg" alt="Youtube" width={44} height={44} />
             </SocialIcon>
             <SocialIcon href="#">
-              <Image src="/tiktok.svg" alt="Bluesky" width={44} height={44} />
-            </SocialIcon>
-            <SocialIcon href="#">
-              <Image src="/yt.svg" alt="Bluesky" width={44} height={44} />
-            </SocialIcon>
-            <SocialIcon href="#">
-              <Image src="/blue.svg" alt="Bluesky" width={44} height={44} />
+              <Image src="/threads.png" alt="Threads" width={44} height={44} />
             </SocialIcon>
 
-            <SocialIcon href="#">
-              <Image src="/threads.svg" alt="Bluesky" width={44} height={44} />
+            <SocialIcon
+              href="https://x.com/connect2attorn1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/twitter.svg" alt="twitter" width={44} height={44} />
             </SocialIcon>
-            <SocialIcon href="#">
-              <Image src="/fb.svg" alt="Bluesky" width={44} height={44} />
+            <SocialIcon
+              href="https://www.facebook.com/connect2attorney"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/fb.svg" alt="Facebook" width={44} height={44} />
             </SocialIcon>
-            <SocialIcon href="#">
-              <Image src="/istg.svg" alt="Bluesky" width={44} height={44} />
+            <SocialIcon
+              href="https://www.instagram.com/connect2attorney/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/istg.svg" alt="Instagram" width={44} height={44} />
             </SocialIcon>
           </div>
         </div>
@@ -435,7 +493,7 @@ const NavSection = ({
     text-[#F2C438]
     text-[20px]
     font-semibold
-    leading-[18px]
+    leading-[30px]
     tracking-[1px]
     uppercase
     mb-4
@@ -453,13 +511,19 @@ const NavSection = ({
 const SocialIcon = ({
   href,
   children,
+  target = "_blank",
+  rel = "noopener noreferrer",
 }: {
   href: string;
   children: React.ReactNode;
+  target?: string;
+  rel?: string;
 }) => (
   <a
     href={href}
-    className="w-11 h-11 lg:w-11 lg:h-11 flex items-center justify-center rounded-xl border border-white/20 bg-white/5 text-[#ffc845]  hover:text-[#162252]  transition-all duration-300 shadow-md  hover:border-[#f1ede3]  hover:backdrop-blur-[0px] hover:shadow-lg "
+    target={target}
+    rel={rel}
+    className="w-11 h-11 lg:w-11 lg:h-11 flex items-center justify-center rounded-xl border border-white/20 bg-white/5 text-[#ffc845] hover:text-[#162252] transition-all duration-300 shadow-md hover:border-[#f1ede3] hover:backdrop-blur-[0px] hover:shadow-lg"
   >
     <span className="text-lg">{children}</span>
   </a>

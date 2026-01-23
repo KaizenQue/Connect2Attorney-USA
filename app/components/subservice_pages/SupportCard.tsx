@@ -69,12 +69,21 @@ interface SupportCardProps {
 }
 
 const SupportCard = ({ title, description }: SupportCardProps) => {
+  const scrollToNextSection = () => {
+    const el = document.getElementById("stepper-form");
+    if (!el) return;
+
+    const yOffset = -80; // header height
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
   return (
     <>
       {/*================= MOBILE VERSION ===================== */}
-  <div className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
-  <div
-    className="
+      <div className="md:hidden w-full px-4 py-6 sm:py-8 font-sans">
+        <div
+          className="
       relative
       w-[358px]
       h-[271px]
@@ -87,10 +96,10 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
       bg-center
       overflow-hidden
     "
-    style={{ backgroundImage: "url('/bgmobilecompletecard.svg')" }}
-  >
-    <h1
-      className="
+          style={{ backgroundImage: "url('/bgmobilecompletecard.svg')" }}
+        >
+          <h1
+            className="
         font-noto-serif
         text-[#F2C438]
         text-[22px] sm:text-[25px]
@@ -98,13 +107,13 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
         leading-normal
         pt-[4px]
       "
-    >
-      {title}
-    </h1>
+          >
+            {title}
+          </h1>
 
-    {/* Paragraph */}
-    <p
-      className="
+          {/* Paragraph */}
+          <p
+            className="
         font-urbanist
         text-white
         text-[14px] sm:text-[15px]
@@ -113,14 +122,15 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
         mt-[12px]
         pr-[20px]
       "
-    >
-  {description}
-    </p>
+          >
+            {description}
+          </p>
 
-    {/* Button text – locked to yellow background */}
-    <Link href="/contact-us">
-      <button
-        className="
+          {/* Button text – locked to yellow background */}
+       
+            <button
+              onClick={scrollToNextSection}
+              className="
           absolute
           bottom-[12px]
           left-[20px]
@@ -134,18 +144,19 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
           p-0
           whitespace-nowrap
         "
+            >
+              Check if you Qualify
+            </button>
+        
+        </div>
+      </div>
+
+      <div
+        id="support"
+        className="hidden md:flex w-full justify-center bg-white font-sans px-4 md:px-6 lg:px-8 xl:px-10 py-8"
       >
-        Check if you Qualify
-      </button>
-    </Link>
-  </div>
-</div>
-
-
-
-   <div id= "support"  className="hidden md:flex w-full justify-center bg-white font-sans px-4 md:px-6 lg:px-8 xl:px-10 py-8">
-  <div
-    className="
+        <div
+          className="
       relative w-full
       bg-[#162766]
       rounded-3xl
@@ -158,16 +169,16 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
       lg:min-h-[255px]
       xl:min-h-[270px]
     "
-  >
-    {/* Background */}
-    <div className="absolute inset-0 pointer-events-none bg-[url('/still-life-with-scales-justice1bg.svg')] bg-no-repeat bg-contain bg-right">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#19224D] via-[#162766]/85 to-transparent" />
-    </div>
+        >
+          {/* Background */}
+          <div className="absolute inset-0 pointer-events-none bg-[url('/still-life-with-scales-justice1bg.svg')] bg-no-repeat bg-contain bg-right">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#19224D] via-[#162766]/85 to-transparent" />
+          </div>
 
-    {/* Content */}
-    <div className="relative z-20 w-full md:w-[80%] lg:w-[68%] xl:w-[60%] px-6 md:px-8 lg:px-10 xl:px-12 py-5 md:py-6 lg:py-7">
-<h1
-  className="
+          {/* Content */}
+          <div className="relative z-20 w-full md:w-[80%] lg:w-[68%] xl:w-[60%] px-6 md:px-8 lg:px-10 xl:px-12 py-5 md:py-6 lg:py-7">
+            <h1
+              className="
     font-noto-serif
     text-white
     capitalize
@@ -183,12 +194,12 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
 
     whitespace-nowrap
   "
->
-  {title}
-</h1>
+            >
+              {title}
+            </h1>
 
-      <p
-        className="
+            <p
+              className="
           font-urbanist
           text-[#F9F9F9]
           capitalize
@@ -200,39 +211,36 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
           max-w-3xl
           mb-4
         "
-      >
-          {description}
+            >
+              {description}
+            </p>
 
-      </p>
+            <div className="flex flex-nowrap items-center gap-4 lg:gap-5 mb-4">
+              <div className="flex items-center gap-2">
+                <MagnifyingGlassIcon />
+                <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
+                  Analyze Your Case
+                </p>
+              </div>
 
-      <div className="flex flex-nowrap items-center gap-4 lg:gap-5 mb-4">
+              <div className="flex items-center gap-2">
+                <DocumentIcon />
+                <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
+                  Help Secure Medical Records
+                </p>
+              </div>
 
-        <div className="flex items-center gap-2">
-          <MagnifyingGlassIcon />
-          <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
-            Analyze Your Case
-          </p>
-        </div>
+              <div className="flex items-center gap-2">
+                <MoneyBagIcon />
+                <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
+                  Maximize Your Chance For Compensation
+                </p>
+              </div>
+            </div>
 
-        <div className="flex items-center gap-2">
-          <DocumentIcon />
-          <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
-            Help Secure Medical Records
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <MoneyBagIcon />
-          <p className="font-urbanist text-white text-[13px] md:text-[14px] lg:text-[15px] whitespace-nowrap">
-            Maximize Your Chance For Compensation
-          </p>
-        </div>
-
-      </div>
-
-      <Link href="/contact-us">
-        <button
-          className="
+            <Link href="/contact-us">
+              <button
+                className="
             inline-flex items-center justify-center
             bg-[#F2C94C]
             font-urbanist
@@ -247,16 +255,13 @@ const SupportCard = ({ title, description }: SupportCardProps) => {
             hover:shadow-xl hover:-translate-y-[1px]
             active:translate-y-0
           "
-        >
-          Start a Free Case Review
-        </button>
-      </Link>
-
-    </div>
-  </div>
-</div>
-
-
+              >
+                Start a Free Case Review
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

@@ -35,7 +35,7 @@ const LegalBanner = () => {
                 letterSpacing: '0px',
               }}
             >
-              Don't wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.
+              Don&apos;t wait to seek the justice you deserve. Contact us today to schedule your free case evaluation.
             </p>
           </div>
 

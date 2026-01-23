@@ -34,7 +34,7 @@ const casesData: CaseItem[] = [
     id: 4,
     title: "Talcum Powder\nLawsuit",
     image: "/sectionimg4.svg",
-    url: "/mass-tort/talcum-lawsuit",
+    url: "/mass-tort/talcum-powder-lawsuit",
   },
 
   // {
@@ -163,7 +163,7 @@ const tabCasesCompact: Record<string, CaseItem[]> = {
       id: 4,
       title: "Talcum Powder\nLawsuit",
       image: "/sectionimg4.svg",
-      url: "/mass-tort/talcum-lawsuit",
+      url: "/mass-tort/talcum-powder-lawsuit",
     },
   ],
 
@@ -193,19 +193,19 @@ const tabCasesCompact: Record<string, CaseItem[]> = {
       id: 2,
       title: "Motor Vehicle\n Accident Lawsuit",
       image: "/motorimg.svg",
-      url: "/personal-injury/motor-vehicle-accident-lawsuit",
+      url: "/personal-injury/motor-vehicle-accident",
     },
     {
       id: 3,
       title: "Slip and Fall Injury\n Lawsuit",
       image: "/slipimg.svg",
-      url: "/personal-injury/slip-and-fall-injury-lawsuit",
+      url: "/personal-injury/slip-and-fall",
     },
     {
       id: 4,
       title: "18-Wheeler Accident\n Lawsuit",
       image: "/truckimg.svg",
-      url: "/personal-injury/18-wheeler-lawsuit",
+      url: "/personal-injury/18-wheeler-accident",
     },
   ],
 };
@@ -234,7 +234,7 @@ const tabCasesExpanded: Record<string, CaseItem[]> = {
       id: 4,
       title: "Talcum Powder\nLawsuit",
       image: "/img14.svg",
-      url: "/mass-tort/talcum-lawsuit",
+      url: "/mass-tort/talcum-powder-lawsuit",
     },
   ],
 
@@ -264,19 +264,19 @@ const tabCasesExpanded: Record<string, CaseItem[]> = {
       id: 2,
       title: "Motor Vehicle\n Accident Lawsuit",
       image: "/PIimg2.svg",
-      url: "/personal-injury/motor-vehicle-accident-lawsuit",
+      url: "/personal-injury/motor-vehicle-accident",
     },
     {
       id: 3,
       title: "Slip and Fall Injury\n Lawsuit",
       image: "/PIimg3.svg",
-      url: "/personal-injury/slip-and-fall-injury-lawsuit",
+      url: "/personal-injury/slip-and-fall",
     },
     {
       id: 4,
       title: "18-Wheeler Accident\n Lawsuit",
       image: "/PIimg4.svg",
-      url: "/personal-injury/18-wheeler-lawsuit",
+      url: "/personal-injury/18-wheeler-accident",
     },
   ],
 };
@@ -315,7 +315,7 @@ const CasesSectionCompact: React.FC = () => {
   "
       >
         {/* Header */}
-        <div className="flex flex-col lg:items-start items-center mt-4 md:mt-6 lg:m-0 mb-8 lg:pl-10">
+        <div className="flex flex-col lg:items-start items-center mt-4 md:mt-6 lg:m-0 lg:pl-10">
           <h1 className="font-noto-serif font-normal text-[30px] md:text-[44px] text-white mb-2 md:mb-5 md:mt-0 xl:mb-10 xl:mt-10 text-center lg:text-left leading-[50px] md:leading-[52px] lg:leading-[70px] capitalize">
             <span className="text-[#fcc030]">Cases</span> We Handle
           </h1>
@@ -414,7 +414,7 @@ const CasesSectionCompact: React.FC = () => {
         <div
           className="
     flex md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 
-    gap-6 sm:gap-5 lg:gap-10 h-[325px] md:h-auto
+    gap-6 sm:gap-5 lg:gap-10 h-[300px] md:h-auto
     w-full lg:pl-2 lg:pr-2  lg:pb-0 overflow-x-auto scrollbar-hide md:overflow-visible 
    
   "
@@ -480,7 +480,7 @@ const CasesSectionExpanded: React.FC = () => {
   "
       >
         {/* Header */}
-        <div className="flex flex-col lg:items-start items-center mt-4 md:mt-6 lg:m-0 mb-8 lg:pl-10">
+        <div className="flex flex-col lg:items-start items-center mt-4 md:mt-6 lg:m-0  lg:pl-10">
           <h1 className="font-noto-serif font-normal text-[30px] md:text-[44px] lg:text-[55px] lg:mt-4 xl:mt-10 xl:mb-10 text-white mb-2 md:mb-4 text-center lg:text-left leading-[50px] md:leading-[52px] lg:leading-[70px] capitalize">
             <span className="text-[#fcc030]">Cases</span> We Handle
           </h1>

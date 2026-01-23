@@ -14,7 +14,7 @@ export const content = {
     whoQualifiesTitle: "who-qualifies-title",
     mdllitigationTitle: "mdl-litigation-title",
     compensationTitle: "compensation-title",
-healthRisksTitle: "health-risks-title",
+    healthRisksTitle: "health-risks-title",
     realStoriesTitle: "real-stories-title",
     stepsTitle: "steps-title",
   },
@@ -72,7 +72,8 @@ healthRisksTitle: "health-risks-title",
 
   whoQualifies: [
     {
-      description: "You regularly used Roundup weed killer spray at work or home.",
+      description:
+        "You regularly used Roundup weed killer spray at work or home.",
     },
     {
       description:
@@ -88,33 +89,33 @@ healthRisksTitle: "health-risks-title",
     },
   ],
 
- compensation: [
-  {
-    title: "Medical Expenses",
-    description:
-      "Coverage for current and future medical bills related to your illness.",
-  },
-  {
-    title: "Lost Wages",
-    description:
-      "Compensation for income lost due to inability to work during treatment or recovery.",
-  },
-  {
-    title: "Pain and Suffering",
-    description:
-      "Financial awards for physical pain, emotional distress, and reduced quality of life.",
-  },
-  {
-    title: "Punitive Damages",
-    description:
-      "Additional damages intended to punish the manufacturer for negligence or misconduct (granted in certain cases).",
-  },
-  {
-    title: "Other Related Costs",
-    description:
-      "This can include travel expenses for treatment, rehabilitation, and ongoing care needs.",
-  },
-],
+  compensation: [
+    {
+      title: "Medical Expenses",
+      description:
+        "Coverage for current and future medical bills related to your illness.",
+    },
+    {
+      title: "Lost Wages",
+      description:
+        "Compensation for income lost due to inability to work during treatment or recovery.",
+    },
+    {
+      title: "Pain and Suffering",
+      description:
+        "Financial awards for physical pain, emotional distress, and reduced quality of life.",
+    },
+    {
+      title: "Punitive Damages",
+      description:
+        "Additional damages intended to punish the manufacturer for negligence or misconduct (granted in certain cases).",
+    },
+    {
+      title: "Other Related Costs",
+      description:
+        "This can include travel expenses for treatment, rehabilitation, and ongoing care needs.",
+    },
+  ],
 
   riskPoints: [
     {
@@ -127,38 +128,38 @@ healthRisksTitle: "health-risks-title",
       title: "Users were not warned about cancer risks",
     },
   ],
-mdllitigationPoints1: [
-  {
-    title: "Active Cases",
-    description:
-      "Approximately 61,000 Roundup lawsuits remain pending as of fall 2025.",
-  },
-  {
-    title: "Federal MDL Cases",
-    description:
-      "More than 4,000 claims are consolidated in the federal MDL in the Northern District of California.",
-  },
-  {
-    title: "State Court Filings",
-    description:
-      "Most new and ongoing cases are now being pursued in state courts.",
-  },
-],
+  mdllitigationPoints1: [
+    {
+      title: "Active Cases",
+      description:
+        "Approximately 61,000 Roundup lawsuits remain pending as of fall 2025.",
+    },
+    {
+      title: "Federal MDL Cases",
+      description:
+        "More than 4,000 claims are consolidated in the federal MDL in the Northern District of California.",
+    },
+    {
+      title: "State Court Filings",
+      description:
+        "Most new and ongoing cases are now being pursued in state courts.",
+    },
+  ],
 
-mdllitigationPoints2: [
-  {
-    title: "Massive Settlements",
-    description:
-      "About 100,000 claims have been settled, with payouts reaching around $11 billion.",
-  },
-  {
-    title: "New Cases Still Being Filed",
-    description:
-      "New cases continue to be added weekly as more victims come forward.",
-  },
-],
+  mdllitigationPoints2: [
+    {
+      title: "Massive Settlements",
+      description:
+        "About 100,000 claims have been settled, with payouts reaching around $11 billion.",
+    },
+    {
+      title: "New Cases Still Being Filed",
+      description:
+        "New cases continue to be added weekly as more victims come forward.",
+    },
+  ],
 
-   roundupRisks: [
+  roundupRisks: [
     {
       title: "Glyphosate exposure damages cells and DNA",
       description:
@@ -183,7 +184,7 @@ mdllitigationPoints2: [
       "The Roundup cancer lawsuit refers to legal claims filed by individuals who allege that exposure to the herbicide Roundup caused serious health conditions, particularly cancer. The lawsuits argue that Bayer, which acquired Monsanto (the original manufacturer of Roundup), knew or should have known about the dangers of the Roundup chemical but continued to market it as a safe weed killer without proper warnings. These claims have been consolidated into large-scale litigation to streamline the legal process and ensure consistent rulings",
       "What is Roundup Cancer?",
       "Roundup is a glyphosate-based herbicide developed by Monsanto in the 1970s. Its use expanded in the 1990s when Monsanto introduced genetically modified seeds resistant to glyphosate.",
-      "Roundup cancer commonly refers to cancers allegedly linked to exposure to Roundup weed killer, especially non-Hodgkin's lymphoma. Scientific studies and jury verdicts have connected glyphosate, the primary ingredient in Roundup, to increased cancer risk after repeated or prolonged exposure."
+      "Roundup cancer commonly refers to cancers allegedly linked to exposure to Roundup weed killer, especially non-Hodgkin's lymphoma. Scientific studies and jury verdicts have connected glyphosate, the primary ingredient in Roundup, to increased cancer risk after repeated or prolonged exposure.",
     ],
 
     allegationsTitle: "Who is Eligible to File a Claim?",
@@ -199,24 +200,21 @@ mdllitigationPoints2: [
     whoQualifiesTitle: "Who is Eligible to File a Claim? ",
     whoQualifiesSubtitle: "You may qualify for a Roundup cancer lawsuit if:  ",
 
-    healthRisksTitle :
-      "What are the Other Health Risks of Roundup? ",
+    healthRisksTitle: "What are the Other Health Risks of Roundup? ",
 
     healthRisksParagraph:
       "While non-Hodgkin's lymphoma is the most well-known condition linked to Roundup exposure, the herbicide may also be connected to a variety of other health issues. Here are some of the other possible health risks:   ",
-mdllitigationTitle: "Roundup Cancer Lawsuit & MDL Litigation Explained ",
-   
+    mdllitigationTitle: "Roundup Cancer Lawsuit & MDL Litigation Explained ",
 
-mdllitigationParagraph:
-    "Most of the Roundup Cancer lawsuit cases are handled through MDL (Multidistrict Litigation). MDL allows individual lawsuits to be grouped under one federal court for pretrial proceedings while preserving each claimant’s right to individual compensation. ",
-    
-mdllitigationsubheading1:"Latest News",
-mdllitigationsubheading2:"Settlements & Payouts",
+    mdllitigationParagraph:
+      "Most of the Roundup Cancer lawsuit cases are handled through MDL (Multidistrict Litigation). MDL allows individual lawsuits to be grouped under one federal court for pretrial proceedings while preserving each claimant’s right to individual compensation. ",
 
+    mdllitigationsubheading1: "Latest News",
+    mdllitigationsubheading2: "Settlements & Payouts",
 
     compensationTitle: "What Compensation Can You Seek?",
     compensationParagraph:
-    "The compensation from a Roundup lawsuit depends largely on the severity of your health issues and the specific circumstances of your case. While typical payouts range from $5,000 to $250,000, the actual amount can vary depending on factors like medical costs and the strength of your claim.",
+      "The compensation from a Roundup lawsuit depends largely on the severity of your health issues and the specific circumstances of your case. While typical payouts range from $5,000 to $250,000, the actual amount can vary depending on factors like medical costs and the strength of your claim.",
     compensationSubtitle:
       "Here are the main types of compensation you can seek: ",
 
@@ -238,20 +236,17 @@ mdllitigationsubheading2:"Settlements & Payouts",
     {
       step: 1,
       title: "Submit a Free Case Review",
-      description:
-        "Share details about your exposure and diagnosis.",
+      description: "Share details about your exposure and diagnosis.",
     },
     {
       step: 2,
       title: "Confirm Eligibility",
-      description:
-        "Our legal team will evaluate your case.",
+      description: "Our legal team will evaluate your case.",
     },
     {
       step: 3,
       title: "Sign Agreement",
-      description:
-        "If eligible, your lawyer handles everything.",
+      description: "If eligible, your lawyer handles everything.",
     },
   ],
 };
@@ -261,7 +256,10 @@ const ROUNDUP_TOC = [
   { label: "Who is Eligible to File a Claim?", id: "who-qualifies-title" },
   { label: "Roundup Weed Killer Risks", id: "risks-title" },
   { label: "Other Health Risks of Roundup", id: "health-risks-title" },
-  { label: "Roundup Cancer Lawsuit & MDL Litigation", id: "mdl-litigation-title" },
+  {
+    label: "Roundup Cancer Lawsuit & MDL Litigation",
+    id: "mdl-litigation-title",
+  },
   { label: "What Compensation Can You Seek?", id: "compensation-title" },
   { label: "Real Stories Behind the Lawsuit", id: "real-stories-title" },
   { label: "How to File a Roundup Cancer Lawsuit", id: "steps-title" },
@@ -276,6 +274,11 @@ const LawsuitsLegalPage = () => {
 
   const [isFixed, setIsFixed] = useState<boolean>(false);
   const [isAtBottom, setIsAtBottom] = useState<boolean>(false);
+
+  const mobileTocWrapperRef = useRef<HTMLDivElement | null>(null);
+  const mobileTocInnerRef = useRef<HTMLDivElement | null>(null);
+
+  const [isMobileTocFixed, setIsMobileTocFixed] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -294,6 +297,26 @@ const LawsuitsLegalPage = () => {
 
     window.addEventListener("scroll", onScroll);
     onScroll(); // run once on mount
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!mobileTocWrapperRef.current) return;
+
+      // Only for tablet + mobile
+      if (window.innerWidth >= 1024) return;
+
+      const NAVBAR_HEIGHT = 60;
+      const rect = mobileTocWrapperRef.current.getBoundingClientRect();
+
+      // Stick when TOC reaches navbar
+      setIsMobileTocFixed(rect.top <= NAVBAR_HEIGHT);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -334,9 +357,24 @@ const LawsuitsLegalPage = () => {
       {/* Page Container */}
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-2 lg:py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
-        <div className="lg:hidden mb-4">
-          <TableOfContents items={ROUNDUP_TOC} />
+
+        <div ref={mobileTocWrapperRef} className="lg:hidden relative mb-10">
+          {/* Spacer to prevent content jump */}
+          {isMobileTocFixed && <div className="h-[60px]" />}
+
+          <div
+            ref={mobileTocInnerRef}
+            className={
+              isMobileTocFixed
+                ? "fixed left-0 right-0 z-40 px-5 md:px-10 lg:px-0 bg-white"
+                : "relative"
+            }
+            style={isMobileTocFixed ? { top: 60 } : undefined}
+          >
+            <TableOfContents items={ROUNDUP_TOC} />
+          </div>
         </div>
+
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
@@ -348,9 +386,9 @@ const LawsuitsLegalPage = () => {
             </h1>
             <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1 capitalize">
               <p>{content.pageContent.mainParagraphs[0]}</p>
-                <br  className="lg:hidden"/>
+              <br className="lg:hidden" />
               <p>{content.pageContent.mainParagraphs[1]}</p>
-              <br/>
+              <br />
               <h3 className=" font-bold">
                 {content.pageContent.mainParagraphs[2]}
               </h3>
@@ -421,7 +459,7 @@ const LawsuitsLegalPage = () => {
                 </a>
               </p> */}
             </div>
-                      
+
             {/* ==================== HEALTH RISKS SECTION ==================== */}
             <div className="mb-16">
               <h2
@@ -441,7 +479,7 @@ const LawsuitsLegalPage = () => {
               <p className="mb-4 font-poppins capitalize font-normal text-[#425777] text-[16px] sm:text-[17px] lg:text-[18px] leading-[24px] sm:leading-[26px] lg:leading-[27px]">
                 {content.pageContent.RisksSubtitle2}
               </p>
-           
+
               <ul className="space-y-5 mb-8 whitespace-pre-line">
                 {content.roundupRisks.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
@@ -459,25 +497,22 @@ const LawsuitsLegalPage = () => {
                     </span>
                     {/* Text */}
                     <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-                      <span className="font-bold">
-                        {item.title}
-                      </span>{" "}
+                      <span className="font-bold">{item.title}</span>{" "}
                     </span>
                   </li>
                 ))}
               </ul>
-    
+
               <h2
-                id={content.sectionIds.healthRisksTitle }
+                id={content.sectionIds.healthRisksTitle}
                 className="font-noto-serif font-normal capitalize text-[#162766] text-[24px] sm:text-[32px] lg:text-[40px] leading-[32px] sm:leading-[42px] lg:leading-[50px] mb-4"
               >
-                {content.pageContent.healthRisksTitle }
+                {content.pageContent.healthRisksTitle}
               </h2>
 
               <p className="mb-4 font-poppins font-normal text-[#425777] text-[16px] leading-[27px]">
                 {content.pageContent.healthRisksParagraph}
               </p>
-              
 
               <div className="space-y-4 w-full mb-16">
                 {content.healthRisks.map((item, index) => (
@@ -493,12 +528,12 @@ const LawsuitsLegalPage = () => {
                     </p>
                   </div>
                 ))}
-              </div> 
+              </div>
 
               <div className="bg-[#F0F2F4] text-[#FFF] rounded-xl p-4 sm:p-6 w-full  mb-16">
-                  <h2
-  id={content.sectionIds.mdllitigationTitle}
-  className="
+                <h2
+                  id={content.sectionIds.mdllitigationTitle}
+                  className="
     font-noto-serif
     font-medium
     capitalize
@@ -507,77 +542,70 @@ const LawsuitsLegalPage = () => {
     leading-normal
     mb-4
   "
->
-  {content.pageContent.mdllitigationTitle}
-</h2>
+                >
+                  {content.pageContent.mdllitigationTitle}
+                </h2>
 
-             
-          <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] leading-[27px]">
-  {content.pageContent.mdllitigationParagraph}
-</p>
+                <p className="mb-4 font-urbanist font-normal text-[#425777] text-[16px] leading-[27px]">
+                  {content.pageContent.mdllitigationParagraph}
+                </p>
 
-               <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] leading-[27px]">
-  {content.pageContent.mdllitigationsubheading1}
-</p>
+                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[16px] leading-[27px]">
+                  {content.pageContent.mdllitigationsubheading1}
+                </p>
 
-             
-            <ul className="space-y-3 mb-8">
-  {content.mdllitigationPoints1.map((item, index) => (
-    <li key={index} className="flex items-start gap-3">
-      {/* Custom Bullet */}
-     <span className="mt-[9px] shrink-0">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="4"
-    height="4"
-    viewBox="0 0 4 4"
-    fill="none"
-  >
-    <circle cx="2" cy="2" r="2" fill="#425777" />
-  </svg>
-</span>
+                <ul className="space-y-3 mb-8">
+                  {content.mdllitigationPoints1.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Custom Bullet */}
+                      <span className="mt-[9px] shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#425777" />
+                        </svg>
+                      </span>
 
+                      {/* Text */}
+                      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+                        <span className="font-bold">{item.title}</span>{" "}
+                        <span className="font-normal">{item.description}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
 
-      {/* Text */}
-      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-        <span className="font-bold">{item.title}</span>{" "}
-        <span className="font-normal">{item.description}</span>
-      </span>
-    </li>
-  ))}
-</ul>
+                <p className="mb-4 font-urbanist font-bold text-[#425777] text-[18px] leading-[27px]">
+                  {content.pageContent.mdllitigationsubheading2}
+                </p>
 
+                <ul className="space-y-3 mb-8">
+                  {content.mdllitigationPoints2.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Custom Bullet */}
+                      <span className="mt-[9px] shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#425777" />
+                        </svg>
+                      </span>
 
-                      <p className="mb-4 font-urbanist font-bold text-[#425777] text-[18px] leading-[27px]">
-  {content.pageContent.mdllitigationsubheading2}
-</p>
-
-
-                  
-            <ul className="space-y-3 mb-8">
-  {content.mdllitigationPoints2.map((item, index) => (
-    <li key={index} className="flex items-start gap-3">
-      {/* Custom Bullet */}
-     <span className="mt-[9px] shrink-0">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="4"
-    height="4"
-    viewBox="0 0 4 4"
-    fill="none"
-  >
-    <circle cx="2" cy="2" r="2" fill="#425777" />
-  </svg>
-</span>
-
-
-      {/* Text */}
-      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-        <span className="font-normal">{item.description}</span>
-      </span>
-    </li>
-  ))}
-</ul>
+                      {/* Text */}
+                      <span className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+                        <span className="font-normal">{item.description}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <h2
@@ -595,7 +623,7 @@ const LawsuitsLegalPage = () => {
                 {content.pageContent.compensationSubtitle}
               </p>
 
-                          <div className="space-y-4 sm:space-y-5 w-full mb-16">
+              <div className="space-y-4 sm:space-y-5 w-full mb-16">
                 {content.compensation.map((item, index) => (
                   <div
                     key={index}
@@ -624,7 +652,7 @@ const LawsuitsLegalPage = () => {
                     >
                       {item.title}
                     </h4>
-              
+
                     {/* Description */}
                     <p
                       className="
@@ -641,15 +669,13 @@ const LawsuitsLegalPage = () => {
                     </p>
                   </div>
                 ))}
-              
               </div>
-              
 
-             <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
-  {/* Section Title */}
-  <h3
-    id={content.sectionIds.realStoriesTitle}
-    className="
+              <div className="bg-[#F4F6F8] rounded-lg px-4 sm:px-8 py-6">
+                {/* Section Title */}
+                <h3
+                  id={content.sectionIds.realStoriesTitle}
+                  className="
       font-noto-serif
       text-[#162766]
       text-[26px]
@@ -658,41 +684,36 @@ const LawsuitsLegalPage = () => {
       capitalize
       mb-4
     "
-  >
-    {content.pageContent.realStoriesTitle}
-  </h3>
+                >
+                  {content.pageContent.realStoriesTitle}
+                </h3>
 
-  {/* Stories */}
-  <ul className="space-y-4">
-    {content.realStories.map((item, index) => (
-      <li key={index} className="flex items-start gap-3">
-        {/* Small Bullet */}
-        <span className="mt-[9px] shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="4"
-            height="4"
-            viewBox="0 0 4 4"
-            fill="none"
-          >
-            <circle cx="2" cy="2" r="2" fill="#425777" />
-          </svg>
-        </span>
+                {/* Stories */}
+                <ul className="space-y-4">
+                  {content.realStories.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      {/* Small Bullet */}
+                      <span className="mt-[9px] shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="4"
+                          height="4"
+                          viewBox="0 0 4 4"
+                          fill="none"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#425777" />
+                        </svg>
+                      </span>
 
-        {/* Text */}
-        <p className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
-          <span className="font-bold">
-            {item.name}:
-          </span>{" "}
-          <span className="font-medium">
-            {item.story}
-          </span>
-        </p>
-      </li>
-    ))}
-  </ul>
-</div>
-
+                      {/* Text */}
+                      <p className="font-urbanist text-[#425777] text-[18px] leading-[27px]">
+                        <span className="font-bold">{item.name}:</span>{" "}
+                        <span className="font-medium">{item.story}</span>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* ==================== STEPS SECTION ==================== */}
@@ -801,7 +822,6 @@ const StepsComponent = () => {
         >
           {/* TOP ROW: BADGE + TITLE */}
           <div className="flex items-start gap-4">
-            
             {/* STEP BADGE (Figma Perfect) */}
             <div
               className="

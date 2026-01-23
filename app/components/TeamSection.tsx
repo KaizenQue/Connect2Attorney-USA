@@ -1,5 +1,6 @@
+/* eslint-disable react/display-name */
 "use client";
-import React, { useState ,useMemo,useRef} from "react";
+import React, { useState ,useEffect,useMemo,useRef} from "react";
 import Link from "next/link";
 import { FaLinkedinIn } from "react-icons/fa";
  const VectorLeftDottedLine = React.memo(() => (
@@ -193,6 +194,28 @@ export const DrivingForceHover = ({
 
     if (isOutside) onLeave();
   };
+
+  useEffect(() => {
+  const handleScrollExit = () => {
+    onLeave();
+  };
+
+  // Mouse wheel (desktop)
+  window.addEventListener("wheel", handleScrollExit, { passive: true });
+
+  // Touch scroll (mobile / trackpad)
+  window.addEventListener("touchmove", handleScrollExit, { passive: true });
+
+  // Keyboard scroll (optional but good UX)
+  window.addEventListener("keydown", handleScrollExit);
+
+  return () => {
+    window.removeEventListener("wheel", handleScrollExit);
+    window.removeEventListener("touchmove", handleScrollExit);
+    window.removeEventListener("keydown", handleScrollExit);
+  };
+}, [onLeave]);
+
 
   return (
     <div

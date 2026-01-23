@@ -118,7 +118,7 @@ export const CaseCardExpanded: React.FC<CaseCardProps> = ({
 
           rounded-[20px]
           overflow-hidden
-          mx-auto
+          mx-auto 2xl:mx-0
           transition-transform duration-300
           lg:hover:-translate-y-3
         "
@@ -130,7 +130,7 @@ export const CaseCardExpanded: React.FC<CaseCardProps> = ({
           fill
           priority={false}
           className="
-            object-contain
+            object-contain 
             object-center xl:translate-y-0  xl:translate-x-0 lg:translate-y-2
           "
         />

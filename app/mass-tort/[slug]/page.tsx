@@ -62,7 +62,7 @@ const HERO_TITLES: Record<string, string> = {
   "roundup-lawsuit":
     "Roundup Cancer Lawsuit: Weed Killer Lawsuit, Settlement & Legal Claims",
 
-  "talcum-lawsuit":
+  "talcum-powder-lawsuit":
     "Talcum Powder Lawsuit: Baby Powder Cancer Claims & Legal Updates",
 };
 /* ================= FAQ DATA ================= */
@@ -156,7 +156,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
     },
   ],
 
-  "talcum-lawsuit": [
+  "talcum-powder-lawsuit": [
     {
       question: "Which companies are named in talcum powder lawsuits?",
       answer:
@@ -245,7 +245,7 @@ export default function MassTortPage() {
       data: roundupTimelineData,
     },
 
-    "talcum-lawsuit": {
+    "talcum-powder-lawsuit": {
       title: "Talcum Powder Lawsuit Timeline",
       data: talcumTimelineData,
     },
@@ -263,7 +263,7 @@ const HERO_IMAGE_BY_SLUG: Record<string, string> = {
   "mesothelioma-lawsuit": "/meso_bg_dark.png",
   "depo-provera-lawsuit": "/depo_bg_dark.png",
   "roundup-lawsuit": "/roundup_bg_dark.png",
-  "talcum-lawsuit": "/talc_bg_dark.png",
+  "talcum-powder-lawsuit": "/talc_bg_dark.png",
 };
 
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
@@ -271,7 +271,7 @@ const HERO_IMAGE_BY_SLUG: Record<string, string> = {
     "mesothelioma-lawsuit": <MesoLawsuitsLegalPage />,
     "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
     "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
-    "talcum-lawsuit": <TalcumLawsuitsLegalPage />,
+    "talcum-powder-lawsuit": <TalcumLawsuitsLegalPage />,
   };
 const timelineConfig = TIMELINE_BY_SLUG[slug];
 const heroImage =
@@ -303,7 +303,7 @@ const heroImage =
       "You don’t have to fight this battle alone. If Roundup has caused you cancer or any other health problem, Connect2Attorney can help you:",
   },
 
-  "talcum-lawsuit": {
+  "talcum-powder-lawsuit": {
     title: "Get Legal Support from Connect2Attorney",
     description:
       "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
@@ -401,7 +401,7 @@ const supportData = SUPPORT_BY_SLUG[slug];
 //   "roundup-lawsuit":
 //     "Roundup Cancer Lawsuit: Weed Killer Lawsuit, Settlement & Legal Claims",
 
-//   "talcum-lawsuit":
+//   "talcum-powder-lawsuit":
 //     "Talcum Powder Lawsuit: Baby Powder Cancer Claims & Legal Updates",
 // };
 

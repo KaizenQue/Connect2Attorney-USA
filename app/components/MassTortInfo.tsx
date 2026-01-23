@@ -1,7 +1,9 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 
 const MassTortInfo = () => {
+
   return (
     <>
       {/* 2. Main Container */}
@@ -56,7 +58,7 @@ const MassTortInfo = () => {
               Today To Schedule Your Free Case Evaluation.
             </p>
 
-            <button
+            <button 
               className="
                 bg-[#F2C94C]
                 text-[#19224D]

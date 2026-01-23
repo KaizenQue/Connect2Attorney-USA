@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ContactCard = () => {
+
+ 
+
   return (
     <section
       className="
@@ -80,7 +83,7 @@ const ContactCard = () => {
           </h2>
 
           <Link
-            href="/contact-us"
+            href="/contact-us"  
             className="
               flex items-center justify-center
               w-[242px] h-[65px]

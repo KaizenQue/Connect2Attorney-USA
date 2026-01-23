@@ -1679,7 +1679,7 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
           "
         >
           {/* ================= LEFT COLUMN ================= */}
-          <div className="flex flex-col justify-center max-w-[720px]">
+          <div className="flex flex-col justify-start mt-10 max-w-[720px]">
             <h1 className="leading-none">
               <span
                 className="

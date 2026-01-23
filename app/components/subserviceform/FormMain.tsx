@@ -3,9 +3,11 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import {sendWithEmailJS} from "./emailJsService";
+import { sendWithEmailJS } from "./emailJsService";
+import { usePathname } from "next/navigation";
 const CRM_API_URL =
   "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
+
 const CLIENT_WEBHOOK_URL: string | null = null;
 const EMAILJS_ENABLED = true;
 
@@ -26,6 +28,20 @@ const CASES = [
   "Slip and Fall Injury Lawsuit",
   "18-Wheeler Accident Lawsuit",
 ];
+
+const SLUG_TO_CASE_MAP: Record<string, string> = {
+  "ozempic-lawsuit": "Ozempic Lawsuit",
+  "mesothelioma-lawsuit": "Mesothelioma Lawsuit",
+  "depo-provera-lawsuit": "Depo-Provera Lawsuit",
+  "roundup-cancer-lawsuit": "Roundup Cancer Lawsuit",
+  "talcum-powder-lawsuit": "Talcum Powder Lawsuit",
+  "tesla-autopilot-recall-lawsuit": "Tesla Autopilot Recall Lawsuit",
+  "maclaren-sexual-abuse-lawsuit": "MacLaren Sexual Abuse Lawsuit",
+  "sexual-abuse-lawsuit": "Sexual Abuse Lawsuit",
+  "motor-vehicle-accident": "Motor Vehicle Accident Lawsuit",
+  "slip-and-fall-injury-lawsuit": "Slip and Fall Injury Lawsuit",
+  "18-wheeler-accident-lawsuit": "18-Wheeler Accident Lawsuit",
+};
 
 /* ---------------- Utils ---------------- */
 
@@ -61,7 +77,7 @@ const formatPhone = (value: string) => {
     return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
   return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(
     6,
-    10
+    10,
   )}`;
 };
 
@@ -88,21 +104,21 @@ const PencilIcon = React.memo((props: React.SVGProps<SVGSVGElement>) => (
 ));
 /* ---------------- Validation ---------------- */
 
-const validateEmail = (value: string) => {
-  if (!value.trim()) return "Required";
-  if (!/^\S+@\S+\.\S+$/.test(value)) return "Invalid email";
-  return "";
-};
+// const validateEmail = (value: string) => {
+//   if (!value.trim()) return "Required";
+//   if (!/^\S+@\S+\.\S+$/.test(value)) return "Invalid email";
+//   return "";
+// };
 
 const validateRequired = (v: string) => (!v.trim() ? "Required" : "");
 
-const validatePhone = (v: string) =>
-  normalizePhone(v).length === 10 ? "" : "Enter 10 digit phone";
+// const validatePhone = (v: string) =>
+//   normalizePhone(v).length === 10 ? "" : "Enter 10 digit phone";
 
 /* ---------------- Analytics ---------------- */
 
 const track = (event: string, data?: any) => {
-  console.log("📊 ANALYTICS:", event, data || {});
+  // console.log("📊 ANALYTICS:", event, data || {});
   // plug GA, Meta, etc here
 };
 type CustomCaptchaProps = {
@@ -208,7 +224,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             (voice.lang === "en-US" &&
               voice.name.toLowerCase().includes("male")) ||
             voice.name.toLowerCase().includes("david") ||
-            voice.name.toLowerCase().includes("microsoft david")
+            voice.name.toLowerCase().includes("microsoft david"),
         ) ||
         voices.find((voice) => voice.lang === "en-US") ||
         voices[0];
@@ -375,8 +391,8 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             disabled
               ? "bg-gray-100 cursor-not-allowed border-gray-300"
               : userInput !== "" && !isValid
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-blue-500"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
           }`}
         />
 
@@ -394,6 +410,41 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
     </div>
   );
 };
+
+const checkboxClass = `
+  mt-[2px]
+  w-[16px] h-[16px]
+  min-w-[16px] min-h-[16px]
+  max-w-[16px] max-h-[16px]
+  rounded-[5px]
+  border border-[#162766]
+  bg-white
+  appearance-none
+  cursor-pointer
+  relative
+  flex-shrink-0
+
+  checked:bg-[#F2C438]
+  checked:border-[#F2C438]
+
+  focus:outline-none
+  focus:ring-0
+  focus:ring-offset-0
+
+  after:content-['']
+  after:absolute
+  after:hidden
+  after:left-[4px]
+  after:top-[1px]
+  after:w-[5px]
+  after:h-[9px]
+  after:border-white
+  after:border-r-[2px]
+  after:border-b-[2px]
+  after:rotate-45
+
+  checked:after:block
+`;
 /* ---------------- Main ---------------- */
 
 export default function Form() {
@@ -406,6 +457,14 @@ export default function Form() {
   const [captchaResetTrigger, setCaptchaResetTrigger] = useState(false);
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [robotChecked, setRobotChecked] = useState(false);
+
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [captchaChecked, setCaptchaChecked] = useState(false);
+
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [earlySent, setEarlySent] = useState(false);
+
+  const generateLeadId = () => crypto.randomUUID();
 
   const [form, setForm] = useState({
     firstName: "",
@@ -428,6 +487,11 @@ export default function Form() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showFullConsent, setShowFullConsent] = useState(false);
+
+  const pathname = usePathname();
+  const slug = pathname.split("/").pop(); // ✅ ozempic-lawsuit
+
   useEffect(() => {
     const url = new URL(window.location.href);
     if (
@@ -487,10 +551,11 @@ export default function Form() {
 
   useEffect(() => {
     if (step === 3) {
+      setCaptchaChecked(false);
+      setConsentChecked(false);
       setShowCaptcha(false);
-      setRobotChecked(false);
       setCaptchaVerified(false);
-      setCaptchaResetTrigger((prev) => !prev);
+      setCaptchaResetTrigger((p) => !p);
     }
   }, [step]);
 
@@ -508,82 +573,39 @@ export default function Form() {
     return () => document.removeEventListener("mousedown", handle);
   }, [dropdownOpen]);
 
+  useEffect(() => {
+    if (caseType) return; // don't override user choice
+    if (!slug) return;
+
+    const matchedCase = SLUG_TO_CASE_MAP[slug];
+
+    if (matchedCase && CASES.includes(matchedCase)) {
+      setCaseType(matchedCase);
+    }
+  }, [slug, caseType]);
+
+  useEffect(() => {
+    if (!form.phone) {
+      setEarlySent(false);
+      setLeadId(null);
+    }
+  }, [form.phone]);
+
   /* ---------------- Validation ---------------- */
 
-  const formatUSAMobile = (input: string): string => {
-    if (!input) return "";
-
-    let raw = String(input).trim();
-
-    if (raw === "+") return "+";
-
-    const plus = raw.startsWith("+") ? "+" : "";
-    raw = plus + raw.replace(/\+/g, "").replace(/[^\d]/g, "");
-
-    let prefix = "";
-    let digits = "";
-
-    if (raw.startsWith("+1")) {
-      prefix = "+1";
-      digits = raw.slice(2);
-    } else if (raw.startsWith("0")) {
-      prefix = "0";
-      digits = raw.slice(1);
-    } else if (raw.startsWith("+")) {
-      prefix = "+";
-      digits = raw.slice(1);
-    } else {
-      digits = raw;
-    }
-
-    // Limit to exactly 9 digits
-    digits = digits.slice(0, 9);
-
-    // Format as XXX XXX XXX
-    let formatted = digits;
-    if (digits.length <= 3) {
-      formatted = digits;
-    } else if (digits.length <= 6) {
-      formatted = `${digits.slice(0, 3)} ${digits.slice(3)}`;
-    } else {
-      formatted = `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(
-        6
-      )}`;
-    }
-
-    // Construct output
-    if (prefix === "+1") {
-      return `${prefix} ${formatted}`.trim();
-    } else if (prefix === "0") {
-      return `${prefix}${formatted}`.trim();
-    } else if (prefix === "+") {
-      return formatted ? `+${formatted}` : "+";
-    } else {
-      return formatted;
-    }
+  const formatUSAMobile = (phone: string): string => {
+    const cleaned = phone.replace(/\D/g, "");
+    if (cleaned.length === 0) return "";
+    if (cleaned.length <= 3) return `(${cleaned}`;
+    if (cleaned.length <= 6)
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
   };
 
   // SIMPLIFIED validation - exactly 9 digits (after removing prefix)
-  const validateUSAMobile = (input: string): boolean => {
-    if (!input) return false;
-
-    const raw = String(input).trim();
-
-    // Remove all non-digits except the first + if present
-    let digitsOnly = raw.replace(/[^\d+]/g, "");
-
-    // Remove the prefix to count actual phone digits
-    if (digitsOnly.startsWith("+1")) {
-      digitsOnly = digitsOnly.slice(2);
-    } else if (digitsOnly.startsWith("0")) {
-      digitsOnly = digitsOnly.slice(1);
-    } else if (digitsOnly.startsWith("+")) {
-      digitsOnly = digitsOnly.slice(1);
-    }
-
-    // Must be exactly 9 digits
-    digitsOnly = digitsOnly.replace(/\D/g, "");
-    return digitsOnly.length === 9;
+  const validateUSAMobile = (phone: string): boolean => {
+    const cleaned = phone.replace(/\D/g, "");
+    return cleaned.length === 10;
   };
 
   const formatEmail = (input: string): string => {
@@ -679,22 +701,42 @@ export default function Form() {
     return { isValid: true, reason: null };
   };
 
-  const handlePhoneChange = useCallback((value: string) => {
-    const formatted = formatUSAMobile(value);
-    let error = "";
+  const handlePhoneChange = useCallback(
+    async (value: string) => {
+      const formatted = formatUSAMobile(value);
+      let error = "";
 
-    if (!value.trim()) {
-      error = "Phone number is required";
-    } else if (!validateUSAMobile(formatted)) {
-      error = "Please enter a valid phone number";
-    }
+      if (!value.trim()) {
+        error = "Phone number is required";
+      } else if (!validateUSAMobile(formatted)) {
+        error = "Please enter a valid phone number";
+      }
 
-    setPhoneError(error);
+      setPhoneError(error);
+      setForm((prev) =>
+        prev.phone === formatted ? prev : { ...prev, phone: formatted },
+      );
 
-    setForm((prev) =>
-      prev.phone === formatted ? prev : { ...prev, phone: formatted }
-    );
-  }, []);
+      // ✅ FIRE EARLY API WHEN PHONE BECOMES VALID FIRST TIME
+      if (
+        !earlySent &&
+        validateUSAMobile(formatted) &&
+        form.firstName.trim() &&
+        form.lastName.trim()
+      ) {
+        try {
+          const id = crypto.randomUUID();
+          await createLeadEarly(id);
+          setLeadId(id);
+          setEarlySent(true);
+          console.log("✅ Early lead sent:", id);
+        } catch (err) {
+          console.error("❌ Early API failed:", err);
+        }
+      }
+    },
+    [earlySent, form.firstName, form.lastName],
+  );
 
   const handleEmailChange = useCallback((value: string) => {
     const formatted = formatEmail(value);
@@ -713,7 +755,7 @@ export default function Form() {
     setEmailError((prev) => (prev === error ? prev : error));
 
     setForm((prev) =>
-      prev.email === formatted ? prev : { ...prev, email: formatted }
+      prev.email === formatted ? prev : { ...prev, email: formatted },
     );
   }, []);
 
@@ -730,7 +772,7 @@ export default function Form() {
     setFirstError(error);
 
     setForm((prev) =>
-      prev.firstName === cleaned ? prev : { ...prev, firstName: cleaned }
+      prev.firstName === cleaned ? prev : { ...prev, firstName: cleaned },
     );
   }, []);
 
@@ -747,7 +789,7 @@ export default function Form() {
     setLastError(error);
 
     setForm((prev) =>
-      prev.lastName === cleaned ? prev : { ...prev, lastName: cleaned }
+      prev.lastName === cleaned ? prev : { ...prev, lastName: cleaned },
     );
   }, []);
 
@@ -764,7 +806,7 @@ export default function Form() {
     setZipError(error);
 
     setForm((prev) =>
-      prev.zip === cleaned ? prev : { ...prev, zip: cleaned }
+      prev.zip === cleaned ? prev : { ...prev, zip: cleaned },
     );
   }, []);
 
@@ -839,7 +881,7 @@ export default function Form() {
       if (current === 2) return validateStep2();
       return true;
     },
-    [validateStep1, validateStep2]
+    [validateStep1, validateStep2],
   );
 
   /* ---------------- Navigation ---------------- */
@@ -863,135 +905,163 @@ export default function Form() {
   }, [step]);
 
   /* ---------------- Submit ---------------- */
-const handleSubmit = async () => {
-  if (isSubmitting) return;
 
-  setIsSubmitting(true);
+  // const buildEarlyUrl = (id: string) =>
+  //   `https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata/${id}`;
 
-  try {
-    // ================== TRUSTEDFORM ==================
-    const tfCertUrl =
-      (
-        document.querySelector(
-          'input[name="xxTrustedFormCertUrl"]'
-        ) as HTMLInputElement
-      )?.value || "";
+  // const createLeadEarly = async (id: string) => {
+  //   const createApiBody = {
+  //     countryName: "USA",
+  //     brandName: "C2A",
+  //     websiteName: "Connect 2 Attorney",
+  //     formname: "Stepper Section Form",
+  //     sourceUrl: getSourceUrl(),
+  //     data: {
+  //       name: `${form.firstName} ${form.lastName}`,
+  //       phone: `+1${normalizePhone(form.phone)}`,
+  //       submissionDate: new Date().toISOString(),
+  //       pageSource: getSourceUrl(),
+  //     },
+  //   };
 
-    const tfPingUrl =
-      (
-        document.querySelector(
-          'input[name="xxTrustedFormPingUrl"]'
-        ) as HTMLInputElement
-      )?.value || "";
+  //   const res = await fetch(buildEarlyUrl(id), {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(createApiBody),
+  //   });
 
-    const tfCertId = tfCertUrl ? tfCertUrl.split("/").pop() || "" : "";
+  //   if (!res.ok) {
+  //     const text = await res.text();
+  //     throw new Error("Early lead failed: " + text);
+  //   }
+  // };
 
-    // ================== BUILD PAYLOAD ==================
-    const apiBody = {
-      countryName: "USA",
-      brandName: "C2A",
-      websiteName: "Connect 2 Attorney",
-      formname: "Stepper Section Form",
-      sourceUrl: getSourceUrl(),
-      data: {
-        name: `${form.firstName} ${form.lastName}`,
-        email: form.email,
-        phone: `+1${normalizePhone(form.phone)}`,
-        zip: form.zip,
-        category: caseType,
-        caseHistory: description,
-        state: "",
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
 
-        ipAddress: await getIPAddress(),
 
-        trustedFormCertUrl: tfCertUrl,
-        trustedFormToken: tfCertId,
-        trustedFormPingUrl: tfPingUrl,
+    setIsSubmitting(true);
 
-        submissionDate: new Date().toISOString(),
-        pageSource: getSourceUrl(),
-      },
-    };
-
-    // console.log("FINAL API BODY:", apiBody);
-
-    // =====================================================
-    // 1 CRM (AZURE) — MUST SUCCEED
-    // =====================================================
     try {
-      const res = await fetch(CRM_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(apiBody),
-      });
+      // ================== TRUSTEDFORM ==================
+      const tfCertUrl =
+        (
+          document.querySelector(
+            'input[name="xxTrustedFormCertUrl"]',
+          ) as HTMLInputElement
+        )?.value || "";
 
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error("CRM failed: " + text);
-      }
-    } catch (err) {
-      console.error("❌ CRM FAILED:", err);
-      // alert("Submission failed. Please try again.");
-      return;
-    }
-    // =====================================================
-    // 2 CLIENT WEBHOOK — CONDITIONAL HARD FAIL
-    // =====================================================
-    if (CLIENT_WEBHOOK_URL) {
+      const tfPingUrl =
+        (
+          document.querySelector(
+            'input[name="xxTrustedFormPingUrl"]',
+          ) as HTMLInputElement
+        )?.value || "";
+
+      const tfCertId = tfCertUrl ? tfCertUrl.split("/").pop() || "" : "";
+
+      // ================== BUILD PAYLOAD ==================
+      const apiBody = {
+        countryName: "USA",
+        brandName: "C2A",
+        websiteName: "Connect 2 Attorney",
+        formname: "Stepper Section Form",
+        sourceUrl: getSourceUrl(),
+        data: {
+          name: `${form.firstName} ${form.lastName}`,
+          email: form.email,
+          phone: `+1${normalizePhone(form.phone)}`,
+          zip: form.zip,
+          category: caseType,
+          caseHistory: description,
+          state: "",
+
+          ipAddress: await getIPAddress(),
+
+          trustedFormCertUrl: tfCertUrl,
+          trustedFormToken: tfCertId,
+          trustedFormPingUrl: tfPingUrl,
+
+          submissionDate: new Date().toISOString(),
+          pageSource: getSourceUrl(),
+        },
+      };
+
+      // console.log("FINAL API BODY:", apiBody);
+
+      // =====================================================
+      // 1 CRM (AZURE) — MUST SUCCEED
+      // =====================================================
       try {
-        const res = await fetch(CLIENT_WEBHOOK_URL, {
-          method: "POST",
+        const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(apiBody),
         });
 
         if (!res.ok) {
           const text = await res.text();
-          throw new Error("Webhook failed: " + text);
+          throw new Error("CRM failed: " + text);
         }
       } catch (err) {
-        console.error("❌ WEBHOOK FAILED:", err);
+        console.error("❌ CRM FAILED:", err);
         // alert("Submission failed. Please try again.");
         return;
       }
+      // =====================================================
+      // 2 CLIENT WEBHOOK — CONDITIONAL HARD FAIL
+      // =====================================================
+      if (CLIENT_WEBHOOK_URL) {
+        try {
+          const res = await fetch(CLIENT_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(apiBody),
+          });
+
+          if (!res.ok) {
+            const text = await res.text();
+            throw new Error("Webhook failed: " + text);
+          }
+        } catch (err) {
+          console.error("❌ WEBHOOK FAILED:", err);
+          // alert("Submission failed. Please try again.");
+          return;
+        }
+      }
+
+      // =====================================================
+      // 3 EMAILJS — MUST SUCCEED
+      // =====================================================
+      try {
+        await sendWithEmailJS(apiBody);
+      } catch (err) {
+        console.error("❌ EMAILJS FAILED:", err);
+        // alert("Submission failed. Please try again.");
+        return;
+      }
+
+      // =====================================================
+      // SUCCESS
+      // =====================================================
+      setDirection("next");
+      setStep(4);
+    } catch (e) {
+      console.error("❌ UNEXPECTED ERROR:", e);
+      // alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // =====================================================
-    // 3 EMAILJS — MUST SUCCEED
-    // =====================================================
-    try {
-      await sendWithEmailJS(apiBody);
-    } catch (err) {
-      console.error("❌ EMAILJS FAILED:", err);
-      // alert("Submission failed. Please try again.");
-      return;
-    }
-
-    
-
-    // =====================================================
-    // SUCCESS
-    // =====================================================
-    setDirection("next");
-    setStep(4);
-  } catch (e) {
-    console.error("❌ UNEXPECTED ERROR:", e);
-    // alert("Something went wrong. Please try again.");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
-
-
+  };
 
   /* ---------------- UI ---------------- */
 
   return (
-  <div className="w-full flex justify-center items-center p-3 sm:p-4">
-  <Toaster position="top-right" />
-  <div
-    ref={containerRef}
-    className="
+    <div className="w-full flex justify-center items-center p-3 sm:p-4">
+      <Toaster position="top-right" />
+      <div
+        ref={containerRef}
+        className="
       flex flex-col
       w-full
       max-w-[447px]
@@ -1002,255 +1072,372 @@ const handleSubmit = async () => {
       shadow-xl
       overflow-hidden
     "
-  >
-    {/* ---------------- STEP 1 ---------------- */}
-    <Step active={step === 1} direction={direction}>
-      <div className="flex flex-col h-full">
-        <form
-          className="flex flex-col h-full"
-          onSubmit={(e) => {
-            e.preventDefault();
-            next();
-          }}
-        >
-          {/* Hidden fields */}
-          <input type="hidden" name="xxTrustedFormCertUrl" />
-          <input type="hidden" name="xxTrustedFormCertToken" />
-          <input type="hidden" name="xxTrustedFormPingUrl" />
+      >
+        {/* ---------------- STEP 1 ---------------- */}
+        <Step active={step === 1} direction={direction}>
+          <div className="flex flex-col h-full">
+            <form
+              className="flex flex-col h-full"
+              onSubmit={async (e) => {
+                e.preventDefault();
 
-          {/* CONTENT AREA - Takes available space */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="p-4">
-              <div className="mb-4">
-                <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">  
-                  It&apos;s easy to get started
-                </h2>
-                <p className="text-[#6E6E6E] font-urbanist text-[13px] font-medium mt-1">  
-                  Provide a few details about your case and our team will take it from here.
-                </p>
-              </div>
+                if (!canProceed(1)) return;
 
-              <div className="flex flex-col gap-2">  
-                <Input label="First name" value={form.firstName} error={firstError || errors.firstName} onChange={handleFirstNameChange} />
-                <Input label="Last name" value={form.lastName} error={lastError || errors.lastName} onChange={handleLastNameChange} />
-                <Input label="Phone number" value={form.phone} error={phoneError || errors.phone} onChange={handlePhoneChange} />
-                <Input label="Email" value={form.email} error={emailError || errors.email} onChange={handleEmailChange} />
-                <Input label="Zip code" value={form.zip} error={zipError || errors.zip} onChange={handleZipChange} />
-              </div>
-            </div>
-          </div>
+                if (!leadId) {
+                  try {
+                    const id = generateLeadId();
+                    await createLeadEarly(id);
+                    setLeadId(id);
+                  } catch (err) {
+                    console.error("❌ Early API failed:", err);
+                    return;
+                  }
+                }
 
-          {/* FOOTER - Fixed at bottom */}
-          <div className="p-3 space-y-2   border-gray-100 bg-white">  
-            <ProgressBar step={step} />
-            <button type="submit" className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg">  
-              Next
-            </button>
-          </div>
-        </form>
-      </div>
-    </Step>
-
-    {/* ---------------- STEP 2 ---------------- */}
-    <Step active={step === 2} direction={direction}>
-      <div className="flex flex-col h-full" ref={dropdownRef}>
-        {/* CONTENT AREA - Takes available space */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-4 space-y-3"> 
-            <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
-              Select Your Case
-            </h2>
-
-            <p className="font-urbanist font-medium text-[#6E6E6E] text-[13px] leading-normal">
-              Tell us about your situation, and we&apos;ll connect you with the right legal support.
-            </p>
-
-            {/* Dropdown */}
-            <button
-              type="button"
-              onClick={() => setDropdownOpen((v) => !v)}
-              className="w-full h-[45px] px-3 rounded-[8px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[15px] font-medium text-[#303030]"
+                next();
+              }}
             >
-              <span className="truncate">{caseType || "Choose from the list"}</span>
-              {dropdownOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </button>
+              {/* Hidden fields */}
+              <input type="hidden" name="xxTrustedFormCertUrl" />
+              <input type="hidden" name="xxTrustedFormCertToken" />
+              <input type="hidden" name="xxTrustedFormPingUrl" />
 
-            {dropdownOpen && (
-              <div className="w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[160px] overflow-y-auto">
-                {CASES.map((item) => (
-                  <div
-                    key={item}
-                    onClick={() => {
-                      setCaseType(item);
-                      setDropdownOpen(false);
-                      setErrors({});
-                    }}
-                    className={`h-[40px] px-3 flex items-center cursor-pointer text-[14px] ${
-                      caseType === item ? "bg-[#162766] text-white" : "text-[#162766] hover:bg-[#162766] hover:text-white"
-                    }`}
-                  >
-                    {item}
+              {/* CONTENT AREA - Takes available space */}
+              <div id="stepper-form" className="flex-1 overflow-y-auto">
+                <div className="p-4">
+                  <div className="mb-4">
+                    <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
+                      It&apos;s easy to get started
+                    </h2>
+                    <p className="text-[#6E6E6E] font-urbanist text-[13px] font-medium mt-1">
+                      Provide a few details about your case and our team will
+                      take it from here.
+                    </p>
                   </div>
-                ))}
+
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      label="First name"
+                      value={form.firstName}
+                      error={firstError || errors.firstName}
+                      onChange={handleFirstNameChange}
+                    />
+                    <Input
+                      label="Last name"
+                      value={form.lastName}
+                      error={lastError || errors.lastName}
+                      onChange={handleLastNameChange}
+                    />
+                    <Input
+                      label="Phone number"
+                      value={form.phone}
+                      error={phoneError || errors.phone}
+                      onChange={handlePhoneChange}
+                    />
+                    <Input
+                      label="Email"
+                      value={form.email}
+                      error={emailError || errors.email}
+                      onChange={handleEmailChange}
+                    />
+                    <Input
+                      label="Zip code"
+                      value={form.zip}
+                      error={zipError || errors.zip}
+                      onChange={handleZipChange}
+                    />
+                  </div>
+                </div>
               </div>
-            )}
 
-            <textarea
-              placeholder="Please describe what happened"
-              className="w-full border border-[#E2E4EA] rounded-[8px] p-3 min-h-[100px] resize-y text-[14px]"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* FOOTER - Fixed at bottom */}
-        <div className="p-3 space-y-2   border-gray-100 bg-white">
-          <ProgressBar step={step} />
-          <button onClick={next} className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg">
-            Next
-          </button>
-        </div>
-      </div>
-    </Step>
-
-    {/* ---------------- STEP 3 ---------------- */}
-    <Step active={step === 3} direction={direction}>
-      <div className="flex flex-col h-full">
-        {/* CONTENT AREA - Takes available space */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-4 space-y-3">
-            <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
-              Confirm your Personal Details
-            </h2>
-
-            {/* Details Card */}
-            <div className="border border-[#E6E8F0] rounded-xl p-3 space-y-1.5 text-[13px]">
-              <div className="flex items-center">
-                <Row label="First name" value={form.firstName} />
+              {/* FOOTER - Fixed at bottom */}
+              <div className="p-3 space-y-2   border-gray-100 bg-white">
+                <ProgressBar step={step} />
                 <button
-                  onClick={() => {
-                    setDirection("back");
-                    setStep(1);
-                  }}
-                  className="ml-auto text-[#162766]"
-                  aria-label="Edit"
+                  type="submit"
+                  className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg"
                 >
-                  <PencilIcon className="w-3.5 h-3.5" />
+                  Next
                 </button>
               </div>
+            </form>
+          </div>
+        </Step>
 
-              <Row label="Last name" value={form.lastName} />
-              <Row label="Phone number" value={formatPhone(form.phone)} />
-              <Row label="Email" value={form.email} />
-              <Row label="Zip code" value={form.zip} />
-              <Row label="Case Type" value={caseType} />
+        {/* ---------------- STEP 2 ---------------- */}
+        <Step active={step === 2} direction={direction}>
+          <div className="flex flex-col h-full" ref={dropdownRef}>
+            {/* CONTENT AREA - Takes available space */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4 space-y-3">
+                <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
+                  Select Your Case
+                </h2>
+
+                <p className="font-urbanist font-medium text-[#6E6E6E] text-[13px] leading-normal">
+                  Tell us about your situation, and we&apos;ll connect you with
+                  the right legal support.
+                </p>
+
+                {/* Dropdown */}
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen((v) => !v)}
+                  className="w-full h-[45px] px-3 rounded-[8px] border border-[#E2E4EA] flex items-center justify-between font-poppins text-[15px] font-medium text-[#303030]"
+                >
+                  <span className="truncate">
+                    {caseType || "Choose from the list"}
+                  </span>
+                  {dropdownOpen ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
+                </button>
+
+                {dropdownOpen && (
+                  <div className="w-full rounded-md border border-[#E8E9F0] bg-white shadow-lg overflow-hidden max-h-[160px] overflow-y-auto">
+                    {CASES.map((item) => (
+                      <div
+                        key={item}
+                        onClick={() => {
+                          setCaseType(item);
+                          setDropdownOpen(false);
+                          setErrors({});
+                        }}
+                        className={`h-[40px] px-3 flex items-center cursor-pointer text-[14px] ${
+                          caseType === item
+                            ? "bg-[#162766] text-white"
+                            : "text-[#162766] hover:bg-[#162766] hover:text-white"
+                        }`}
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <textarea
+                  placeholder="Please describe what happened"
+                  className="w-full border border-[#E2E4EA] rounded-[8px] p-3 min-h-[100px] resize-y text-[14px]"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
             </div>
 
-            {/* CONSENT + CAPTCHA */}
-            <div className="pt-2 space-y-2">
-              <label className="flex items-start gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={robotChecked}
-                  disabled={isSubmitting}
-                  onChange={(e) => {
-                    const checked = e.target.checked;
-                    setRobotChecked(checked);
-
-                    if (checked) {
-                      setShowCaptcha(true);
-                    } else {
-                      setShowCaptcha(false);
-                      setCaptchaVerified(false);
-                      setCaptchaResetTrigger((p) => !p);
-                    }
-                  }}
-                  className="mt-[2px] w-[14px] h-[14px]"
-                />
-
-                <span className="font-urbanist text-[11px] font-normal tracking-[0.2px] leading-[14px] text-[#425777]">
-                  I hereby expressly consent to receive automated
-                  communications including calls, texts, emails, and/or
-                  prerecorded messages.
-                  <br />
-                  <br />
-                  By submitting this form, you agree to our{" "}
-                  <span className="underline cursor-pointer">Terms</span> &
-                  acknowledge our{" "}
-                  <span className="underline cursor-pointer">
-                    Privacy Policy
-                  </span>
-                  .
-                </span>
-              </label>
-
-              {/* CAPTCHA */}
-              {showCaptcha && (
-                <div className="pt-1">
-                  <CustomCaptcha
-                    onCaptchaChange={(valid) => {
-                      setCaptchaVerified(valid);
-                      if (valid) setRobotChecked(true);
-                    }}
-                    resetTrigger={captchaResetTrigger}
-                    disabled={isSubmitting}
-                  />
-                </div>
-              )}
+            {/* FOOTER - Fixed at bottom */}
+            <div className="p-3 space-y-2   border-gray-100 bg-white">
+              <ProgressBar step={step} />
+              <button
+                onClick={next}
+                className="w-full bg-[#FCCB48] text-[#162766] font-semibold py-2.5 rounded-lg"
+              >
+                Next
+              </button>
             </div>
           </div>
-        </div>
+        </Step>
 
-        {/* FOOTER - Fixed at bottom */}
-        <div className="p-3 space-y-2   border-gray-100 bg-white">
-          <ProgressBar step={step} />
-          <button
-            disabled={isSubmitting || !captchaVerified}
-            className={`w-full h-[42px] rounded-lg font-semibold transition-all text-sm ${
-              isSubmitting || !captchaVerified
-                ? "bg-gray-300 cursor-not-allowed text-gray-600"
-                : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
-            }`}
-            onClick={handleSubmit}
-          >
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </button>
-        </div>
+        {/* ---------------- STEP 3 ---------------- */}
+        <Step active={step === 3} direction={direction}>
+          <div className="flex flex-col h-full">
+            {/* CONTENT AREA - Takes available space */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4 space-y-3">
+                <h2 className="text-[#162766] font-urbanist text-[20px] font-semibold leading-[26px]">
+                  Confirm your Personal Details
+                </h2>
+
+                {/* Details Card */}
+                <div className="border border-[#E6E8F0] rounded-xl p-3 space-y-1.5 text-[13px]">
+                  <div className="flex items-center">
+                    <Row label="First name" value={form.firstName} />
+                    <button
+                      onClick={() => {
+                        setDirection("back");
+                        setStep(1);
+                      }}
+                      className="ml-auto text-[#162766]"
+                      aria-label="Edit"
+                    >
+                      <PencilIcon className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  <Row label="Last name" value={form.lastName} />
+                  <Row label="Phone number" value={formatPhone(form.phone)} />
+                  <Row label="Email" value={form.email} />
+                  <Row label="Zip code" value={form.zip} />
+                  <Row label="Case Type" value={caseType} />
+                </div>
+
+                {/* CONSENT + CAPTCHA */}
+                <div className="pt-2 space-y-2">
+                  <label className="flex items-start gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={consentChecked}
+                      disabled={isSubmitting}
+                      className={checkboxClass}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setConsentChecked(checked);
+
+                        if (checked) {
+                          setShowCaptcha(true);
+                        } else {
+                          setShowCaptcha(false);
+                          setCaptchaVerified(false);
+                          setCaptchaResetTrigger((p) => !p);
+                        }
+                      }}
+                    />
+
+                    <div className="text-[#808080] text-[12px] leading-relaxed">
+                      {/* Short text (always visible) */}
+                      <span>
+                        I agree to the{" "}
+                        <span className="text-[#162766] font-semibold underline cursor-pointer">
+                          Privacy Policy &amp; Disclaimer
+                        </span>{" "}
+                        and give my express written consent.
+                      </span>
+
+                      {/* Read more button */}
+                      {!showFullConsent && (
+                        <button
+                          type="button"
+                          onClick={() => setShowFullConsent(true)}
+                          className="ml-2 text-[#162766] font-semibold underline"
+                        >
+                          Read more
+                        </button>
+                      )}
+
+                      {/* Expanded text */}
+                      {showFullConsent && (
+                        <>
+                          <span>
+                            {" "}
+                            I expressly consent to receive communications from
+                            written affiliates and/or attorneys at the number
+                            provided above, even if this number is a wireless
+                            number or if I am presently listed on a Do Not Call
+                            list. I understand that I may be contacted by
+                            telephone, email, text message or mail regarding
+                            case options and that I may be called using
+                            automatic dialing equipment. Message and data rates
+                            may apply. My consent does not require purchase.
+                            This is legal advertising.
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={() => setShowFullConsent(false)}
+                            className="ml-2 text-[#162766] font-semibold underline"
+                          >
+                            Show less
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </label>
+                  <label className="flex items-start gap-2 cursor-pointer">
+                    <input
+                      id="captchabox-check"
+                      name="captchaCheck"
+                      type="checkbox"
+                      checked={captchaChecked}
+                      disabled={isSubmitting}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setCaptchaChecked(checked);
+
+                        if (checked) {
+                          setShowCaptcha(true);
+                        } else {
+                          setShowCaptcha(false);
+                          setCaptchaVerified(false);
+                          setCaptchaResetTrigger((p) => !p);
+                        }
+                      }}
+                      className={checkboxClass}
+                    />
+
+                    <span className="text-[#808080] text-[12px]">
+                      Please check this box so we know you&apos;re a person and
+                      not a computer
+                    </span>
+                  </label>
+
+                  {/* CAPTCHA */}
+                  {showCaptcha && (
+                    <div className="pt-1">
+                      <CustomCaptcha
+                        onCaptchaChange={(valid) => {
+                          setCaptchaVerified(valid);
+                          if (valid) setCaptchaChecked(true);
+                        }}
+                        resetTrigger={captchaResetTrigger}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* FOOTER - Fixed at bottom */}
+            <div className="p-3 space-y-2   border-gray-100 bg-white">
+              <ProgressBar step={step} />
+              <button
+                disabled={isSubmitting || !consentChecked || !captchaVerified}
+                className={`w-full h-[42px] rounded-lg font-semibold transition-all text-sm ${
+                  isSubmitting || !captchaVerified
+                    ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                    : "bg-[#FCCB48] text-[#162766] hover:brightness-105"
+                }`}
+                onClick={handleSubmit}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
+            </div>
+          </div>
+        </Step>
+
+        {/* ---------------- STEP 4 ---------------- */}
+        <Step active={step === 4} direction={direction}>
+          <div className="relative w-full h-full flex items-center justify-center p-4">
+            {/* Background */}
+            <img
+              src="/bgshape.svg"
+              alt=""
+              className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+            />
+
+            {/* Content centered */}
+            <div className="relative z-10 flex flex-col items-center text-center">
+              <img
+                src="/success_check.svg"
+                alt="Submission successful"
+                className="w-20 h-20 mb-3"
+              />
+
+              <h2 className="font-urbanist text-[#162766] font-medium text-lg sm:text-xl md:text-2xl leading-tight mb-2">
+                Thank You!
+              </h2>
+
+              <p className="font-urbanist text-[#6E6E6E] font-medium text-[14px] leading-normal text-center max-w-[240px]">
+                We&apos;ve received your request and will begin processing it
+                shortly.
+              </p>
+            </div>
+          </div>
+        </Step>
       </div>
-    </Step>
-
-    {/* ---------------- STEP 4 ---------------- */}
-    <Step active={step === 4} direction={direction}>
-      <div className="relative w-full h-full flex items-center justify-center p-4">
-        {/* Background */}
-        <img
-          src="/bgshape.svg"
-          alt=""
-          className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-        />
-
-        {/* Content centered */}
-        <div className="relative z-10 flex flex-col items-center text-center">
-          <img
-            src="/success_check.svg"
-            alt="Submission successful"
-            className="w-20 h-20 mb-3"  
-          />
-
-          <h2 className="font-urbanist text-[#162766] font-medium text-lg sm:text-xl md:text-2xl leading-tight mb-2">
-            Thank You!
-          </h2>
-
-          <p className="font-urbanist text-[#6E6E6E] font-medium text-[14px] leading-normal text-center max-w-[240px]">
-            We&apos;ve received your request and will begin processing it
-            shortly.
-          </p>
-        </div>
-      </div>
-    </Step>
-  </div>
-</div>
+    </div>
   );
 }
 
@@ -1284,7 +1471,6 @@ function Step({
     </div>
   );
 }
-
 
 function Input({
   label,
@@ -1327,16 +1513,12 @@ function Input({
       {/* Error message */}
       <div className="min-h-[8px] mt-0.5 pl-1">
         {error && (
-          <p className="text-[9px] text-red-500 leading-tight">
-            {error}
-          </p>
+          <p className="text-[9px] text-red-500 leading-tight">{error}</p>
         )}
       </div>
     </div>
   );
 }
-
-
 
 function Row({ label, value }: { label: string; value: string }) {
   return (

@@ -24,19 +24,19 @@ const HERO_CONFIG: Record<string, { title: React.ReactNode; bg: string }> = {
     bg: "/sexualabuseimg.png",
   },
 
-  "motor-vehicle-accident-lawsuit": {
+  "motor-vehicle-accident": {
     title:
       "Motor Vehicle Accident Lawsuit: Injury Claims, Legal Rights & Compensation",
     bg: "/motorbgimg.png",
   },
 
-  "slip-and-fall-injury-lawsuit": {
+  "slip-and-fall": {
     title:
       "Slip and Fall Injury Lawsuit: Liability, Legal Rights & Compensation",
     bg: "/slipnfallimg.png",
   },
 
-  "18-wheeler-lawsuit": {
+  "18-wheeler-accident": {
     title: "18-Wheeler Accident Lawsuit Settlements and Compensation",
     bg: "/truckbgimg.png",
   },
@@ -71,7 +71,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "While not legally required, working with an experienced sexual abuse attorney can help ensure proper documentation, maximize compensation, and navigate complex legal procedures.",
     },
   ],
-  "motor-vehicle-accident-lawsuit": [
+  "motor-vehicle-accident": [
     {
       question: "Who can file a motor vehicle accident claim?",
       answer:
@@ -101,7 +101,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Common evidence includes police reports, medical records, witness statements, photographs or videos of the accident scene, vehicle damage documentation, and insurance information.",
     },
   ],
-  "slip-and-fall-injury-lawsuit": [
+  "slip-and-fall": [
     {
       question: "Do I need an attorney for a slip and fall case?",
       answer:
@@ -128,7 +128,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Many slip and fall claims are resolved through settlement negotiations. However, if a fair settlement cannot be reached, the case may proceed to litigation.",
     },
   ],
-  "18-wheeler-lawsuit": [
+  "18-wheeler-accident": [
     {
       question: "What should I do immediately after an 18-wheeler accident?",
       answer:
@@ -150,8 +150,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Yes. Many states follow comparative negligence laws that allow injured parties to recover compensation even if they share some responsibility, though the total amount may be reduced based on their percentage of fault.",
     },
     {
-      question:
-        "What types of damages can I recover?",
+      question: "What types of damages can I recover?",
       answer:
         "You may be able to recover compensation for medical expenses, lost wages, pain and suffering, property damage, future medical care, and long-term or permanent disabilities.",
     },
@@ -185,9 +184,9 @@ export default function MassTortPage() {
   }
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "sexual-abuse-lawsuit": <SexualAbuseLegalPage />,
-    "motor-vehicle-accident-lawsuit": <MvaLawsuitsLegalPage />,
-    "slip-and-fall-injury-lawsuit": <SlipnFallLawsuitsLegalPage />,
-    "18-wheeler-lawsuit": <TruckAccidentLawsuitsLegalPage />,
+    "motor-vehicle-accident": <MvaLawsuitsLegalPage />,
+    "slip-and-fall": <SlipnFallLawsuitsLegalPage />,
+    "18-wheeler-accident": <TruckAccidentLawsuitsLegalPage />,
   };
   const SUPPORT_BY_SLUG: Record<
     string,
@@ -199,27 +198,27 @@ export default function MassTortPage() {
         "You don’t have to fight this battle alone. If sexual abuse in an institution or workplace has harmed you physically or mentally, Connect2Attorney can help you: ",
     },
 
-    "motor-vehicle-accident-lawsuit": {
+    "motor-vehicle-accident": {
       title: "Get Legal Support from Connect2Attorney",
       description:
         "You don’t have to fight this battle alone. If a motor vehicle accident has caused you injury or property damage, Connect2Attorney can help you: ",
     },
-    "slip-and-fall-injury-lawsuit": {
+    "slip-and-fall": {
       title: "Get Legal Support from Connect2Attorney",
       description:
         "You don’t have to fight this battle alone. If slip and fall has caused you injury, Connect2Attorney can help you: ",
     },
-    "18-wheeler-lawsuit": {
+    "18-wheeler-accident": {
       title: "Get Legal Support from Connect2Attorney",
       description:
         "You don't have to handle this issue alone. If an 18-wheeler accident has caused you personal injury or property damage, Connect2Attorney can help you: ",
     },
   };
   const HERO_IMAGE_BY_SLUG: Record<string, string> = {
-    "sexual-abuse-lawsuit": "/sexual-abuse-lawsuit.png",
-    "motor-vehicle-accident-lawsuit": "/motor-vehicle-accident-lawsuit.png",
-    "slip-and-fall-injury-lawsuit": "/slip-and-fall-injury-lawsuit.png",
-    "18-wheeler-lawsuit": "/18-wheeler-lawsuit.png",
+    "sexual-abuse-lawsuit": "/sexualabuseimg.png",
+    "motor-vehicle-accident": "/motorbgimg.png",
+    "slip-and-fall": "/slipnfallimg.png",
+    "18-wheeler-accident": "/truckbgimg.png",
   };
 
   const timelineConfig = TIMELINE_BY_SLUG[slug];

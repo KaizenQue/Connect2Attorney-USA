@@ -31,6 +31,13 @@ declare global {
   }
 }
 
+const validateName = (value: string) => {
+  if (!value.trim()) return "This field is required";
+  if (value.trim().length < 2) return "Must be at least 2 characters";
+  return "";
+};
+
+
 const formatUSAMobile = (input: string): string => {
   if (!input) return "";
 
@@ -2483,6 +2490,9 @@ const LandingPageContactus: React.FC<{
     }
   }, []);
 
+
+
+
   const handleChange = useCallback(
     (
       e: React.ChangeEvent<
@@ -2508,6 +2518,8 @@ const LandingPageContactus: React.FC<{
 
           return;
         }
+
+        
 
         if (name === "phone") {
           handlePhoneChange(value);

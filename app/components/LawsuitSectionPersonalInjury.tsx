@@ -24,13 +24,13 @@ const casesData: CaseItem[] = [
     id: 2,
     title: "Motor Vehicle Accident Lawsuit",
     image: "/motorimg.svg",
-    url: "/personal-injury/motor-vehicle-accident-lawsuit",
+    url: "/personal-injury/motor-vehicle-accident",
   },
   {
     id: 3,
     title: "Slip and Fall Injury Lawsuit",
     image: "/slipimg.svg",
-    url: "/personal-injury/slip-and-fall-injury-lawsuit",
+    url: "/personal-injury/slip-and-fall",
   },
   {
     id: 4,
@@ -52,13 +52,13 @@ const mobileCasesData: CaseItem[] = [
     id: 2,
     title: "Motor Vehicle Accident Lawsuit",
     image: "/motorimgmobile.svg",
-    url: "/personal-injury/motor-vehicle-accident-lawsuit",
+    url: "/personal-injury/motor-vehicle-accident",
   },
   {
     id: 3,
     title: "Slip and Fall Injury Lawsuit",
     image: "/slipimgmobile.svg",
-    url: "/personal-injury/slip-and-fall-injury-lawsuit",
+    url: "/personal-injury/slip-and-fall",
   },
   {
     id: 4,

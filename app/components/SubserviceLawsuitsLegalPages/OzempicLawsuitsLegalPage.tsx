@@ -260,6 +260,11 @@ const LawsuitsLegalPage = () => {
   const [isFixed, setIsFixed] = useState<boolean>(false);
   const [isAtBottom, setIsAtBottom] = useState<boolean>(false);
 
+  const mobileTocWrapperRef = useRef<HTMLDivElement | null>(null);
+  const mobileTocInnerRef = useRef<HTMLDivElement | null>(null);
+
+  const [isMobileTocFixed, setIsMobileTocFixed] = useState(false);
+
   useEffect(() => {
     const onScroll = () => {
       if (!wrapperRef.current || !ctaRef.current) return;
@@ -277,6 +282,26 @@ const LawsuitsLegalPage = () => {
 
     window.addEventListener("scroll", onScroll);
     onScroll(); // run once on mount
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!mobileTocWrapperRef.current) return;
+
+      // Only for tablet + mobile
+      if (window.innerWidth >= 1024) return;
+
+      const NAVBAR_HEIGHT = 60;
+      const rect = mobileTocWrapperRef.current.getBoundingClientRect();
+
+      // Stick when TOC reaches navbar
+      setIsMobileTocFixed(rect.top <= NAVBAR_HEIGHT);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -317,9 +342,24 @@ const LawsuitsLegalPage = () => {
       {/* Page Container */}
       <div className="mx-auto px-2 sm:px-2 md:px-8 py-1 md:py-8">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
-        <div className="lg:hidden mb-10 shadow-md">
-          <TableOfContents items={OZEMPIC_TOC} />
+        {/* MOBILE / TABLET TOC */}
+        <div ref={mobileTocWrapperRef} className="lg:hidden relative mb-10">
+          {/* Spacer to prevent content jump */}
+          {isMobileTocFixed && <div className="h-[60px]" />}
+
+          <div
+            ref={mobileTocInnerRef}
+            className={
+              isMobileTocFixed
+                ? "fixed left-0 right-0 z-40 px-5 md:px-10 lg:px-0 bg-white"
+                : "relative"
+            }
+            style={isMobileTocFixed ? { top: 60 } : undefined}
+          >
+            <TableOfContents items={OZEMPIC_TOC} />
+          </div>
         </div>
+
         <div className="flex flex-col lg:flex-row gap-18">
           {/* Left Content Column */}
           <div className="flex-1 max-w-[946px]">
@@ -348,7 +388,7 @@ const LawsuitsLegalPage = () => {
 
             <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1">
               <p>{content.pageContent.mainParagraphs[0]}</p>
-                <br  className="lg:hidden"/>
+              <br className="lg:hidden" />
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
               <br />
@@ -645,12 +685,11 @@ const LawsuitsLegalPage = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mb-8">
+              <div className="mb-8 ">
                 <TableOfContents items={OZEMPIC_TOC} />
               </div>
             </div>
           </aside>
-          {/* Content Table */}
         </div>
       </div>
     </div>

@@ -469,39 +469,55 @@ const ContactSection = () => {
     }
   }, []);
 
+  const sanitizeName = (value: string) =>
+  value
+    .replace(/\s{2,}/g, " ")
+    .replace(/[^a-zA-Z\s]/g, "");
+
+
   // Handle input changes with live validation
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  const { name, value, type } = e.target;
+  const checked = (e.target as HTMLInputElement).checked;
 
-    if (type === "checkbox") {
-      if (name === "captchaCheck") {
-        setShowCaptcha(checked);
-        setCaptchaValid(false);
-        if (checked) {
-          setResetTrigger((t) => !t);
-        }
-        return;
-      }
-      setForm({ ...form, [name]: checked });
-      setErrors({ ...errors, [name]: "" });
+  if (type === "checkbox") {
+    if (name === "captchaCheck") {
+      setShowCaptcha(checked);
+      setCaptchaValid(false);
+      if (checked) setResetTrigger((t) => !t);
       return;
     }
 
-    if (name === "phone") {
-      const formatted = formatUSAMobile(value);
-      const error = validateField(name, formatted);
-      setForm({ ...form, phone: formatted });
-      setErrors({ ...errors, phone: error });
-      return;
-    }
+    setForm((prev) => ({ ...prev, [name]: checked }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+    return;
+  }
 
-    const error = validateField(name, value);
-    setForm({ ...form, [name]: value });
-    setErrors({ ...errors, [name]: error });
-  };
+  if (name === "firstName" || name === "lastName") {
+    const cleaned = sanitizeName(value);
+    const error = validateName(cleaned);
+
+    setForm((prev) => ({ ...prev, [name]: cleaned }));
+    setErrors((prev) => ({ ...prev, [name]: error }));
+    return;
+  }
+
+  if (name === "phone") {
+    const formatted = formatUSAMobile(value);
+    const error = validatePhone(formatted);
+
+    setForm((prev) => ({ ...prev, phone: formatted }));
+    setErrors((prev) => ({ ...prev, phone: error }));
+    return;
+  }
+
+  const error = validateField(name, value);
+  setForm((prev) => ({ ...prev, [name]: value }));
+  setErrors((prev) => ({ ...prev, [name]: error }));
+};
+
 
   // Blur validation for immediate feedback
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -10,7 +10,7 @@ const MASS_TORT_LAWSUIT_TYPES = [
   { name: "Mesothelioma Lawsuit", href: "/mass-tort/mesothelioma-lawsuit" },
   { name: "Depo-Provera Lawsuit", href: "/mass-tort/depo-provera-lawsuit" },
   { name: "Roundup Cancer Lawsuit", href: "/mass-tort/roundup-lawsuit" },
-  { name: "Talcum Powder Lawsuit", href: "/mass-tort/talcum-lawsuit" },
+  { name: "Talcum Powder Lawsuit", href: "/mass-tort/talcum-powder-lawsuit" },
 ];
 
 const CLASS_ACTION_LAWSUIT_TYPES = [
@@ -31,15 +31,15 @@ const PERSONAL_INJURY_LAWSUIT_TYPES = [
   },
   {
     name: "Motor Vehicle Accident Lawsuit",
-    href: "/personal-injury/motor-vehicle-accident-lawsuit",
+    href: "/personal-injury/motor-vehicle-accident",
   },
   {
     name: "Slip and Fall Injury Lawsuit",
-    href: "/personal-injury/slip-and-fall-injury-lawsuit",
+    href: "/personal-injury/slip-and-fall",
   },
   {
     name: "18-Wheeler Accident Lawsuit",
-    href: "/personal-injury/18-wheeler-lawsuit",
+    href: "/personal-injury/18-wheeler-accident",
   },
 ];
 

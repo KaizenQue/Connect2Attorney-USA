@@ -307,8 +307,7 @@ export const content = {
 
   ctaContent: {
     title: "Were You Affected? ",
-    description:
-      "You may be entitled to compensation. ",
+    description: "You may be entitled to compensation. ",
     buttonText: "Get a Free Case Review",
   },
 
@@ -341,6 +340,11 @@ const LawsuitsLegalPage = () => {
   const [isFixed, setIsFixed] = useState<boolean>(false);
   const [isAtBottom, setIsAtBottom] = useState<boolean>(false);
 
+  const mobileTocWrapperRef = useRef<HTMLDivElement | null>(null);
+  const mobileTocInnerRef = useRef<HTMLDivElement | null>(null);
+
+  const [isMobileTocFixed, setIsMobileTocFixed] = useState(false);
+
   useEffect(() => {
     const onScroll = () => {
       if (!wrapperRef.current || !ctaRef.current) return;
@@ -358,6 +362,26 @@ const LawsuitsLegalPage = () => {
 
     window.addEventListener("scroll", onScroll);
     onScroll(); // run once on mount
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!mobileTocWrapperRef.current) return;
+
+      // Only for tablet + mobile
+      if (window.innerWidth >= 1024) return;
+
+      const NAVBAR_HEIGHT = 60;
+      const rect = mobileTocWrapperRef.current.getBoundingClientRect();
+
+      // Stick when TOC reaches navbar
+      setIsMobileTocFixed(rect.top <= NAVBAR_HEIGHT);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -398,8 +422,21 @@ const LawsuitsLegalPage = () => {
       {/* Page Container */}
       <div className="mx-auto px-4 sm:px-6 md:px-8 py-2 lg:py-12">
         {/* ==================== SECTION 1: Ozempic Lawsuit ==================== */}
-        <div className="lg:hidden mb-4">
-          <TableOfContents />
+        <div ref={mobileTocWrapperRef} className="lg:hidden relative mb-10">
+          {/* Spacer to prevent content jump */}
+          {isMobileTocFixed && <div className="h-[60px]" />}
+
+          <div
+            ref={mobileTocInnerRef}
+            className={
+              isMobileTocFixed
+                ? "fixed left-0 right-0 z-40 px-5 md:px-10 lg:px-0 bg-white"
+                : "relative"
+            }
+            style={isMobileTocFixed ? { top: 60 } : undefined}
+          >
+            <TableOfContents />
+          </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Content Column */}
@@ -410,17 +447,14 @@ const LawsuitsLegalPage = () => {
             >
               {content.pageContent.mainTitle}
             </h1>
-            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[18px] leading-[27px] space-y-1">
+            <div className="mb-10 font-urbanist font-medium text-[#425777] text-[16px] lg:text-[18px] leading-[27px] space-y-1">
               <p>{content.pageContent.mainParagraphs[0]}</p>
               <br />
 
               <p>{content.pageContent.mainParagraphs[1]}</p>
               <br />
-              
 
-              <p>
-                {content.pageContent.mainParagraphs[2]}
-              </p>
+              <p>{content.pageContent.mainParagraphs[2]}</p>
             </div>
 
             {/* ==================== Eligibility SECTION ==================== */}
@@ -505,7 +539,10 @@ const LawsuitsLegalPage = () => {
                     </svg>
                   </span>
 
-                  <span className="text-[#425777] font-bold"> {item.description}</span>
+                  <span className="text-[#425777] font-bold">
+                    {" "}
+                    {item.description}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -554,7 +591,6 @@ const LawsuitsLegalPage = () => {
             <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-medium leading-[24px] sm:leading-[27px]">
               {content.pageContent.limitationsParagraph}
             </p>
-            
 
             <p className="font-urbanist text-[#425777] text-[16px] sm:text-[18px] font-bold leading-[24px] sm:leading-[27px]">
               {content.pageContent.limitationsSub1}
@@ -564,7 +600,7 @@ const LawsuitsLegalPage = () => {
             <ul className="list-none list-outside space-y-3 mb-8  marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
               {content.limitationsPoints1.map((item, index) => (
                 <li key={index} className="">
-                    <span className="inline-block mr-2">
+                  <span className="inline-block mr-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="14"
@@ -591,7 +627,7 @@ const LawsuitsLegalPage = () => {
             <ul className="list-none list-outside space-y-3 mb-8 marker:text-[#2d3663] marker:font-bold font-urbanist font-normal text-[16px] sm:text-[17px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[27px]">
               {content.limitationsPoints2.map((item, index) => (
                 <li key={index} className="">
-                    <span className="inline-block mr-2">
+                  <span className="inline-block mr-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="14"
@@ -818,7 +854,6 @@ const StepsComponent = () => {
         >
           {/* TOP ROW: BADGE + TITLE */}
           <div className="flex items-start gap-4">
-            
             {/* STEP BADGE (Figma Perfect) */}
             <div
               className="
@@ -911,6 +946,27 @@ const tocItems1 = [
 ];
 
 const TableOfContents = () => {
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  const [open, setOpen] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth >= 1024; // lg+
+  });
+
+  
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) {
+        setOpen(true); // always open on desktop
+      } else {
+        setOpen(false); // collapsed on mobile/tablet
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -921,10 +977,34 @@ const TableOfContents = () => {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const ids = tocItems1.map((item) => item.id);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -50% 0px",
+        threshold: 0,
+      },
+    );
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [tocItems1]);
 
   return (
-      <div className="lg:mt-6 mt-4 w-full">
+    <div className="lg:mt-6 mt-4 w-full">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}
@@ -972,16 +1052,16 @@ const TableOfContents = () => {
             rounded-xl
             border border-[#d9e0ff]
             bg-[#f9fafc]
-            p-4
+            p-4 
           "
         >
           <div
             className="
-              max-h-[300px]
+              max-h-[300px]     
               overflow-y-auto
               flex flex-col
               gap-2
-              pr-1
+              pr-1           
             "
           >
             {tocItems1.map((item) => (
@@ -989,22 +1069,24 @@ const TableOfContents = () => {
                 key={item.id}
                 onClick={() => {
                   scrollToSection(item.id);
-                  setOpen(false);
+                  if (window.innerWidth < 1024) {
+                    setOpen(false);
+                  }
                 }}
-                className="
-      w-full
-      flex items-center
-      px-4 py-3.5
-      bg-white
-      rounded-lg
-      text-[#162766]
-      font-urbanist
-      text-[15px] xl:text-[16px]
-      font-medium
-      cursor-pointer
-      hover:bg-[#eef1ff]
-      transition
-    "
+                className={`
+    px-4
+    py-3.5
+    rounded-lg
+    font-urbanist
+    text-[15px]
+    cursor-pointer
+    transition
+    ${
+      activeId === item.id
+        ? "bg-[#eef1ff] text-[#162766] font-bold"
+        : "text-[#162766] font-medium hover:bg-[#eef1ff]"
+    }
+  `}
               >
                 <span className="leading-snug">{item.label}</span>
               </div>

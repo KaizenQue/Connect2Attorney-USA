@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xl15: "1408px", // ✅ 1.5xl breakpoint (between xl and 2xl)
+        xl15: "1408px", //  1.5xl breakpoint (between xl and 2xl)
       },
 
       colors: {

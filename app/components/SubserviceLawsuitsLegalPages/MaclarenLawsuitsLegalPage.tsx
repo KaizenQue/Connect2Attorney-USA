@@ -11,7 +11,7 @@ export const content = {
     mainTitle: "main-title",
     eligibleTitle: "allegations-title",
     healthRisksTitle: "health-risks-title",
-    allegationsTitle1: "allegations-title",
+    allegationsTitle1: "allegations-title1",
     harmsExpiriencedTitle: "harms-experienced-title",
     whoQualifiesTitle: "who-qualifies-title",
     compensationTitle: "compensation-title",

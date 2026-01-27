@@ -7,6 +7,12 @@ import React, {
 } from "react";
 import Image from "next/image";
 import "./EnquiryForm2.css";
+import { sendWithEmailJS } from "../emailjs";
+// import { Phone } from "lucide-react";
+
+const CRM_API_URL =
+  "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
+
 // Import required icons and components
 const ChevronDownIcon = ({ className }: { className?: string }) => (
   <svg
@@ -81,17 +87,6 @@ const getSourceUrl = (): string => {
     return window.location.href;
   }
   return "Unknown";
-};
-
-// Mock email sending functions - replace with actual implementations
-const sendFormAdmin = async (data: any): Promise<void> => {
-  // console.log("Sending admin email:", data);
-  // Implement your email sending logic here
-};
-
-const sendFormUser = async (data: any): Promise<void> => {
-  // console.log("Sending user email:", data);
-  // Implement your email sending logic here
 };
 
 const checkboxClass = `
@@ -1337,62 +1332,137 @@ const LandingPageContactus: React.FC<{
   const [tokenUrl, setTokenUrl] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState<boolean>(false);
+
+  const [leadId, setLeadId] = useState<number | null>(null);
+  const [earlySent, setEarlySent] = useState(false);
+
   type SubmitMessageType = { type: "success" | "error"; text: string } | null;
   const [submitMessage, setSubmitMessage] = useState<SubmitMessageType>(null);
+  const emailSent = useRef(false);
 
-  const handlePhoneChange = useCallback((value: string) => {
-    try {
+  const createEarlyLead = async (fullName: string, phoneDigits: string) => {
+    const cleaned = phoneDigits.replace(/\D/g, "");
+
+    const earlyBody = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Enquiry form",
+      sourceUrl: getSourceUrl(),
+      data: {
+        name: fullName,
+        phone: `+1${cleaned}`,
+        submissionDate: new Date().toISOString(),
+        trustedFormCertUrl: certId || "",
+        trustedFormToken: tokenUrl || "",
+        trustedFormPingUrl: pingUrl || "",
+        pageSource: getSourceUrl(),
+      },
+    };
+
+    const res = await fetch(CRM_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(earlyBody),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    const json = await res.json();
+
+    // console.log("Early Lead Created:", json);
+
+    return json.id;
+  };
+
+  const earlyLeadLock = useRef(false);
+
+  const handlePhoneChange = useCallback(
+    async (value: string) => {
       const formatted = formatUSAMobile(value);
-      const isValid = validateUSAMobile(formatted);
+      setFormData((prev) => ({ ...prev, phone: formatted }));
 
-      // Simple error message
-      let nextPhoneError = "";
-      if (value && value.trim() !== "" && !isValid) {
-        nextPhoneError = "Please enter a valid phone number";
+      const phoneDigits = formatted.replace(/\D/g, "");
+      if (phoneDigits.length !== 10) {
+        earlyLeadLock.current = false;
+        return;
       }
 
-      setPhoneError((prev) =>
-        prev === nextPhoneError ? prev : nextPhoneError,
-      );
+      if (earlySent || leadId) return;
+      if (earlyLeadLock.current) return;
 
-      setFormData((prev) => {
-        if (prev.phone === formatted) return prev;
-        return { ...prev, phone: formatted };
-      });
-    } catch (error) {
-      console.error("Error handling phone change:", error);
-      setPhoneError("Error formatting phone number");
-    }
-  }, []);
+      const fullName = formData.name.trim();
+      if (fullName.split(" ").length < 2) return;
 
-  const handleEmailChange = useCallback((value: string) => {
-    try {
+       earlyLeadLock.current = true;
+
+      try {
+        const newId = await createEarlyLead(fullName, phoneDigits);
+        setLeadId(newId);
+        setEarlySent(true);
+      } catch (err) {
+        console.error(" Early Lead Failed:", err);
+      }
+    },
+    [formData.name, earlySent, leadId],
+  );
+
+  const handleEmailChange = useCallback(
+    async (value: string) => {
       const formatted = formatEmail(value);
-      const validation = validateEmail(formatted);
+      setFormData((prev) => ({ ...prev, email: formatted }));
 
-      let nextEmailError = "";
+      if (!validateEmail(formatted).isValid) return;
 
-      if (value && value.trim() !== "" && !validation.isValid) {
-        nextEmailError = "Please enter a valid email address ";
+      //  Only if lead exists
+      if (!leadId) return;
+
+      // Prevent duplicate email update
+      if (emailSent.current) return;
+      emailSent.current = true;
+
+      try {
+        const rawPhone = formData.phone.replace(/\D/g, "");
+        const updateBody = {
+          countryName: "USA",
+          brandName: "C2A",
+          websiteName: "Connect 2 Attorney",
+          formname: "Enquiry form Email Update",
+          sourceUrl: getSourceUrl(),
+          data: {
+            name: formData.name,
+            phone: `+1${rawPhone}`,
+            email: formatted,
+            ipAddress: await getIPAddress(),
+            submissionDate: new Date().toISOString(),
+            trustedFormCertUrl: certId || "",
+            trustedFormToken: tokenUrl || "",
+            trustedFormPingUrl: pingUrl || "",
+          },
+        };
+
+        const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updateBody),
+        });
+
+        if (!res.ok) {
+          console.error(" Email Update Failed:", await res.text());
+          return;
+        }
+
+        console.log(" Email Updated Successfully for Lead:", leadId);
+      } catch (err) {
+        console.error(" Email Update Error:", err);
       }
-
-      setEmailError((prev) =>
-        prev === nextEmailError ? prev : nextEmailError,
-      );
-
-      setFormData((prev) => {
-        if (prev.email === formatted) return prev;
-        return { ...prev, email: formatted };
-      });
-    } catch (error) {
-      console.error("Error handling email change:", error);
-      setEmailError("Please enter a valid email address ");
-    }
-  }, []);
+    },
+    [leadId],
+  );
 
   const handleNameChange = useCallback((value: string) => {
     try {
-      const cleaned = value.replace(/\s{3,}/g, "  ");
+      const cleaned = value.replace(/[^a-zA-Z\s]/g, "").replace(/\s{2,}/g, " ");
 
       const trimmedForValidation = cleaned.trim();
       const wordsForValidation = trimmedForValidation
@@ -1628,6 +1698,12 @@ const LandingPageContactus: React.FC<{
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      //       if (!leadId) {
+      //   alert("Lead not created yet. Please enter phone first.");
+      //   return;
+      // }
+
       if (!isFormValid || isSubmitting) return;
 
       setIsSubmitting(true);
@@ -1636,103 +1712,52 @@ const LandingPageContactus: React.FC<{
       try {
         const rawPhone = formData.phone?.replace(/\D/g, "") || "";
 
-        const submitData = {
-          ...formData,
-          phone: rawPhone,
-          certId: certId || "",
-          tokenUrl: tokenUrl || "",
-          pingUrl: pingUrl || "",
+        const apiBody = {
+          countryName: "USA",
+          brandName: "C2A",
+          websiteName: "Connect 2 Attorney",
+          formname: "Final Enquiry Form",
+          sourceUrl: getSourceUrl(),
+          finalSubmit: "true",
+          pageSource: getSourceUrl(),
+          data: {
+            name: formData.name,
+            email: formData.email,
+            phone: `+1${rawPhone}`,
+            caseType: formData.category,
+            description: formData.caseHistory,
+            state: formData.state || "",
+            ipAddress: await getIPAddress(),
+            trustedFormCertUrl: certId || "",
+            trustedFormToken: tokenUrl || "",
+            trustedFormPingUrl: pingUrl || "",
+            submissionDate: new Date().toISOString(),
+          },
         };
-        try {
-          await Promise.all([
-            sendFormAdmin(submitData),
-            sendFormUser(submitData),
-          ]);
-          await fetch(
-            "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                countryName: "USA",
-                brandName: "C2A",
-                websiteName: "Connect 2 Attorney",
-                formname: "Enquiry Form",
-                data: {
-                  name: submitData.name,
-                  email: submitData.email,
-                  phone: `+1${submitData.phone}`,
-                  category: submitData.category,
-                  state: submitData.state,
-                  caseHistory: submitData.caseHistory,
-                  needHelp: submitData.needHelp || false,
-                  ipAddress: await getIPAddress(),
-                  trustedFormCertUrl: submitData.certId,
-                  trustedFormToken: submitData.tokenUrl,
-                  trustedFormPingUrl: submitData.pingUrl,
-                  submissionDate: new Date().toISOString(),
-                  pageSource: getSourceUrl(),
-                },
-              }),
-            },
-          );
-          setFormData(initialData);
-          setSuccessDialogOpen(true);
-          setShowCaptcha(false);
-          setCaptchaValid(false);
-          setResetTrigger((t) => !t);
-          setPhoneError("");
-          setEmailError("");
-          setNameError("");
-          setSubmitMessage({
-            type: "success",
-            text: "Form submitted successfully! You should receive a confirmation email shortly.",
-          });
-        } catch (err) {
-          console.error("Email sending error:", err);
-          try {
-            await sendFormAdmin(submitData);
-            await fetch(
-              "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  countryName: "USA",
-                  brandName: "C2A",
-                  websiteName: "Connect 2 Attorney",
-                  formname: "Enquiry Form",
-                  data: {
-                    name: submitData.name,
-                    email: submitData.email,
-                    phone: `+1${submitData.phone}`,
-                    category: submitData.category,
-                    state: submitData.state,
-                    caseHistory: submitData.caseHistory,
-                    needHelp: submitData.needHelp || false,
-                    ipAddress: await getIPAddress(),
-                    trustedFormCertUrl: submitData.certId,
-                    trustedFormToken: submitData.tokenUrl,
-                    trustedFormPingUrl: submitData.pingUrl,
-                    submissionDate: new Date().toISOString(),
-                    pageSource: getSourceUrl(),
-                  },
-                }),
-              },
-            );
-            setSubmitMessage({
-              type: "success",
-              text: "Form submitted successfully! Confirmation email failed, but we have received your inquiry.",
-            });
-            setSuccessDialogOpen(true);
-          } catch (adminErr) {
-            console.error("Admin email error:", adminErr);
-            setSubmitMessage({
-              type: "error",
-              text: "There was an error submitting your form. Please try again or contact us directly.",
-            });
-          }
-        }
+
+        //  EMAILJS — MUST SUCCEED
+        await sendWithEmailJS(apiBody);
+
+        // CRM — MUST SUCCEED
+        await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(apiBody),
+        });
+
+        //  SUCCESS
+        setFormData(initialData);
+        setSuccessDialogOpen(true);
+        setShowCaptcha(false);
+        setCaptchaValid(false);
+        setResetTrigger((t) => !t);
+        setPhoneError("");
+        setEmailError("");
+        setNameError("");
+        setSubmitMessage({
+          type: "success",
+          text: "Form submitted successfully! You should receive a confirmation email shortly.",
+        });
       } catch (error) {
         console.error("Form submission error:", error);
         setSubmitMessage({
@@ -1751,6 +1776,7 @@ const LandingPageContactus: React.FC<{
       tokenUrl,
       pingUrl,
       initialData,
+      leadId,
     ],
   );
 

@@ -1,7 +1,16 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import Image from "next/image";
 import { sendWithEmailJS } from "../emailjs";
+
+const CRM_API_URL =
+  "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
 
 // Utility functions (matching your previous form's validation)
 const validateName = (value: string) => {
@@ -19,31 +28,33 @@ const validateEmail = (value: string) => {
 
 const formatUSAMobile = (input: string): string => {
   if (!input) return "";
-  
+
   // Clean the input - remove all non-digits except plus
-  const raw = input.replace(/[^\d+]/g, '');
-  
+  const raw = input.replace(/[^\d+]/g, "");
+
   // Handle various formats
-  if (raw.startsWith('+1')) {
+  if (raw.startsWith("+1")) {
     const digits = raw.slice(2).slice(0, 10);
-    if (digits.length === 0) return '+1';
+    if (digits.length === 0) return "+1";
     if (digits.length <= 3) return `+1 (${digits}`;
-    if (digits.length <= 6) return `+1 (${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    if (digits.length <= 6)
+      return `+1 (${digits.slice(0, 3)}) ${digits.slice(3)}`;
     return `+1 (${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
   }
-  
+
   // If starts with 1 (without +)
-  if (raw.startsWith('1') && raw.length > 1) {
+  if (raw.startsWith("1") && raw.length > 1) {
     const digits = raw.slice(1).slice(0, 10);
-    if (digits.length === 0) return '1';
+    if (digits.length === 0) return "1";
     if (digits.length <= 3) return `1 (${digits}`;
-    if (digits.length <= 6) return `1 (${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    if (digits.length <= 6)
+      return `1 (${digits.slice(0, 3)}) ${digits.slice(3)}`;
     return `1 (${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
   }
-  
+
   // Regular US number without country code
   const digits = raw.slice(0, 10);
-  if (digits.length === 0) return '';
+  if (digits.length === 0) return "";
   if (digits.length <= 3) return `(${digits}`;
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
@@ -86,23 +97,24 @@ const checkboxClass = `
 
 const validateUSAMobile = (input: string): boolean => {
   if (!input) return false;
-  
+
   // Remove all formatting
-  const digits = input.replace(/\D/g, '');
-  
+  const digits = input.replace(/\D/g, "");
+
   // Check if it's +1 format
-  if (input.includes('+1')) {
+  if (input.includes("+1")) {
     // +1 followed by 10 digits
-    return digits.length === 11 && digits.startsWith('1');
+    return digits.length === 11 && digits.startsWith("1");
   }
-  
+
   // Regular 10-digit US number
   return digits.length === 10;
 };
 
 const validatePhone = (value: string) => {
   if (!value || value.trim() === "") return "Phone number is required";
-  if (!validateUSAMobile(value)) return "Please enter a valid US phone number (10 digits)";
+  if (!validateUSAMobile(value))
+    return "Please enter a valid US phone number (10 digits)";
   return "";
 };
 
@@ -115,11 +127,11 @@ const validateMessage = (value: string) => {
 // Add these functions for consistent form handling
 const getIPAddress = async (): Promise<string> => {
   try {
-    const response = await fetch('https://api.ipify.org?format=json');
+    const response = await fetch("https://api.ipify.org?format=json");
     const data = await response.json();
     return data.ip;
   } catch {
-    return 'Unknown';
+    return "Unknown";
   }
 };
 
@@ -140,7 +152,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [charOffsets, setCharOffsets] = useState<number[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  
+
   // Use refs to track current state for cleanup
   const isSpeakingRef = useRef(false);
   const speechSynthRef = useRef<SpeechSynthesis | null>(null);
@@ -152,17 +164,18 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       isSpeakingRef.current = false;
     }
 
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     const offsets: number[] = [];
-    
+
     // Generate 6 random characters with random vertical offsets
     for (let i = 0; i < 6; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
       // Generate offsets between -5 and 5
       offsets.push(parseFloat((Math.random() * 10 - 5).toFixed(2)));
     }
-    
+
     setCaptchaText(result);
     setCharOffsets(offsets);
     setUserInput("");
@@ -174,7 +187,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   useEffect(() => {
     generateCaptcha();
     speechSynthRef.current = window.speechSynthesis;
-    
+
     // Cleanup function
     return () => {
       if (speechSynthRef.current && isSpeakingRef.current) {
@@ -219,13 +232,16 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
     // Try to find a male US voice
     if (voices.length > 0) {
-      selectedVoice = voices.find(
-        (voice) =>
-          voice.lang === "en-US" && 
-          voice.name.toLowerCase().includes("male") || 
-          voice.name.toLowerCase().includes("david") ||
-          voice.name.toLowerCase().includes("microsoft david")
-      ) || voices.find((voice) => voice.lang === "en-US") || voices[0];
+      selectedVoice =
+        voices.find(
+          (voice) =>
+            (voice.lang === "en-US" &&
+              voice.name.toLowerCase().includes("male")) ||
+            voice.name.toLowerCase().includes("david") ||
+            voice.name.toLowerCase().includes("microsoft david"),
+        ) ||
+        voices.find((voice) => voice.lang === "en-US") ||
+        voices[0];
     }
 
     let currentIndex = 0;
@@ -233,13 +249,13 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
       if (currentIndex < captchaText.length && isSpeakingRef.current) {
         const char = captchaText[currentIndex];
         const utterance = new SpeechSynthesisUtterance(char);
-        
+
         // Configure speech properties
         utterance.rate = 0.5;
         utterance.pitch = 0.9;
         utterance.volume = 1.0;
         utterance.lang = "en-US";
-        
+
         if (selectedVoice) {
           utterance.voice = selectedVoice;
         }
@@ -274,7 +290,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUserInput(value);
-    
+
     // Case-insensitive comparison for better UX
     const valid = value.toLowerCase() === captchaText.toLowerCase();
     setIsValid(valid);
@@ -283,7 +299,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
 
   const handleAudioToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAudioEnabled(e.target.checked);
-    
+
     // Cancel speech when disabling audio
     if (!e.target.checked && isSpeakingRef.current) {
       window.speechSynthesis.cancel();
@@ -305,7 +321,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
               backgroundPosition: "0 50%",
             }}
           />
-          
+
           {/* CAPTCHA text with offsets */}
           <div className="relative z-10 flex justify-center">
             {captchaText.split("").map((char, index) => (
@@ -323,7 +339,7 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             ))}
           </div>
         </div>
-        
+
         {/* Control buttons */}
         <div className="flex gap-2 items-center justify-start sm:justify-start">
           <button
@@ -331,24 +347,22 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             onClick={generateCaptcha}
             disabled={disabled}
             className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-              disabled 
-                ? "opacity-50 cursor-not-allowed" 
-                : "hover:bg-gray-50"
+              disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-50"
             }`}
             title="Refresh CAPTCHA"
             aria-label="Refresh CAPTCHA"
           >
             ↻
           </button>
-          
+
           {audioEnabled && (
             <button
               type="button"
               onClick={speakCaptcha}
               disabled={disabled || isSpeaking}
               className={`px-3 py-2 text-gray-600 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0 ${
-                disabled || isSpeaking 
-                  ? "opacity-50 cursor-not-allowed" 
+                disabled || isSpeaking
+                  ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"
               }`}
               title={isSpeaking ? "Speaking..." : "Listen to CAPTCHA"}
@@ -370,9 +384,10 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
           disabled={disabled}
           className="mr-2"
         />
-        <label htmlFor="enableAudio" className={`text-sm ${
-          disabled ? "text-gray-400" : "text-gray-700"
-        }`}>
+        <label
+          htmlFor="enableAudio"
+          className={`text-sm ${disabled ? "text-gray-400" : "text-gray-700"}`}
+        >
           Enable Audio
         </label>
       </div>
@@ -389,25 +404,27 @@ const CustomCaptcha: React.FC<CustomCaptchaProps> = ({
             disabled
               ? "bg-gray-100 cursor-not-allowed border-gray-300"
               : userInput !== "" && !isValid
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-blue-500"
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
           }`}
-          aria-describedby={userInput !== "" && !isValid ? "captcha-error" : undefined}
+          aria-describedby={
+            userInput !== "" && !isValid ? "captcha-error" : undefined
+          }
         />
-        
+
         {/* Validation messages */}
         {userInput !== "" && !isValid && !disabled && (
           <p id="captcha-error" className="text-red-500 text-sm mt-1">
             CAPTCHA does not match. Please try again.
           </p>
         )}
-        
+
         {isValid && !disabled && (
           <p className="text-green-500 text-sm mt-1">
             ✓ CAPTCHA verified successfully
           </p>
         )}
-        
+
         {disabled && (
           <p className="text-gray-500 text-sm mt-1">
             CAPTCHA verification is disabled
@@ -452,6 +469,20 @@ const ContactSection = () => {
   });
   const [showFullConsent, setShowFullConsent] = useState(false);
 
+  const [leadId, setLeadId] = useState<number | null>(null);
+  const [earlySent, setEarlySent] = useState(false);
+
+  const earlyLeadLock = useRef(false);
+  const emailSent = useRef(false);
+
+  const normalizePhoneDigits = (input: string) =>
+    input.replace(/\D/g, "").slice(-10);
+
+  const format = (input: string) => {
+    const digits = normalizePhoneDigits(input);
+    return digits.length === 10 ? `+1${digits}` : "";
+  };
+
   // Live validation for each field
   const validateField = useCallback((name: string, value: string) => {
     switch (name) {
@@ -470,57 +501,157 @@ const ContactSection = () => {
   }, []);
 
   const sanitizeName = (value: string) =>
-  value
-    .replace(/\s{2,}/g, " ")
-    .replace(/[^a-zA-Z\s]/g, "");
+    value.replace(/\s{2,}/g, " ").replace(/[^a-zA-Z\s]/g, "");
 
+  const createEarlyLead = async (fullName: string, email: string) => {
+    const body = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Contact form Start",
+      sourceUrl: window.location.href,
+      data: {
+        name: fullName,
+        email,
+        submissionDate: new Date().toISOString(),
+      },
+    };
 
-  // Handle input changes with live validation
-const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-) => {
-  const { name, value, type } = e.target;
-  const checked = (e.target as HTMLInputElement).checked;
+    const res = await fetch(CRM_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-  if (type === "checkbox") {
-    if (name === "captchaCheck") {
-      setShowCaptcha(checked);
-      setCaptchaValid(false);
-      if (checked) setResetTrigger((t) => !t);
+    if (!res.ok) throw new Error(await res.text());
+
+    const json = await res.json();
+    return json.id; //  Return leadId
+  };
+
+  const updateLeadPhone = async (phoneformatted: string) => {
+    const body = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Contact section form Update",
+      sourceUrl: window.location.href,
+      data: {
+        name: `${form.firstName} ${form.lastName}`.trim(),
+        phone: `+1${phoneformatted}`,
+        email: form.email,
+        ipAddress: await getIPAddress(),
+        submissionDate: new Date().toISOString(),
+        trustedFormCertUrl: trustedFormData.certId,
+        trustedFormToken: trustedFormData.tokenUrl,
+        trustedFormPingUrl: trustedFormData.pingUrl,
+      },
+    };
+
+    const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+  };
+
+  const handleChange = async (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+
+    //  Checkbox handler
+    if (type === "checkbox") {
+      if (name === "captchaCheck") {
+        setShowCaptcha(checked);
+        setCaptchaValid(false);
+        if (checked) setResetTrigger((t) => !t);
+        return;
+      }
+
+      setForm((prev) => ({ ...prev, [name]: checked }));
       return;
     }
 
-    setForm((prev) => ({ ...prev, [name]: checked }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
-    return;
-  }
+    //  Name handler
+    if (name === "firstName" || name === "lastName") {
+      const cleaned = sanitizeName(value);
 
-  if (name === "firstName" || name === "lastName") {
-    const cleaned = sanitizeName(value);
-    const error = validateName(cleaned);
+      setForm((prev) => ({ ...prev, [name]: cleaned }));
+      return;
+    }
 
-    setForm((prev) => ({ ...prev, [name]: cleaned }));
-    setErrors((prev) => ({ ...prev, [name]: error }));
-    return;
-  }
+    if (name === "email") {
+      const formatted = value.trim().toLowerCase();
 
-  if (name === "phone") {
-    const formatted = formatUSAMobile(value);
-    const error = validatePhone(formatted);
+      setForm((prev) => ({ ...prev, email: formatted }));
 
-    setForm((prev) => ({ ...prev, phone: formatted }));
-    setErrors((prev) => ({ ...prev, phone: error }));
-    return;
-  }
+      if (validateEmail(formatted) !== "") return;
 
-  const error = validateField(name, value);
-  setForm((prev) => ({ ...prev, [name]: value }));
-  setErrors((prev) => ({ ...prev, [name]: error }));
-};
+      if (leadId || earlySent) return;
 
+      const fullName =
+        `${form.firstName.trim()} ${form.lastName.trim()}`.trim();
+
+      if (fullName.split(" ").length < 2) {
+        console.log("⏳ Waiting for full name before lead create...");
+        return;
+      }
+
+      try {
+        console.log(" Creating lead from email...");
+
+        const newId = await createEarlyLead(fullName, formatted);
+
+        setLeadId(newId);
+        setEarlySent(true);
+
+        console.log("Lead Created From Email:", newId);
+      } catch (err) {
+        console.error("Lead Create Failed:", err);
+      }
+
+      return;
+    }
+
+    // PHONE SECOND → Update Lead Once
+    if (name === "phone") {
+      const formatted = formatUSAMobile(value);
+      setForm((prev) => ({ ...prev, phone: formatted }));
+
+      const phoneDigits = formatted.replace(/\D/g, "");
+      if (phoneDigits.length !== 10) return;
+
+      //  Lead must exist first
+      if (!leadId) return;
+
+      //  Prevent duplicate updates
+      if (earlyLeadLock.current) return;
+      earlyLeadLock.current = true;
+
+      try {
+        await updateLeadPhone(`+1${phoneDigits}`);
+
+        console.log(" Phone Updated");
+      } catch (err) {
+        console.error("Phone Update Failed:", err);
+        earlyLeadLock.current = false;
+      }
+
+      return;
+    }
+
+    // Default field handler
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Blur validation for immediate feedback
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     if (name === "phone") {
       const error = validateField(name, form.phone);
@@ -533,14 +664,14 @@ const handleChange = (
 
   // Check if form is valid
   const isFormValid = useMemo(() => {
-    const basicFieldsValid = 
+    const basicFieldsValid =
       validateName(form.firstName) === "" &&
       validateName(form.lastName) === "" &&
       validateEmail(form.email) === "" &&
       validatePhone(form.phone) === "" &&
       validateMessage(form.message) === "" &&
       form.consent;
-    
+
     return basicFieldsValid && captchaValid;
   }, [form, captchaValid]);
 
@@ -561,13 +692,19 @@ const handleChange = (
               try {
                 const el = targetNode as HTMLInputElement | null;
                 if (el && el.name === "xxTrustedFormCertUrl" && el.value) {
-                  setTrustedFormData(prev => ({ ...prev, certId: el.value }));
+                  setTrustedFormData((prev) => ({ ...prev, certId: el.value }));
                 }
                 if (el && el.name === "xxTrustedFormPingUrl" && el.value) {
-                  setTrustedFormData(prev => ({ ...prev, pingUrl: el.value }));
+                  setTrustedFormData((prev) => ({
+                    ...prev,
+                    pingUrl: el.value,
+                  }));
                 }
                 if (el && el.name === "xxTrustedFormCertToken" && el.value) {
-                  setTrustedFormData(prev => ({ ...prev, tokenUrl: el.value }));
+                  setTrustedFormData((prev) => ({
+                    ...prev,
+                    tokenUrl: el.value,
+                  }));
                 }
               } catch (error) {
                 console.warn("TrustedForm observer error:", error);
@@ -579,7 +716,7 @@ const handleChange = (
         const startObserving = () => {
           try {
             const trustedFormFields = document.querySelectorAll(
-              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]'
+              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]',
             );
 
             trustedFormFields.forEach((field) => {
@@ -593,13 +730,22 @@ const handleChange = (
                 if (el.value) {
                   switch (el.name) {
                     case "xxTrustedFormCertUrl":
-                      setTrustedFormData(prev => ({ ...prev, certId: el.value }));
+                      setTrustedFormData((prev) => ({
+                        ...prev,
+                        certId: el.value,
+                      }));
                       break;
                     case "xxTrustedFormPingUrl":
-                      setTrustedFormData(prev => ({ ...prev, pingUrl: el.value }));
+                      setTrustedFormData((prev) => ({
+                        ...prev,
+                        pingUrl: el.value,
+                      }));
                       break;
                     case "xxTrustedFormCertToken":
-                      setTrustedFormData(prev => ({ ...prev, tokenUrl: el.value }));
+                      setTrustedFormData((prev) => ({
+                        ...prev,
+                        tokenUrl: el.value,
+                      }));
                       break;
                   }
                 }
@@ -628,173 +774,82 @@ const handleChange = (
     };
   }, []);
 
-  // Handle form submission (similar to your previous form)
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  // console.group("CONTACT FORM SUBMIT FLOW");
-
-  if (!isFormValid) {
-    // console.warn("Form invalid – blocking submit");
-    // console.groupEnd();
-    return;
-  }
-
-  if (submitting) {
-    // console.warn("Already submitting – blocking duplicate submit");
-    // console.groupEnd();
-    return;
-  }
-
-  // =========================
-  // FINAL VALIDATION
-  // =========================
-  // console.log(" Running final validation");
-
-  const newErrors = {
-    firstName: validateName(form.firstName),
-    lastName: validateName(form.lastName),
-    email: validateEmail(form.email),
-    phone: validatePhone(form.phone),
-    message: validateMessage(form.message),
-  };
-
-  setErrors(newErrors);
-
-  if (Object.values(newErrors).some(Boolean)) {
-    console.warn("Validation failed:", newErrors);
-    console.groupEnd();
-    return;
-  }
-
-  setSubmitting(true);
-  // console.log("Validation passed");
-
-  try {
-    // =========================
-    // FORMAT DATA
-    // =========================
-    // console.log("Formatting form data");
-
-    const rawPhone = form.phone.replace(/\D/g, "");
-    const phoneWithCountryCode =
-      rawPhone.length === 11 && rawPhone.startsWith("1")
-        ? `+${rawPhone}`
-        : `+1${rawPhone.slice(-10)}`;
-
-    const fullName = `${form.firstName} ${form.lastName}`.trim();
-
-    // =========================
-    // IP ADDRESS (NON-BLOCKING)
-    // =========================
-    // console.log("Fetching IP address");
-
-    let ipAddress = "Unknown";
-    try {
-      ipAddress = await getIPAddress();
-      // console.log("IP address:", ipAddress);
-    } catch (ipErr) {
-      console.warn("IP fetch failed (continuing)", ipErr);
+    if (!isFormValid || submitting) return;
+    if (!leadId) {
+      alert("Lead not created yet. Please enter phone first.");
+      return;
     }
 
-    const apiBody = {
-      countryName: "USA",
-      brandName: "C2A",
-      websiteName: "Connect 2 Attorney",
-      formname: "Contact Section Form",
-      sourceUrl:
-        typeof window !== "undefined" ? window.location.href : "Unknown",
-      data: {
-        name: fullName,
-        firstName: form.firstName,
-        lastName: form.lastName,
-        email: form.email,
-        phone: phoneWithCountryCode,
-        message: form.message,
-        needHelp: form.needHelp,
+    setSubmitting(true);
 
-        ipAddress,
+    try {
+      const phoneformatted = format(form.phone);
 
-        trustedFormCertUrl: trustedFormData?.certId ?? "",
-        trustedFormToken: trustedFormData?.tokenUrl ?? "",
-        trustedFormPingUrl: trustedFormData?.pingUrl ?? "",
+      const finalBody = {
+        countryName: "USA",
+        brandName: "C2A",
+        websiteName: "Connect 2 Attorney",
+        formname: "Contact Final Submission",
+        sourceUrl: window.location.href,
+        finalSubmit: true,
+        data: {
+          name: `${form.firstName} ${form.lastName}`.trim(),
+          email: form.email,
+          phone: phoneformatted,
+          message: form.message,
+          ipAddress: await getIPAddress(),
 
-        submissionDate: new Date().toISOString(),
-        pageSource:
-          typeof window !== "undefined" ? window.location.href : "Unknown",
-      },
-    };
+          trustedFormCertUrl: trustedFormData.certId,
+          trustedFormToken: trustedFormData.tokenUrl,
+          trustedFormPingUrl: trustedFormData.pingUrl,
 
-    console.log(" FINAL PAYLOAD", apiBody);
+          submissionDate: new Date().toISOString(),
+          pageSource: window.location.href,
+        },
+      };
 
-    // ================================
-    // 1️⃣ CRM SUBMISSION (MUST SUCCEED)
-    // ================================
-    console.log("📤 Submitting to CRM");
-
-    const crmRes = await fetch(
-      "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-      {
-        method: "POST",
+      //  Update existing lead
+      const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(apiBody),
-      }
-    );
+        body: JSON.stringify(finalBody),
+      });
 
-    console.log("📥 CRM response status:", crmRes.status);
+      if (!res.ok) throw new Error(await res.text());
 
-    if (!crmRes.ok) {
-      const text = await crmRes.text();
-      console.error("❌ CRM error response:", text);
-      throw new Error(`CRM failed (${crmRes.status}): ${text}`);
+      console.log(" CRM Final Submit Success");
+
+      //  EmailJS after CRM
+      await sendWithEmailJS(finalBody);
+
+      setSuccess(true);
+
+      setTimeout(() => {
+        setSuccess(false);
+
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+          consent: false,
+          needHelp: false,
+        });
+
+        setLeadId(null);
+        setEarlySent(false);
+      }, 2000);
+    } catch (err) {
+      console.error(" Final Submit Failed:", err);
+      alert("Submission failed. Check console.");
+    } finally {
+      setSubmitting(false);
     }
-
-    console.log("✅ CRM submission successful");
-
-    // ================================
-    // 2️⃣ EMAILJS (BEST EFFORT)
-    // ================================
-    console.log("📧 Sending EmailJS");
-
-    try {
-      await sendWithEmailJS(apiBody);
-      console.log("✅ EmailJS sent successfully");
-    } catch (emailErr) {
-      console.warn(" EmailJS failed (CRM succeeded)", emailErr);
-    }
-
-    // ================================
-    // ✅ SUCCESS
-    // ================================
-    console.log("🎉 FORM SUBMISSION COMPLETE");
-
-    setSuccess(true);
-
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-      consent: false,
-      needHelp: false,
-    });
-
-    setShowCaptcha(false);
-    setCaptchaValid(false);
-    setResetTrigger((t) => !t);
-    setErrors({});
-
-    setTimeout(() => setSuccess(false), 5000);
-  } catch (err: any) {
-    console.error(" FORM SUBMIT FAILED", err);
-    alert(err?.message || "Unknown error occurred. Check console.");
-  } finally {
-    setSubmitting(false);
-    console.groupEnd();
-  }
-};
-
+  };
 
   const fields: { name: keyof ContactFormData; label: string }[] = [
     { name: "firstName", label: "First Name" },
@@ -848,9 +903,21 @@ const handleSubmit = async (e: React.FormEvent) => {
             noValidate
           >
             {/* Hidden TrustedForm Fields */}
-            <input type="hidden" name="xxTrustedFormCertUrl" value={trustedFormData.certId} />
-            <input type="hidden" name="xxTrustedFormCertToken" value={trustedFormData.tokenUrl} />
-            <input type="hidden" name="xxTrustedFormPingUrl" value={trustedFormData.pingUrl} />
+            <input
+              type="hidden"
+              name="xxTrustedFormCertUrl"
+              value={trustedFormData.certId}
+            />
+            <input
+              type="hidden"
+              name="xxTrustedFormCertToken"
+              value={trustedFormData.tokenUrl}
+            />
+            <input
+              type="hidden"
+              name="xxTrustedFormPingUrl"
+              value={trustedFormData.pingUrl}
+            />
 
             {fields.map((field) => (
               <div key={field.name} className="space-y-1">
@@ -858,17 +925,23 @@ const handleSubmit = async (e: React.FormEvent) => {
                   name={field.name}
                   value={String(form[field.name] ?? "")}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  onBlur={handleChange}
                   placeholder={field.label}
                   disabled={submitting}
                   className={`w-full p-3 h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F5C844] ${
-                    errors[field.name] ? 'border-red-500' : 'border-[#D0D5DD]'
+                    errors[field.name] ? "border-red-500" : "border-[#D0D5DD]"
                   }`}
                   aria-invalid={!!errors[field.name]}
-                  aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    errors[field.name] ? `${field.name}-error` : undefined
+                  }
                 />
                 {errors[field.name] && (
-                  <p id={`${field.name}-error`} className="text-red-500 text-sm mt-1" role="alert">
+                  <p
+                    id={`${field.name}-error`}
+                    className="text-red-500 text-sm mt-1"
+                    role="alert"
+                  >
                     {errors[field.name]}
                   </p>
                 )}
@@ -884,13 +957,17 @@ const handleSubmit = async (e: React.FormEvent) => {
                 placeholder="How can we help?"
                 disabled={submitting}
                 className={`w-full p-3 h-20 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#F5C844] ${
-                  errors.message ? 'border-red-500' : 'border-[#D0D5DD]'
+                  errors.message ? "border-red-500" : "border-[#D0D5DD]"
                 }`}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? "message-error" : undefined}
               />
               {errors.message && (
-                <p id="message-error" className="text-red-500 text-sm mt-1" role="alert">
+                <p
+                  id="message-error"
+                  className="text-red-500 text-sm mt-1"
+                  role="alert"
+                >
                   {errors.message}
                 </p>
               )}
@@ -952,14 +1029,15 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <>
                       <span>
                         {" "}
-                        I expressly consent to receive communications from written
-                        affiliates and/or attorneys at the number provided above, even if
-                        this number is a wireless number or if I am presently listed on a Do
-                        Not Call list. I understand that I may be contacted by telephone,
-                        email, text message or mail regarding case options and that I may be
-                        called using automatic dialing equipment. Message and data rates may
-                        apply. My consent does not require purchase. This is legal
-                        advertising.
+                        I expressly consent to receive communications from
+                        written affiliates and/or attorneys at the number
+                        provided above, even if this number is a wireless number
+                        or if I am presently listed on a Do Not Call list. I
+                        understand that I may be contacted by telephone, email,
+                        text message or mail regarding case options and that I
+                        may be called using automatic dialing equipment. Message
+                        and data rates may apply. My consent does not require
+                        purchase. This is legal advertising.
                       </span>
 
                       <button
@@ -988,13 +1066,14 @@ const handleSubmit = async (e: React.FormEvent) => {
                   className={checkboxClass}
                 />
                 <span className="text-[#808080] text-sm">
-                  Please check this box so we know you&apos;re a person and not a computer
+                  Please check this box so we know you&apos;re a person and not
+                  a computer
                 </span>
               </label>
 
               {showCaptcha && (
                 <div className="pl-6">
-                  <CustomCaptcha 
+                  <CustomCaptcha
                     onCaptchaChange={setCaptchaValid}
                     resetTrigger={resetTrigger}
                     disabled={submitting}

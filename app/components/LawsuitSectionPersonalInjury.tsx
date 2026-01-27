@@ -101,7 +101,7 @@ const CasesSection2: React.FC = () => {
           ))}
         </div>
 
-        {/* ❌ No button on mobile (intentionally removed) */}
+        {/*  No button on mobile (intentionally removed) */}
       </div>
 
       {/* ================= TABLET / DESKTOP VERSION ================= */}

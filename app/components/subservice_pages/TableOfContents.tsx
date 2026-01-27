@@ -10,13 +10,23 @@ export type TocItem = {
 
 const TableOfContents = ({ items }: { items: TocItem[] }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const [open, setOpen] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.innerWidth >= 1024; // lg+
-  });
+  const [open, setOpen] = useState(false)
+   
+  useEffect(() => {
+    setMounted(true);
+
+    //  After mount decide initial open state
+    if (window.innerWidth >= 1024) {
+      setOpen(true);
+    }
+  }, []);
 
   useEffect(() => {
+
+        if (!mounted) return;
+
     const onResize = () => {
       if (window.innerWidth >= 1024) {
         setOpen(true); // always open on desktop
@@ -27,7 +37,7 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
 
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, [mounted]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -64,6 +74,8 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
 
     return () => observer.disconnect();
   }, [items]);
+
+  if (!mounted) return null;
 
   return (
     <div className="mt-6  w-full top-[120px]">

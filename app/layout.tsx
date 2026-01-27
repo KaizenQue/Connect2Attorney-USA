@@ -117,7 +117,7 @@ export default function RootLayout({
         
         {children}
 
-           {/* ✅ TrustedForm NoScript Fallback */}
+           {/*  TrustedForm NoScript Fallback */}
         <noscript>
           <img
             src="https://api.trustedform.com/ns.gif"

@@ -10,6 +10,7 @@ emailjs.init(PUBLIC_KEY);
 export const sendWithEmailJS = async (apiBody: any) => {
   const d = apiBody.data;
   const currentYear = new Date().getFullYear();
+  
 
   const adminParams = {
     full_name: d.name,
@@ -59,5 +60,7 @@ export const sendWithEmailJS = async (apiBody: any) => {
 
 const isValidEmail = (email?: string) =>
   !!email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+
 
 

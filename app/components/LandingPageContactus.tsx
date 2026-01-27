@@ -11,6 +11,9 @@ import Image from "next/image";
 import PartnerStatsCard from "./PartnerStatsCard";
 import { useRouter } from "next/navigation";
 
+const CRM_API_URL =
+  "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
+
 // import { sendFormAdmin, sendFormUser } from "./emailJsService";
 // Fallback stubs - replace these with real implementations from your email service
 const sendFormAdmin = async (data: Record<string, unknown>) => {
@@ -32,86 +35,37 @@ declare global {
 }
 
 const validateName = (value: string) => {
-  if (!value.trim()) return "This field is required";
-  if (value.trim().length < 2) return "Must be at least 2 characters";
+  const cleaned = value.trim();
+
+  if (!cleaned) return "Full name is required";
+
+  //  Only alphabets + spaces allowed
+  if (!/^[A-Za-z ]+$/.test(cleaned)) return "Name must contain only letters";
+
+  //  Must contain at least 2 words
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length < 2) return "Please enter first and last name";
+
   return "";
 };
 
-
 const formatUSAMobile = (input: string): string => {
-  if (!input) return "";
+  // Remove all non-digits
+  const digits = input.replace(/\D/g, "").slice(0, 10);
 
-  let raw = String(input).trim();
+  if (digits.length === 0) return "";
 
-  if (raw === "+") return "+";
+  if (digits.length <= 3) return `(${digits}`;
 
-  const plus = raw.startsWith("+") ? "+" : "";
-  raw = plus + raw.replace(/\+/g, "").replace(/[^\d]/g, "");
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
 
-  let prefix = "";
-  let digits = "";
-
-  if (raw.startsWith("+1")) {
-    prefix = "+1";
-    digits = raw.slice(2);
-  } else if (raw.startsWith("0")) {
-    prefix = "0";
-    digits = raw.slice(1);
-  } else if (raw.startsWith("+")) {
-    prefix = "+";
-    digits = raw.slice(1);
-  } else {
-    digits = raw;
-  }
-
-  // Limit to exactly 9 digits
-  digits = digits.slice(0, 9);
-
-  // Format as XXX XXX XXX
-  let formatted = digits;
-  if (digits.length <= 3) {
-    formatted = digits;
-  } else if (digits.length <= 6) {
-    formatted = `${digits.slice(0, 3)} ${digits.slice(3)}`;
-  } else {
-    formatted = `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(
-      6,
-    )}`;
-  }
-
-  // Construct output
-  if (prefix === "+1") {
-    return `${prefix} ${formatted}`.trim();
-  } else if (prefix === "0") {
-    return `${prefix}${formatted}`.trim();
-  } else if (prefix === "+") {
-    return formatted ? `+${formatted}` : "+";
-  } else {
-    return formatted;
-  }
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 };
 
 // SIMPLIFIED validation - exactly 9 digits (after removing prefix)
 const validateUSAMobile = (input: string): boolean => {
-  if (!input) return false;
-
-  const raw = String(input).trim();
-
-  // Remove all non-digits except the first + if present
-  let digitsOnly = raw.replace(/[^\d+]/g, "");
-
-  // Remove the prefix to count actual phone digits
-  if (digitsOnly.startsWith("+1")) {
-    digitsOnly = digitsOnly.slice(2);
-  } else if (digitsOnly.startsWith("0")) {
-    digitsOnly = digitsOnly.slice(1);
-  } else if (digitsOnly.startsWith("+")) {
-    digitsOnly = digitsOnly.slice(1);
-  }
-
-  // Must be exactly 9 digits
-  digitsOnly = digitsOnly.replace(/\D/g, "");
-  return digitsOnly.length === 9;
+  const digits = input.replace(/\D/g, "");
+  return digits.length === 10;
 };
 
 const formatEmail = (input: string): string => {
@@ -1845,7 +1799,7 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [showFullConsent, setShowFullConsent] = useState(false);
 
-  // ✅ TrustedForm – run EVERY time popup opens
+  //  TrustedForm – run EVERY time popup opens
   useEffect(() => {
     const interval = setInterval(() => {
       if (window.TrustedForm && window.TrustedForm.certify) {
@@ -1857,6 +1811,15 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
 
     return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+    if (successDialogOpen) {
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 2000); // reload after 2 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [successDialogOpen]);
 
   return (
     <div className="hidden lg:flex w-full justify-center bg-white font-sans lg:py-1  lg:px-5 xl:px-10">
@@ -2407,91 +2370,142 @@ const LandingPageContactus: React.FC<{
   const [tokenUrl, setTokenUrl] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState<boolean>(false);
+
+   const [leadId, setLeadId] = useState<number | null>(null);
+    const [earlySent, setEarlySent] = useState(false);
+  
   type SubmitMessageType = { type: "success" | "error"; text: string } | null;
   const [submitMessage, setSubmitMessage] = useState<SubmitMessageType>(null);
 
-  const handlePhoneChange = useCallback((value: string) => {
-    try {
+const emailSent = useRef(false);
+  
+  const createEarlyLead = async (fullName: string, phoneDigits: string) => {
+    const cleaned = phoneDigits.replace(/\D/g, "");
+
+    const earlyBody = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Contact Page form",
+      sourceUrl: getSourceUrl(),
+      data: {
+        name: fullName,
+        phone: `+1${cleaned}`,
+        submissionDate: new Date().toISOString(),
+        trustedFormCertUrl: certId || "",
+        trustedFormToken: tokenUrl || "",
+        trustedFormPingUrl: pingUrl || "",
+        pageSource: getSourceUrl(),
+      },
+    };
+
+    const res = await fetch(CRM_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(earlyBody),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    const json = await res.json();
+
+    // console.log("Early Lead Created:", json);
+
+    return json.id;
+  };
+
+    const earlyLeadLock = useRef(false);
+  
+  const handlePhoneChange = useCallback(
+    async (value: string) => {
       const formatted = formatUSAMobile(value);
-      const isValid = validateUSAMobile(formatted);
+      setFormData((prev) => ({ ...prev, phone: formatted }));
 
-      // Simple error message
-      let nextPhoneError = "";
-      if (value && value.trim() !== "" && !isValid) {
-        nextPhoneError = "Please enter a valid phone number";
+      const phoneDigits = formatted.replace(/\D/g, "");
+
+      if (phoneDigits.length !== 10) return;
+
+      earlyLeadLock.current = true;
+
+      const fullName = formData.name.trim();
+      if (fullName.split(" ").length < 2) return;
+
+      try {
+        const newId = await createEarlyLead(fullName, phoneDigits);
+        setLeadId(newId);
+        setEarlySent(true);
+      } catch (err) {
+        console.error(" Early Lead Failed:", err);
       }
+    },
+    [formData.name, earlySent, leadId],
+  );
 
-      setPhoneError((prev) =>
-        prev === nextPhoneError ? prev : nextPhoneError,
-      );
-
-      setFormData((prev) => {
-        if (prev.phone === formatted) return prev;
-        return { ...prev, phone: formatted };
-      });
-    } catch (error) {
-      console.error("Error handling phone change:", error);
-      setPhoneError("Error formatting phone number");
-    }
-  }, []);
-
-  const handleEmailChange = useCallback((value: string) => {
-    try {
+  const handleEmailChange = useCallback(
+    async (value: string) => {
       const formatted = formatEmail(value);
-      const validation = validateEmail(formatted);
+      setFormData((prev) => ({ ...prev, email: formatted }));
 
-      let nextEmailError = "";
+      if (!validateEmail(formatted).isValid) return;
 
-      if (value && value.trim() !== "" && !validation.isValid) {
-        nextEmailError = "Please enter a valid email address ";
+      //  Only if lead exists
+      if (!leadId) return;
+
+      // Prevent duplicate email update
+      if (emailSent.current) return;
+      emailSent.current = true;
+
+      try {
+        const rawPhone = formData.phone.replace(/\D/g, "");
+        const updateBody = {
+          countryName: "USA",
+          brandName: "C2A",
+          websiteName: "Connect 2 Attorney",
+          formname: "Contact Page form Email Update",
+          sourceUrl: getSourceUrl(),
+          data: {
+            name: formData.name,
+            phone: `+1${rawPhone}`,
+            email: formatted,
+            ipAddress: await getIPAddress(),
+            submissionDate: new Date().toISOString(),
+            trustedFormCertUrl: certId || "",
+            trustedFormToken: tokenUrl || "",
+            trustedFormPingUrl: pingUrl || "",
+          },
+        };
+
+        const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updateBody),
+        });
+
+        if (!res.ok) {
+          console.error(" Email Update Failed:", await res.text());
+          return;
+        }
+
+        console.log(" Email Updated Successfully for Lead:", leadId);
+      } catch (err) {
+        console.error(" Email Update Error:", err);
       }
-
-      setEmailError((prev) =>
-        prev === nextEmailError ? prev : nextEmailError,
-      );
-
-      setFormData((prev) => {
-        if (prev.email === formatted) return prev;
-        return { ...prev, email: formatted };
-      });
-    } catch (error) {
-      console.error("Error handling email change:", error);
-      setEmailError("Please enter a valid email address ");
-    }
-  }, []);
+    },
+    [leadId],
+  );
 
   const handleNameChange = useCallback((value: string) => {
-    try {
-      const cleaned = value.replace(/\s{3,}/g, "  ");
+    //  Remove non letters instantly
+    const cleaned = value.replace(/[^A-Za-z\s]/g, "").replace(/\s{2,}/g, " ");
 
-      const trimmedForValidation = cleaned.trim();
-      const wordsForValidation = trimmedForValidation
-        .split(/\s+/)
-        .filter((word) => word.length > 0);
+    const error = validateName(cleaned);
 
-      let nextNameError = "";
+    setNameError(error);
 
-      if (trimmedForValidation && trimmedForValidation.length > 0) {
-        if (wordsForValidation.length < 2) {
-          nextNameError = "Please enter your full name (first and last name)";
-        } else if (trimmedForValidation.length < 3) {
-          nextNameError = "Please enter your full name (first and last name)";
-        }
-      }
-
-      setNameError((prev) => (prev === nextNameError ? prev : nextNameError));
-
-      setFormData((prev) =>
-        prev.name === cleaned ? prev : { ...prev, name: cleaned },
-      );
-    } catch (error) {
-      console.error("Error handling name change:", error);
-      setNameError("Please enter your full name (first and last name)");
-    }
+    setFormData((prev) =>
+      prev.name === cleaned ? prev : { ...prev, name: cleaned },
+    );
   }, []);
-
-
-
 
   const handleChange = useCallback(
     (
@@ -2518,8 +2532,6 @@ const LandingPageContactus: React.FC<{
 
           return;
         }
-
-        
 
         if (name === "phone") {
           handlePhoneChange(value);
@@ -2703,6 +2715,12 @@ const LandingPageContactus: React.FC<{
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      //       if (!leadId) {
+      //   alert("Lead not created yet. Please enter phone first.");
+      //   return;
+      // }
+
       if (!isFormValid || isSubmitting) return;
 
       setIsSubmitting(true);
@@ -2715,43 +2733,35 @@ const LandingPageContactus: React.FC<{
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Contact Us Form",
+          formname: "Final Contact Page Form",
           sourceUrl: getSourceUrl(),
+          finalSubmit: "true",
+          pageSource: getSourceUrl(),
           data: {
             name: formData.name,
             email: formData.email,
             phone: `+1${rawPhone}`,
             caseType: formData.category,
             description: formData.caseHistory,
-            state: formData.state || "",
             ipAddress: await getIPAddress(),
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
             submissionDate: new Date().toISOString(),
-            pageSource: getSourceUrl(),
           },
         };
 
-        // 1️⃣ CRM — MUST SUCCEED
-        const crmRes = await fetch(
-          "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(apiBody),
-          },
-        );
-
-        if (!crmRes.ok) {
-          const text = await crmRes.text();
-          throw new Error("CRM failed: " + text);
-        }
-
-        // 2️⃣ EMAILJS — MUST SUCCEED
+        //  EMAILJS — MUST SUCCEED
         await sendWithEmailJS(apiBody);
 
-        // ✅ SUCCESS
+        // CRM — MUST SUCCEED
+        await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(apiBody),
+        });
+
+        //  SUCCESS
         setFormData(initialData);
         setSuccessDialogOpen(true);
         setShowCaptcha(false);
@@ -2760,17 +2770,15 @@ const LandingPageContactus: React.FC<{
         setPhoneError("");
         setEmailError("");
         setNameError("");
-
         setSubmitMessage({
           type: "success",
-          text: "Form submitted successfully! You will receive a confirmation email shortly.",
+          text: "Form submitted successfully! You should receive a confirmation email shortly.",
         });
       } catch (error) {
-        console.error("❌ Submission error:", error);
-
+        console.error("Form submission error:", error);
         setSubmitMessage({
           type: "error",
-          text: "There was an error submitting your form. Please try again.",
+          text: "There was an error submitting your form. Please try again or contact us directly.",
         });
       } finally {
         setIsSubmitting(false);
@@ -2784,20 +2792,21 @@ const LandingPageContactus: React.FC<{
       tokenUrl,
       pingUrl,
       initialData,
+      leadId,
     ],
   );
-const router = useRouter();
+  const router = useRouter();
 
-useEffect(() => {
-  if (!successDialogOpen) return;
+  useEffect(() => {
+    if (!successDialogOpen) return;
 
-  const timer = setTimeout(() => {
-    router.refresh(); // re-fetch server data
-    // or router.push("/")
-  }, 2000);
+    const timer = setTimeout(() => {
+      router.refresh(); // re-fetch server data
+      // or router.push("/")
+    }, 2000);
 
-  return () => clearTimeout(timer);
-}, [successDialogOpen, router]);
+    return () => clearTimeout(timer);
+  }, [successDialogOpen, router]);
   return (
     <>
       <MobileLanding

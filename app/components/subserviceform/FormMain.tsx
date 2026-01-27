@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { sendWithEmailJS } from "./emailJsService";
 import { usePathname } from "next/navigation";
+
 const CRM_API_URL =
   "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata";
 
@@ -51,8 +52,7 @@ const getSourceUrl = () => {
   if (typeof window === "undefined") return "Unknown";
 
   if (!initialLandingUrl) {
-    const { origin, pathname } = window.location;
-    initialLandingUrl = origin + pathname; // ✅ STRIPS QUERY PARAMS
+    initialLandingUrl = window.location.href;
   }
 
   return initialLandingUrl;
@@ -68,7 +68,7 @@ const getIPAddress = async () => {
   }
 };
 
-const normalizePhone = (v: string) => v.replace(/\D/g, "").slice(0, 10);
+// const normalizePhone = (v: string) => v.replace(/\D/g, "").slice(0, 10);
 
 const formatPhone = (value: string) => {
   const numbers = value.replace(/\D/g, "");
@@ -118,7 +118,7 @@ const validateRequired = (v: string) => (!v.trim() ? "Required" : "");
 /* ---------------- Analytics ---------------- */
 
 const track = (event: string, data?: any) => {
-  // console.log("📊 ANALYTICS:", event, data || {});
+  // console.log(" ANALYTICS:", event, data || {});
   // plug GA, Meta, etc here
 };
 type CustomCaptchaProps = {
@@ -461,10 +461,12 @@ export default function Form() {
   const [consentChecked, setConsentChecked] = useState(false);
   const [captchaChecked, setCaptchaChecked] = useState(false);
 
-  const [leadId, setLeadId] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<number | null>(null);
   const [earlySent, setEarlySent] = useState(false);
 
-  const generateLeadId = () => crypto.randomUUID();
+  const [pingUrl, setPingUrl] = useState<string>("");
+  const [certId, setCertId] = useState<string>("");
+  const [tokenUrl, setTokenUrl] = useState<string>("");
 
   const [form, setForm] = useState({
     firstName: "",
@@ -489,9 +491,6 @@ export default function Form() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showFullConsent, setShowFullConsent] = useState(false);
 
-  const pathname = usePathname();
-  const slug = pathname.split("/").pop(); // ✅ ozempic-lawsuit
-
   useEffect(() => {
     const url = new URL(window.location.href);
     if (
@@ -504,7 +503,7 @@ export default function Form() {
   useEffect(() => {
     if (step === 4) {
       const t = setTimeout(() => {
-        // 🔄 Full reset
+        //  Full reset
         setStep(1);
         setDirection("next");
 
@@ -526,7 +525,7 @@ export default function Form() {
         setShowCaptcha(false);
         setRobotChecked(false);
         setCaptchaResetTrigger((p) => !p);
-      }, 3000); // ⏱️ 1 second
+      }, 3000); // ⏱ 1 second
 
       return () => clearTimeout(t);
     }
@@ -573,16 +572,24 @@ export default function Form() {
     return () => document.removeEventListener("mousedown", handle);
   }, [dropdownOpen]);
 
+  const pathname = usePathname();
+
+  const slug = pathname.split("/").pop()?.split("?")[0];
+
   useEffect(() => {
-    if (caseType) return; // don't override user choice
     if (!slug) return;
 
     const matchedCase = SLUG_TO_CASE_MAP[slug];
+    if (!matchedCase) return;
 
-    if (matchedCase && CASES.includes(matchedCase)) {
-      setCaseType(matchedCase);
-    }
-  }, [slug, caseType]);
+    const found = CASES.find(
+      (c) => c.toLowerCase() === matchedCase.toLowerCase(),
+    );
+
+    if (!found) return;
+
+    setCaseType((prev) => prev || found);
+  }, [slug]);
 
   useEffect(() => {
     if (!form.phone) {
@@ -591,7 +598,122 @@ export default function Form() {
     }
   }, [form.phone]);
 
+  useEffect(() => {
+    let observerInstance: MutationObserver | null = null;
+    let timeoutId: number | null = null;
+
+    const initializeTrustedFormObserver = () => {
+      try {
+        observerInstance = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "value"
+            ) {
+              const targetNode = mutation.target as HTMLElement | null;
+
+              try {
+                const el = targetNode as
+                  | HTMLInputElement
+                  | HTMLSelectElement
+                  | HTMLTextAreaElement
+                  | null;
+                if (
+                  el &&
+                  el.name === "xxTrustedFormCertUrl" &&
+                  (el as HTMLInputElement).value
+                ) {
+                  setCertId((el as HTMLInputElement).value);
+                }
+
+                if (
+                  el &&
+                  el.name === "xxTrustedFormPingUrl" &&
+                  (el as HTMLInputElement).value
+                ) {
+                  setPingUrl((el as HTMLInputElement).value);
+                }
+
+                if (
+                  el &&
+                  el.name === "xxTrustedFormCertToken" &&
+                  (el as HTMLInputElement).value
+                ) {
+                  setTokenUrl((el as HTMLInputElement).value);
+                }
+              } catch (error) {
+                console.warn("TrustedForm observer error:", error);
+              }
+            }
+          });
+        });
+
+        const startObserving = () => {
+          try {
+            const trustedFormFields = document.querySelectorAll(
+              '[name="xxTrustedFormCertUrl"], [name="xxTrustedFormPingUrl"], [name="xxTrustedFormCertToken"]',
+            );
+
+            trustedFormFields.forEach((field) => {
+              const el = field as
+                | HTMLInputElement
+                | HTMLSelectElement
+                | HTMLTextAreaElement;
+              if (el && observerInstance) {
+                observerInstance.observe(el, {
+                  attributes: true,
+                  attributeFilter: ["value"],
+                });
+
+                if ((el as HTMLInputElement).value) {
+                  switch (el.name) {
+                    case "xxTrustedFormCertUrl":
+                      setCertId((el as HTMLInputElement).value);
+                      break;
+                    case "xxTrustedFormPingUrl":
+                      setPingUrl((el as HTMLInputElement).value);
+                      break;
+                    case "xxTrustedFormCertToken":
+                      setTokenUrl((el as HTMLInputElement).value);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              }
+            });
+          } catch (error) {
+            console.warn("Error starting TrustedForm observation:", error);
+          }
+        };
+
+        timeoutId = window.setTimeout(startObserving, 1000);
+      } catch (error) {
+        console.error("Error initializing TrustedForm observer:", error);
+      }
+    };
+
+    initializeTrustedFormObserver();
+
+    return () => {
+      try {
+        if (timeoutId !== null) {
+          clearTimeout(timeoutId);
+        }
+        if (observerInstance) {
+          observerInstance.disconnect();
+        }
+      } catch (error) {
+        console.error("Error cleaning up TrustedForm observer:", error);
+      }
+    };
+  }, []);
+
   /* ---------------- Validation ---------------- */
+
+  const normalizePhone = (input: string) => {
+    return input.replace(/\D/g, "").slice(0, 10);
+  };
 
   const formatUSAMobile = (phone: string): string => {
     const cleaned = phone.replace(/\D/g, "");
@@ -701,63 +823,98 @@ export default function Form() {
     return { isValid: true, reason: null };
   };
 
+  const earlyLeadLock = useRef(false);
+
   const handlePhoneChange = useCallback(
     async (value: string) => {
       const formatted = formatUSAMobile(value);
-      let error = "";
+      setForm((prev) => ({ ...prev, phone: formatted }));
 
-      if (!value.trim()) {
-        error = "Phone number is required";
-      } else if (!validateUSAMobile(formatted)) {
-        error = "Please enter a valid phone number";
+      const phoneDigits = normalizePhone(formatted);
+
+      //  Stop until 10 digits entered
+      if (phoneDigits.length !== 10) {
+        earlyLeadLock.current = false;
+        return;
       }
 
-      setPhoneError(error);
-      setForm((prev) =>
-        prev.phone === formatted ? prev : { ...prev, phone: formatted },
-      );
+      //  Prevent duplicates
+      if (earlySent) return;
+      if (earlyLeadLock.current) return;
 
-      // ✅ FIRE EARLY API WHEN PHONE BECOMES VALID FIRST TIME
-      if (
-        !earlySent &&
-        validateUSAMobile(formatted) &&
-        form.firstName.trim() &&
-        form.lastName.trim()
-      ) {
-        try {
-          const id = crypto.randomUUID();
-          await createLeadEarly(id);
-          setLeadId(id);
-          setEarlySent(true);
-          console.log("✅ Early lead sent:", id);
-        } catch (err) {
-          console.error("❌ Early API failed:", err);
-        }
+      const fullName =
+        `${form.firstName.trim()} ${form.lastName.trim()}`.trim();
+
+      if (fullName.split(" ").length < 2) return;
+
+      earlyLeadLock.current = true;
+
+      try {
+        await createEarlyLead(fullName, phoneDigits);
+        setEarlySent(true);
+      } catch (err) {
+        console.error(" Early Lead Failed:", err);
+        earlyLeadLock.current = false;
       }
     },
-    [earlySent, form.firstName, form.lastName],
+    [form.firstName, form.lastName, earlySent],
   );
 
-  const handleEmailChange = useCallback((value: string) => {
-    const formatted = formatEmail(value);
-    let error = "";
+  const emailUpdateLock = useRef(false);
 
-    try {
-      if (!value.trim()) {
-        error = "Email address is required";
-      } else if (!validateEmail(formatted).isValid) {
-        error = "Please enter a valid email address";
+  const handleEmailChange = useCallback(
+    async (value: string) => {
+      const formatted = formatEmail(value);
+      setForm((prev) => ({ ...prev, email: formatted }));
+
+      //  Only continue if valid email
+      if (!validateEmail(formatted).isValid) return;
+
+      //  Only update if leadId exists
+      if (!leadId) return;
+
+      if (emailUpdateLock.current) return;
+      emailUpdateLock.current = true;
+
+      earlyLeadLock.current = true;
+
+      try {
+        const updateBody = {
+          countryName: "USA",
+          brandName: "C2A",
+          websiteName: "Connect 2 Attorney",
+          formname: "Stepper Email Update",
+          sourceUrl: getSourceUrl(),
+          data: {
+            name: `${form.firstName} ${form.lastName}`,
+            phone: `+1${normalizePhone(form.phone)}`,
+            email: formatted,
+            ipAddress: await getIPAddress(),
+            submissionDate: new Date().toISOString(),
+            trustedFormCertUrl: certId || "",
+            trustedFormToken: tokenUrl || "",
+            trustedFormPingUrl: pingUrl || "",
+          },
+        };
+
+        const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updateBody),
+        });
+
+        if (!res.ok) {
+          console.error(" Email Update Failed:", await res.text());
+          return;
+        }
+
+        console.log(" Email Updated Successfully for Lead:", leadId);
+      } catch (err) {
+        console.error(" Email Update Error:", err);
       }
-    } catch {
-      error = "Please enter a valid email address";
-    }
-
-    setEmailError((prev) => (prev === error ? prev : error));
-
-    setForm((prev) =>
-      prev.email === formatted ? prev : { ...prev, email: formatted },
-    );
-  }, []);
+    },
+    [leadId],
+  );
 
   const handleFirstNameChange = useCallback((value: string) => {
     const cleaned = value.replace(/\s{2,}/g, " ").replace(/[^a-zA-Z\s'-]/g, "");
@@ -906,149 +1063,113 @@ export default function Form() {
 
   /* ---------------- Submit ---------------- */
 
-  // const buildEarlyUrl = (id: string) =>
-  //   `https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/submitformdata/${id}`;
+  const generateUniqueSessionId = () => {
+    const prefix = "CR";
+    const timestamp = Date.now(); // milliseconds
+    const random = Math.random().toString(36).substring(2, 10);
 
-  // const createLeadEarly = async (id: string) => {
-  //   const createApiBody = {
-  //     countryName: "USA",
-  //     brandName: "C2A",
-  //     websiteName: "Connect 2 Attorney",
-  //     formname: "Stepper Section Form",
-  //     sourceUrl: getSourceUrl(),
-  //     data: {
-  //       name: `${form.firstName} ${form.lastName}`,
-  //       phone: `+1${normalizePhone(form.phone)}`,
-  //       submissionDate: new Date().toISOString(),
-  //       pageSource: getSourceUrl(),
-  //     },
-  //   };
+    return `${prefix}_${timestamp}_${random}`;
+  };
 
-  //   const res = await fetch(buildEarlyUrl(id), {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(createApiBody),
-  //   });
+  const [uniqueSessionId] = useState(() => generateUniqueSessionId());
 
-  //   if (!res.ok) {
-  //     const text = await res.text();
-  //     throw new Error("Early lead failed: " + text);
-  //   }
-  // };
+  const createEarlyLead = async (fullName: string, phoneDigits: string) => {
+    const cleaned = phoneDigits.replace(/\D/g, "");
+
+    const earlyBody = {
+      countryName: "USA",
+      brandName: "C2A",
+      websiteName: "Connect 2 Attorney",
+      formname: "Stepper form",
+      sourceUrl: getSourceUrl(),
+      data: {
+        name: fullName,
+        phone: `+1${cleaned}`,
+        submissionDate: new Date().toISOString(),
+        uniqueSessionId: uniqueSessionId,
+        trustedFormCertUrl: certId || "",
+        trustedFormToken: tokenUrl || "",
+        trustedFormPingUrl: pingUrl || "",
+        pageSource: getSourceUrl(),
+      },
+    };
+
+    const res = await fetch(CRM_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(earlyBody),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    const json = await res.json();
+
+    console.log("Early Lead Created:", json);
+
+    //  store backend id
+    setLeadId(json.id);
+  };
 
   const handleSubmit = async () => {
+    // if (!leadId) {
+    //   console.error(" Early lead not created yet");
+    //   return;
+    // }
     if (isSubmitting) return;
-
 
     setIsSubmitting(true);
 
     try {
-      // ================== TRUSTEDFORM ==================
-      const tfCertUrl =
-        (
-          document.querySelector(
-            'input[name="xxTrustedFormCertUrl"]',
-          ) as HTMLInputElement
-        )?.value || "";
-
-      const tfPingUrl =
-        (
-          document.querySelector(
-            'input[name="xxTrustedFormPingUrl"]',
-          ) as HTMLInputElement
-        )?.value || "";
-
-      const tfCertId = tfCertUrl ? tfCertUrl.split("/").pop() || "" : "";
-
-      // ================== BUILD PAYLOAD ==================
       const apiBody = {
         countryName: "USA",
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
-        formname: "Stepper Section Form",
+        formname: "Final Stepper Submission",
         sourceUrl: getSourceUrl(),
+        finalSubmit: "true",
         data: {
           name: `${form.firstName} ${form.lastName}`,
-          email: form.email,
           phone: `+1${normalizePhone(form.phone)}`,
+          email: form.email,
           zip: form.zip,
           category: caseType,
           caseHistory: description,
-          state: "",
-
           ipAddress: await getIPAddress(),
-
-          trustedFormCertUrl: tfCertUrl,
-          trustedFormToken: tfCertId,
-          trustedFormPingUrl: tfPingUrl,
-
           submissionDate: new Date().toISOString(),
-          pageSource: getSourceUrl(),
+          trustedFormCertUrl: certId || "",
+          trustedFormToken: tokenUrl || "",
+          trustedFormPingUrl: pingUrl || "",
         },
       };
 
-      // console.log("FINAL API BODY:", apiBody);
+      const res = await fetch(`${CRM_API_URL}/${leadId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(apiBody),
+      });
 
-      // =====================================================
-      // 1 CRM (AZURE) — MUST SUCCEED
-      // =====================================================
-      try {
-        const res = await fetch(`${CRM_API_URL}/${leadId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(apiBody),
-        });
-
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error("CRM failed: " + text);
-        }
-      } catch (err) {
-        console.error("❌ CRM FAILED:", err);
-        // alert("Submission failed. Please try again.");
-        return;
-      }
-      // =====================================================
-      // 2 CLIENT WEBHOOK — CONDITIONAL HARD FAIL
-      // =====================================================
-      if (CLIENT_WEBHOOK_URL) {
-        try {
-          const res = await fetch(CLIENT_WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(apiBody),
-          });
-
-          if (!res.ok) {
-            const text = await res.text();
-            throw new Error("Webhook failed: " + text);
-          }
-        } catch (err) {
-          console.error("❌ WEBHOOK FAILED:", err);
-          // alert("Submission failed. Please try again.");
-          return;
-        }
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error(" CRM Failed:", errText);
+        throw new Error("CRM submission failed");
       }
 
-      // =====================================================
-      // 3 EMAILJS — MUST SUCCEED
-      // =====================================================
+      console.log(" CRM Success");
+
+      // ============================
+      //  EMAILJS (BEST EFFORT)
+      // ============================
       try {
         await sendWithEmailJS(apiBody);
-      } catch (err) {
-        console.error("❌ EMAILJS FAILED:", err);
-        // alert("Submission failed. Please try again.");
-        return;
+        console.log(" EmailJS Sent");
+      } catch (emailErr) {
+        console.warn(" EmailJS Failed (CRM still saved)", emailErr);
       }
 
-      // =====================================================
-      // SUCCESS
-      // =====================================================
-      setDirection("next");
+      //  ONLY show thank you if CRM succeeds
       setStep(4);
-    } catch (e) {
-      console.error("❌ UNEXPECTED ERROR:", e);
-      // alert("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error(" Final Submit Failed:", err);
     } finally {
       setIsSubmitting(false);
     }
@@ -1082,17 +1203,6 @@ export default function Form() {
                 e.preventDefault();
 
                 if (!canProceed(1)) return;
-
-                if (!leadId) {
-                  try {
-                    const id = generateLeadId();
-                    await createLeadEarly(id);
-                    setLeadId(id);
-                  } catch (err) {
-                    console.error("❌ Early API failed:", err);
-                    return;
-                  }
-                }
 
                 next();
               }}
@@ -1277,7 +1387,7 @@ export default function Form() {
                   <label className="flex items-start gap-2 cursor-pointer">
                     <input
                       type="checkbox"
-                      name="consent"
+                      name="consent-box"
                       checked={consentChecked}
                       disabled={isSubmitting}
                       className={checkboxClass}
@@ -1285,9 +1395,8 @@ export default function Form() {
                         const checked = e.target.checked;
                         setConsentChecked(checked);
 
-                        if (checked) {
-                          setShowCaptcha(true);
-                        } else {
+                        if (!checked) {
+                          setCaptchaChecked(false);
                           setShowCaptcha(false);
                           setCaptchaVerified(false);
                           setCaptchaResetTrigger((p) => !p);
@@ -1378,7 +1487,6 @@ export default function Form() {
                       <CustomCaptcha
                         onCaptchaChange={(valid) => {
                           setCaptchaVerified(valid);
-                          if (valid) setCaptchaChecked(true);
                         }}
                         resetTrigger={captchaResetTrigger}
                         disabled={isSubmitting}

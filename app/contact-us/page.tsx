@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 export const metadata: Metadata = {
   title: "Contact Us",
   alternates: {
-    canonical: "https://connect2attorney.com/contact",
+    canonical: "https://connect2attorney.com/contact-us",
   },
 };
 

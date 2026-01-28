@@ -461,8 +461,8 @@ type FormMainDesktopProps = {
     name?: string;
     email?: string;
     phone?: string;
-    category?: string;
-    caseHistory?: string;
+    caseType?: string;
+    description?: string;
     consent?: boolean;
     state?: string;
     [key: string]: unknown;
@@ -653,7 +653,7 @@ const FormMainDesktop: React.FC<FormMainDesktopProps> = ({
           <div className="relative">
             <select
               name="category"
-              value={formData.category || ""}
+              value={formData.caseType || ""}
               onChange={handleChange}
               disabled={isSubmitting}
               required
@@ -686,7 +686,7 @@ const FormMainDesktop: React.FC<FormMainDesktopProps> = ({
           <div>
             <textarea
               name="caseHistory"
-              value={formData.caseHistory || ""}
+              value={formData.description || ""}
               onChange={handleChange}
               disabled={isSubmitting}
               placeholder="How Can We Help?"
@@ -972,7 +972,7 @@ const FormMainMobile: React.FC<FormMainDesktopProps> = ({
         <div className="relative w-full">
           <select
             name="category"
-            value={formData.category || ""}
+            value={formData.caseType || ""}
             onChange={handleChange}
             disabled={isSubmitting}
             required
@@ -1008,7 +1008,7 @@ const FormMainMobile: React.FC<FormMainDesktopProps> = ({
         <div>
           <textarea
             name="caseHistory"
-            value={formData.caseHistory || ""}
+            value={formData.description || ""}
             onChange={handleChange}
             disabled={isSubmitting}
             placeholder="How Can We Help?"
@@ -1173,9 +1173,9 @@ const EnquiryForm: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boole
     name: string;
     phone: string;
     email: string;
-    category: string;
+    caseType: string;
     state: string;
-    caseHistory: string;
+    description: string;
     consent: boolean;
     needHelp?: boolean;
   };
@@ -1184,9 +1184,9 @@ const EnquiryForm: React.FC<{ setOpen: React.Dispatch<React.SetStateAction<boole
     name: "",
     phone: "",
     email: "",
-    category: "",
+    caseType: "",
     state: "",
-    caseHistory: "",
+    description: "",
     consent: false,
     needHelp: false,
   }), []);
@@ -1359,14 +1359,14 @@ const handleEmailChange = useCallback((value: string) => {
       isFullNameValid &&
       isPhoneValid &&
       isEmailValid &&
-      formData.category &&
+      formData.caseType &&
       formData.consent
     );
   }, [
     isFullNameValid,
     isPhoneValid,
     isEmailValid,
-    formData.category,
+    formData.caseType,
     formData.consent,
   ]);
 
@@ -1503,16 +1503,16 @@ const handleEmailChange = useCallback((value: string) => {
                   name: submitData.name,
                   email: submitData.email,
                   phone: `+1${submitData.phone}`,
-                  category: submitData.category,
+                  caseType: submitData.caseType,
                   state: submitData.state,
-                  caseHistory: submitData.caseHistory,
+                  description: submitData.description,
                   needHelp: submitData.needHelp || false,
                   ipAddress: await getIPAddress(),
                   trustedFormCertUrl: submitData.certId,
                   trustedFormToken: submitData.tokenUrl,
                   trustedFormPingUrl: submitData.pingUrl,
                   submissionDate: new Date().toISOString(),
-                  pageSource: getSourceUrl(),
+                  sourceUrl: getSourceUrl(),
                 },
               }),
             }
@@ -1547,16 +1547,16 @@ const handleEmailChange = useCallback((value: string) => {
                     name: submitData.name,
                     email: submitData.email,
                     phone: `+1${submitData.phone}`,
-                    category: submitData.category,
+                    caseType: submitData.caseType,
                     state: submitData.state,
-                    caseHistory: submitData.caseHistory,
+                    description: submitData.description,
                     needHelp: submitData.needHelp || false,
                     ipAddress: await getIPAddress(),
                     trustedFormCertUrl: submitData.certId,
                     trustedFormToken: submitData.tokenUrl,
                     trustedFormPingUrl: submitData.pingUrl,
                     submissionDate: new Date().toISOString(),
-                    pageSource: getSourceUrl(),
+                    sourceUrl: getSourceUrl(),
                   },
                 }),
               }

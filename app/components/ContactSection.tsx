@@ -807,7 +807,7 @@ const ContactSection = () => {
           trustedFormPingUrl: trustedFormData.pingUrl,
 
           submissionDate: new Date().toISOString(),
-          pageSource: window.location.href,
+          sourceUrl: window.location.href,
         },
       };
 

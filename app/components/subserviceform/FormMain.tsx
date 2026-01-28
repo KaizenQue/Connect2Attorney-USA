@@ -894,7 +894,7 @@ export default function Form() {
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
-            pageSource: window.location.href,
+            sourceUrl: window.location.href,
           },
         };
 
@@ -1091,7 +1091,7 @@ export default function Form() {
         trustedFormCertUrl: certId || "",
         trustedFormToken: tokenUrl || "",
         trustedFormPingUrl: pingUrl || "",
-        pageSource: window.location.href,
+        sourceUrl: window.location.href,
       },
     };
 
@@ -1134,13 +1134,13 @@ export default function Form() {
           email: form.email,
           zip: form.zip,
           category: caseType,
-          caseHistory: description,
+          description: description,
           ipAddress: await getIPAddress(),
           submissionDate: new Date().toISOString(),
           trustedFormCertUrl: certId || "",
           trustedFormToken: tokenUrl || "",
           trustedFormPingUrl: pingUrl || "",
-          pageSource: window.location.href,
+          sourceUrl: window.location.href,
         },
       };
 

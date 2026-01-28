@@ -1,11 +1,10 @@
-import ClassActionHero from "../components/ClassActionHero";
-import ClassActionCard from "../components/ClassActionCard";
-import LawsuitSection from "../components/LawsuitSection";
-import ClassActionLegalPage from "../components/ClassActionLegalPage";
-import MassTortInfo from "../components/MassTortInfo";
+"use client"
+import ContactCardsSection from "../components/ContactCardsSection";
+import Footer from "../components/Footer";
 import FaqSection from "../components/FaqSection";
 import ContactCard from "../components/ContactCard";
-import Footer from "../components/Footer";
+import LandingPageContactus from "../components/LandingPageContactus";
+import { useState } from "react";
 const faqData = [
   {
     question: "How much does it cost to start a case?",
@@ -35,24 +34,24 @@ const faqData = [
 ];
 
 export const metadata = {
-  title: "Class Action",
+  title: "Contact Us",
   alternates: {
-    canonical: "https://connect2attorney.com/class-action",
+    canonical: "https://connect2attorney.com/contact-us",
   },
 };
 
-export default function ClassActionPage() {
+export default function ContactUsPage() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <main className="min-h-screen">
-      <ClassActionHero />
-      <ClassActionCard />
-      <LawsuitSection />
-      <ClassActionLegalPage />
-      <MassTortInfo />
+    <main className="">
+      <LandingPageContactus setOpen={setOpen} />
+      <ContactCardsSection />
       <FaqSection faqData={faqData} />;
       <ContactCard />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }
+
 

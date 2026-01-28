@@ -16,7 +16,7 @@ const LawsuitsHeroCard = ({
   imageClassName = "object-cover scale-[1.1] md:scale-[1.12] md:translate-y-[-20px]",
 }: LawsuitsHeroCardProps) => {
 
-  console.log(heroImage)
+  // console.log(heroImage)
   return (
     <section
       className="

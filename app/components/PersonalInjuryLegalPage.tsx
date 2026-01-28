@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const eligibilityPoints = [
   {
@@ -280,9 +281,11 @@ const PersonalInjuryLegalPage: React.FC = () => {
                     review today.
                   </p>
 
+                  <Link href="/contact-us">
                   <button className="w-full bg-[#fccb48] hover:bg-[#eebb20] text-[#162766] font-poppins font-semibold text-[16px] leading-normal tracking-[0.32px] uppercase text-center py-3 px-4 rounded transition-colors duration-200">
                     Get a Free Case Review
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>

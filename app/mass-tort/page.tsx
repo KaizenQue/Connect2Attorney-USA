@@ -35,6 +35,14 @@ const faqData = [
   },
 ];
 
+export const metadata = {
+  title: "Mass Tort",
+  alternates: {
+    canonical: "https://connect2attorney.com/mass-tort",
+  },
+};
+
+
 export default function MassTortPage() {
   return (
     <main className="min-h-screen">

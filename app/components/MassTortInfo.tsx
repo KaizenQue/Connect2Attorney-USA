@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const MassTortInfo = () => {
 
@@ -58,7 +59,8 @@ const MassTortInfo = () => {
               Today To Schedule Your Free Case Evaluation.
             </p>
 
-            <button 
+              <Link href="/contact-us">
+                  <button 
               className="
                 bg-[#F2C94C]
                 text-[#19224D]
@@ -77,6 +79,8 @@ const MassTortInfo = () => {
             >
               Start a Free Case Review
             </button>
+              </Link>
+        
           </div>
 
           {/* ================= RIGHT: IMAGE (DESKTOP/TABLET ONLY) ================= */}

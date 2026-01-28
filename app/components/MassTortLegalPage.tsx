@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const eligibilityPoints = [
   {
@@ -213,9 +214,12 @@ const MassTortLegalPage = () => {
                     Don’t wait to protect your rights. Get a free case
                     evaluation today.
                   </p>
-                  <button className="w-full bg-[#fccb48] text-[#162766] font-semibold uppercase py-3 rounded">
+                  <Link href="/contact-us">
+                   <button className="w-full bg-[#fccb48] text-[#162766] font-semibold uppercase py-3 rounded">
                     Get a Free Case Review
                   </button>
+                  </Link>
+                 
                 </div>
               </div>
             </div>

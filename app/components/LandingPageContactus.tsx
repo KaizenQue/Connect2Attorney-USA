@@ -1804,7 +1804,7 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
     const interval = setInterval(() => {
       if (window.TrustedForm && window.TrustedForm.certify) {
         window.TrustedForm.certify();
-        console.log("TrustedForm certified on popup open");
+        // console.log("TrustedForm certified on popup open");
         clearInterval(interval);
       }
     }, 300);
@@ -2371,14 +2371,14 @@ const LandingPageContactus: React.FC<{
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState<boolean>(false);
 
-   const [leadId, setLeadId] = useState<number | null>(null);
-    const [earlySent, setEarlySent] = useState(false);
-  
+  const [leadId, setLeadId] = useState<number | null>(null);
+  const [earlySent, setEarlySent] = useState(false);
+
   type SubmitMessageType = { type: "success" | "error"; text: string } | null;
   const [submitMessage, setSubmitMessage] = useState<SubmitMessageType>(null);
 
-const emailSent = useRef(false);
-  
+  const emailSent = useRef(false);
+
   const createEarlyLead = async (fullName: string, phoneDigits: string) => {
     const cleaned = phoneDigits.replace(/\D/g, "");
 
@@ -2387,7 +2387,7 @@ const emailSent = useRef(false);
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Contact Page form",
-      sourceUrl: getSourceUrl(),
+
       data: {
         name: fullName,
         phone: `+1${cleaned}`,
@@ -2395,7 +2395,7 @@ const emailSent = useRef(false);
         trustedFormCertUrl: certId || "",
         trustedFormToken: tokenUrl || "",
         trustedFormPingUrl: pingUrl || "",
-        pageSource: getSourceUrl(),
+        pageSource: window.location.href,
       },
     };
 
@@ -2414,8 +2414,8 @@ const emailSent = useRef(false);
     return json.id;
   };
 
-    const earlyLeadLock = useRef(false);
-  
+  const earlyLeadLock = useRef(false);
+
   const handlePhoneChange = useCallback(
     async (value: string) => {
       const formatted = formatUSAMobile(value);
@@ -2425,20 +2425,27 @@ const emailSent = useRef(false);
 
       if (phoneDigits.length !== 10) return;
 
-      earlyLeadLock.current = true;
+      if (earlySent) return;
+
+      if (earlyLeadLock.current) return;
 
       const fullName = formData.name.trim();
       if (fullName.split(" ").length < 2) return;
 
+      earlyLeadLock.current = true;
+
       try {
         const newId = await createEarlyLead(fullName, phoneDigits);
+
         setLeadId(newId);
         setEarlySent(true);
       } catch (err) {
-        console.error(" Early Lead Failed:", err);
+        console.error("Early Lead Failed:", err);
+
+        earlyLeadLock.current = false;
       }
     },
-    [formData.name, earlySent, leadId],
+    [formData.name, earlySent],
   );
 
   const handleEmailChange = useCallback(
@@ -2461,8 +2468,8 @@ const emailSent = useRef(false);
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Contact Page form Email Update",
-          sourceUrl: getSourceUrl(),
+          formname: "Contact Page form",
+
           data: {
             name: formData.name,
             phone: `+1${rawPhone}`,
@@ -2472,6 +2479,7 @@ const emailSent = useRef(false);
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
+            pageSource: window.location.href,
           },
         };
 
@@ -2486,7 +2494,7 @@ const emailSent = useRef(false);
           return;
         }
 
-        console.log(" Email Updated Successfully for Lead:", leadId);
+        // console.log(" Email Updated Successfully for Lead:", leadId);
       } catch (err) {
         console.error(" Email Update Error:", err);
       }
@@ -2733,10 +2741,9 @@ const emailSent = useRef(false);
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Final Contact Page Form",
-          sourceUrl: getSourceUrl(),
+          formname: "Contact Page Form",
           finalSubmit: "true",
-          pageSource: getSourceUrl(),
+
           data: {
             name: formData.name,
             email: formData.email,
@@ -2747,6 +2754,7 @@ const emailSent = useRef(false);
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
+            pageSource: window.location.href,
             submissionDate: new Date().toISOString(),
           },
         };

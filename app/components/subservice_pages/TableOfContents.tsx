@@ -95,9 +95,8 @@ const TableOfContents = ({ items }: { items: TocItem[] }) => {
       {open && (
         <div className="mt-2 rounded-xl border border-[#d9e0ff] bg-[#f9fafc] p-4">
           <div className="max-h-[300px] overflow-y-auto flex flex-col gap-2 pr-1">
-            {items.map((item) => (
-              <div
-                key={item.id}
+            {items.map((item, index) => (
+                <div key={`${item.id}-${index}`}
                 onClick={() => {
                   scrollToSection(item.id);
                   if (window.innerWidth < 1024) {

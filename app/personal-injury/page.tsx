@@ -34,6 +34,12 @@ const faqData = [
   },
 ];
 
+export const metadata = {
+  title: "Personal Injury",
+  alternates: {
+    canonical: "https://connect2attorney.com/personal-injury",
+  },
+};
 export default function PersonalInjuryPage() {
   return (
     <main className="min-h-screen">

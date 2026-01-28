@@ -35,6 +35,12 @@ const faqData = [
       "We specialize in personal injury, worker's compensation, and medical malpractice. If you aren't sure if your case qualifies, give us a call for a free evaluation.",
   },
 ];
+export const metadata = {
+  title: "Home",
+  alternates: {
+    canonical: "https://connect2attorney.com/",
+  },
+};
 
 export default function Home() {
   return (

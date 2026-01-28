@@ -60,9 +60,8 @@ const workSans = Work_Sans({
 export const metadata: Metadata = {
   title: "Connect2Attorney",
   description: "Connect2Attorney - Your Trusted Legal Connection",
+  
 };
-
-
 export default function RootLayout({
   children,
 }: Readonly<{

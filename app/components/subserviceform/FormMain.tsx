@@ -34,14 +34,14 @@ const SLUG_TO_CASE_MAP: Record<string, string> = {
   "ozempic-lawsuit": "Ozempic Lawsuit",
   "mesothelioma-lawsuit": "Mesothelioma Lawsuit",
   "depo-provera-lawsuit": "Depo-Provera Lawsuit",
-  "roundup-cancer-lawsuit": "Roundup Cancer Lawsuit",
+  "roundup-lawsuit": "Roundup Cancer Lawsuit",
   "talcum-powder-lawsuit": "Talcum Powder Lawsuit",
   "tesla-autopilot-recall-lawsuit": "Tesla Autopilot Recall Lawsuit",
-  "maclaren-sexual-abuse-lawsuit": "MacLaren Sexual Abuse Lawsuit",
+  "maclaren-hall-sex-abuse-lawsuit": "MacLaren Sexual Abuse Lawsuit",
   "sexual-abuse-lawsuit": "Sexual Abuse Lawsuit",
   "motor-vehicle-accident": "Motor Vehicle Accident Lawsuit",
-  "slip-and-fall-injury-lawsuit": "Slip and Fall Injury Lawsuit",
-  "18-wheeler-accident-lawsuit": "18-Wheeler Accident Lawsuit",
+  "slip-and-fall": "Slip and Fall Injury Lawsuit",
+  "18-wheeler-accident": "18-Wheeler Accident Lawsuit",
 };
 
 /* ---------------- Utils ---------------- */
@@ -883,8 +883,8 @@ export default function Form() {
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Stepper Email Update",
-          sourceUrl: getSourceUrl(),
+          formname: "Stepper Form",
+          
           data: {
             name: `${form.firstName} ${form.lastName}`,
             phone: `+1${normalizePhone(form.phone)}`,
@@ -894,6 +894,7 @@ export default function Form() {
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
+            pageSource: window.location.href,
           },
         };
 
@@ -908,7 +909,7 @@ export default function Form() {
           return;
         }
 
-        console.log(" Email Updated Successfully for Lead:", leadId);
+        // console.log(" Email Updated Successfully for Lead:", leadId);
       } catch (err) {
         console.error(" Email Update Error:", err);
       }
@@ -1081,7 +1082,7 @@ export default function Form() {
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Stepper form",
-      sourceUrl: getSourceUrl(),
+      
       data: {
         name: fullName,
         phone: `+1${cleaned}`,
@@ -1090,7 +1091,7 @@ export default function Form() {
         trustedFormCertUrl: certId || "",
         trustedFormToken: tokenUrl || "",
         trustedFormPingUrl: pingUrl || "",
-        pageSource: getSourceUrl(),
+        pageSource: window.location.href,
       },
     };
 
@@ -1104,7 +1105,7 @@ export default function Form() {
 
     const json = await res.json();
 
-    console.log("Early Lead Created:", json);
+    // console.log("Early Lead Created:", json);
 
     //  store backend id
     setLeadId(json.id);
@@ -1124,8 +1125,8 @@ export default function Form() {
         countryName: "USA",
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
-        formname: "Final Stepper Submission",
-        sourceUrl: getSourceUrl(),
+        formname: "Stepper Form",
+        
         finalSubmit: "true",
         data: {
           name: `${form.firstName} ${form.lastName}`,
@@ -1139,6 +1140,7 @@ export default function Form() {
           trustedFormCertUrl: certId || "",
           trustedFormToken: tokenUrl || "",
           trustedFormPingUrl: pingUrl || "",
+          pageSource: window.location.href,
         },
       };
 
@@ -1154,14 +1156,14 @@ export default function Form() {
         throw new Error("CRM submission failed");
       }
 
-      console.log(" CRM Success");
+      // console.log(" CRM Success");
 
       // ============================
       //  EMAILJS (BEST EFFORT)
       // ============================
       try {
         await sendWithEmailJS(apiBody);
-        console.log(" EmailJS Sent");
+        // console.log(" EmailJS Sent");
       } catch (emailErr) {
         console.warn(" EmailJS Failed (CRM still saved)", emailErr);
       }

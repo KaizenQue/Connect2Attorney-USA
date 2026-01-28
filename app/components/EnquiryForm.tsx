@@ -523,7 +523,7 @@ const FormMainDesktop: React.FC<FormMainDesktopProps> = ({
     const interval = setInterval(() => {
       if (window.TrustedForm && window.TrustedForm.certify) {
         window.TrustedForm.certify();
-        console.log("TrustedForm certified on popup open");
+        // console.log("TrustedForm certified on popup open");
         clearInterval(interval);
       }
     }, 300);

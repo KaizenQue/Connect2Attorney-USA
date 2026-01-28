@@ -1347,8 +1347,7 @@ const LandingPageContactus: React.FC<{
       countryName: "USA",
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
-      formname: "Enquiry form",
-      sourceUrl: getSourceUrl(),
+      formname: "Enquiry Form",
       data: {
         name: fullName,
         phone: `+1${cleaned}`,
@@ -1356,7 +1355,7 @@ const LandingPageContactus: React.FC<{
         trustedFormCertUrl: certId || "",
         trustedFormToken: tokenUrl || "",
         trustedFormPingUrl: pingUrl || "",
-        pageSource: getSourceUrl(),
+        pageSource: window.location.href,
       },
     };
 
@@ -1427,8 +1426,8 @@ const LandingPageContactus: React.FC<{
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Enquiry form Email Update",
-          sourceUrl: getSourceUrl(),
+          formname: "Enquiry Form",
+          
           data: {
             name: formData.name,
             phone: `+1${rawPhone}`,
@@ -1438,6 +1437,7 @@ const LandingPageContactus: React.FC<{
             trustedFormCertUrl: certId || "",
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
+            pageSource: window.location.href,
           },
         };
 
@@ -1452,7 +1452,7 @@ const LandingPageContactus: React.FC<{
           return;
         }
 
-        console.log(" Email Updated Successfully for Lead:", leadId);
+        // console.log(" Email Updated Successfully for Lead:", leadId);
       } catch (err) {
         console.error(" Email Update Error:", err);
       }
@@ -1716,10 +1716,9 @@ const LandingPageContactus: React.FC<{
           countryName: "USA",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
-          formname: "Final Enquiry Form",
-          sourceUrl: getSourceUrl(),
+          formname: "Enquiry Form",
+          
           finalSubmit: "true",
-          pageSource: getSourceUrl(),
           data: {
             name: formData.name,
             email: formData.email,
@@ -1732,6 +1731,7 @@ const LandingPageContactus: React.FC<{
             trustedFormToken: tokenUrl || "",
             trustedFormPingUrl: pingUrl || "",
             submissionDate: new Date().toISOString(),
+            pageSource: window.location.href,
           },
         };
 

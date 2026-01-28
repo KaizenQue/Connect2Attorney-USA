@@ -363,6 +363,16 @@ const LawsuitsLegalPage = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+    const scrollToNextSection = () => {
+    const el = document.getElementById("stepper-form");
+    if (!el) return;
+
+    const yOffset = -80; // header height
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
     <div
       ref={wrapperRef}
@@ -698,11 +708,11 @@ const LawsuitsLegalPage = () => {
                   <p className="text-[#F9F9F9] font-urbanist font-medium text-center text-[16px] leading-normal mb-6">
                     {content.ctaContent.description}
                   </p>
-                  <Link href="/contact-us">
-                    <button className="w-full bg-[#fccb48] hover:bg-[#eebb20] text-[#162766] font-poppins font-semibold text-[16px] leading-normal tracking-[0.32px] uppercase text-center py-3 px-4 rounded transition-colors duration-200">
+                 
+                    <button onClick={scrollToNextSection} className="w-full bg-[#fccb48] hover:bg-[#eebb20] text-[#162766] font-poppins font-semibold text-[16px] leading-normal tracking-[0.32px] uppercase text-center py-3 px-4 rounded transition-colors duration-200">
                       {content.ctaContent.buttonText}
                     </button>
-                  </Link>
+                  
                 </div>
               </div>
               <div className="mb-8">

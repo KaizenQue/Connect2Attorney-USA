@@ -508,7 +508,7 @@ const ContactSection = () => {
       countryName: "USA",
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
-      formname: "Contact form Start",
+      formname: "Contact Section Form",
       sourceUrl: window.location.href,
       data: {
         name: fullName,
@@ -534,7 +534,7 @@ const ContactSection = () => {
       countryName: "USA",
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
-      formname: "Contact section form Update",
+      formname: "Contact Section Form",
       sourceUrl: window.location.href,
       data: {
         name: `${form.firstName} ${form.lastName}`.trim(),
@@ -597,19 +597,19 @@ const ContactSection = () => {
         `${form.firstName.trim()} ${form.lastName.trim()}`.trim();
 
       if (fullName.split(" ").length < 2) {
-        console.log("⏳ Waiting for full name before lead create...");
+        // console.log(" Waiting for full name before lead create...");
         return;
       }
 
       try {
-        console.log(" Creating lead from email...");
+        // console.log(" Creating lead from email...");
 
         const newId = await createEarlyLead(fullName, formatted);
 
         setLeadId(newId);
         setEarlySent(true);
 
-        console.log("Lead Created From Email:", newId);
+        // console.log("Lead Created From Email:", newId);
       } catch (err) {
         console.error("Lead Create Failed:", err);
       }
@@ -635,7 +635,7 @@ const ContactSection = () => {
       try {
         await updateLeadPhone(`+1${phoneDigits}`);
 
-        console.log(" Phone Updated");
+        // console.log(" Phone Updated");
       } catch (err) {
         console.error("Phone Update Failed:", err);
         earlyLeadLock.current = false;
@@ -792,7 +792,7 @@ const ContactSection = () => {
         countryName: "USA",
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
-        formname: "Contact Final Submission",
+        formname: "Contact Section Form",
         sourceUrl: window.location.href,
         finalSubmit: true,
         data: {
@@ -820,7 +820,7 @@ const ContactSection = () => {
 
       if (!res.ok) throw new Error(await res.text());
 
-      console.log(" CRM Final Submit Success");
+      // console.log(" CRM Final Submit Success");
 
       //  EmailJS after CRM
       await sendWithEmailJS(finalBody);

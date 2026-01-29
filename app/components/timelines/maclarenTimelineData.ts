@@ -34,7 +34,7 @@ export const maclarenHallTimelineData: TimelineData = {
       {
         date: "August",
         text:
-          "The first MacLaren Hall sexual abuse lawsuit was filed, marking the beginning of coordinated legal action against Los Angeles County.",
+          "The first lawsuit was filed .",
       },
     ],
   },

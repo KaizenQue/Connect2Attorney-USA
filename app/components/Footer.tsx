@@ -177,7 +177,7 @@ const Footer = () => {
               >
                 <Image src="/yt.svg" alt="Youtube" width={44} height={44} />
               </SocialIcon>
-              <SocialIcon href="#">
+              <SocialIcon href="https://www.threads.com/@connect2attorney?hl=en">
                 <Image
                   src="/threads.png"
                   alt="Threads"
@@ -364,7 +364,7 @@ const Footer = () => {
             >
               <Image src="/yt.svg" alt="Youtube" width={44} height={44} />
             </SocialIcon>
-            <SocialIcon href="#">
+            <SocialIcon href="https://www.threads.com/@connect2attorney?hl=en">
               <Image src="/threads.png" alt="Threads" width={44} height={44} />
             </SocialIcon>
 

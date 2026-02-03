@@ -48,8 +48,8 @@ type ChartConfig = {
     courtTime: string;
   };
 };
-type Lawsuit = (typeof lawsuits)[number];
-type DataGridItem = Lawsuit["dataGrid"][number];
+// type Lawsuit = (typeof lawsuits)[number];
+// type DataGridItem = Lawsuit["dataGrid"][number];
 
 type TabletLandingProps = {
   selectedIndex: number;

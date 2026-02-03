@@ -1168,7 +1168,7 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
                       <span>
                         I agree to the{" "}
                         <span className="text-[#162766] font-semibold underline">
-                          Privacy Policy & Disclaimer
+                          <a href="/privacy-policy">Privacy Policy & Disclaimer </a>
                         </span>{" "}
                         and give my express written consent
                       </span>

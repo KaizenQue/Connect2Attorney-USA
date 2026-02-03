@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // SVG Icon Components
 // const GavelIcon = ({ className }: { className?: string }) => (
@@ -398,15 +399,17 @@ const Footer = () => {
 
           <div className="flex flex-col items-center gap-5">
             <div className="flex w-full justify-between px-2">
-              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+              <Link href="/privacy-policy" className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
                 Privacy Policy
-              </a>
-              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+              </Link>
+              <Link href="/disclaimer" className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
                 Disclaimer
-              </a>
-              <a className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
-                Sitemap
-              </a>
+              </Link>
+              <Link href="/sitemap"
+                 className="font-urbanist text-white text-[14px] font-normal leading-[18px] tracking-[0.7px]">
+                  Sitemap
+                
+              </Link>
             </div>
           </div>
 
@@ -428,7 +431,7 @@ const Footer = () => {
             </div>
 
             <div className="flex gap-8">
-              <a
+              <Link href="/sitemap"
                 className="
     font-urbanist
     text-white
@@ -440,9 +443,9 @@ const Footer = () => {
   "
               >
                 Sitemap
-              </a>
+              </Link>
 
-              <a
+              <Link href="/privacy-policy"
                 className="
     font-urbanist
     text-white
@@ -454,9 +457,9 @@ const Footer = () => {
   "
               >
                 Privacy Policy
-              </a>
+              </Link>
 
-              <a
+              <Link href="/disclaimer"
                 className="
     font-urbanist
     text-white
@@ -468,7 +471,7 @@ const Footer = () => {
   "
               >
                 Disclaimer
-              </a>
+              </Link>
             </div>
           </div>
         </div>

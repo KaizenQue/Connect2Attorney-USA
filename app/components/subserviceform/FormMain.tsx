@@ -1411,7 +1411,8 @@ export default function Form() {
                       <span>
                         I agree to the{" "}
                         <span className="text-[#162766] font-semibold underline cursor-pointer">
-                          Privacy Policy &amp; Disclaimer
+                          <a href="/privacy-policy"> Privacy Policy &amp; Disclaimer</a>
+                         
                         </span>{" "}
                         and give my express written consent.
                       </span>

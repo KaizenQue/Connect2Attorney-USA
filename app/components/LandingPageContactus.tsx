@@ -1034,7 +1034,10 @@ const StepperForm: React.FC<DesktopLandingProps> = ({
                   <span>
                     I agree to the{" "}
                     <span className="text-[#162766] font-bold underline cursor-pointer">
-                      Privacy Policy &amp; Disclaimer
+                      <a href="/privacy-policy">
+                        {" "}
+                        Privacy Policy &amp; Disclaimer
+                      </a>
                     </span>{" "}
                     and give my express written consent
                   </span>
@@ -1580,7 +1583,8 @@ const MobileLanding: React.FC<DesktopLandingProps> = ({
                     <span>
                       I agree to the{" "}
                       <span className="text-[#162766] font-bold underline cursor-pointer">
-                        Privacy Policy &amp; Disclaimer
+                        <a href="/privacy-policy"> Privacy Policy &amp; Disclaimer</a>
+                       
                       </span>{" "}
                       and give my express written consent
                     </span>
@@ -2172,7 +2176,8 @@ const DesktopLanding: React.FC<DesktopLandingProps> = ({
                       <span>
                         I agree to the{" "}
                         <span className="text-[#162766] font-bold underline cursor-pointer">
-                          Privacy Policy &amp; Disclaimer
+                          <a href="/privacy-policy"> Privacy Policy &amp; Disclaimer</a>
+                          
                         </span>{" "}
                         and give my express written consent
                       </span>

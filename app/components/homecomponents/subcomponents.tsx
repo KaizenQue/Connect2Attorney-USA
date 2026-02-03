@@ -14,6 +14,7 @@ type ChartConfig = {
   };
 };
 
+
 type Lawsuit = (typeof lawsuits)[number];
 type DataGridItem = Lawsuit["dataGrid"][number];
 
@@ -62,8 +63,11 @@ import {
   LightShapeSVG,
   LightShapeSVGExpanded,
 } from "./svg";
+import {mapChartFromDB} from "../homecomponents/lawsuitData";
+import { useEffect,useState } from "react";
 
 /* ================= COMPONENTS ================= */
+
 
 const GlassCard = ({
   icon,

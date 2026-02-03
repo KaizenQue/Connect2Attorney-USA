@@ -41,14 +41,14 @@ const leaders: Person[] = [
     name: "Mr. Manoj Gupta",
     role: "FOUNDER & PRESIDENT",
     img: "/TeamSectionImg1desktop.png",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/manojcgupta/",
     data: "Manoj Gupta is the Founder and President of Opalescent IT Solutions Inc., a visionary entrepreneur known for his innovative approach and unwavering commitment to excellence.",
   },
   {
     name: "Mr. Neeraj Gupta",
     role: "VICE PRESIDENT",
     img: "/TeamSectionImg2desktop.png",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
     data: "Neeraj Gupta serves as the Vice President and Head of IT at Opalescent IT Solutions Inc., where he spearheads technological innovation and drives digital growth strategy.",
   },
 ];
@@ -56,8 +56,8 @@ const leaders: Person[] = [
 const deputy: Person = {
   name: "Mrs. Sunshine Rigsby",
   role: "DEPUTY DIRECTOR SALES & MARKETING",
-  img: "/TeamSectionImg3desktop.png",
-  linkedIn: "#",
+  img: "/SunshineRigsby.png",
+  linkedIn: "https://www.linkedin.com/in/sunshine-rigsby-222569282/",
   data: "Sunshine Rigsby leads sales and marketing initiatives with a strong focus on brand growth, strategic partnerships, and customer engagement.",
 };
 
@@ -67,7 +67,7 @@ const tabletleaders = [
     role: "FOUNDER & PRESIDENT",
     img: "/TeamSectionImg1desktop.png",
     bg: "bg-[#facc42]",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/manojcgupta/",
     data: "Manoj Gupta is the Founder and President of Opalescent IT Solutions Inc., a visionary entrepreneur known for his innovative approach and unwavering commitment to excellence.",
   },
   {
@@ -75,7 +75,7 @@ const tabletleaders = [
     role: "VICE PRESIDENT",
     img: "/TeamSectionImg2desktop.png",
     bg: "bg-[#facc42]",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
     data: "Neeraj Gupta serves as the Vice President and Head of IT at Opalescent IT Solutions Inc., where he spearheads the company's technological innovation and drives its digital growth strategy.",
   },
 ];
@@ -83,9 +83,9 @@ const tabletleaders = [
 const tabletdeputy = {
   name: "Sunshine Rigsby",
   role: "DEPUTY DIRECTOR SALES & MARKETING",
-  img: "/TeamSectionImg3desktop.png",
+  img: "/SunshineRigsby.png",
   bg: "bg-[#f1f3f6]",
-  linkedIn: "#",
+  linkedIn: "https://www.linkedin.com/in/sunshine-rigsby-222569282/",
   data: "Mrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine RigsbyMrs. Sunshine Rigsby",
 };
 
@@ -95,56 +95,59 @@ const mobileleaders = [
     role: "FOUNDER & PRESIDENT",
     img: "/TeamSectionImg1mobile.png",
     bg: "bg-[#facc42]",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/manojcgupta/",
   },
   {
     name: "Mr. Neeraj Gupta",
     role: "VICE PRESIDENT",
     img: "/TeamSectionImg2mobile.png",
     bg: "bg-[#facc42]",
-    linkedIn: "#",
+    linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
   },
 ];
 
 const mobiledeputy = {
   name: "Sunshine Rigsby",
   role: "DEPUTY DIRECTOR SALES & MARKETING",
-  img: "/TeamSectionImg3mobile.png",
+  img: "/SunshineRigsby.png",
   bg: "bg-[#f1f3f6]",
-  linkedIn: "#",
+  linkedIn: "https://www.linkedin.com/in/sunshine-rigsby-222569282/",
 };
 
 const teamMembers = [
   {
-    name: "Dr. Winston Rodriguez",
-    role: "CHIEF EXECUTIVE OFFICER",
-    img: "/mockimg1.png",
+    name: "Brian Thompson ",
+    role: "Intake Specialist ",
+    img: "/BrianThompson.jpeg",
+    linkedIn:"https://www.linkedin.com/in/t3m3d/",
   },
   {
-    name: "Ms. Carlisle Keshirin",
-    role: "SALES MANAGER",
-    img: "/mockimg2.png",
+    name: "Candace Martin",
+    role: "Marketing Assistance Specialist",
+    img: "/CandanceMartin.jpeg",
+    linkedIn:"https://www.linkedin.com/in/candace-martin-853851289/",
   },
   {
-    name: "Ms. Mina Trantow",
-    role: "PROJECT MANAGER",
-    img: "/mockimg3.png",
+    name: "Monica Howell",
+    role: "Director of Operations",
+    img: "/MonicaHowell.jpeg",
+    linkedIn:"https://www.linkedin.com/in/monica-howell-387005267/",
   },
-  {
-    name: "Mrs. Aponi Curtis",
-    role: "Lead Engineer",
-    img: "/mockimg4.png",
-  },
-  {
-    name: "Ms. Cielo Cama",
-    role: "FINANCIAL DIRECTOR",
-    img: "/mockimg5.png",
-  },
-  {
-    name: "Mr. Nicholas Runolfsdottir",
-    role: "MARKETING DIRECTOR",
-    img: "/mockimg6.png",
-  },
+  // {
+  //   name: "Mrs. Aponi Curtis",
+  //   role: "Lead Engineer",
+  //   img: "/mockimg4.png",
+  // },
+  // {
+  //   name: "Ms. Cielo Cama",
+  //   role: "FINANCIAL DIRECTOR",
+  //   img: "/mockimg5.png",
+  // },
+  // {
+  //   name: "Mr. Nicholas Runolfsdottir",
+  //   role: "MARKETING DIRECTOR",
+  //   img: "/mockimg6.png",
+  // },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -330,9 +333,10 @@ const TeamSectionDesktop = () => {
             Our <span className="text-[#eec044]">A</span> Team
           </h2>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 px-4 -mx-4 scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0 md:px-0 md:mx-0">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 px-4 -mx-4 scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0 md:px-4 md:mx-0">
             {teamMembers.map((member, index) => (
               <div key={index} className="group shrink-0 w-[200px] md:w-auto snap-center flex flex-col items-center">
+                            <Link href={member.linkedIn} target="_blank" rel="noopener noreferrer" className="block">
                 <div className="relative w-full aspect-square rounded-[20px] overflow-hidden mb-3">
                   <img src={member.img} alt={member.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-75" />
                   <div className="absolute inset-0 flex items-center justify-center px-3 text-center bg-transparent group-hover:bg-[#1d3a8a] transition-colors duration-300">
@@ -342,6 +346,7 @@ const TeamSectionDesktop = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
                 <p className="text-[#eec044] group-hover:text-white transition-colors font-urbanist font-normal uppercase tracking-widest mb-1" style={{ fontSize: "12px", lineHeight: "16px", letterSpacing: "0px" }}>
                   {member.role}
                 </p>

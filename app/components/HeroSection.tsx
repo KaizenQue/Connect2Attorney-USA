@@ -15,12 +15,12 @@ import {
 import {
   ArrowUpRightIcon,
   BAR_COLORS,
-  lawsuits,
-  TALC_CONFIG,
-  ROUNDUP_CONFIG,
-  MESO_CONFIG,
-  DEPO_CONFIG,
-  CHART_CONFIGS,
+  // lawsuits,
+  // TALC_CONFIG,
+  // ROUNDUP_CONFIG,
+  // MESO_CONFIG,
+  // DEPO_CONFIG,
+  // CHART_CONFIGS,
   ChevronDownIcon,
 } from "./homecomponents/lawsuitData";
 import {
@@ -28,6 +28,10 @@ import {
   LightShapeSVG,
   LightShapeSVGExpanded,
 } from "./homecomponents/svg";
+
+import { mapChartFromDB } from "./homecomponents/lawsuitData";
+import LawsuitsHeroCard from "./subservice_pages/LawsuitsHeroCard";
+import dynamic from "next/dynamic";
 
 /* ================= TYPES ================= */
 type ChartConfig = {
@@ -46,19 +50,23 @@ type ChartConfig = {
 };
 type Lawsuit = (typeof lawsuits)[number];
 type DataGridItem = Lawsuit["dataGrid"][number];
+
 type TabletLandingProps = {
-  selectedLawsuit: Lawsuit;
-  selectedChartConfig: ChartConfig;
   selectedIndex: number;
   setSelectedIndex: (v: number) => void;
+
   dropdownOpen: boolean;
   setDropdownOpen: (v: boolean) => void;
-  setOpen: (v: boolean) => void;
-  open: boolean;
+
+  chartConfigs: ChartConfig[];
+  lawsuitsList: any[];
 };
+
 type Props = {
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
+  chartConfigs: ChartConfig[];
+  lawsuitsList: any[];
 };
 
 type GridItem = {
@@ -251,15 +259,38 @@ const ClearBarChart = ({ config }: { config: ChartConfig }) => {
     value: config.bars[i],
   }));
 
-  const minTick = Math.min(...config.yTicks);
-  const maxTick = Math.max(...config.yTicks);
+  const maxValue = Math.max(...config.bars);
+
+  // Dynamic rounding based on maxValue size
+  let roundedMax = 0;
+  let step = 0;
+
+  if (maxValue <= 100) {
+    roundedMax = Math.ceil(maxValue / 10) * 10;
+    step = roundedMax / 4;
+  } else if (maxValue <= 1000) {
+    roundedMax = Math.ceil(maxValue / 100) * 100;
+    step = roundedMax / 4;
+  } else if (maxValue <= 10000) {
+    roundedMax = Math.ceil(maxValue / 500) * 500;
+    step = roundedMax / 4;
+  } else if (maxValue <= 100000) {
+    roundedMax = Math.ceil(maxValue / 1000) * 1000;
+    step = roundedMax / 4;
+  } else {
+    roundedMax = Math.ceil(maxValue / 10000) * 10000;
+    step = roundedMax / 4;
+  }
+
+  //  Build ticks cleanly
+  const dynamicTicks = [step, step * 2, step * 3, step * 4];
 
   return (
     <div className="w-full h-[130px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          barCategoryGap={22}
+          barCategoryGap={20}
           margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
         >
           <CartesianGrid stroke="#E6ECFF" vertical={false} />
@@ -272,14 +303,14 @@ const ClearBarChart = ({ config }: { config: ChartConfig }) => {
           />
 
           <YAxis
-            domain={[minTick, maxTick]}
-            ticks={config.yTicks}
+            domain={[0, roundedMax]}
+            ticks={dynamicTicks}
             interval={0}
-            tickFormatter={(v) => `${v / 1000}K`}
+            tickFormatter={(v) => (v >= 1000 ? `${v / 1000}K` : `${v}`)}
             tick={{ fontSize: 9, fill: "#162766" }}
             tickLine={false}
             axisLine={false}
-            width={40}
+            width={45}
             tickMargin={4}
           />
 
@@ -294,13 +325,8 @@ const ClearBarChart = ({ config }: { config: ChartConfig }) => {
   );
 };
 
-const StatisticsCard = ({
-  stats,
-  chartConfig,
-}: {
-  stats: string;
-  chartConfig: ChartConfig;
-}) => {
+const StatisticsCard = ({ chartConfig }: { chartConfig: ChartConfig }) => {
+  const totalStats = chartConfig.bars.reduce((sum, val) => sum + val, 0);
   return (
     <div
       className="
@@ -326,7 +352,7 @@ const StatisticsCard = ({
         </div>
 
         <span className="font-urbanist text-[#162766] text-[25px] font-light ml-2 shrink-0">
-          {stats}
+          {totalStats.toLocaleString()}
         </span>
       </div>
 
@@ -514,10 +540,25 @@ const scrollToNextSection = () => {
 };
 
 /* ================= MOBILE ================= */
-const MobileLanding = () => {
+const MobileLanding = ({
+  selectedIndex,
+  setSelectedIndex,
+  chartConfigs,
+  lawsuitsList,
+}: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const link = "/contact-us";
   const router = useRouter();
+
+  const selectedChartConfig = chartConfigs[selectedIndex];
+  const selectedLawsuit = lawsuitsList[selectedIndex];
+
+  const totalStats = selectedChartConfig.bars.reduce(
+    (sum, val) => sum + Number(val),
+    0,
+  );
+
+  const formattedTotal = totalStats.toLocaleString();
 
   type Slide =
     | {
@@ -548,17 +589,13 @@ const MobileLanding = () => {
       type: "chart",
       title: "Case Closure Statistics",
       subtitle: "MDL Cases (2025)",
-      value: "1,88,511",
+      value: formattedTotal,
     },
     {
       id: 2,
       type: "stats",
       title: "Case Summary",
-      items: [
-        { label: "Average Settlement", value: "$100K – $1M" },
-        { label: "Time to Settlement", value: "18–30 Months" },
-        { label: "Time in Court", value: "4–5 Weeks" },
-      ],
+      items: selectedLawsuit.dataGrid,
     },
     {
       id: 3,
@@ -577,16 +614,14 @@ const MobileLanding = () => {
       prev === 0 ? slides.length - 1 : prev - 1,
     );
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  if (!selectedLawsuit || !selectedChartConfig) return null;
 
-  const selectedLawsuit = lawsuits[selectedIndex];
-  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
   return (
-<div className="block lg:hidden w-full bg-white font-sans">
-  {/* ================= HERO ================= */}
-  <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[600px]">
+    <div className="block lg:hidden w-full bg-white font-sans">
+      {/* ================= HERO ================= */}
+      <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[600px]">
         <div
           className="absolute top-0 inset-x-0 mx-[15px] lg:hidden  aspect-357/358 md:aspect-357/260"
           style={{
@@ -612,32 +647,31 @@ const MobileLanding = () => {
           <div className="absolute inset-0 bg-[#162766]/60" />
         </div>
 
-       {/* Masked video background */}
-<div
-  className="absolute inset-x-0 top-0 mx-[15px] aspect-[357/358] sm:aspect-[357/260]"
-  style={{
-    WebkitMaskImage: "url(/HPL.png)",
-    WebkitMaskRepeat: "no-repeat",
-    WebkitMaskSize: "100% 100%",
-    maskImage: "url(/HPL.png)",
-    maskRepeat: "no-repeat",
-    maskSize: "100% 100%",
-  }}
->
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    preload="metadata"
-    className="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="/herovideo.mp4" type="video/mp4" />
-  </video>
+        {/* Masked video background */}
+        <div
+          className="absolute inset-x-0 top-0 mx-[15px] aspect-[357/358] sm:aspect-[357/260]"
+          style={{
+            WebkitMaskImage: "url(/HPL.png)",
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskSize: "100% 100%",
+            maskImage: "url(/HPL.png)",
+            maskRepeat: "no-repeat",
+            maskSize: "100% 100%",
+          }}
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/herovideo.mp4" type="video/mp4" />
+          </video>
 
-  <div className="absolute inset-0 bg-[#162766]/60" />
-</div>
-
+          <div className="absolute inset-0 bg-[#162766]/60" />
+        </div>
 
         <div className="md:hidden absolute inset-x-0 mx-[15px] bottom-10 min-[360px]:bottom-12 min-[375px]:bottom-[35px] md:bottom-[140px] left-0 h-[346px] md:h-[446px] z-0">
           <Image
@@ -687,7 +721,7 @@ const MobileLanding = () => {
                   onClick={() => setDropdownOpen((v) => !v)}
                   className="justify-between bg-[#FFFFFF] border border-white py-2 px-3 rounded-xl flex items-center gap-4 shadow-sm min-[375px]:mt-1 min-[425px]:mr-4 mb-4 md:hidden w-[150px] min-[360px]:w-[160px] min-[375px]:w-[197px] md:w-[415px] cursor-pointer"
                 >
-                  <span className="text-[#1a2b5e] font-urbanist text-[8px] min-[360px]:text-[10px] min-[375px]:text-[12px] md:text-[16px] font-semibold">
+                  <span className="text-[#1a2b5e] font-urbanist text-[10px] min-[360px]:text-[10px] min-[375px]:text-[12px] md:text-[16px] font-semibold">
                     {selectedLawsuit.title}
                   </span>
 
@@ -697,8 +731,8 @@ const MobileLanding = () => {
                 </div>
 
                 {dropdownOpen && (
-                  <div className="absolute top-10 left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-20 min-[360px]:w-[180px] min-[375px]:w-[195px] min-[425px]:w-[200px]">
-                    {lawsuits.map((lawsuit, idx) => (
+                  <div className="absolute top-10 left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-20 min-[360px]:w-[180px] min-[375px]:w-[195px] min-[425px]:w-[200px] overflow-y-auto max-h-40">
+                    {lawsuitsList.map((lawsuit, idx) => (
                       <div
                         key={idx}
                         className={`flex items-center justify-between px-4 py-2 cursor-pointer text-[#162766] font-urbanist text-[12px]${
@@ -767,7 +801,7 @@ const MobileLanding = () => {
                         </div>
                         {slide.type === "chart" && (
                           <div className="font-serif text-[#1a2b5e] text-xl sm:text-2xl">
-                            {selectedLawsuit.stats}
+                            {formattedTotal}
                           </div>
                         )}
                       </div>
@@ -941,15 +975,18 @@ const MobileLanding = () => {
 /* ================= TABLET ================= */
 
 const TabletLanding = ({
-  selectedLawsuit,
-  selectedChartConfig,
   selectedIndex,
   setSelectedIndex,
   dropdownOpen,
   setDropdownOpen,
-  open,
-  setOpen,
+  chartConfigs,
+  lawsuitsList,
 }: TabletLandingProps) => {
+  const selectedChartConfig = chartConfigs[selectedIndex];
+  const selectedLawsuit = lawsuitsList[selectedIndex];
+
+  if (!selectedLawsuit || !selectedChartConfig) return null;
+
   return (
     <div className="hidden md:block lg:hidden w-full overflow-visible px-6 -mt-25 ">
       <div className="relative w-full h-[500px] rounded-4xl">
@@ -979,8 +1016,8 @@ const TabletLanding = ({
 
             {/* DROPDOWN LIST */}
             {dropdownOpen && (
-              <div className="absolute top-13 left-77 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-[350px]">
-                {lawsuits.map((lawsuit, idx) => (
+              <div className="absolute top-13 left-77 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-[350px] overflow-y-auto max-h-40">
+                {lawsuitsList.map((lawsuit, idx) => (
                   <div
                     key={idx}
                     className={`flex items-center justify-between px-4 py-2 cursor-pointer text-[#162766] font-urbanist text-[12px]${
@@ -990,7 +1027,7 @@ const TabletLanding = ({
                     }`}
                     onClick={() => {
                       setSelectedIndex(idx);
-                      setOpen(false);
+                      setDropdownOpen(false);
                     }}
                   >
                     <span>{lawsuit.title}</span>
@@ -1019,10 +1056,7 @@ const TabletLanding = ({
           {/* ================= MAIN CONTENT ================= */}
           <div className="grid grid-cols-[2fr_1fr] gap-6 items-start">
             {/* LEFT — CHART */}
-            <StatisticsCard
-              stats={selectedLawsuit.stats}
-              chartConfig={selectedChartConfig}
-            />
+            <StatisticsCard chartConfig={selectedChartConfig} />
 
             {/* RIGHT — DATA CARDS */}
             <div className="flex flex-col gap-4  w-[277px]">
@@ -1117,16 +1151,30 @@ const TabletLanding = ({
 const DesktopLandingHeroCompact = ({
   selectedIndex,
   setSelectedIndex,
+  chartConfigs,
+  lawsuitsList,
 }: {
   selectedIndex: number;
   setSelectedIndex: (index: number) => void;
+  chartConfigs: ChartConfig[];
+  lawsuitsList: any[];
 }) => {
   const link = "/contact-us";
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
-  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
-  const selectedLawsuit = lawsuits[selectedIndex];
+  // const selectedChartConfig = CHART_CONFIGS[selectedIndex];
+
+  const selectedChartConfig = chartConfigs[selectedIndex];
+  const selectedLawsuit = lawsuitsList[selectedIndex];
+
+  // const selectedLawsuit = lawsuits[selectedIndex];
+  useEffect(() => {
+    if (selectedIndex >= lawsuitsList.length) {
+      setSelectedIndex(0);
+    }
+  }, [lawsuitsList]);
+
   const [heroSlide, setHeroSlide] = useState(0);
 
   type HeroSlide =
@@ -1148,11 +1196,7 @@ const DesktopLandingHeroCompact = ({
       id: 1,
       type: "stats",
       title: "Case Summary",
-      items: [
-        { label: "Average Settlement", value: "$100K – $1M" },
-        { label: "Time to Settlement", value: "18–30 Months" },
-        { label: "Time in Court", value: "4–5 Weeks" },
-      ],
+      items: selectedLawsuit.dataGrid,
     },
     {
       id: 2,
@@ -1327,8 +1371,8 @@ const DesktopLandingHeroCompact = ({
               </div>
 
               {open && (
-                <div className="absolute top-[52px] left-0 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-full">
-                  {lawsuits.map((lawsuit, idx) => (
+                <div className="absolute top-[52px] left-0 bg-white rounded-xl shadow-lg border border-gray-200 z-20 w-full overflow-y-auto max-h-40">
+                  {lawsuitsList.map((lawsuit, idx) => (
                     <div
                       key={idx}
                       className={`flex items-center justify-between px-4 py-2 cursor-pointer text-[#162766] font-urbanist text-[12px] ${
@@ -1373,10 +1417,7 @@ const DesktopLandingHeroCompact = ({
             [@media(min-width:1920px)_and_(max-width:2559px)]:right-[200px]
             [@media(min-width:2560px)]:right-[280px] w-[280px]"
             >
-              <StatisticsCard
-                stats={selectedLawsuit.stats}
-                chartConfig={selectedChartConfig}
-              />
+              <StatisticsCard chartConfig={selectedChartConfig} />
             </div>
 
             {/* ================= MINI INFO SLIDER ================= */}
@@ -1602,12 +1643,28 @@ const DesktopLandingHeroCompact = ({
 const DesktopLandingHeroExpanded: React.FC<Props> = ({
   selectedIndex,
   setSelectedIndex,
+  chartConfigs,
+  lawsuitsList,
+}: {
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+  chartConfigs: ChartConfig[];
+  lawsuitsList: any[];
 }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
-  const selectedLawsuit = lawsuits[selectedIndex];
+  // const selectedChartConfig = CHART_CONFIGS[selectedIndex];
+
+  const selectedChartConfig = chartConfigs[selectedIndex];
+  const selectedLawsuit = lawsuitsList[selectedIndex];
+
+  // const selectedLawsuit = lawsuits[selectedIndex];
+  useEffect(() => {
+    if (selectedIndex >= lawsuitsList.length) {
+      setSelectedIndex(0);
+    }
+  }, [lawsuitsList]);
 
   return (
     <div className="hidden lg:flex justify-center font-sans px-4 xl:px-8 2xl:px-10 mt-10">
@@ -1850,13 +1907,13 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                     xl:top-[52px]
                     
                     left-0 bg-white rounded-xl shadow-lg border border-gray-200
-                    w-full overflow-hidden z-40
+                    w-full overflow-hidden z-40 overflow-y-auto max-h-40
                   "
                   >
-                    {lawsuits.map((lawsuit, idx) => (
+                    {lawsuitsList.map((lawsuit, idx) => (
                       <div
                         key={idx}
-                        className={`
+                        className={` flex items-center justify-between
                           px-3 xl:px-4 py-2 cursor-pointer
                           text-[#162766]
                           lg:text-[12px]
@@ -1868,7 +1925,28 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                           setOpen(false);
                         }}
                       >
-                        {lawsuit.title}
+                        <span>{lawsuit.title}</span>
+                        {selectedIndex === idx && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                          >
+                            <rect
+                              width="14"
+                              height="14"
+                              rx="4"
+                              fill="#162766"
+                            />
+                            <path
+                              d="M5 7L6.1847 8.1847C6.61501 8.61501 7.32668 8.56443 7.69181 8.07759L10 5"
+                              stroke="#F2C438"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -1886,10 +1964,7 @@ const DesktopLandingHeroExpanded: React.FC<Props> = ({
                 xl:h-[calc(100%-60px)]
               "
               >
-                <StatisticsCard
-                  stats={selectedLawsuit.stats}
-                  chartConfig={selectedChartConfig}
-                />
+                <StatisticsCard chartConfig={selectedChartConfig} />
                 <DataGridCompactExtend grid={selectedLawsuit.dataGrid} />
               </div>
             </div>
@@ -2018,9 +2093,29 @@ const LandingPage = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const selectedLawsuit = lawsuits[selectedIndex];
-  const selectedChartConfig = CHART_CONFIGS[selectedIndex];
+
+  const [chartConfigs, setChartConfigs] = useState<ChartConfig[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const [open, setOpen] = useState(false);
+
+  
+  const CHART_CONFIGS: ChartConfig = {
+  title: "Talcum Powder Pending MDL Cases",
+  xAxisLabel: "Month (2025)",
+  yAxisLabel: "# of Pending Cases",
+  xLabels: ["Apr", "Jul", "Sept"],
+  yTicks: [10000, 30000, 60000, 90000],
+  maxY: 90000,
+  bars: [58208, 63693, 66910],
+  stats: {
+    averageSettlement: "$100K – $1M",
+    settlementTime: "18–30 months",
+    courtTime: "4–5 weeks",
+  },
+};
+
+  const configsToUse = chartConfigs.length > 0 ? chartConfigs : CHART_CONFIGS;
 
   useEffect(() => {
     const updateDesktop = () => {
@@ -2051,27 +2146,83 @@ const LandingPage = () => {
     return () => window.removeEventListener("resize", updateHeight);
   }, [isDesktop]);
 
+  useEffect(() => {
+    async function loadCharts() {
+      try {
+        const res = await fetch(
+          "https://crm-internal-backend-ayb9fqawg8b6bjen.canadacentral-01.azurewebsites.net/api/stats/published",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+
+        if (!res.ok) {
+          throw new Error("API Error: " + res.status);
+        }
+
+        const data = await res.json();
+        // console.log("Published charts:", data);
+
+        setChartConfigs(data.map(mapChartFromDB));
+      } catch (err) {
+        console.error("Fetch failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadCharts();
+  }, []);
+
+  useEffect(() => {
+    if (selectedIndex >= chartConfigs.length && chartConfigs.length > 0) {
+      setSelectedIndex(0);
+    }
+  }, [chartConfigs.length, selectedIndex]);
+
   /* PREVENT HYDRATION / FLASH */
   if (isDesktop === null) {
     return null;
   }
 
+  if (loading) return null;
+
+  const lawsuitsList = chartConfigs.map((c) => ({
+    title: c.title,
+    stats: c.bars[c.bars.length - 1],
+    statsImage: "/default.svg",
+    dataGrid: [
+      { label: "Average Settlement", value: c.stats.averageSettlement },
+      { label: "Time to Receive Settlement", value: c.stats.settlementTime },
+      { label: "Time in Court", value: c.stats.courtTime },
+    ],
+  }));
+
+
   return (
     <>
       {/* MOBILE */}
-      {!isDesktop && <MobileLanding />}
+      {!isDesktop && loading && (
+        <MobileLanding
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+          chartConfigs={chartConfigs}
+          lawsuitsList={lawsuitsList}
+        />
+      )}
 
       {/* TABLET */}
       <div className="hidden md:block lg:hidden">
         <TabletLanding
-          selectedLawsuit={selectedLawsuit}
-          selectedChartConfig={selectedChartConfig}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
           dropdownOpen={dropdownOpen}
           setDropdownOpen={setDropdownOpen}
-          open={open}
-          setOpen={setOpen}
+          chartConfigs={chartConfigs}
+          lawsuitsList={lawsuitsList}
         />
       </div>
 
@@ -2081,11 +2232,15 @@ const LandingPage = () => {
           <DesktopLandingHeroExpanded
             selectedIndex={selectedIndex}
             setSelectedIndex={setSelectedIndex}
+            chartConfigs={chartConfigs}
+            lawsuitsList={lawsuitsList}
           />
         ) : (
           <DesktopLandingHeroCompact
             selectedIndex={selectedIndex}
             setSelectedIndex={setSelectedIndex}
+            chartConfigs={chartConfigs}
+            lawsuitsList={lawsuitsList}
           />
         ))}
     </>

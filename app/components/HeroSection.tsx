@@ -814,7 +814,7 @@ const MobileLanding = ({
 
                       {slide.type === "stats" && (
                         <div className="grid grid-cols-3 gap-2 sm:gap-3 p-2.5 sm:p-3 rounded-2xl md:hidden">
-                          {selectedLawsuit.dataGrid.map((item: GridItem) => (
+                          {selectedLawsuit.dataGrid.map((item:any) => (
                             <div
                               key={item.label}
                               className="bg-white/70 p-2.5 sm:p-3 rounded-xl border border-white/60 shadow-sm min-h-[129px] sm:min-h-[92px] flex flex-col justify-between"
@@ -1060,7 +1060,7 @@ const TabletLanding = ({
 
             {/* RIGHT — DATA CARDS */}
             <div className="flex flex-col gap-4  w-[277px]">
-              {selectedLawsuit.dataGrid.map((item:GridItem) => (
+              {selectedLawsuit.dataGrid.map((item:any) => (
                 <div
                   key={item.label}
                   className="bg-white rounded-xl p-4 shadow-md"
@@ -2181,7 +2181,7 @@ const LandingPage = () => {
     if (selectedIndex >= chartConfigs.length && chartConfigs.length > 0) {
       setSelectedIndex(0);
     }
-  }, [chartConfigs.length, selectedIndex]);
+  }, [chartConfigs.length,selectedIndex]);
 
   /* PREVENT HYDRATION / FLASH */
   if (isDesktop === null) {
@@ -2205,7 +2205,7 @@ const LandingPage = () => {
   return (
     <>
       {/* MOBILE */}
-      {!isDesktop && loading && (
+      {!isDesktop && (
         <MobileLanding
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}

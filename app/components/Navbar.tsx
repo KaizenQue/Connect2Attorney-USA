@@ -294,7 +294,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({ scrolled }) => {
 
         <li>
           <Link
-            href="#"
+            href="https://legalcaseinfo.com/" target="_blank"
             className="hover:text-[#182C5B] transition-colors lg:text-[16px]"
             onClick={handleLinkClick}
           >
@@ -637,7 +637,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({
                 {/* Blogs */}
                 <li>
                   <Link
-                    href="#"
+                    href="https://legalcaseinfo.com/" target="_blank"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="block text-[#5A6782]"
                   >

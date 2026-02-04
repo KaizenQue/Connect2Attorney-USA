@@ -33,7 +33,7 @@ const BlogsEducationCard = () => {
           
           {/* Floating Button (Top Right) */}
           <a 
-            href="#" 
+            href="https://legalcaseinfo.com/"  target="_blank"
             className="absolute -top-5 right-8 z-20 bg-[#f2c94c] hover:bg-[#e0b83b] text-[#1a2350] font-bold py-3 px-6 rounded-xl shadow-lg flex items-center gap-3 transition-transform hover:-translate-y-1 group"
           >
             See All Blogs

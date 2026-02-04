@@ -41,7 +41,7 @@ const BlogsEducationCard2 = () => {
       <div className="absolute inset-0 z-10 flex items-center px-8 sm:px-6 md:px-10 lg:px-16">
         {/* BUTTON */}
         <a
-          href="#"
+          href="https://legalcaseinfo.com/" target="_blank"
           className="
         absolute
         top-0 right-5  min-[375px]:w-[130px] min-[375px]:h-[60px] w-[110px] h-[50px] md:w-[140px] lg:w-[160px] lg:h-[80px] xl:w-[240px] xl:h-[90px] 2xl:w-[280px] 2xl:h-[108px] 3xl:w-[400px] 3xl:h-[180px]

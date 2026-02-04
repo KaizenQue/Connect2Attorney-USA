@@ -20,7 +20,7 @@ const SitemapPage = () => {
     { name: "Mass Tort", href: "/mass-tort" },
     { name: "Class Action", href: "/class-action" },
     { name: "Personal Injury", href: "/personal-injury" },
-    { name: "Blog", href: "#" },
+    { name: "Blog", href: "https://legalcaseinfo.com/" },
   ];
 
   const massTort: BaseLink[] = [

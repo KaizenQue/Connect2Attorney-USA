@@ -506,10 +506,13 @@ const ContactSection = () => {
   const createEarlyLead = async (fullName: string, email: string) => {
     const body = {
       countryName: "USA",
+      brandType:'Internal',
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Contact Section Form",
       sourceUrl: window.location.href,
+      vertical:'General',
+      formPath:'https://connect2attorney.com/',
       data: {
         name: fullName,
         email,
@@ -532,10 +535,13 @@ const ContactSection = () => {
   const updateLeadPhone = async (phoneformatted: string) => {
     const body = {
       countryName: "USA",
+      brandType:'Internal',
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Contact Section Form",
       sourceUrl: window.location.href,
+      vertical:'General',
+      formPath:'https://connect2attorney.com/',
       data: {
         name: `${form.firstName} ${form.lastName}`.trim(),
         phone: `+1${phoneformatted}`,
@@ -790,10 +796,13 @@ const ContactSection = () => {
 
       const finalBody = {
         countryName: "USA",
+        brandType:'Internal',
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
         formname: "Contact Section Form",
         sourceUrl: window.location.href,
+        vertical:'General',
+        formPath:'https://connect2attorney.com/',
         finalSubmit: true,
         data: {
           name: `${form.firstName} ${form.lastName}`.trim(),

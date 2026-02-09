@@ -1345,9 +1345,12 @@ const LandingPageContactus: React.FC<{
 
     const earlyBody = {
       countryName: "USA",
+      brandType:"Internal",
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Enquiry Form",
+      vertical:'General',
+      formPath:'https://connect2attorney.com/',
       data: {
         name: fullName,
         phone: `+1${cleaned}`,
@@ -1424,10 +1427,12 @@ const LandingPageContactus: React.FC<{
         const rawPhone = formData.phone.replace(/\D/g, "");
         const updateBody = {
           countryName: "USA",
+          brandType : "Internal",
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
           formname: "Enquiry Form",
-          
+          vertical:'General',
+          formPath:'https://connect2attorney.com/',
           data: {
             name: formData.name,
             phone: `+1${rawPhone}`,
@@ -1717,7 +1722,8 @@ const LandingPageContactus: React.FC<{
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
           formname: "Enquiry Form",
-          
+          vertical:'General',
+          formPath:'https://connect2attorney.com/',
           finalSubmit: "true",
           data: {
             name: formData.name,

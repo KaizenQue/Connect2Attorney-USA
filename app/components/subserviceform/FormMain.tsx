@@ -881,10 +881,11 @@ export default function Form() {
       try {
         const updateBody = {
           countryName: "USA",
+          brandType:'Internal',
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
           formname: "Stepper Form",
-          
+          vertical:'General',
           data: {
             name: `${form.firstName} ${form.lastName}`,
             phone: `+1${normalizePhone(form.phone)}`,
@@ -1079,10 +1080,11 @@ export default function Form() {
 
     const earlyBody = {
       countryName: "USA",
+      brandType:'Internal',
       brandName: "C2A",
       websiteName: "Connect 2 Attorney",
       formname: "Stepper form",
-      
+      vertical:'General',
       data: {
         name: fullName,
         phone: `+1${cleaned}`,
@@ -1123,10 +1125,11 @@ export default function Form() {
     try {
       const apiBody = {
         countryName: "USA",
+        brandType:'Internal',
         brandName: "C2A",
         websiteName: "Connect 2 Attorney",
         formname: "Stepper Form",
-        
+        vertical:'General',
         finalSubmit: "true",
         data: {
           name: `${form.firstName} ${form.lastName}`,

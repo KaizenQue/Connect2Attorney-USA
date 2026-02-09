@@ -60,3 +60,10 @@ export async function generateMetadata(
     },
   };
 }
+
+
+export async function generateStaticParams() {
+  return VALID_SLUGS.map((slug) => ({
+    slug,
+  }));
+}

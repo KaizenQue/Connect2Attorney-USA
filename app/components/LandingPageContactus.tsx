@@ -2748,6 +2748,7 @@ const LandingPageContactus: React.FC<{
 
         const apiBody = {
           countryName: "USA",
+          brandType:'Internal',
           brandName: "C2A",
           websiteName: "Connect 2 Attorney",
           formname: "Contact Page Form",

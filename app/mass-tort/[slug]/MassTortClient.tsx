@@ -13,18 +13,19 @@ import MesoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages
 import DepoLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/DepoLawsuitsLegalPage";
 import RoundupLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RoundupLawsuitsLegalPage";
 import TalcumLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TalcumLawsuitsLegalPage";
+import RideshareSexualLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RideshareSexualLawsuitsLegalPage";
 
-import {ozempicTimelineData} from "../../components/timelines/ozempicTimelineData";
+import { ozempicTimelineData } from "../../components/timelines/ozempicTimelineData";
 
 import { TimelineData } from "@/app/components/timelineTypes";
 import { depoTimelineData } from "@/app/components/timelines/depoTimelineData";
 import { talcumTimelineData } from "@/app/components/timelines/talcumTimelineData";
 import { roundupTimelineData } from "@/app/components/timelines/roundupTimelineData";
+import { rideshareTimelineData } from "@/app/components/timelines/rideshareTimelineData";
 
 type Props = {
   slug: string;
 };
-
 
 /* ================= PAGE TITLES ================= */
 const HERO_TITLES: Record<string, string> = {
@@ -42,6 +43,9 @@ const HERO_TITLES: Record<string, string> = {
 
   "talcum-powder-lawsuit":
     "Talcum Powder Lawsuit: Baby Powder Cancer Claims & Legal Updates",
+
+  "rideshare-sexual-assault-lawsuit":
+    "Rideshare Sexual Assault Lawsuit: Legal Claims & Compensation Help ",
 };
 /* ================= FAQ DATA ================= */
 const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
@@ -162,7 +166,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Yes, surviving family members can file wrongful death claims if their loved one died from talcum-related cancer.",
     },
   ],
-    "roundup-lawsuit": [
+  "roundup-lawsuit": [
     {
       question: "What cancers qualify for Roundup lawsuits?",
       answer:
@@ -189,13 +193,38 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Proof may include work records, receipts, personal use history, or witness statements.",
     },
   ],
-
+  "rideshare-sexual-assault-lawsuit": [
+    {
+      question: "Who can get compensation from a rideshare lawsuit?",
+      answer:
+        "Anyone who experienced sexual assault or harassment during a rideshare trip may be eligible to pursue compensation. This can include passengers and, in some cases, minors represented by a parent or legal guardian.",
+    },
+    {
+      question: "Can I still join a rideshare sexual assault lawsuit?",
+      answer:
+        "You may qualify if the litigation is still active and you meet the eligibility requirements. An attorney can review your situation and determine whether you can file an individual claim or join ongoing multidistrict litigation (MDL).",
+    },
+    {
+      question: "How long do I have to file a rideshare sexual assault claim?",
+      answer:
+        "The time limit to file a claim varies by state and depends on the statute of limitations. Filing as soon as possible helps preserve evidence and ensures your claim is considered within the legal deadline.",
+    },
+    {
+      question: "Can minors file a rideshare sexual assault lawsuit?",
+      answer:
+        "Yes. A parent or legal guardian can file a claim on behalf of a minor to seek compensation and accountability.",
+    },
+    {
+      question: "Will the rideshare company automatically pay compensation?",
+      answer:
+        "No. Compensation is not automatic. Claims typically proceed through legal review, negotiations, or court proceedings before any settlement or award is determined.",
+    },
+  ],
 };
-
 
 export default function MassTortClient({ slug }: Props) {
   if (!slug) return null;
-//   const { slug } = useParams<{ slug: string }>();
+  //   const { slug } = useParams<{ slug: string }>();
   const heroTitle: ReactNode = HERO_TITLES[slug] ?? (
     <>
       Mass Tort
@@ -204,7 +233,7 @@ export default function MassTortClient({ slug }: Props) {
     </>
   );
 
-//   console.log("MassTort slug:", slug);
+  //   console.log("MassTort slug:", slug);
   const TIMELINE_BY_SLUG: Record<
     string,
     { title: string; data: TimelineData }
@@ -231,6 +260,10 @@ export default function MassTortClient({ slug }: Props) {
       title: "Talcum Powder Lawsuit Timeline",
       data: talcumTimelineData,
     },
+    "rideshare-sexual-assault-lawsuit": {
+      title: "Rideshare Sexual Assault Lawsuit",
+      data: rideshareTimelineData,
+    },
   };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
@@ -239,14 +272,15 @@ export default function MassTortClient({ slug }: Props) {
       answer: "We work on a contingency basis. You pay nothing unless we win.",
     },
   ];
-/* ================= HERO IMAGES ================= */
-const HERO_IMAGE_BY_SLUG: Record<string, string> = {
-  "ozempic-lawsuit": "/ozempic_bg_dark_new.png",
-  "mesothelioma-lawsuit": "/meso_bg_dark.png",
-  "depo-provera-lawsuit": "/depo_bg_dark.png",
-  "roundup-lawsuit": "/roundup_bg_dark.png",
-  "talcum-powder-lawsuit": "/talc_bg_dark.png",
-};
+  /* ================= HERO IMAGES ================= */
+  const HERO_IMAGE_BY_SLUG: Record<string, string> = {
+    "ozempic-lawsuit": "/ozempic_bg_dark_new.png",
+    "mesothelioma-lawsuit": "/meso_bg_dark.png",
+    "depo-provera-lawsuit": "/depo_bg_dark.png",
+    "roundup-lawsuit": "/roundup_bg_dark.png",
+    "talcum-powder-lawsuit": "/talc_bg_dark.png",
+    "rideshare-sexual-assault-lawsuit": "/rideshare_bg_dark.png",
+  };
 
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
     "ozempic-lawsuit": <OzempicLawsuitsLegalPage />,
@@ -254,71 +288,76 @@ const HERO_IMAGE_BY_SLUG: Record<string, string> = {
     "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
     "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
     "talcum-powder-lawsuit": <TalcumLawsuitsLegalPage />,
+    "rideshare-sexual-assault-lawsuit": <RideshareSexualLawsuitsLegalPage />,
   };
-const timelineConfig = TIMELINE_BY_SLUG[slug];
-const heroImage =
-  HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
+  const timelineConfig = TIMELINE_BY_SLUG[slug];
+  const heroImage = HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
 
+  const SUPPORT_BY_SLUG: Record<
+    string,
+    { title: string; description: string }
+  > = {
+    "ozempic-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You don’t have to fight this battle alone. If Ozempic caused serious harm to your health, Connect2Attorney can help you:",
+    },
 
- const SUPPORT_BY_SLUG: Record<string, { title: string; description: string }> = {
-  "ozempic-lawsuit": {
-    title: "Get Legal Support from Connect2Attorney",
-    description:
-      "You don’t have to fight this battle alone. If Ozempic caused serious harm to your health, Connect2Attorney can help you:",
-  },
+    "mesothelioma-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You don’t have to face a mesothelioma challenge. If asbestos exposure caused your illness, Connect2Attorney can help you:",
+    },
 
-  "mesothelioma-lawsuit": {
-    title: "Get Legal Support from Connect2Attorney",
-    description:
-      "You don’t have to face a mesothelioma challenge. If asbestos exposure caused your illness, Connect2Attorney can help you:",
-  },
+    "depo-provera-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You don’t have to face this challenge alone. If Depo-Provera caused serious harm to your health, Connect2Attorney is here to help you:",
+    },
 
-  "depo-provera-lawsuit": {
-    title: "Get Legal Support from Connect2Attorney",
-    description:
-      "You don’t have to face this challenge alone. If Depo-Provera caused serious harm to your health, Connect2Attorney is here to help you:",
-  },
+    "roundup-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You don’t have to fight this battle alone. If Roundup has caused you cancer or any other health problem, Connect2Attorney can help you:",
+    },
 
-  "roundup-lawsuit": {
-    title: "Get Legal Support from Connect2Attorney",
-    description:
-      "You don’t have to fight this battle alone. If Roundup has caused you cancer or any other health problem, Connect2Attorney can help you:",
-  },
+    "talcum-powder-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
+    },
+    "rideshare-sexual-assault-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
+    },
+  };
 
-  "talcum-powder-lawsuit": {
-    title: "Get Legal Support from Connect2Attorney",
-    description:
-      "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
-  },
-};
+  const supportData = SUPPORT_BY_SLUG[slug];
 
+  return (
+    <main className="min-h-screen">
+      <LawsuitsHeroCard heroTitle={heroTitle} heroImage={heroImage} />
 
-const supportData = SUPPORT_BY_SLUG[slug];
+      {LEGAL_PAGE_BY_SLUG[slug] ?? null}
 
-return (
-  <main className="min-h-screen">
-    <LawsuitsHeroCard heroTitle={heroTitle} heroImage={heroImage} />
+      {timelineConfig && (
+        <TimeLineCard
+          title={timelineConfig.title}
+          timelineData={timelineConfig.data}
+        />
+      )}
 
-    {LEGAL_PAGE_BY_SLUG[slug] ?? null}
+      {supportData && (
+        <SupportCard
+          title={supportData.title}
+          description={supportData.description}
+        />
+      )}
 
-    {timelineConfig && (
-      <TimeLineCard
-        title={timelineConfig.title}
-        timelineData={timelineConfig.data}
-      />
-    )}
-
-    {supportData && (
-      <SupportCard
-        title={supportData.title}
-        description={supportData.description}
-      />
-    )}
-
-    <FaqSection faqData={faqData} />
-    <ContactCard />
-    <Footer />
-  </main>
-);
-
+      <FaqSection faqData={faqData} />
+      <ContactCard />
+      <Footer />
+    </main>
+  );
 }

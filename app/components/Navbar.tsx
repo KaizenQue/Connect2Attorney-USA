@@ -11,6 +11,7 @@ const MASS_TORT_LAWSUIT_TYPES = [
   { name: "Depo-Provera Lawsuit", href: "/mass-tort/depo-provera-lawsuit" },
   { name: "Roundup Cancer Lawsuit", href: "/mass-tort/roundup-lawsuit" },
   { name: "Talcum Powder Lawsuit", href: "/mass-tort/talcum-powder-lawsuit" },
+  {name: "Rideshare Sexual Assault Lawsuit", href: "/mass-tort/rideshare-sexual-assault-lawsuit"},
 ];
 
 const CLASS_ACTION_LAWSUIT_TYPES = [

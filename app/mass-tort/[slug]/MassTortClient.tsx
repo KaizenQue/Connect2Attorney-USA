@@ -43,9 +43,6 @@ const HERO_TITLES: Record<string, string> = {
 
   "talcum-powder-lawsuit":
     "Talcum Powder Lawsuit: Baby Powder Cancer Claims & Legal Updates",
-
-  "rideshare-sexual-assault-lawsuit":
-    "Rideshare Sexual Assault Lawsuit: Legal Claims & Compensation Help ",
 };
 /* ================= FAQ DATA ================= */
 const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
@@ -193,33 +190,7 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "Proof may include work records, receipts, personal use history, or witness statements.",
     },
   ],
-  "rideshare-sexual-assault-lawsuit": [
-    {
-      question: "Who can get compensation from a rideshare lawsuit?",
-      answer:
-        "Anyone who experienced sexual assault or harassment during a rideshare trip may be eligible to pursue compensation. This can include passengers and, in some cases, minors represented by a parent or legal guardian.",
-    },
-    {
-      question: "Can I still join a rideshare sexual assault lawsuit?",
-      answer:
-        "You may qualify if the litigation is still active and you meet the eligibility requirements. An attorney can review your situation and determine whether you can file an individual claim or join ongoing multidistrict litigation (MDL).",
-    },
-    {
-      question: "How long do I have to file a rideshare sexual assault claim?",
-      answer:
-        "The time limit to file a claim varies by state and depends on the statute of limitations. Filing as soon as possible helps preserve evidence and ensures your claim is considered within the legal deadline.",
-    },
-    {
-      question: "Can minors file a rideshare sexual assault lawsuit?",
-      answer:
-        "Yes. A parent or legal guardian can file a claim on behalf of a minor to seek compensation and accountability.",
-    },
-    {
-      question: "Will the rideshare company automatically pay compensation?",
-      answer:
-        "No. Compensation is not automatic. Claims typically proceed through legal review, negotiations, or court proceedings before any settlement or award is determined.",
-    },
-  ],
+
 };
 
 export default function MassTortClient({ slug }: Props) {
@@ -260,10 +231,7 @@ export default function MassTortClient({ slug }: Props) {
       title: "Talcum Powder Lawsuit Timeline",
       data: talcumTimelineData,
     },
-    "rideshare-sexual-assault-lawsuit": {
-      title: "Rideshare Sexual Assault Lawsuit",
-      data: rideshareTimelineData,
-    },
+   
   };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
@@ -279,7 +247,6 @@ export default function MassTortClient({ slug }: Props) {
     "depo-provera-lawsuit": "/depo_bg_dark.png",
     "roundup-lawsuit": "/roundup_bg_dark.png",
     "talcum-powder-lawsuit": "/talc_bg_dark.png",
-    "rideshare-sexual-assault-lawsuit": "/rideshare_bg_dark.png",
   };
 
   const LEGAL_PAGE_BY_SLUG: Record<string, ReactNode> = {
@@ -288,7 +255,6 @@ export default function MassTortClient({ slug }: Props) {
     "depo-provera-lawsuit": <DepoLawsuitsLegalPage />,
     "roundup-lawsuit": <RoundupLawsuitsLegalPage />,
     "talcum-powder-lawsuit": <TalcumLawsuitsLegalPage />,
-    "rideshare-sexual-assault-lawsuit": <RideshareSexualLawsuitsLegalPage />,
   };
   const timelineConfig = TIMELINE_BY_SLUG[slug];
   const heroImage = HERO_IMAGE_BY_SLUG[slug] ?? "/default_hero_bg.png";
@@ -326,11 +292,7 @@ export default function MassTortClient({ slug }: Props) {
       description:
         "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
     },
-    "rideshare-sexual-assault-lawsuit": {
-      title: "Get Legal Support from Connect2Attorney",
-      description:
-        "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
-    },
+  
   };
 
   const supportData = SUPPORT_BY_SLUG[slug];

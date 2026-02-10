@@ -13,6 +13,7 @@ const VALID_SLUGS = [
   "motor-vehicle-accident",
   "slip-and-fall",
   "18-wheeler-accident",
+  "rideshare-sexual-assault-lawsuit",
 ];
 
 export default async function Page({ params }: PageProps) {
@@ -25,20 +26,19 @@ export default async function Page({ params }: PageProps) {
   return <PersonalInjuryClient slug={slug} />;
 }
 
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params; //  REQUIRED
 
   const titleMap: Record<string, string> = {
-    "sexual-abuse-lawsuit":
-      "Sexual Abuse Lawsuit – Legal Help & Compensation",
+    "sexual-abuse-lawsuit": "Sexual Abuse Lawsuit – Legal Help & Compensation",
     "motor-vehicle-accident":
       "Motor Vehicle Accident – Legal Help & Compensation",
-    "slip-and-fall":
-      "Slip and Fall – Legal Help & Compensation",
-    "18-wheeler-accident":
-      "18-Wheeler Accident – Legal Help & Compensation",
+    "slip-and-fall": "Slip and Fall – Legal Help & Compensation",
+    "18-wheeler-accident": "18-Wheeler Accident – Legal Help & Compensation",
+    "rideshare-sexual-assault-lawsuit":
+      "Rideshare Sexual Lawsuit - Legal Help & Compensation",
   };
 
   if (!titleMap[slug]) {

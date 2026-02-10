@@ -73,7 +73,7 @@ const leaders: Person[] = [
   {
     name: "Mr. Neeraj Gupta",
     role: "VICE PRESIDENT",
-    img: "/TeamSectionImg2desktop.png",
+    img: "/TeamSectionNgimg.png",
     linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
     data: "Neeraj Gupta serves as the Vice President and Head of IT at Opalescent IT Solutions Inc., where he spearheads technological innovation and drives digital growth strategy.",
   },
@@ -99,7 +99,7 @@ const tabletleaders = [
   {
     name: "Mr. Neeraj Gupta",
     role: "VICE PRESIDENT",
-    img: "/TeamSectionImg2desktop.png",
+    img: "/TeamSectionNgimg.png",
     bg: "bg-[#facc42]",
     linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
     data: "Neeraj Gupta serves as the Vice President and Head of IT at Opalescent IT Solutions Inc., where he spearheads the company's technological innovation and drives its digital growth strategy.",
@@ -126,7 +126,7 @@ const mobileleaders = [
   {
     name: "Mr. Neeraj Gupta",
     role: "VICE PRESIDENT",
-    img: "/TeamSectionImg2mobile.png",
+    img: "/TeamSectionNgimg.png",
     bg: "bg-[#facc42]",
     linkedIn: "https://www.linkedin.com/in/neerajchgupta/",
   },

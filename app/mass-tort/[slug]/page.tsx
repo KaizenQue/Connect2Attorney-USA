@@ -14,7 +14,6 @@ const VALID_SLUGS = [
   "depo-provera-lawsuit",
   "roundup-lawsuit",
   "talcum-powder-lawsuit",
-  "rideshare-sexual-assault-lawsuit",
 ];
 
 export default async function Page({ params }: PageProps) {
@@ -43,8 +42,7 @@ export async function generateMetadata(
       "Roundup Lawsuit – Cancer Claims & Settlements",
     "talcum-powder-lawsuit":
       "Talcum Powder Lawsuit – Ovarian Cancer Claims",
-      "rideshare-sexual-assault-lawsuit":
-      "Rideshare Sexual Lawsuit",
+     
   };
 
   if (!titleMap[slug]) {

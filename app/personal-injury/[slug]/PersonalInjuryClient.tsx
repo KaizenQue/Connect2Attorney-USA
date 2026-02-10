@@ -6,12 +6,17 @@ import ContactCard from "../../components/ContactCard";
 import Footer from "../../components/Footer";
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
+
 import SexualAbuseLegalPage from "../../components/SubserviceLawsuitsLegalPages/SexualAbuseLawsuitsLegalPage";
 import MvaLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/MvaLawsuitsLegalPage";
-import { sexualAbuseTimelineData } from "@/app/components/timelines/sexualabuselawsuitTimelineData";
 import SlipnFallLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/SlipnFallLawsuitsLegalPage";
 import TruckAccidentLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/TruckAccidentLawsuitsLegalPage";
+import RideshareSexualLawsuitsLegalPage from "../../components/SubserviceLawsuitsLegalPages/RideshareSexualLawsuitsLegalPage";
+
 import { TimelineData } from "@/app/components/timelineTypes";
+import { sexualAbuseTimelineData } from "@/app/components/timelines/sexualabuselawsuitTimelineData";
+import { rideshareTimelineData } from "@/app/components/timelines/rideshareTimelineData";
+
 import SupportCard from "../../components/subservice_pages/SupportCard";
 
 /* ================= PAGE TITLES ================= */
@@ -37,6 +42,10 @@ const HERO_CONFIG: Record<string, { title: React.ReactNode; bg: string }> = {
   "18-wheeler-accident": {
     title: "18-Wheeler Accident Lawsuit Settlements and Compensation",
     bg: "/truckbgimg.png",
+  },
+  "rideshare-sexual-assault-lawsuit": {
+    title:  "Rideshare Sexual Assault Lawsuit: Legal Claims & Compensation Help ",
+    bg: "/rideshare_bg_dark.png"
   },
 };
 
@@ -153,6 +162,33 @@ const FAQ_BY_SLUG: Record<string, { question: string; answer: string }[]> = {
         "You may be able to recover compensation for medical expenses, lost wages, pain and suffering, property damage, future medical care, and long-term or permanent disabilities.",
     },
   ],
+    "rideshare-sexual-assault-lawsuit": [
+    {
+      question: "Who can get compensation from a rideshare lawsuit?",
+      answer:
+        "Anyone who experienced sexual assault or harassment during a rideshare trip may be eligible to pursue compensation. This can include passengers and, in some cases, minors represented by a parent or legal guardian.",
+    },
+    {
+      question: "Can I still join a rideshare sexual assault lawsuit?",
+      answer:
+        "You may qualify if the litigation is still active and you meet the eligibility requirements. An attorney can review your situation and determine whether you can file an individual claim or join ongoing multidistrict litigation (MDL).",
+    },
+    {
+      question: "How long do I have to file a rideshare sexual assault claim?",
+      answer:
+        "The time limit to file a claim varies by state and depends on the statute of limitations. Filing as soon as possible helps preserve evidence and ensures your claim is considered within the legal deadline.",
+    },
+    {
+      question: "Can minors file a rideshare sexual assault lawsuit?",
+      answer:
+        "Yes. A parent or legal guardian can file a claim on behalf of a minor to seek compensation and accountability.",
+    },
+    {
+      question: "Will the rideshare company automatically pay compensation?",
+      answer:
+        "No. Compensation is not automatic. Claims typically proceed through legal review, negotiations, or court proceedings before any settlement or award is determined.",
+    },
+  ],
 };
 
 export default function MassTortPage({ slug }: { slug: string }) {
@@ -168,6 +204,10 @@ export default function MassTortPage({ slug }: { slug: string }) {
       title: "Sexual Abuse Timeline",
       data: sexualAbuseTimelineData,
     },
+    "rideshare-sexual-assault-lawsuit":{
+      title: "RideShare Sexual Assault Timeline",
+      data: rideshareTimelineData,
+    }
   };
 
   const faqData = FAQ_BY_SLUG[slug] ?? [
@@ -185,6 +225,7 @@ export default function MassTortPage({ slug }: { slug: string }) {
     "motor-vehicle-accident": <MvaLawsuitsLegalPage />,
     "slip-and-fall": <SlipnFallLawsuitsLegalPage />,
     "18-wheeler-accident": <TruckAccidentLawsuitsLegalPage />,
+    "rideshare-sexual-assault-lawsuit": <RideshareSexualLawsuitsLegalPage />,
   };
   const SUPPORT_BY_SLUG: Record<
     string,
@@ -211,12 +252,18 @@ export default function MassTortPage({ slug }: { slug: string }) {
       description:
         "You don't have to handle this issue alone. If an 18-wheeler accident has caused you personal injury or property damage, Connect2Attorney can help you: ",
     },
+       "rideshare-sexual-assault-lawsuit": {
+      title: "Get Legal Support from Connect2Attorney",
+      description:
+        "You are not alone in this fight. If talcum powder has caused you ovarian cancer or any other health problem, Connect2Attorney can help you:",
+    },
   };
   const HERO_IMAGE_BY_SLUG: Record<string, string> = {
     "sexual-abuse-lawsuit": "/sexualabuseimg.png",
     "motor-vehicle-accident": "/motorbgimg.png",
     "slip-and-fall": "/slipnfallimg.png",
     "18-wheeler-accident": "/truckbgimg.png",
+    "rideshare-sexual-assault-lawsuit": "/rideshare_bg_dark.png",
   };
 
   const timelineConfig = TIMELINE_BY_SLUG[slug];

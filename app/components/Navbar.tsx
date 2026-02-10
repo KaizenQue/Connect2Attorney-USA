@@ -11,7 +11,6 @@ const MASS_TORT_LAWSUIT_TYPES = [
   { name: "Depo-Provera Lawsuit", href: "/mass-tort/depo-provera-lawsuit" },
   { name: "Roundup Cancer Lawsuit", href: "/mass-tort/roundup-lawsuit" },
   { name: "Talcum Powder Lawsuit", href: "/mass-tort/talcum-powder-lawsuit" },
-  {name: "Rideshare Sexual Assault Lawsuit", href: "/mass-tort/rideshare-sexual-assault-lawsuit"},
 ];
 
 const CLASS_ACTION_LAWSUIT_TYPES = [
@@ -42,6 +41,7 @@ const PERSONAL_INJURY_LAWSUIT_TYPES = [
     name: "18-Wheeler Accident Lawsuit",
     href: "/personal-injury/18-wheeler-accident",
   },
+    {name: "Rideshare Sexual Assault Lawsuit", href: "/personal-injury/rideshare-sexual-assault-lawsuit"},
 ];
 
 interface DesktopNavbarProps {

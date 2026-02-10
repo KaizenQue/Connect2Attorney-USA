@@ -28,6 +28,7 @@ const CASES = [
   "Motor Vehicle Accident Lawsuit",
   "Slip and Fall Injury Lawsuit",
   "18-Wheeler Accident Lawsuit",
+  "Rideshare Sexual Assault Lawsuit",
 ];
 
 const SLUG_TO_CASE_MAP: Record<string, string> = {
@@ -42,6 +43,7 @@ const SLUG_TO_CASE_MAP: Record<string, string> = {
   "motor-vehicle-accident": "Motor Vehicle Accident Lawsuit",
   "slip-and-fall": "Slip and Fall Injury Lawsuit",
   "18-wheeler-accident": "18-Wheeler Accident Lawsuit",
+  "rideshare-sexual-assault-lawsuit": "Rideshare Sexual Assault Lawsuit",
 };
 
 /* ---------------- Utils ---------------- */
